@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Produtos & Ferramentas Prontas — Girassol Inteligência</title>
 <meta name="description" content="Ferramentas prontas com licença definitiva e sem assinatura. AlltoParquet, Plataforma Eleitoral Inteligente e Guia Oficial Parquet.">
-<meta name="theme-color" content="#0c0a08">
+<meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://girassolinteligencia.com.br/produtos.html">
 <link rel="icon" type="image/png" href="logo.png">
 
@@ -30,17 +30,19 @@
   outline-offset: 3px !important;
 }
 :root{
-  --void:#0c0a08;
-  --surface:#14110e;
-  --surface-raised:#1c1813;
-  --line:rgba(242,237,226,0.08);
-  --line-light:rgba(242,237,226,0.16);
+  --void:#000000;
+  --surface:#0a0a0a;
+  --surface-raised:#12100d;
+  --surface-glass:rgba(14,12,10,0.72);
+  --line:rgba(242,237,226,0.07);
+  --line-light:rgba(242,237,226,0.14);
   --ink:#F4EFE6;
   --ink-soft:#A99E8F;
   --ink-faint:#6B6256;
   --earth:#C46A42;
-  --petal:#E8B33C;
-  --petal-glow:rgba(232,179,60,0.18);
+  --petal:#D4AF37;
+  --petal-bright:#f7c858;
+  --petal-glow:rgba(212,175,55,0.22);
   --sky:#7E9AA6;
   --fd:"Instrument Serif",Georgia,serif;
   --fb:"Newsreader",Georgia,serif;
@@ -72,17 +74,17 @@ body{
 }
 
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-.scan{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.18;
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.14;
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px)}
 
 #cursor-glow{
   position:fixed;
-  width:460px;height:460px;
+  width:480px;height:480px;
   border-radius:50%;
   pointer-events:none;
   z-index:1;
   transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(232,179,60,0.06) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(212,175,55,0.07) 0%,transparent 70%);
   transition:width .3s,height .3s,opacity .3s;
 }
 
@@ -92,40 +94,50 @@ body{
 .wrap-wide{max-width:1120px;margin:0 auto;padding:0 var(--s3)}
 @media(min-width:768px){.wrap-wide{padding:0 var(--s4)}}
 
-/* ══ HEADER ══ */
+/* ══ HEADER PREMIUM AUSTENSOR-STYLE (NAV DOCK FLUTUANTE) ══ */
 .site-header{
   position:fixed;
   top:0;left:0;right:0;
   z-index:100;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  background:rgba(12,10,8,.75);
-  border-bottom:1px solid var(--line);
-  transition:border-color .3s;
+  padding:14px 20px;
+  pointer-events:none;
 }
 .header-inner{
-  max-width:1160px;
+  max-width:1180px;
   margin:0 auto;
-  padding:14px var(--s3);
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:16px;
+  pointer-events:auto;
 }
 .brand-mark{
   display:flex;
   align-items:center;
   gap:12px;
   text-decoration:none;
+  background:var(--surface-glass);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--line-light);
+  padding:6px 14px 6px 8px;
+  border-radius:999px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transition:all .3s var(--ease);
+}
+.brand-mark:hover{
+  border-color:rgba(212,175,55,0.4);
+  box-shadow:0 0 20px rgba(212,175,55,0.2);
 }
 .brand-mark img{
-  width:36px;height:36px;
+  width:32px;height:32px;
   border-radius:50%;
   object-fit:contain;
-  filter:drop-shadow(0 0 14px rgba(232,179,60,.4));
+  filter:drop-shadow(0 0 10px rgba(212,175,55,.45));
 }
 .brand-title strong{
   font-family:var(--fd);
-  font-size:1.28rem;
+  font-size:1.18rem;
   font-weight:400;
   color:var(--ink);
   line-height:1;
@@ -133,37 +145,122 @@ body{
 }
 .brand-title span{
   font-family:var(--fm);
-  font-size:.62rem;
+  font-size:.58rem;
   letter-spacing:.16em;
   color:var(--petal);
   text-transform:uppercase;
-  margin-top:3px;
+  margin-top:2px;
   display:block;
 }
-.header-nav{
+
+/* Floating Central Nav Dock */
+.header-nav-dock{
   display:none;
   align-items:center;
-  gap:20px;
+  gap:4px;
+  background:var(--surface-glass);
+  backdrop-filter:blur(28px);
+  -webkit-backdrop-filter:blur(28px);
+  border:1px solid var(--line-light);
+  border-radius:999px;
+  padding:5px 8px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.6);
 }
 @media(min-width:960px){
-  .header-nav{display:flex}
+  .header-nav-dock{display:flex}
 }
-.header-nav a{
+.nav-dock-item{
   font-family:var(--fm);
-  font-size:.7rem;
+  font-size:.68rem;
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--ink-soft);
   text-decoration:none;
-  transition:color .25s;
+  padding:8px 14px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:all .22s var(--ease);
 }
-.header-nav a:hover{
+.nav-dock-item span.num{
+  color:var(--petal);
+  font-size:.62rem;
+  opacity:.75;
+}
+.nav-dock-item:hover, .nav-dock-item.active{
+  color:var(--ink);
+  background:rgba(212,175,55,0.09);
+}
+.nav-dock-item.active{
+  border:1px solid rgba(212,175,55,0.3);
   color:var(--petal);
 }
-.header-nav a.active{
+.nav-dock-item:hover span.num, .nav-dock-item.active span.num{
+  opacity:1;
+}
+
+/* Header Right Actions */
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* Audio Synthesizer Toggle */
+.audio-toggle-btn{
+  background:var(--surface-glass);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--line-light);
+  color:var(--ink-soft);
+  font-family:var(--fm);
+  font-size:.64rem;
+  letter-spacing:.14em;
+  padding:7px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  gap:7px;
+  text-transform:uppercase;
+  transition:all .25s var(--ease);
+}
+@media(min-width:640px){
+  .audio-toggle-btn{display:inline-flex}
+}
+.audio-toggle-btn .sound-bars{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+  height:10px;
+}
+.audio-toggle-btn .bar{
+  width:2px;
+  height:3px;
+  background:var(--ink-faint);
+  border-radius:1px;
+  transition:all .2s;
+}
+.audio-toggle-btn.sound-on{
+  border-color:rgba(212,175,55,0.45);
   color:var(--petal);
-  border-bottom:1px solid var(--petal);
-  padding-bottom:2px;
+}
+.audio-toggle-btn.sound-on .bar{
+  background:var(--petal);
+  animation:soundPulse .8s infinite alternate ease-in-out;
+}
+.audio-toggle-btn.sound-on .bar:nth-child(2){animation-delay:.15s;height:7px}
+.audio-toggle-btn.sound-on .bar:nth-child(3){animation-delay:.3s;height:10px}
+.audio-toggle-btn.sound-on .bar:nth-child(4){animation-delay:.45s;height:5px}
+
+@keyframes soundPulse{
+  0%{height:2px}
+  100%{height:10px}
+}
+.audio-toggle-btn:hover{
+  border-color:var(--petal);
+  color:var(--ink);
 }
 
 .mobile-menu-btn{
@@ -671,15 +768,24 @@ footer{
         <span>Campo Grande / MS</span>
       </div>
     </a>
-    <nav class="header-nav">
-      <a href="index.html#girassol">O Girassol</a>
-      <a href="produtos.html" class="active">Produtos</a>
-      <a href="index.html#servicos">Serviços</a>
-      <a href="index.html#casos">Casos</a>
-      <a href="index.html#coordenacao">Coordenação</a>
-      <a href="index.html#contato">Contato</a>
+    <nav class="header-nav-dock" aria-label="Navegação Principal">
+      <a href="index.html#girassol" class="nav-dock-item"><span class="num">01</span><span>O Girassol</span></a>
+      <a href="produtos.html" class="nav-dock-item active"><span class="num">02</span><span>Produtos</span></a>
+      <a href="index.html#servicos" class="nav-dock-item"><span class="num">03</span><span>Serviços</span></a>
+      <a href="index.html#casos" class="nav-dock-item"><span class="num">04</span><span>Casos</span></a>
+      <a href="index.html#coordenacao" class="nav-dock-item"><span class="num">05</span><span>Coordenação</span></a>
+      <a href="index.html#contato" class="nav-dock-item"><span class="num">06</span><span>Contato</span></a>
     </nav>
-    <div style="display:flex;align-items:center;gap:10px">
+    <div class="header-actions">
+      <button type="button" class="audio-toggle-btn" id="audioToggleBtn" title="Ativar/desativar sons táteis do site (Atalho: M)" aria-label="Alternar áudio tátil">
+        <span class="sound-bars">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </span>
+        <span id="audioStatusText">Áudio [M]</span>
+      </button>
       <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20vim%20pela%20p%C3%A1gina%20de%20produtos%20da%20Girassol%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener noreferrer" class="header-cta hud-box" id="btnHeaderContact" aria-label="Fale conosco no WhatsApp">
         <span class="hud-corner tl"></span>
         <span class="hud-corner tr"></span>
@@ -696,12 +802,12 @@ footer{
   </div>
   <!-- Drawer Mobile -->
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navegação Móvel">
-    <a href="index.html#girassol" onclick="closeMobileDrawer()">O Girassol</a>
-    <a href="produtos.html" onclick="closeMobileDrawer()" style="color:var(--petal)">Produtos (Ativo)</a>
-    <a href="index.html#servicos" onclick="closeMobileDrawer()">Serviços</a>
-    <a href="index.html#casos" onclick="closeMobileDrawer()">Casos</a>
-    <a href="index.html#coordenacao" onclick="closeMobileDrawer()">Coordenação</a>
-    <a href="index.html#contato" onclick="closeMobileDrawer()">Contato</a>
+    <a href="index.html#girassol" onclick="closeMobileDrawer()">01 O Girassol</a>
+    <a href="produtos.html" onclick="closeMobileDrawer()" style="color:var(--petal)">02 Produtos (Ativo)</a>
+    <a href="index.html#servicos" onclick="closeMobileDrawer()">03 Serviços</a>
+    <a href="index.html#casos" onclick="closeMobileDrawer()">04 Casos</a>
+    <a href="index.html#coordenacao" onclick="closeMobileDrawer()">05 Coordenação</a>
+    <a href="index.html#contato" onclick="closeMobileDrawer()">06 Contato</a>
   </nav>
 </header>
 
@@ -1090,6 +1196,92 @@ function handleLeadSubmit(e){
       if(p.plataformaEleitoral.buyUrl) document.getElementById('btnBuyEleitoral').href = p.plataformaEleitoral.buyUrl;
     }
   } catch(e){}
+})();
+
+/* ══ WEB AUDIO API: SINTETIZADOR DE MICRO-SONS TÁTEIS (AUSTENSOR-STYLE) ══ */
+(function(){
+  let audioCtx = null;
+  let isSoundEnabled = false;
+
+  function initAudio(){
+    if(!audioCtx){
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if(AudioContext){
+        audioCtx = new AudioContext();
+      }
+    }
+    if(audioCtx && audioCtx.state === 'suspended'){
+      audioCtx.resume();
+    }
+  }
+
+  function playTick(freq = 820, duration = 0.035, type = 'sine', gainVal = 0.028){
+    if(!isSoundEnabled) return;
+    initAudio();
+    if(!audioCtx) return;
+
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.4, audioCtx.currentTime + duration);
+
+      gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(err){}
+  }
+
+  window.AudioEngine = {
+    enabled: false,
+    playTick,
+    toggle: function(){
+      isSoundEnabled = !isSoundEnabled;
+      this.enabled = isSoundEnabled;
+      initAudio();
+      const btn = document.getElementById('audioToggleBtn');
+      const text = document.getElementById('audioStatusText');
+      if(btn && text){
+        if(isSoundEnabled){
+          btn.classList.add('sound-on');
+          text.textContent = 'Áudio [ON]';
+          playTick(880, 0.06, 'sine', 0.05);
+        } else {
+          btn.classList.remove('sound-on');
+          text.textContent = 'Áudio [M]';
+        }
+      }
+    }
+  };
+
+  const audioBtn = document.getElementById('audioToggleBtn');
+  if(audioBtn){
+    audioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.AudioEngine.toggle();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if(e.key === 'm' || e.key === 'M'){
+      window.AudioEngine.toggle();
+    }
+  });
+
+  document.querySelectorAll('a, button, details summary').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      if(isSoundEnabled) playTick(1100, 0.018, 'sine', 0.015);
+    }, {passive:true});
+    el.addEventListener('click', () => {
+      if(isSoundEnabled) playTick(680, 0.045, 'triangle', 0.035);
+    });
+  });
 })();
 </script>
 
