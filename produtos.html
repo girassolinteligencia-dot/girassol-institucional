@@ -6,6 +6,8 @@
 <title>Produtos & Ferramentas Prontas — Girassol Inteligência</title>
 <meta name="description" content="Ferramentas prontas com licença definitiva e sem assinatura. AlltoParquet, Plataforma Eleitoral Inteligente e Guia Oficial Parquet.">
 <meta name="theme-color" content="#0c0a08">
+<link rel="canonical" href="https://girassolinteligencia.com.br/produtos.html">
+<link rel="icon" type="image/png" href="logo.png">
 
 <!-- Open Graph / Redes Sociais & WhatsApp -->
 <meta property="og:type" content="website">
@@ -625,6 +627,32 @@ footer{
 .social-links a:hover{
   color:var(--petal);
 }
+
+/* ══ TOAST FEEDBACK ══ */
+#toast{
+  position:fixed;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--surface-raised);
+  color:var(--petal);
+  border:1px solid var(--petal);
+  font-family:var(--fm);
+  font-size:.76rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:12px 24px;
+  border-radius:999px;
+  box-shadow:0 12px 40px rgba(0,0,0,.65);
+  pointer-events:none;
+  opacity:0;
+  transition:all .35s var(--ease);
+  z-index:99999;
+}
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
 </style>
 </head>
 <body>
@@ -719,7 +747,7 @@ footer{
             </ul>
             <div class="product-disclaimer">
               Ativação: e-mail da compra + código <code>GP-XXXX-XXXX-XXXX</code><br>
-              Suporte: <span id="supportAlltoparquet">girassolinteligencia@gmail.com</span>
+              Suporte: <span id="supportAlltoparquet" style="color:var(--petal);cursor:pointer;text-decoration:underline;" title="Clique para copiar o e-mail de suporte">girassolinteligencia@gmail.com</span>
             </div>
           </div>
           <div class="product-actions">
@@ -897,11 +925,47 @@ footer{
   </div>
 </div>
 
+<!-- TOAST FEEDBACK -->
+<div id="toast">E-mail copiado para a área de transferência!</div>
+
 <script>
 const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const DPR = Math.min(devicePixelRatio || 1, 2);
 
 document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// Copiar e-mail de suporte
+const supportEl = document.getElementById('supportAlltoparquet');
+const toastEl = document.getElementById('toast');
+if(supportEl && toastEl){
+  supportEl.addEventListener('click', () => {
+    const email = supportEl.textContent.trim();
+    function showToast(){
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 3200);
+    }
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(email).then(showToast).catch(() => {
+        execCopy(email);
+        showToast();
+      });
+    } else {
+      execCopy(email);
+      showToast();
+    }
+    function execCopy(val){
+      const t = document.createElement('textarea');
+      t.value = val;
+      t.style.position = 'fixed';
+      t.style.opacity = '0';
+      document.body.appendChild(t);
+      t.focus();
+      t.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(t);
+    }
+  });
+}
 
 // Cursor glow
 (function(){
@@ -1005,10 +1069,11 @@ function handleLeadSubmit(e){
     const cfg = JSON.parse(raw);
     const g = cfg.general || {};
     if(g.whatsappPhone){
-      document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
-        const msg = encodeURIComponent(g.whatsappMessage || "Olá Paulo, vim pelo catálogo da Girassol e gostaria de conversar.");
-        a.href = `https://wa.me/${g.whatsappPhone}?text=${msg}`;
-      });
+      const headerBtn = document.getElementById('btnHeaderContact');
+      if(headerBtn){
+        const msg = encodeURIComponent(g.whatsappMessage || "Olá Paulo, vim pela página de produtos da Girassol e gostaria de conversar.");
+        headerBtn.href = `https://wa.me/${g.whatsappPhone}?text=${msg}`;
+      }
     }
 
     const p = cfg.products || {};
