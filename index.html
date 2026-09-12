@@ -1442,6 +1442,59 @@ footer{
   .bloomrail{height:auto}
   .bloomrail .stick{position:static;height:auto;padding:var(--s5) 0}
 }
+
+/* ACCORDION DETAILS */
+details.modern-details {
+  margin: 16px 0 24px;
+}
+details.modern-details > summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: var(--fm);
+  font-size: var(--sm);
+  color: var(--petal);
+  font-weight: 500;
+  list-style: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  transition: all .2s var(--ease);
+}
+details.modern-details > summary:hover {
+  border-color: var(--petal);
+  color: #fff;
+}
+details.modern-details[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+details.modern-details > summary::-webkit-details-marker {
+  display: none;
+}
+details.modern-details > summary::after {
+  content: '+';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+details.modern-details[open] > summary::after {
+  content: '−';
+}
+details.modern-details > .details-content {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-top: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: transparent;
+}
+.details-content.case-dual-body {
+  margin-bottom: 0; /* Override default gap */
+}
 </style>
 </head>
 <body>
@@ -1615,12 +1668,16 @@ footer{
             <p class="product-desc">
               Aplicativo desktop portátil para Windows — executável único, sem instalação. Converte CSV, XLSX, JSON, NDJSON e JSONL para Apache Parquet com compressão Snappy, Zstd ou sem compressão, direto na máquina do usuário. Nenhum dado sai do computador.
             </p>
-            <span class="product-features-label">[ Três perfis de conversão ]</span>
-            <ul class="product-list">
-              <li><b>Preservação Máxima:</b> mantém tipos e fidelidade total do dado original.</li>
-              <li><b>BI de Dados:</b> otimizado para leitura em ferramentas analíticas.</li>
-              <li><b>GIS e Geoprocessamento:</b> preserva estruturas geoespaciais.</li>
-            </ul>
+            <details class="modern-details">
+              <summary>Ver os três perfis de conversão</summary>
+              <div class="details-content">
+                <ul class="product-list" style="margin:0;">
+                  <li><b>Preservação Máxima:</b> mantém tipos e fidelidade total do dado original.</li>
+                  <li><b>BI de Dados:</b> otimizado para leitura em ferramentas analíticas.</li>
+                  <li><b>GIS e Geoprocessamento:</b> preserva estruturas geoespaciais.</li>
+                </ul>
+              </div>
+            </details>
             <div class="product-disclaimer">
               Ativação: e-mail da compra + código <code>GP-XXXX-XXXX-XXXX</code><br>
               Suporte: girassolinteligencia@gmail.com
@@ -1649,13 +1706,17 @@ footer{
             <p class="product-desc">
               Plataforma mobile-first de consulta e análise de dados eleitorais públicos dos 79 municípios de MS, construída sobre o repositório oficial do TSE (2010 a 2024). Acesso por e-mail via link direto, sem senha para memorizar.
             </p>
-            <span class="product-features-label">[ 8 Módulos de Análise ]</span>
-            <ul class="product-list">
-              <li>Perfil Eleitoral e Ranking Geral</li>
-              <li>Resultados por Município e Comparar Municípios</li>
-              <li>Evolução da Candidatura e Desempenho dos Partidos</li>
-              <li>Panorama de MS e Simulador de Vagas 2026</li>
-            </ul>
+            <details class="modern-details">
+              <summary>Ver os 8 Módulos de Análise</summary>
+              <div class="details-content">
+                <ul class="product-list" style="margin:0;">
+                  <li>Perfil Eleitoral e Ranking Geral</li>
+                  <li>Resultados por Município e Comparar Municípios</li>
+                  <li>Evolução da Candidatura e Desempenho dos Partidos</li>
+                  <li>Panorama de MS e Simulador de Vagas 2026</li>
+                </ul>
+              </div>
+            </details>
             <div class="product-disclaimer">
               <b>Aviso:</b> A Plataforma Eleitoral Inteligente é uma ferramenta de consulta e análise de dados públicos. Não realiza previsão de resultados, não garante desempenho eleitoral e não possui qualquer vínculo institucional com o Tribunal Superior Eleitoral.
             </div>
@@ -1686,13 +1747,17 @@ footer{
             <p class="product-desc">
               Material técnico completo sobre Apache Parquet: fundamentos do formato colunar, estratégias de compressão, particionamento e benchmarks reais em BigQuery e AWS Athena. Inclui estudo de caso do desenvolvimento do AlltoParquet.
             </p>
-            <span class="product-features-label">[ Destaques do Guia ]</span>
-            <ul class="product-list">
-              <li>Fundamentos e anatomia do formato colunar</li>
-              <li>Comparativo de compressão Snappy vs Zstandard</li>
-              <li>Benchmarks de redução de custos em nuvem</li>
-              <li>Engenharia reversa e estudo de caso prático</li>
-            </ul>
+            <details class="modern-details">
+              <summary>Ver destaques do Guia</summary>
+              <div class="details-content">
+                <ul class="product-list" style="margin:0;">
+                  <li>Fundamentos e anatomia do formato colunar</li>
+                  <li>Comparativo de compressão Snappy vs Zstandard</li>
+                  <li>Benchmarks de redução de custos em nuvem</li>
+                  <li>Engenharia reversa e estudo de caso prático</li>
+                </ul>
+              </div>
+            </details>
           </div>
           <div class="product-actions">
             <a href="#guia-parquet" class="product-btn">
@@ -1728,14 +1793,18 @@ footer{
           <p class="service-desc">
             Implantação de agentes inteligentes acoplados à rotina da empresa: leitura de documentos, conferência fiscal, triagem de tickets, elaboração de minutas e atendimento consultivo de nível 1. Toda decisão de impacto passa por aprovação humana registrada.
           </p>
-          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
-          <div class="scope-pills">
-            <span class="scope-pill">Modelos de linguagem de mercado (Claude, GPT, DeepSeek)</span>
-            <span class="scope-pill">Busca inteligente nos documentos da sua empresa (RAG)</span>
-            <span class="scope-pill">Travas contra respostas incorretas (guardrails)</span>
-            <span class="scope-pill">Painel de aprovação humana para ações críticas</span>
-            <span class="scope-pill">Integração com WhatsApp, e-mail e sistemas internos</span>
-          </div>
+          <details class="modern-details">
+            <summary>O que está incluso no escopo?</summary>
+            <div class="details-content">
+              <div class="scope-pills">
+                <span class="scope-pill">Modelos de linguagem de mercado (Claude, GPT, DeepSeek)</span>
+                <span class="scope-pill">Busca inteligente nos documentos da sua empresa (RAG)</span>
+                <span class="scope-pill">Travas contra respostas incorretas (guardrails)</span>
+                <span class="scope-pill">Painel de aprovação humana para ações críticas</span>
+                <span class="scope-pill">Integração com WhatsApp, e-mail e sistemas internos</span>
+              </div>
+            </div>
+          </details>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20desenhar%20um%20agente%20de%20IA%20para%20a%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
               Desenhar meu agente <span>→</span>
@@ -1757,14 +1826,18 @@ footer{
           <p class="service-desc">
             Aplicações web modernas e responsivas para substituir planilhas quebradas, centralizar cadastros, emitir relatórios gerenciais em tempo real ou entregar portais de autoatendimento a clientes e parceiros.
           </p>
-          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
-          <div class="scope-pills">
-            <span class="scope-pill">Funciona no celular e no computador</span>
-            <span class="scope-pill">Níveis de acesso por função (RBAC)</span>
-            <span class="scope-pill">Painéis com indicadores em tempo real</span>
-            <span class="scope-pill">Banco de dados próprio com backup diário</span>
-            <span class="scope-pill">Entrega do repositório à sua empresa</span>
-          </div>
+          <details class="modern-details">
+            <summary>O que está incluso no escopo?</summary>
+            <div class="details-content">
+              <div class="scope-pills">
+                <span class="scope-pill">Funciona no celular e no computador</span>
+                <span class="scope-pill">Níveis de acesso por função (RBAC)</span>
+                <span class="scope-pill">Painéis com indicadores em tempo real</span>
+                <span class="scope-pill">Banco de dados próprio com backup diário</span>
+                <span class="scope-pill">Entrega do repositório à sua empresa</span>
+              </div>
+            </div>
+          </details>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20substituir%20uma%20planilha%20por%20um%20sistema%20sob%20medida." target="_blank" rel="noopener noreferrer" class="service-link">
               Substituir minha planilha <span>→</span>
@@ -1786,13 +1859,17 @@ footer{
           <p class="service-desc">
             Mapeamento dos gargalos operacionais e desenho formal do fluxo de trabalho antes de qualquer linha de código. Em muitos casos, o mapeamento sozinho já resolve — sem necessidade de software novo.
           </p>
-          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
-          <div class="scope-pills">
-            <span class="scope-pill">Entrevista com quem opera o processo</span>
-            <span class="scope-pill">Diagrama formal em Bizagi / BPMN 2.0</span>
-            <span class="scope-pill">Identificação dos pontos de perda de tempo e custo</span>
-            <span class="scope-pill">Manual de operação do processo redesenhado</span>
-          </div>
+          <details class="modern-details">
+            <summary>O que está incluso no escopo?</summary>
+            <div class="details-content">
+              <div class="scope-pills">
+                <span class="scope-pill">Entrevista com quem opera o processo</span>
+                <span class="scope-pill">Diagrama formal em Bizagi / BPMN 2.0</span>
+                <span class="scope-pill">Identificação dos pontos de perda de tempo e custo</span>
+                <span class="scope-pill">Manual de operação do processo redesenhado</span>
+              </div>
+            </div>
+          </details>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20mapear%20os%20processos%20da%20minha%20empresa%20em%20BPMN." target="_blank" rel="noopener noreferrer" class="service-link">
               Mapear meu processo <span>→</span>
@@ -1814,13 +1891,17 @@ footer{
           <p class="service-desc">
             Conexão contínua entre sistemas legados, ERPs, CRMs, planilhas do Google, gateways de pagamento e canais de mensageria — com rastreabilidade de ponta a ponta.
           </p>
-          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
-          <div class="scope-pills">
-            <span class="scope-pill">Comunicação entre sistemas que hoje não conversam</span>
-            <span class="scope-pill">Disparos automáticos por WhatsApp e e-mail</span>
-            <span class="scope-pill">Sincronização entre estoque, vendas e financeiro</span>
-            <span class="scope-pill">Eliminação da digitação duplicada</span>
-          </div>
+          <details class="modern-details">
+            <summary>O que está incluso no escopo?</summary>
+            <div class="details-content">
+              <div class="scope-pills">
+                <span class="scope-pill">Comunicação entre sistemas que hoje não conversam</span>
+                <span class="scope-pill">Disparos automáticos por WhatsApp e e-mail</span>
+                <span class="scope-pill">Sincronização entre estoque, vendas e financeiro</span>
+                <span class="scope-pill">Eliminação da digitação duplicada</span>
+              </div>
+            </div>
+          </details>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20conectar%20os%20sistemas%20e%20planilhas%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
               Conectar meus sistemas <span>→</span>
@@ -1842,13 +1923,17 @@ footer{
           <p class="service-desc">
             Auditoria técnica de sistemas e modelos de IA, adequação às normas da LGPD e implementação de controles contra vazamento de informação comercial. Inclui a opção de rodar modelos localmente (on-premise) no servidor da sua empresa.
           </p>
-          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
-          <div class="scope-pills">
-            <span class="scope-pill">Diagnóstico e plano de adequação à LGPD</span>
-            <span class="scope-pill">Operação de IA sem tráfego de dados pela internet</span>
-            <span class="scope-pill">Garantia de que seus dados não treinam modelos públicos</span>
-            <span class="scope-pill">Treinamento da equipe</span>
-          </div>
+          <details class="modern-details">
+            <summary>O que está incluso no escopo?</summary>
+            <div class="details-content">
+              <div class="scope-pills">
+                <span class="scope-pill">Diagnóstico e plano de adequação à LGPD</span>
+                <span class="scope-pill">Operação de IA sem tráfego de dados pela internet</span>
+                <span class="scope-pill">Garantia de que seus dados não treinam modelos públicos</span>
+                <span class="scope-pill">Treinamento da equipe</span>
+              </div>
+            </div>
+          </details>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20auditar%20a%20seguran%C3%A7a%2C%20governan%C3%A7a%20e%20LGPD%20na%20minha%20opera%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="service-link">
               Auditar minha operação <span>→</span>
@@ -1901,20 +1986,23 @@ footer{
             <span class="case-audience">Quem usa: Escritórios de advocacia e peritos trabalhistas</span>
             <h3 class="case-title">Sistema de Conferência de Ponto para Processos Trabalhistas</h3>
           </div>
-          <div class="case-dual-body">
-            <div class="case-subblock">
-              <strong>O Problema</strong>
-              <p>
-                Um processo trabalhista chega com centenas de folhas de cartão-ponto em PDF. Alguém precisa abrir folha por folha, digitar cada horário numa planilha e conferir a conta. São dias de trabalho por processo — e basta um número digitado errado para o cálculo inteiro ir por água abaixo.
-              </p>
+          <details class="modern-details">
+            <summary>Ler a história completa: O Problema & O Que Foi Feito</summary>
+            <div class="details-content case-dual-body">
+              <div class="case-subblock">
+                <strong>O Problema</strong>
+                <p>
+                  Um processo trabalhista chega com centenas de folhas de cartão-ponto em PDF. Alguém precisa abrir folha por folha, digitar cada horário numa planilha e conferir a conta. São dias de trabalho por processo — e basta um número digitado errado para o cálculo inteiro ir por água abaixo.
+                </p>
+              </div>
+              <div class="case-subblock">
+                <strong>O Que Foi Feito</strong>
+                <p>
+                  Um programa instalado no computador do escritório que lê os cartões-ponto sozinho e devolve uma planilha pronta, com cada horário ligado à página de onde veio. Quando o programa não tem certeza de um número, ele avisa em vez de chutar. As regras de hora extra, intervalo e adicional noturno seguem a CLT, a Constituição e as súmulas do TST.
+                </p>
+              </div>
             </div>
-            <div class="case-subblock">
-              <strong>O Que Foi Feito</strong>
-              <p>
-                Um programa instalado no computador do escritório que lê os cartões-ponto sozinho e devolve uma planilha pronta, com cada horário ligado à página de onde veio. Quando o programa não tem certeza de um número, ele avisa em vez de chutar. As regras de hora extra, intervalo e adicional noturno seguem a CLT, a Constituição e as súmulas do TST.
-              </p>
-            </div>
-          </div>
+          </details>
           <div class="case-table-wrap">
             <table class="case-table">
               <thead>
@@ -1955,20 +2043,23 @@ footer{
             <span class="case-audience">Quem usa: Consultores, jornalistas e equipes de campanha</span>
             <h3 class="case-title">Plataforma de Consulta de Dados Eleitorais</h3>
           </div>
-          <div class="case-dual-body">
-            <div class="case-subblock">
-              <strong>O Problema</strong>
-              <p>
-                Os resultados de todas as eleições são públicos e estão lá, no site oficial. O detalhe é que vêm em dezenas de arquivos enormes, em formatos diferentes a cada ano. Na prática, quem não é técnico não consegue usar — e quem é técnico perde dias organizando antes de conseguir olhar qualquer coisa.
-              </p>
+          <details class="modern-details">
+            <summary>Ler a história completa: O Problema & O Que Foi Feito</summary>
+            <div class="details-content case-dual-body">
+              <div class="case-subblock">
+                <strong>O Problema</strong>
+                <p>
+                  Os resultados de todas as eleições são públicos e estão lá, no site oficial. O detalhe é que vêm em dezenas de arquivos enormes, em formatos diferentes a cada ano. Na prática, quem não é técnico não consegue usar — e quem é técnico perde dias organizando antes de conseguir olhar qualquer coisa.
+                </p>
+              </div>
+              <div class="case-subblock">
+                <strong>O Que Foi Feito</strong>
+                <p>
+                  Todo o histórico de 2010 a 2024 dos 79 municípios do estado foi tratado e reorganizado num formato moderno de dados. Em cima disso, um aplicativo que abre no celular e responde em segundos: como foi o desempenho de uma candidatura, quem lidera cada município, como dois municípios se comparam, como cada partido se saiu.
+                </p>
+              </div>
             </div>
-            <div class="case-subblock">
-              <strong>O Que Foi Feito</strong>
-              <p>
-                Todo o histórico de 2010 a 2024 dos 79 municípios do estado foi tratado e reorganizado num formato moderno de dados. Em cima disso, um aplicativo que abre no celular e responde em segundos: como foi o desempenho de uma candidatura, quem lidera cada município, como dois municípios se comparam, como cada partido se saiu.
-              </p>
-            </div>
-          </div>
+          </details>
           <div class="case-table-wrap">
             <table class="case-table">
               <thead>
@@ -2012,20 +2103,23 @@ footer{
             <span class="case-audience">Quem usa: Gestores públicos, consultorias e equipes de planejamento</span>
             <h3 class="case-title">Painéis de Análise por Bairro e Região</h3>
           </div>
-          <div class="case-dual-body">
-            <div class="case-subblock">
-              <strong>O Problema</strong>
-              <p>
-                Os números de votação estão num lugar, o mapa dos bairros está em outro, e os indicadores sociais em um terceiro. Cruzar isso à mão é inviável. O resultado é que a decisão acaba sendo tomada no "achismo" sobre a região.
-              </p>
+          <details class="modern-details">
+            <summary>Ler a história completa: O Problema & O Que Foi Feito</summary>
+            <div class="details-content case-dual-body">
+              <div class="case-subblock">
+                <strong>O Problema</strong>
+                <p>
+                  Os números de votação estão num lugar, o mapa dos bairros está em outro, e os indicadores sociais em um terceiro. Cruzar isso à mão é inviável. O resultado é que a decisão acaba sendo tomada no "achismo" sobre a região.
+                </p>
+              </div>
+              <div class="case-subblock">
+                <strong>O Que Foi Feito</strong>
+                <p>
+                  Um painel visual que junta as três coisas num mapa só: onde estão os votos, onde estão os bairros e como cada região está em termos de renda, infraestrutura e vulnerabilidade. É entregue como um <b>único arquivo</b> que abre com dois cliques no navegador — não precisa instalar nada, não precisa de servidor, não precisa nem de internet.
+                </p>
+              </div>
             </div>
-            <div class="case-subblock">
-              <strong>O Que Foi Feito</strong>
-              <p>
-                Um painel visual que junta as três coisas num mapa só: onde estão os votos, onde estão os bairros e como cada região está em termos de renda, infraestrutura e vulnerabilidade. É entregue como um <b>único arquivo</b> que abre com dois cliques no navegador — não precisa instalar nada, não precisa de servidor, não precisa nem de internet.
-              </p>
-            </div>
-          </div>
+          </details>
           <div class="case-table-wrap">
             <table class="case-table">
               <thead>
