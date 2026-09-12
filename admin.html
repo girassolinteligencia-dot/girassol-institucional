@@ -424,6 +424,7 @@ html,body{
     <div class="header-actions">
       <a href="index.html" target="_blank" class="btn-ghost" title="Abrir Página Inicial">Ver Home ↗</a>
       <a href="produtos.html" target="_blank" class="btn-ghost" style="color:var(--petal);border-color:rgba(232,179,60,.3)" title="Abrir Catálogo de Produtos">Ver Produtos ↗</a>
+      <a href="artigos.html" target="_blank" class="btn-ghost" style="color:var(--petal-bright);border-color:rgba(212,175,55,.4)" title="Abrir Página de Artigos">Ver Artigos ↗</a>
       <button type="button" class="btn-save" onclick="saveAllConfigurations()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         Salvar Alterações
@@ -439,6 +440,10 @@ html,body{
       <div class="nav-tab active" onclick="switchTab('tabGeneral', this)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         <span>Geral & Contatos</span>
+      </div>
+      <div class="nav-tab" onclick="switchTab('tabArticles', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Artigos Técnicos</span>
       </div>
       <div class="nav-tab" onclick="switchTab('tabProducts', this)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -523,7 +528,98 @@ html,body{
         </div>
       </section>
 
-      <!-- ABA 2: PRODUTOS PRONTOS -->
+      <!-- ABA 2: ARTIGOS TÉCNICOS -->
+      <section id="tabArticles" class="tab-pane">
+        <div class="pane-header">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 class="pane-title">Artigos Técnicos (Publicações em artigos.html)</h2>
+              <p class="pane-desc">Crie, edite e gerencie seus artigos de engenharia, IA, BPMN 2.0 e governança de dados.</p>
+            </div>
+            <button type="button" class="btn-primary" onclick="openNewArticleModal()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Novo Artigo
+            </button>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <div class="card-title" style="margin:0">Artigos Publicados & Rascunhos</div>
+            <a href="artigos.html" target="_blank" class="btn-ghost" style="text-decoration:none;font-size:0.75rem;">Ver no Site ↗</a>
+          </div>
+
+          <div style="overflow-x:auto">
+            <table class="leads-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Título</th>
+                  <th>Categoria</th>
+                  <th>Leitura</th>
+                  <th>Status</th>
+                  <th style="text-align:right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="articlesTableBody">
+                <!-- Preenchido via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Form Editor Card (Aberto ao Criar / Editar) -->
+        <div id="articleEditorCard" class="card-box" style="display:none;margin-top:20px;border-color:rgba(212,175,55,0.35);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div class="card-title" id="articleEditorTitle" style="margin:0;color:var(--petal)">Cadastrar Artigo Técnico</div>
+            <button type="button" class="btn-ghost" onclick="closeArticleEditor()" style="padding:4px 10px;font-size:0.75rem;">✕ Fechar</button>
+          </div>
+          <input type="hidden" id="artEditingId" value="">
+
+          <div class="form-grid">
+            <div class="full-span">
+              <label class="field-label">Título do Artigo</label>
+              <input type="text" id="artTitle" class="field-input" placeholder="Ex: Por que BPMN 2.0 e IA Generativa devem operar na mesma mesa" oninput="autoGenerateSlug()">
+            </div>
+            <div>
+              <label class="field-label">Slug / ID URL (sem acentos e espaços)</label>
+              <input type="text" id="artSlug" class="field-input" placeholder="bpmn-ia-arquitetura">
+            </div>
+            <div>
+              <label class="field-label">Categoria / Tag Principal</label>
+              <input type="text" id="artCategory" class="field-input" placeholder="Engenharia & IA, Arquitetura de Dados, LGPD, etc.">
+            </div>
+            <div>
+              <label class="field-label">Data de Publicação</label>
+              <input type="date" id="artDate" class="field-input">
+            </div>
+            <div>
+              <label class="field-label">Tempo Estimado de Leitura</label>
+              <input type="text" id="artReadTime" class="field-input" placeholder="Ex: 5 min">
+            </div>
+            <div class="full-span">
+              <label class="field-label">Resumo / Subtítulo (Exibido nos Cards)</label>
+              <textarea id="artSummary" class="field-input" rows="2" placeholder="Breve introdução do ensaio..."></textarea>
+            </div>
+            <div class="full-span">
+              <label class="field-label">Conteúdo Completo (Aceita títulos ###, listas, negrito **texto** e citações >)</label>
+              <textarea id="artContent" class="field-input" rows="12" style="font-family:var(--fm);font-size:0.85rem;line-height:1.6;" placeholder="Escreva seu artigo aqui..."></textarea>
+            </div>
+            <div class="full-span" style="display:flex;align-items:center;justify-content:space-between;padding-top:8px;">
+              <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:0.85rem;color:var(--ink-soft);">
+                <input type="checkbox" id="artPublished" checked style="accent-color:var(--petal);width:16px;height:16px;">
+                <span>Publicar imediatamente (Visível na página <code>artigos.html</code>)</span>
+              </label>
+              <div style="display:flex;gap:10px;">
+                <button type="button" class="btn-ghost" onclick="closeArticleEditor()">Cancelar</button>
+                <button type="button" class="btn-primary" onclick="saveArticleFromEditor()">Salvar Artigo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 3: PRODUTOS PRONTOS -->
       <section id="tabProducts" class="tab-pane">
         <div class="pane-header">
           <h2 class="pane-title">Produtos Prontos (Catálogo em produtos.html)</h2>
@@ -775,11 +871,190 @@ function populateForm(){
     document.getElementById('p2BuyUrl').value = p.plataformaEleitoral.buyUrl || `https://wa.me/${g.whatsappPhone || '5567981151717'}?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente.`;
   }
 
+  // Articles
+  renderArticlesTable();
+
   // Leads
   renderLeadsTable();
 
   // Json Viewer
   document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+}
+
+function renderArticlesTable(){
+  const tbody = document.getElementById('articlesTableBody');
+  if(!tbody) return;
+  tbody.innerHTML = '';
+  const articles = currentConfig.articles || [];
+  if(articles.length === 0){
+    tbody.innerHTML = '<tr><td colspan="6" style="color:var(--ink-faint);text-align:center;padding:24px">Nenhum artigo cadastrado até o momento. Clique em "Novo Artigo" para começar.</td></tr>';
+    return;
+  }
+
+  articles.forEach((art, idx) => {
+    const tr = document.createElement('tr');
+    const isPub = art.published !== false;
+    tr.innerHTML = `
+      <td style="font-family:var(--fm);font-size:.78rem;color:var(--ink-soft);white-space:nowrap">${art.date || '-'}</td>
+      <td><strong>${art.title || 'Sem título'}</strong></td>
+      <td><span class="badge-tag" style="background:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.25);color:var(--petal)">${art.category || 'Geral'}</span></td>
+      <td style="font-size:.8rem;color:var(--ink-soft);white-space:nowrap">${art.readTime || '3 min'}</td>
+      <td>
+        <span class="badge-tag" style="background:${isPub ? 'rgba(74,222,128,0.08)' : 'rgba(239,68,68,0.08)'};border-color:${isPub ? 'rgba(74,222,128,0.25)' : 'rgba(239,68,68,0.25)'};color:${isPub ? '#4ade80' : '#ef4444'};cursor:pointer;" onclick="toggleArticlePublish('${art.id}')" title="Clique para alternar status">
+          ${isPub ? 'Publicado' : 'Rascunho'}
+        </span>
+      </td>
+      <td style="text-align:right;white-space:nowrap">
+        <button type="button" class="btn-ghost" style="padding:4px 8px;font-size:.72rem;margin-right:4px;" onclick="editArticle('${art.id}')">Editar</button>
+        <button type="button" class="btn-ghost" style="padding:4px 8px;font-size:.72rem;color:#ef4444;" onclick="deleteArticle('${art.id}')">Excluir</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function openNewArticleModal(){
+  document.getElementById('artEditingId').value = '';
+  document.getElementById('articleEditorTitle').textContent = 'Cadastrar Novo Artigo Técnico';
+  document.getElementById('artTitle').value = '';
+  document.getElementById('artSlug').value = '';
+  document.getElementById('artCategory').value = 'Engenharia & IA';
+  document.getElementById('artDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('artReadTime').value = '5 min';
+  document.getElementById('artSummary').value = '';
+  document.getElementById('artContent').value = '';
+  document.getElementById('artPublished').checked = true;
+
+  const card = document.getElementById('articleEditorCard');
+  card.style.display = 'block';
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeArticleEditor(){
+  document.getElementById('articleEditorCard').style.display = 'none';
+}
+
+function autoGenerateSlug(){
+  if(document.getElementById('artEditingId').value) return; // Não muda slug ao editar se já existir
+  const title = document.getElementById('artTitle').value;
+  const slug = title.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+  document.getElementById('artSlug').value = slug;
+}
+
+function editArticle(id){
+  const art = (currentConfig.articles || []).find(a => a.id === id);
+  if(!art) return;
+
+  document.getElementById('artEditingId').value = art.id;
+  document.getElementById('articleEditorTitle').textContent = 'Editar Artigo: ' + art.title;
+  document.getElementById('artTitle').value = art.title || '';
+  document.getElementById('artSlug').value = art.id || '';
+  document.getElementById('artCategory').value = art.category || '';
+  document.getElementById('artDate').value = art.date || '';
+  document.getElementById('artReadTime').value = art.readTime || '';
+  document.getElementById('artSummary').value = art.summary || '';
+  document.getElementById('artContent').value = art.content || '';
+  document.getElementById('artPublished').checked = art.published !== false;
+
+  const card = document.getElementById('articleEditorCard');
+  card.style.display = 'block';
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function deleteArticle(id){
+  if(!confirm('Tem certeza que deseja remover este artigo? Esta ação atualizará as configurações.')) return;
+  currentConfig.articles = (currentConfig.articles || []).filter(a => a.id !== id);
+  localStorage.setItem('girassol_site_config', JSON.stringify(currentConfig));
+  renderArticlesTable();
+  document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+  closeArticleEditor();
+  showToast('Artigo removido com sucesso!');
+}
+
+function toggleArticlePublish(id){
+  const art = (currentConfig.articles || []).find(a => a.id === id);
+  if(!art) return;
+  art.published = !art.published;
+  localStorage.setItem('girassol_site_config', JSON.stringify(currentConfig));
+  renderArticlesTable();
+  document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+  showToast(art.published ? 'Artigo agora está publicado!' : 'Artigo agora é rascunho.');
+}
+
+function saveArticleFromEditor(){
+  const title = document.getElementById('artTitle').value.trim();
+  let slug = document.getElementById('artSlug').value.trim();
+  const category = document.getElementById('artCategory').value.trim() || 'Geral';
+  const date = document.getElementById('artDate').value || new Date().toISOString().split('T')[0];
+  const readTime = document.getElementById('artReadTime').value.trim() || '4 min';
+  const summary = document.getElementById('artSummary').value.trim();
+  const content = document.getElementById('artContent').value.trim();
+  const published = document.getElementById('artPublished').checked;
+
+  if(!title){
+    alert('Por favor, informe ao menos o título do artigo.');
+    return;
+  }
+  if(!slug){
+    slug = title.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '');
+  }
+
+  currentConfig.articles = currentConfig.articles || [];
+  const editingId = document.getElementById('artEditingId').value;
+
+  if(editingId){
+    const idx = currentConfig.articles.findIndex(a => a.id === editingId);
+    if(idx !== -1){
+      currentConfig.articles[idx] = {
+        id: slug,
+        title,
+        category,
+        date,
+        readTime,
+        published,
+        summary,
+        content
+      };
+    }
+  } else {
+    // Novo Artigo
+    const exists = currentConfig.articles.some(a => a.id === slug);
+    if(exists){
+      slug = slug + '-' + Date.now().toString().slice(-4);
+    }
+    currentConfig.articles.unshift({
+      id: slug,
+      title,
+      category,
+      date,
+      readTime,
+      published,
+      summary,
+      content
+    });
+  }
+
+  localStorage.setItem('girassol_site_config', JSON.stringify(currentConfig));
+  renderArticlesTable();
+  document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+  closeArticleEditor();
+  showToast('Artigo salvo com sucesso!');
+}
+
+function showToast(msg){
+  const toast = document.getElementById('adminToast');
+  if(msg) toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+    toast.textContent = 'Configurações salvas com sucesso no navegador!';
+  }, 3000);
 }
 
 function renderLeadsTable(){

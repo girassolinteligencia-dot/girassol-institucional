@@ -33,6 +33,28 @@
       "priceLabel": "Gratuito"
     }
   },
+  "articles": [
+    {
+      "id": "bpmn-ia-arquitetura",
+      "title": "Por que BPMN 2.0 e IA Generativa devem operar na mesma mesa de arquitetura",
+      "category": "Engenharia & IA",
+      "date": "2026-09-12",
+      "readTime": "5 min",
+      "published": true,
+      "summary": "Mapear processos formais antes de codificar ou instanciar modelos LLM é a única garantia de previsibilidade, conformidade jurídica e redução drástica de custos em software corporativo.",
+      "content": "### A ilusão do atalho tecnológico\n\nNos últimos dois anos, a facilidade de gerar código e interfaces com inteligência artificial criou uma miragem: a de que o entendimento profundo do negócio tornou-se dispensável. Empresas acreditam que basta solicitar a um modelo de linguagem para 'criar um sistema de faturamento' ou 'um CRM sob medida'.\n\nO resultado frequente é o **débito técnico prematuro**: softwares rápidos de subir, porém impossíveis de auditar, frágeis contra edge-cases e desalinhados da rotina operacional de quem realmente trabalha no chão de fábrica ou no balcão.\n\n### O papel estabilizador do BPMN 2.0\n\nA modelagem formal de processos (BPMN 2.0) não é burocracia; é **a matemática da regra de negócio**. Quando sentamos com o operador e desenhamos raias, eventos intermediários, nós de decisão e gateways exclusivos:\n\n1. **Eliminamos a ambiguidade:** Todo gateway tem critério booleano claro (ex: se valor > R$ 5.000, exige chancela diretiva).\n2. **Isolamos dados sensíveis:** Fica evidente onde incide a LGPD e quais dados precisam de anonimização ou chave de criptografia.\n3. **Definimos contratos de API:** As trocas entre etapas tornam-se schemas de dados rigorosos.\n\n### Onde a IA entra com máxima eficiência\n\nQuando o fluxo de processo já está desenhado e validado com quem opera, a IA não precisa 'adivinhar' o que o negócio precisa. Ela é empregada como um acelerador industrial:\n\n- Gera código limpo respeitando arquitetura modular;\n- Constrói testes unitários para cada gateway de decisão;\n- Otimiza queries e agregações de dados complexas;\n- Cria interfaces que respeitam a sequência humana de trabalho.\n\n> *'Software bom é aquele que funciona silencioso na rotina. E para funcionar em silêncio, a arquitetura precisa ter sido compreendida antes da primeira linha de código.'*\n\n### Conclusão\n\nFerramentas de IA são copilotos excepcionais de execução, mas copilotos não definem rota. A bússola continua sendo a engenharia disciplinada, a conformidade jurídica e o respeito pelo fluxo real da empresa."
+    },
+    {
+      "id": "formato-parquet-analytics",
+      "title": "A transição do CSV para Apache Parquet: Eficiência analítica em escala real",
+      "category": "Arquitetura de Dados",
+      "date": "2026-09-08",
+      "readTime": "4 min",
+      "published": true,
+      "summary": "Como a compressão colunar e os metadados embutidos do formato Parquet transformam rotinas analíticas lentas em consultas de milissegundos sem custos de servidores dedicados.",
+      "content": "### O colapso das planilhas e CSVs volumosos\n\nArquivos CSV foram projetados para simplicidade de intercâmbio, não para velocidade analítica. À medida que bases de dados ultrapassam centenas de milhares de linhas, o custo de parsing linha a linha, conversão de tipos de texto e leitura de I/O em disco torna-se insustentável.\n\n### Por que o Parquet é superior?\n\nO Apache Parquet adota armazenamento colunar com compressão SNAPPY ou ZSTD por bloco. Isso confere três vantagens decisivas:\n\n1. **Redução de 75% a 90% no tamanho em disco.**\n2. **Scan de colunas selecionadas:** Se a consulta precisa apenas de `data` e `valor_total`, nenhuma outra coluna do arquivo é lida.\n3. **Estatísticas embutidas (Min/Max por bloco):** O leitor descarta blocos inteiros de dados sem precisar descompactá-los.\n\n### Filosofia de engenharia local\n\nFerramentas como o **AlltoParquet** nasceram justamente dessa percepção: democratizar o acesso a esse padrão de engenharia para analistas, advogados e gestores que precisam de alta velocidade em computadores comuns, 100% offline e com total privacidade."
+    }
+  ],
   "leads": [
     {
       "id": 1,
