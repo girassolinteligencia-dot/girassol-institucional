@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Girassol Inteligência — sua ideia vira ferramenta</title>
+<meta name="description" content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS.">
+<meta name="theme-color" content="#0c0a08">
+
+<!-- Open Graph / Redes Sociais & WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Girassol Inteligência — sua ideia vira ferramenta">
+<meta property="og:description" content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS.">
+<meta property="og:image" content="logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Girassol Inteligência — sua ideia vira ferramenta">
+<meta name="twitter:description" content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS.">
+<meta name="twitter:image" content="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/chat-widget.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<style>
+:focus-visible{
+  outline: 2px solid var(--petal) !important;
+  outline-offset: 3px !important;
+}
+:root{
+  --void:#0c0a08;
+  --surface:#14110e;
+  --surface-raised:#1c1813;
+  --line:rgba(242,237,226,0.08);
+  --line-light:rgba(242,237,226,0.16);
+  --ink:#F4EFE6;
+  --ink-soft:#A99E8F;
+  --ink-faint:#6B6256;
+  --earth:#C46A42;
+  --petal:#E8B33C;
+  --petal-glow:rgba(232,179,60,0.18);
+  --sky:#7E9AA6;
+  --fd:"Instrument Serif",Georgia,serif;
+  --fb:"Newsreader",Georgia,serif;
+  --fm:"JetBrains Mono",monospace;
+  --hero:clamp(2.9rem,7.4vw,5.6rem);
+  --h2:clamp(2rem,4.2vw,3rem);
+  --h3:clamp(1.25rem,2.4vw,1.75rem);
+  --body:clamp(1.05rem,1.25vw,1.22rem);
+  --sm:.875rem;
+  --s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:96px;--s7:140px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  background:var(--void);
+}
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:var(--body);
+  font-weight:300;
+  line-height:1.68;
+  overflow-x:hidden;
+}
+
+/* ══ BACKGROUND CANVAS & GLOWS ══ */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.scan{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.18;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px)}
+
+/* Cursor Glow interativo */
+#cursor-glow{
+  position:fixed;
+  width:460px;height:460px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(232,179,60,0.06) 0%,transparent 70%);
+  transition:width .3s,height .3s,opacity .3s;
+}
+
+.page{position:relative;z-index:3}
+.wrap{max-width:84ch;margin:0 auto;padding:0 var(--s3)}
+@media(min-width:768px){.wrap{padding:0 var(--s4)}}
+.wrap-wide{max-width:1040px;margin:0 auto;padding:0 var(--s3)}
+@media(min-width:768px){.wrap-wide{padding:0 var(--s4)}}
+
+/* ══ HEADER PREMIUM (TELA 01) ══ */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  background:rgba(12,10,8,.75);
+  border-bottom:1px solid var(--line);
+  transition:border-color .3s;
+}
+.header-inner{
+  max-width:1160px;
+  margin:0 auto;
+  padding:14px var(--s3);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand-mark{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.brand-mark img{
+  width:36px;height:36px;
+  border-radius:50%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 14px rgba(232,179,60,.4));
+}
+.brand-title strong{
+  font-family:var(--fd);
+  font-size:1.28rem;
+  font-weight:400;
+  color:var(--ink);
+  line-height:1;
+  letter-spacing:-.01em;
+}
+.brand-title span{
+  font-family:var(--fm);
+  font-size:.62rem;
+  letter-spacing:.16em;
+  color:var(--petal);
+  text-transform:uppercase;
+  margin-top:3px;
+  display:block;
+}
+.header-nav{
+  display:none;
+  align-items:center;
+  gap:20px;
+}
+@media(min-width:960px){
+  .header-nav{display:flex}
+}
+.header-nav a{
+  font-family:var(--fm);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-decoration:none;
+  transition:color .25s;
+}
+.header-nav a:hover{
+  color:var(--petal);
+}
+
+/* Menu Mobile Toggle & Drawer */
+.mobile-menu-btn{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:38px;
+  height:38px;
+  background:transparent;
+  border:1px solid var(--line-light);
+  border-radius:6px;
+  padding:8px;
+  cursor:pointer;
+  color:var(--ink);
+}
+@media(min-width:960px){
+  .mobile-menu-btn{display:none}
+}
+.mobile-menu-btn span{
+  display:block;
+  height:1.5px;
+  width:100%;
+  background:var(--petal);
+  transition:all .25s;
+}
+.mobile-drawer{
+  position:fixed;
+  top:65px;
+  left:0;
+  right:0;
+  background:rgba(14,12,10,.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line-light);
+  padding:20px var(--s3);
+  display:none;
+  flex-direction:column;
+  gap:16px;
+  z-index:99;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+.mobile-drawer.open{
+  display:flex;
+}
+.mobile-drawer a{
+  font-family:var(--fm);
+  font-size:.85rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+  text-decoration:none;
+  padding:8px 0;
+  border-bottom:1px solid var(--line);
+}
+.mobile-drawer a:hover{
+  color:var(--petal);
+}
+
+.header-cta{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+  background:rgba(232,179,60,.1);
+  border:1px solid rgba(232,179,60,.32);
+  padding:8px 18px;
+  border-radius:999px;
+  text-decoration:none;
+  transition:all .35s var(--ease);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  position:relative;
+}
+.header-cta:hover{
+  background:var(--petal);
+  color:var(--void);
+  box-shadow:0 0 24px rgba(232,179,60,.45);
+}
+
+/* ══ TIPOGRAFIA & BASE EDITORIAL ══ */
+h1,h2,h3{font-family:var(--fd);font-weight:400;letter-spacing:-.02em;margin:0}
+h1{font-size:var(--hero);line-height:1.02}
+h2{font-size:var(--h2);line-height:1.15;margin-bottom:var(--s3)}
+h3{font-size:var(--h3);line-height:1.24;margin-bottom:12px}
+p{margin:0 0 var(--s3);max-width:68ch}
+p:last-child{margin-bottom:0}
+.soft{color:var(--ink-soft)}
+.eyebrow{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin-bottom:var(--s2);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--earth)}
+
+a{color:var(--earth);text-decoration:none;transition:color .25s}
+a:hover{color:var(--petal)}
+
+.rise{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.rise.in{opacity:1;transform:none}
+
+/* ══ TELA 02: HERO SECTION & BARRA DE PROVA ══ */
+.hero{
+  min-height:86vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding-top:calc(var(--s6) + 36px);
+  padding-bottom:var(--s5);
+}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 i{display:block;font-style:normal;transform:translateY(105%);animation:up 1.1s var(--ease) forwards}
+.hero h1 i.d2{animation-delay:.15s}
+@keyframes up{to{transform:none}}
+
+.hero-lead{
+  margin-top:var(--s4);
+  font-size:clamp(1.18rem,1.7vw,1.44rem);
+  color:var(--ink-soft);
+  max-width:62ch;
+  line-height:1.6;
+}
+.hero-lead b{color:var(--ink);font-weight:400}
+
+.hero-actions{
+  margin-top:var(--s4);
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+}
+.btn-primary{
+  font-family:var(--fm);
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:500;
+  padding:14px 26px;
+  border-radius:4px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:all .3s var(--ease);
+  box-shadow:0 0 20px rgba(232,179,60,.28);
+}
+.btn-primary:hover{
+  background:#f7c858;
+  color:var(--void);
+  box-shadow:0 4px 28px rgba(232,179,60,.45);
+  transform:translateY(-2px);
+}
+.btn-secondary{
+  font-family:var(--fm);
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:rgba(242,237,226,.05);
+  color:var(--ink);
+  border:1px solid var(--line-light);
+  padding:14px 24px;
+  border-radius:4px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:all .3s var(--ease);
+}
+.btn-secondary:hover{
+  background:rgba(242,237,226,.12);
+  border-color:var(--ink);
+  color:var(--ink);
+  transform:translateY(-2px);
+}
+
+.scroll-hint{
+  margin-top:var(--s4);
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.scroll-hint span{
+  color:var(--petal);
+  display:inline-block;
+  animation:bounce 1.8s infinite ease-in-out;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(5px)}
+}
+
+/* Barra de Prova (4 Selos no Hero - Únicos números do site) */
+.proof-ribbon{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+  margin-top:var(--s5);
+  border-top:1px solid var(--line);
+  padding-top:var(--s4);
+}
+.proof-card{
+  background:rgba(20,17,14,0.6);
+  border:1px solid var(--line);
+  padding:18px 20px;
+  position:relative;
+  transition:all .3s var(--ease);
+}
+.proof-card:hover{
+  border-color:rgba(232,179,60,0.35);
+  transform:translateY(-2px);
+}
+.proof-val{
+  font-family:var(--fd);
+  font-size:clamp(1.7rem,2.5vw,2.3rem);
+  color:var(--petal);
+  line-height:1;
+  margin-bottom:8px;
+}
+.proof-label{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  color:var(--ink-soft);
+  line-height:1.45;
+}
+
+/* ══ TELA 03: O GIRASSOL INTERATIVO ══ */
+.bloomrail{
+  position:relative;
+  height:440vh;
+}
+.bloomrail .stick{
+  position:sticky;
+  top:54px;
+  height:calc(100vh - 54px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:var(--s3) 0;
+}
+#bloom{
+  width:min(92vw,500px);
+  height:min(50vh,450px);
+  cursor:grab;
+  touch-action:pan-y;
+}
+#bloom:active{cursor:grabbing}
+
+.flower-hud{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  text-align:center;
+  width:100%;
+  max-width:560px;
+}
+.stage-stepper{
+  display:flex;
+  gap:8px;
+  width:100%;
+  padding:0 var(--s3);
+  justify-content:center;
+}
+.stage-step{
+  flex:1;
+  max-width:70px;
+  height:3px;
+  background:rgba(242,237,226,.12);
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+  transition:background .3s;
+}
+.stage-step .fill{
+  position:absolute;
+  inset:0;
+  background:var(--petal);
+  transform:translateX(-100%);
+  transition:transform .2s linear;
+}
+.stage-step.done .fill{transform:translateX(0)}
+.stage-step.active .fill{transform:translateX(0);box-shadow:0 0 10px var(--petal)}
+
+.legend{
+  font-family:var(--fm);
+  font-size:var(--sm);
+  color:var(--ink-soft);
+  max-width:54ch;
+  padding:0 var(--s3);
+  min-height:4.4em;
+  transition:opacity .25s var(--ease);
+}
+.legend b{
+  display:block;
+  color:var(--petal);
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:.78rem;
+  margin-bottom:6px;
+}
+.hud-metrics{
+  font-family:var(--fm);
+  font-size:.7rem;
+  letter-spacing:.18em;
+  color:var(--ink-faint);
+  display:flex;
+  gap:24px;
+}
+.hud-metrics u{text-decoration:none;color:var(--petal);font-weight:500}
+
+/* ══ HUD CORNERS & VIEWFINDER ══ */
+.hud-box{
+  position:relative;
+}
+.hud-corner{
+  position:absolute;
+  width:9px;
+  height:9px;
+  pointer-events:none;
+  transition:transform .32s var(--ease), border-color .32s;
+  z-index:2;
+}
+.hud-corner.tl{top:-1px;left:-1px;border-top:1.5px solid var(--petal);border-left:1.5px solid var(--petal)}
+.hud-corner.tr{top:-1px;right:-1px;border-top:1.5px solid var(--petal);border-right:1.5px solid var(--petal)}
+.hud-corner.bl{bottom:-1px;left:-1px;border-bottom:1.5px solid var(--petal);border-left:1.5px solid var(--petal)}
+.hud-corner.br{bottom:-1px;right:-1px;border-bottom:1.5px solid var(--petal);border-right:1.5px solid var(--petal)}
+
+.hud-box:hover .hud-corner.tl{transform:translate(-3px,-3px)}
+.hud-box:hover .hud-corner.tr{transform:translate(3px,-3px)}
+.hud-box:hover .hud-corner.bl{transform:translate(-3px,3px)}
+.hud-box:hover .hud-corner.br{transform:translate(3px,3px)}
+
+.bracket-tag{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--petal);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.bracket-tag::before{content:"[ ";color:var(--earth)}
+.bracket-tag::after{content:" ]";color:var(--earth)}
+
+/* ══ TELA 04: PRODUTOS PRONTOS ══ */
+.section-products{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.products-intro-lead{
+  font-size:clamp(1.1rem,1.8vw,1.32rem);
+  color:var(--ink-soft);
+  max-width:64ch;
+  line-height:1.6;
+  margin-bottom:var(--s4);
+}
+.products-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:28px;
+  margin-top:var(--s4);
+}
+@media(min-width:960px){
+  .products-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+.product-card{
+  background:linear-gradient(180deg,#161310 0%,#110e0b 100%);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:clamp(24px,3vw,36px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  transition:all .35s var(--ease);
+}
+.product-card:hover{
+  border-color:rgba(232,179,60,.38);
+  transform:translateY(-3px);
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+.product-top{margin-bottom:var(--s3)}
+.product-badge-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.product-badge{
+  font-family:var(--fm);
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--petal);
+  background:rgba(232,179,60,.08);
+  border:1px solid rgba(232,179,60,.25);
+  padding:4px 10px;
+  border-radius:999px;
+}
+.product-price{
+  font-family:var(--fd);
+  font-size:1.45rem;
+  color:var(--ink);
+}
+.product-price small{
+  font-family:var(--fm);
+  font-size:.66rem;
+  color:var(--ink-faint);
+  display:block;
+  line-height:1;
+}
+.product-title{
+  font-size:clamp(1.4rem,2vw,1.75rem);
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.product-tagline{
+  font-family:var(--fm);
+  font-size:.76rem;
+  letter-spacing:.04em;
+  color:var(--petal);
+  margin-bottom:14px;
+  line-height:1.45;
+}
+.product-desc{
+  font-size:.95rem;
+  color:var(--ink-soft);
+  line-height:1.6;
+  margin-bottom:var(--s3);
+}
+.product-features-label{
+  font-family:var(--fm);
+  font-size:.65rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:10px;
+  display:block;
+}
+.product-list{
+  list-style:none;
+  padding:0;
+  margin:0 0 var(--s3);
+  font-size:.88rem;
+  color:var(--ink-soft);
+}
+.product-list li{
+  padding:4px 0 4px 18px;
+  position:relative;
+  line-height:1.45;
+}
+.product-list li::before{
+  content:"•";
+  position:absolute;
+  left:2px;
+  color:var(--petal);
+}
+.product-disclaimer{
+  font-size:.74rem;
+  color:var(--ink-faint);
+  line-height:1.45;
+  border-top:1px solid var(--line);
+  padding-top:12px;
+  margin-top:12px;
+}
+.product-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:auto;
+}
+.product-btn{
+  font-family:var(--fm);
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:500;
+  padding:12px 20px;
+  border-radius:4px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:all .25s var(--ease);
+}
+.product-btn:hover{
+  background:#f7c858;
+  color:var(--void);
+  box-shadow:0 4px 20px rgba(232,179,60,.35);
+}
+.product-btn.outline{
+  background:transparent;
+  color:var(--ink);
+  border:1px solid var(--line-light);
+}
+.product-btn.outline:hover{
+  background:rgba(242,237,226,.08);
+  border-color:var(--petal);
+  color:var(--petal);
+}
+
+/* ══ TELA 05: SERVIÇOS SOB MEDIDA ══ */
+.section-services{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.services-intro-lead{
+  font-size:clamp(1.1rem,1.8vw,1.32rem);
+  color:var(--ink-soft);
+  max-width:66ch;
+  line-height:1.6;
+  margin-bottom:var(--s5);
+}
+.services-matrix{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+.service-card{
+  background:linear-gradient(180deg,#161310 0%,#110e0b 100%);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:clamp(28px,4.5vw,46px);
+  position:relative;
+  transition:border-color .35s,box-shadow .35s,transform .35s var(--ease);
+}
+.service-card:hover{
+  border-color:rgba(232,179,60,.38);
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  transform:translateY(-3px);
+}
+.service-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:var(--s3);
+}
+.service-number{
+  font-family:var(--fm);
+  font-size:.88rem;
+  letter-spacing:.18em;
+  color:var(--ink-faint);
+  font-weight:500;
+}
+.service-number span{color:var(--petal)}
+.service-badge{
+  font-family:var(--fm);
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  background:rgba(232,179,60,.08);
+  border:1px solid rgba(232,179,60,.25);
+  padding:4px 12px;
+  border-radius:999px;
+}
+.service-title{
+  font-size:clamp(1.6rem,2.8vw,2.2rem);
+  color:var(--ink);
+  margin-bottom:12px;
+  letter-spacing:-.01em;
+}
+.service-desc{
+  font-size:1.06rem;
+  color:var(--ink-soft);
+  line-height:1.68;
+  margin-bottom:var(--s4);
+  max-width:70ch;
+}
+.service-scope-label{
+  font-family:var(--fm);
+  font-size:.68rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  white-space:nowrap;
+}
+.service-scope-label::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--line);
+}
+.scope-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:var(--s4);
+}
+.scope-pill{
+  font-family:var(--fm);
+  font-size:.73rem;
+  letter-spacing:.02em;
+  color:var(--ink);
+  background:rgba(242,237,226,.03);
+  border:1px solid var(--line-light);
+  padding:7px 12px;
+  border-radius:4px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:all .25s var(--ease);
+}
+.scope-pill::before{
+  content:"•";
+  color:var(--petal);
+  font-size:1rem;
+  line-height:0;
+}
+.scope-pill:hover{
+  background:rgba(232,179,60,.09);
+  border-color:rgba(232,179,60,.45);
+  color:#fff;
+  transform:translateY(-1px);
+}
+.service-action{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:var(--s3);
+  border-top:1px solid var(--line);
+  flex-wrap:wrap;
+  gap:12px;
+}
+.service-link{
+  font-family:var(--fm);
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:gap .25s var(--ease),color .25s;
+}
+.service-link:hover{
+  color:#f7c858;
+  gap:12px;
+}
+
+/* Bloco "Não sabe por onde começar?" */
+.bridge-cta{
+  margin-top:var(--s6);
+  background:radial-gradient(circle at 10% 20%,rgba(232,179,60,.09) 0%,rgba(20,17,14,.96) 65%);
+  border:1px solid var(--line-light);
+  padding:clamp(32px,5vw,56px);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:var(--s3);
+}
+@media(min-width:768px){
+  .bridge-cta{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:var(--s5);
+  }
+  .bridge-cta-content{max-width:64%}
+}
+.bridge-cta h3{
+  font-size:clamp(1.4rem,2.2vw,1.95rem);
+  margin-bottom:8px;
+}
+.bridge-cta p{
+  color:var(--ink-soft);
+  margin:0;
+  font-size:1.02rem;
+  line-height:1.6;
+}
+.bridge-btn{
+  font-family:var(--fm);
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:500;
+  padding:15px 28px;
+  border-radius:4px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:all .3s var(--ease);
+  box-shadow:0 0 24px rgba(232,179,60,.28);
+  white-space:nowrap;
+  align-self:flex-start;
+  position:relative;
+}
+.bridge-btn:hover{
+  background:#f7c858;
+  color:var(--void);
+  box-shadow:0 6px 32px rgba(232,179,60,.48);
+  transform:translateY(-2px);
+}
+
+/* ══ TELA 06: CASOS REAIS ══ */
+.section-cases{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.cases-intro-lead{
+  font-size:clamp(1.1rem,1.8vw,1.32rem);
+  color:var(--ink-soft);
+  max-width:64ch;
+  line-height:1.6;
+  margin-bottom:var(--s4);
+}
+.cases-stack{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+  margin-top:var(--s4);
+}
+.case-card{
+  background:linear-gradient(180deg,#15120f 0%,#100d0a 100%);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:clamp(26px,4vw,42px);
+  position:relative;
+  transition:all .35s var(--ease);
+}
+.case-card:hover{
+  border-color:rgba(232,179,60,.32);
+}
+.case-header{
+  margin-bottom:var(--s3);
+  border-bottom:1px solid var(--line);
+  padding-bottom:18px;
+}
+.case-audience{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin-bottom:8px;
+  display:block;
+}
+.case-title{
+  font-size:clamp(1.35rem,2.2vw,1.85rem);
+  color:var(--ink);
+  line-height:1.24;
+}
+.case-dual-body{
+  display:grid;
+  gap:var(--s4);
+  margin-bottom:var(--s4);
+}
+@media(min-width:768px){
+  .case-dual-body{
+    grid-template-columns:1fr 1fr;
+    gap:var(--s5);
+  }
+}
+.case-subblock strong{
+  font-family:var(--fm);
+  font-size:.75rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink);
+  display:block;
+  margin-bottom:8px;
+}
+.case-subblock p{
+  font-size:.96rem;
+  color:var(--ink-soft);
+  line-height:1.62;
+  margin:0;
+}
+.case-table-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin-top:var(--s3);
+  border:1px solid var(--line);
+  background:rgba(12,10,8,.4);
+  border-radius:4px;
+}
+.case-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.88rem;
+  text-align:left;
+}
+.case-table th{
+  font-family:var(--fm);
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:12px 18px;
+  background:rgba(242,237,226,.04);
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+.case-table th:nth-child(2){color:var(--petal)}
+.case-table td{
+  padding:12px 18px;
+  border-bottom:1px solid rgba(242,237,226,.05);
+  color:var(--ink-soft);
+  line-height:1.5;
+  vertical-align:top;
+}
+.case-table tr:last-child td{border-bottom:none}
+.case-table td:first-child{color:var(--ink-faint);width:45%}
+.case-table td:nth-child(2){color:var(--ink);font-weight:400;width:55%}
+.case-table td mark{background:none;color:var(--petal);font-weight:500}
+.case-note{
+  font-size:.76rem;
+  color:var(--ink-faint);
+  margin-top:12px;
+  line-height:1.45;
+}
+
+/* ══ TELA 07: FILOSOFIA EDITORIAL ══ */
+.section-manifesto{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.manifesto-statement{
+  font-family:var(--fd);
+  font-size:clamp(1.9rem,3.8vw,3.1rem);
+  line-height:1.24;
+  color:var(--ink);
+  margin-bottom:var(--s5);
+}
+.manifesto-statement em{
+  font-style:italic;
+  color:var(--petal);
+}
+.editorial-dual{
+  display:grid;
+  gap:var(--s5);
+  margin-top:var(--s5);
+  border-top:1px solid var(--line);
+  padding-top:var(--s5);
+}
+@media(min-width:768px){
+  .editorial-dual{grid-template-columns:1fr 1fr;gap:var(--s6)}
+}
+.dual-col h3{
+  font-family:var(--fd);
+  font-size:1.6rem;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.dual-col p{
+  color:var(--ink-soft);
+  font-size:1.06rem;
+  line-height:1.68;
+}
+.dual-index{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.16em;
+  color:var(--petal);
+  margin-bottom:12px;
+  display:block;
+}
+
+/* ══ TELA 08: QUEM COORDENA (PAULO CARDOSO) ══ */
+.section-authority{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.bio-layout{
+  display:flex;
+  flex-direction:column;
+  gap:var(--s4);
+  margin-top:var(--s4);
+}
+@media(min-width:680px){
+  .bio-layout{
+    flex-direction:row;
+    align-items:flex-start;
+    gap:var(--s4);
+  }
+}
+.portrait-container{
+  width:110px;
+  height:110px;
+  border-radius:18px;
+  border:1px solid var(--line-light);
+  overflow:hidden;
+  background:#1A1713;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  flex-shrink:0;
+}
+.portrait-container img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:contrast(1.02) brightness(.98);
+}
+.bio-content{flex:1}
+.bio-content h2{
+  font-size:clamp(1.8rem,3vw,2.4rem);
+  margin-bottom:6px;
+}
+.bio-tagline{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin-bottom:var(--s3);
+  display:block;
+}
+.bio-content p{
+  font-size:1.06rem;
+  color:var(--ink-soft);
+  line-height:1.65;
+  margin-bottom:var(--s3);
+}
+.bio-credentials{
+  margin:var(--s3) 0;
+  padding:16px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.credentials-title{
+  font-family:var(--fm);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin-bottom:10px;
+  display:block;
+}
+.credentials-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  font-size:.9rem;
+  color:var(--ink);
+}
+@media(min-width:640px){
+  .credentials-list{grid-template-columns:1fr 1fr}
+}
+.credentials-list li{
+  padding-left:14px;
+  position:relative;
+}
+.credentials-list li::before{
+  content:"—";
+  position:absolute;
+  left:0;
+  color:var(--earth);
+}
+.quote-box{
+  border-left:2px solid var(--earth);
+  padding:12px var(--s3);
+  margin:var(--s3) 0;
+  background:rgba(196,106,66,.04);
+  border-radius:0 8px 8px 0;
+}
+.quote-box p{
+  font-family:var(--fd);
+  font-size:clamp(1.15rem,1.7vw,1.38rem);
+  font-style:italic;
+  line-height:1.38;
+  color:var(--ink);
+  margin:0;
+}
+.core-pillars{
+  display:grid;
+  gap:16px;
+  margin-top:var(--s4);
+  border-top:1px solid var(--line);
+  padding-top:var(--s4);
+}
+@media(min-width:640px){
+  .core-pillars{grid-template-columns:1fr 1fr 1fr}
+}
+.pillar-item strong{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  display:block;
+  margin-bottom:6px;
+}
+.pillar-item p{
+  font-size:.9rem;
+  color:var(--ink-soft);
+  line-height:1.48;
+  margin:0;
+}
+
+/* ══ TELA 09: CAPTURA DE LEAD (GUIA OFICIAL PARQUET) ══ */
+.section-lead{
+  padding:var(--s7) 0 var(--s6);
+  border-top:1px solid var(--line);
+}
+.lead-box{
+  background:linear-gradient(180deg,#171310 0%,#110e0b 100%);
+  border:1px solid var(--line-light);
+  border-radius:4px;
+  padding:clamp(32px,5vw,56px);
+  position:relative;
+}
+.lead-grid{
+  display:grid;
+  gap:var(--s4);
+}
+@media(min-width:768px){
+  .lead-grid{
+    grid-template-columns:1.2fr 1fr;
+    gap:var(--s5);
+    align-items:center;
+  }
+}
+.lead-grid h2{
+  font-size:clamp(1.8rem,3vw,2.5rem);
+  margin-bottom:12px;
+}
+.lead-grid p{
+  font-size:1.04rem;
+  color:var(--ink-soft);
+  line-height:1.6;
+  margin-bottom:var(--s3);
+}
+.lead-form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.form-input{
+  background:rgba(12,10,8,.75);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:13px 16px;
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:.95rem;
+  outline:none;
+  transition:border-color .25s;
+}
+.form-input:focus{border-color:var(--petal)}
+.form-consent{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:.76rem;
+  color:var(--ink-soft);
+  line-height:1.4;
+  margin-top:4px;
+}
+.form-consent input[type="checkbox"]{
+  margin-top:3px;
+  accent-color:var(--petal);
+}
+.lead-btn{
+  font-family:var(--fm);
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:500;
+  padding:14px 24px;
+  border-radius:4px;
+  border:none;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:all .3s var(--ease);
+}
+.lead-btn:hover{
+  background:#f7c858;
+  transform:translateY(-2px);
+  box-shadow:0 4px 24px rgba(232,179,60,.35);
+}
+.lead-feedback{
+  display:none;
+  font-family:var(--fm);
+  font-size:.82rem;
+  color:var(--petal);
+  margin-top:10px;
+  letter-spacing:.06em;
+}
+
+/* ══ TELA 10: COMPROMISSO, CONTATO & RODAPÉ ══ */
+.section-cta{
+  padding:var(--s7) 0 calc(var(--s7) + 20px);
+  border-top:1px solid var(--line);
+}
+.cta-box{
+  background:linear-gradient(180deg,#161310 0%,rgba(18,16,13,.95) 100%);
+  border:1px solid var(--line-light);
+  border-radius:24px;
+  padding:clamp(36px,6vw,68px);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.6);
+}
+.cta-box::before{
+  content:"";
+  position:absolute;
+  top:-100px;left:50%;transform:translateX(-50%);
+  width:420px;height:240px;
+  background:radial-gradient(circle,rgba(232,179,60,.16),transparent 70%);
+  pointer-events:none;
+}
+.pact-statement{
+  font-family:var(--fd);
+  font-size:clamp(1.5rem,2.8vw,2.2rem);
+  line-height:1.3;
+  color:var(--ink);
+  max-width:44ch;
+  margin:0 auto var(--s4);
+}
+.pact-statement mark{
+  background:none;
+  color:var(--petal);
+}
+.contact-channels{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  margin-top:var(--s4);
+}
+.btn-whatsapp{
+  font-family:var(--fm);
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:500;
+  padding:16px 34px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  transition:all .35s var(--ease);
+  box-shadow:0 0 32px rgba(232,179,60,.32);
+}
+.btn-whatsapp:hover{
+  background:#f7c858;
+  transform:translateY(-2px);
+  box-shadow:0 10px 38px rgba(232,179,60,.5);
+  color:var(--void);
+}
+.btn-email-copy{
+  font-family:var(--fm);
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:rgba(242,237,226,.06);
+  color:var(--ink);
+  border:1px solid rgba(242,237,226,.2);
+  padding:16px 28px;
+  border-radius:999px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:all .35s var(--ease);
+}
+.btn-email-copy:hover{
+  background:rgba(242,237,226,.12);
+  border-color:var(--ink);
+}
+
+/* Toast */
+#toast{
+  position:fixed;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--surface-raised);
+  color:var(--petal);
+  border:1px solid var(--petal);
+  font-family:var(--fm);
+  font-size:.76rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:12px 24px;
+  border-radius:999px;
+  box-shadow:0 12px 30px rgba(0,0,0,.6);
+  z-index:999;
+  opacity:0;
+  pointer-events:none;
+  transition:all .35s var(--ease);
+}
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* FOOTER EDITORIAL */
+footer{
+  padding:var(--s6) 0 var(--s6);
+  border-top:1px solid var(--line);
+  font-size:var(--sm);
+  color:var(--ink-faint);
+  font-family:var(--fm);
+}
+.footer-inner{
+  display:flex;
+  flex-direction:column;
+  gap:var(--s3);
+  justify-content:space-between;
+}
+@media(min-width:768px){
+  .footer-inner{flex-direction:row;align-items:center}
+}
+.social-links{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.social-links a{
+  color:var(--ink-soft);
+  text-decoration:none;
+  transition:color .25s;
+}
+.social-links a:hover{
+  color:var(--petal);
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .rise{opacity:1;transform:none}.hero h1 i{transform:none}.scan{display:none}
+  .bloomrail{height:auto}
+  .bloomrail .stick{position:static;height:auto;padding:var(--s5) 0}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div id="cursor-glow"></div>
+<div class="scan"></div>
+
+<!-- TELA 01: HEADER NAVEGAÇÃO -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand-mark">
+      <img src="logo.png" alt="Girassol Inteligência">
+      <div class="brand-title">
+        <strong>Girassol Inteligência</strong>
+        <span>Campo Grande / MS</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="#girassol">O Girassol</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#casos">Casos</a>
+      <a href="#coordenacao">Coordenação</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20vim%20pelo%20site%20da%20Girassol%20e%20gostaria%20de%20conversar%20sobre%20uma%20ferramenta%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" class="header-cta hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <span>Conversar</span> →
+      </a>
+      <button type="button" class="mobile-menu-btn" id="btnMobileMenu" aria-label="Abrir Menu de Navegação">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Drawer Mobile -->
+  <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navegação Móvel">
+    <a href="#girassol" onclick="closeMobileDrawer()">O Girassol</a>
+    <a href="#produtos" onclick="closeMobileDrawer()">Produtos</a>
+    <a href="#servicos" onclick="closeMobileDrawer()">Serviços</a>
+    <a href="#casos" onclick="closeMobileDrawer()">Casos</a>
+    <a href="#coordenacao" onclick="closeMobileDrawer()">Coordenação</a>
+    <a href="#contato" onclick="closeMobileDrawer()">Contato</a>
+  </nav>
+</header>
+
+<div class="page">
+  <!-- TELA 02: HERO SECTION -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Campo Grande / MS · Engenharia de Software e IA Aplicada</div>
+      <h1>
+        <span><i>Sua ideia</i></span>
+        <span><i class="d2">vira ferramenta.</i></span>
+      </h1>
+      <p class="hero-lead">
+        Todo negócio tem aquele processo que rouba tempo, aquela planilha que vive dando erro ou uma ideia que facilitaria a rotina. Construímos a <b>ferramenta exata que você precisa</b> — rápida de entregar, fácil de usar e segura para o seu dia a dia.
+      </p>
+
+      <!-- CTA Duplo -->
+      <div class="hero-actions">
+        <a href="#produtos" class="btn-primary hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <span>Ver produtos prontos</span> →
+        </a>
+        <a href="#servicos" class="btn-secondary hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <span>Quero uma ferramenta sob medida</span> →
+        </a>
+      </div>
+
+      <!-- Barra de Prova (4 Selos - Únicos números do site) -->
+      <div class="proof-ribbon">
+        <div class="proof-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="proof-val">5</div>
+          <div class="proof-label">Plataformas em produção</div>
+        </div>
+        <div class="proof-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="proof-val">BPMN 2.0</div>
+          <div class="proof-label">Modelagem formal de processos</div>
+        </div>
+        <div class="proof-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="proof-val">20+ anos</div>
+          <div class="proof-label">Atuação técnica e jurídica no setor público e privado</div>
+        </div>
+        <div class="proof-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="proof-val">&lt; 48h</div>
+          <div class="proof-label">Para o desenho do projeto inicial</div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">Role para ver a construção cadenciada <span>↓</span></div>
+    </section>
+  </div>
+
+  <!-- TELA 03: O GIRASSOL INTERATIVO (ÚNICO BLOCO DE PROCESSO DO SITE) -->
+  <div class="bloomrail" id="girassol">
+    <div class="stick">
+      <canvas id="bloom"></canvas>
+      <div class="flower-hud">
+        <!-- Indicador de 5 Estágios -->
+        <div class="stage-stepper" id="stepper">
+          <div class="stage-step" data-step="0"><div class="fill"></div></div>
+          <div class="stage-step" data-step="1"><div class="fill"></div></div>
+          <div class="stage-step" data-step="2"><div class="fill"></div></div>
+          <div class="stage-step" data-step="3"><div class="fill"></div></div>
+          <div class="stage-step" data-step="4"><div class="fill"></div></div>
+        </div>
+        <div class="legend" id="cap">
+          <b>ESTÁGIO 1/5 · A SUA NECESSIDADE</b>No centro está o gargalo ou processo que você quer resolver no seu negócio.
+        </div>
+        <div class="hud-metrics">
+          <span>ETAPAS ACOPLADAS <u id="mLock">00/24</u></span>
+          <span>A CONECTAR <u id="mLoose">24</u></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 04: PRODUTOS PRONTOS (LICENÇA DEFINITIVA) -->
+  <div class="wrap-wide">
+    <section class="section-products rise" id="produtos">
+      <div class="eyebrow"><span class="bracket-tag">Catálogo de Software</span> · Licença Definitiva</div>
+      <h2>Ferramentas prontas, disponíveis hoje.</h2>
+      <p class="products-intro-lead">
+        Além dos projetos sob medida, mantemos produtos próprios em produção. Licença definitiva, sem assinatura recorrente.
+      </p>
+
+      <div class="products-grid">
+        <!-- PRODUTO 1: AlltoParquet -->
+        <article class="product-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="product-top">
+            <div class="product-badge-row">
+              <span class="product-badge">100% Offline · Windows</span>
+              <div class="product-price">R$ 99 <small>licença definitiva</small></div>
+            </div>
+            <h3 class="product-title">AlltoParquet</h3>
+            <div class="product-tagline">Converta CSV, Excel e JSON para Apache Parquet sem enviar um byte para a internet.</div>
+            <p class="product-desc">
+              Aplicativo desktop portátil para Windows — executável único, sem instalação. Converte CSV, XLSX, JSON, NDJSON e JSONL para Apache Parquet com compressão Snappy, Zstd ou sem compressão, direto na máquina do usuário. Nenhum dado sai do computador.
+            </p>
+            <span class="product-features-label">[ Três perfis de conversão ]</span>
+            <ul class="product-list">
+              <li><b>Preservação Máxima:</b> mantém tipos e fidelidade total do dado original.</li>
+              <li><b>BI de Dados:</b> otimizado para leitura em ferramentas analíticas.</li>
+              <li><b>GIS e Geoprocessamento:</b> preserva estruturas geoespaciais.</li>
+            </ul>
+            <div class="product-disclaimer">
+              Ativação: e-mail da compra + código <code>GP-XXXX-XXXX-XXXX</code><br>
+              Suporte: girassolinteligencia@gmail.com
+            </div>
+          </div>
+          <div class="product-actions">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet." target="_blank" rel="noopener noreferrer" class="product-btn">
+              Comprar AlltoParquet →
+            </a>
+          </div>
+        </article>
+
+        <!-- PRODUTO 2: Plataforma Eleitoral Inteligente -->
+        <article class="product-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="product-top">
+            <div class="product-badge-row">
+              <span class="product-badge">Dados Oficiais TSE · 2010–2024</span>
+              <div class="product-price">R$ 499 <small>acesso direto</small></div>
+            </div>
+            <h3 class="product-title">Plataforma Eleitoral Inteligente</h3>
+            <div class="product-tagline">Todo o histórico eleitoral de Mato Grosso do Sul no seu celular.</div>
+            <p class="product-desc">
+              Plataforma mobile-first de consulta e análise de dados eleitorais públicos dos 79 municípios de MS, construída sobre o repositório oficial do TSE (2010 a 2024). Acesso por e-mail via link direto, sem senha para memorizar.
+            </p>
+            <span class="product-features-label">[ 8 Módulos de Análise ]</span>
+            <ul class="product-list">
+              <li>Perfil Eleitoral e Ranking Geral</li>
+              <li>Resultados por Município e Comparar Municípios</li>
+              <li>Evolução da Candidatura e Desempenho dos Partidos</li>
+              <li>Panorama de MS e Simulador de Vagas 2026</li>
+            </ul>
+            <div class="product-disclaimer">
+              <b>Aviso:</b> A Plataforma Eleitoral Inteligente é uma ferramenta de consulta e análise de dados públicos. Não realiza previsão de resultados, não garante desempenho eleitoral e não possui qualquer vínculo institucional com o Tribunal Superior Eleitoral.
+            </div>
+          </div>
+          <div class="product-actions">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente." target="_blank" rel="noopener noreferrer" class="product-btn">
+              Assinar acesso →
+            </a>
+            <a href="https://plataformaeleitoral.ia.br" target="_blank" rel="noopener noreferrer" class="product-btn outline">
+              Ver demonstração →
+            </a>
+          </div>
+        </article>
+
+        <!-- PRODUTO 3: Guia Oficial Parquet -->
+        <article class="product-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="product-top">
+            <div class="product-badge-row">
+              <span class="product-badge">Material Técnico</span>
+              <div class="product-price">Gratuito <small>envio por e-mail</small></div>
+            </div>
+            <h3 class="product-title">Guia Oficial Parquet</h3>
+            <div class="product-tagline">20 capítulos sobre o formato de dados que está cortando custos de armazenamento e consulta.</div>
+            <p class="product-desc">
+              Material técnico completo sobre Apache Parquet: fundamentos do formato colunar, estratégias de compressão, particionamento e benchmarks reais em BigQuery e AWS Athena. Inclui estudo de caso do desenvolvimento do AlltoParquet.
+            </p>
+            <span class="product-features-label">[ Destaques do Guia ]</span>
+            <ul class="product-list">
+              <li>Fundamentos e anatomia do formato colunar</li>
+              <li>Comparativo de compressão Snappy vs Zstandard</li>
+              <li>Benchmarks de redução de custos em nuvem</li>
+              <li>Engenharia reversa e estudo de caso prático</li>
+            </ul>
+          </div>
+          <div class="product-actions">
+            <a href="#guia-parquet" class="product-btn">
+              Receber o guia por e-mail →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 05: SERVIÇOS SOB MEDIDA -->
+  <div class="wrap-wide">
+    <section class="section-services rise" id="servicos">
+      <div class="eyebrow"><span class="bracket-tag">05 Áreas de Atuação</span> · Serviços Sob Medida</div>
+      <h2>O que construímos para o seu negócio.</h2>
+      <p class="services-intro-lead">
+        Do diagnóstico em notação formal à entrega do código-fonte em produção. Aqui, diferente dos produtos de prateleira, <b>o software nasce seu</b>: sem caixas-pretas, sem aprisionamento tecnológico e sem licença por usuário.
+      </p>
+
+      <div class="services-matrix">
+        <!-- SERVIÇO 01 -->
+        <article class="service-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="service-header">
+            <div class="service-number">SERVIÇO <span>01/05</span></div>
+            <span class="service-badge">Decisão Crítica Sempre Humana</span>
+          </div>
+          <h3 class="service-title">Agentes de IA com Supervisão Humana</h3>
+          <p class="service-desc">
+            Implantação de agentes inteligentes acoplados à rotina da empresa: leitura de documentos, conferência fiscal, triagem de tickets, elaboração de minutas e atendimento consultivo de nível 1. Toda decisão de impacto passa por aprovação humana registrada.
+          </p>
+          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Modelos de linguagem de mercado (Claude, GPT, DeepSeek)</span>
+            <span class="scope-pill">Busca inteligente nos documentos da sua empresa (RAG)</span>
+            <span class="scope-pill">Travas contra respostas incorretas (guardrails)</span>
+            <span class="scope-pill">Painel de aprovação humana para ações críticas</span>
+            <span class="scope-pill">Integração com WhatsApp, e-mail e sistemas internos</span>
+          </div>
+          <div class="service-action">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20desenhar%20um%20agente%20de%20IA%20para%20a%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
+              Desenhar meu agente <span>→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- SERVIÇO 02 -->
+        <article class="service-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="service-header">
+            <div class="service-number">SERVIÇO <span>02/05</span></div>
+            <span class="service-badge">Código-Fonte é Seu</span>
+          </div>
+          <h3 class="service-title">Sistemas e Plataformas Web Sob Medida</h3>
+          <p class="service-desc">
+            Aplicações web modernas e responsivas para substituir planilhas quebradas, centralizar cadastros, emitir relatórios gerenciais em tempo real ou entregar portais de autoatendimento a clientes e parceiros.
+          </p>
+          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Funciona no celular e no computador</span>
+            <span class="scope-pill">Níveis de acesso por função (RBAC)</span>
+            <span class="scope-pill">Painéis com indicadores em tempo real</span>
+            <span class="scope-pill">Banco de dados próprio com backup diário</span>
+            <span class="scope-pill">Entrega do repositório à sua empresa</span>
+          </div>
+          <div class="service-action">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20substituir%20uma%20planilha%20por%20um%20sistema%20sob%20medida." target="_blank" rel="noopener noreferrer" class="service-link">
+              Substituir minha planilha <span>→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- SERVIÇO 03 -->
+        <article class="service-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="service-header">
+            <div class="service-number">SERVIÇO <span>03/05</span></div>
+            <span class="service-badge">Padrão Internacional</span>
+          </div>
+          <h3 class="service-title">Engenharia de Processos (BPMN 2.0)</h3>
+          <p class="service-desc">
+            Mapeamento dos gargalos operacionais e desenho formal do fluxo de trabalho antes de qualquer linha de código. Em muitos casos, o mapeamento sozinho já resolve — sem necessidade de software novo.
+          </p>
+          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Entrevista com quem opera o processo</span>
+            <span class="scope-pill">Diagrama formal em Bizagi / BPMN 2.0</span>
+            <span class="scope-pill">Identificação dos pontos de perda de tempo e custo</span>
+            <span class="scope-pill">Manual de operação do processo redesenhado</span>
+          </div>
+          <div class="service-action">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20mapear%20os%20processos%20da%20minha%20empresa%20em%20BPMN." target="_blank" rel="noopener noreferrer" class="service-link">
+              Mapear meu processo <span>→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- SERVIÇO 04 -->
+        <article class="service-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="service-header">
+            <div class="service-number">SERVIÇO <span>04/05</span></div>
+            <span class="service-badge">Fim do Retrabalho Manual</span>
+          </div>
+          <h3 class="service-title">Integrações e Conectores de Dados</h3>
+          <p class="service-desc">
+            Conexão contínua entre sistemas legados, ERPs, CRMs, planilhas do Google, gateways de pagamento e canais de mensageria — com rastreabilidade de ponta a ponta.
+          </p>
+          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Comunicação entre sistemas que hoje não conversam</span>
+            <span class="scope-pill">Disparos automáticos por WhatsApp e e-mail</span>
+            <span class="scope-pill">Sincronização entre estoque, vendas e financeiro</span>
+            <span class="scope-pill">Eliminação da digitação duplicada</span>
+          </div>
+          <div class="service-action">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20conectar%20os%20sistemas%20e%20planilhas%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
+              Conectar meus sistemas <span>→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- SERVIÇO 05 -->
+        <article class="service-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="service-header">
+            <div class="service-number">SERVIÇO <span>05/05</span></div>
+            <span class="service-badge">Soberania dos Seus Dados</span>
+          </div>
+          <h3 class="service-title">Governança, Segurança e LGPD</h3>
+          <p class="service-desc">
+            Auditoria técnica de sistemas e modelos de IA, adequação às normas da LGPD e implementação de controles contra vazamento de informação comercial. Inclui a opção de rodar modelos localmente (on-premise) no servidor da sua empresa.
+          </p>
+          <div class="service-scope-label">[ O QUE ESTÁ INCLUSO NO ESCOPO ]</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Diagnóstico e plano de adequação à LGPD</span>
+            <span class="scope-pill">Operação de IA sem tráfego de dados pela internet</span>
+            <span class="scope-pill">Garantia de que seus dados não treinam modelos públicos</span>
+            <span class="scope-pill">Treinamento da equipe</span>
+          </div>
+          <div class="service-action">
+            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20auditar%20a%20seguran%C3%A7a%2C%20governan%C3%A7a%20e%20LGPD%20na%20minha%20opera%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="service-link">
+              Auditar minha operação <span>→</span>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- BLOCO — Não sabe por onde começar? -->
+      <div class="bridge-cta hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <div class="bridge-cta-content">
+          <div class="bracket-tag" style="margin-bottom:8px">Consultoria Técnica Inicial</div>
+          <h3 style="color:var(--ink)">Não sabe exatamente qual formato se encaixa no seu momento?</h3>
+          <p>
+            Você não precisa chegar com especificação técnica pronta. Conte qual tarefa hoje rouba o tempo da sua equipe ou qual planilha vive dando erro. Desenhamos a arquitetura do processo juntos, em linguagem comum.
+          </p>
+        </div>
+        <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20descrever%20meu%20cen%C3%A1rio%20para%20avaliarmos%20uma%20solu%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bridge-btn hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <span>Descrever meu cenário</span> →
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 06: CASOS REAIS -->
+  <div class="wrap-wide">
+    <section class="section-cases rise" id="casos">
+      <div class="eyebrow"><span class="bracket-tag">Portfólio em Produção</span> · Estudos de Caso</div>
+      <h2>Ferramentas que já estão rodando.</h2>
+      <p class="cases-intro-lead">
+        Ferramentas que já estão rodando. Contamos o problema, o que foi feito e o que mudou na prática — sem citar nomes de clientes.
+      </p>
+
+      <div class="cases-stack">
+        <!-- CASO 1: CARTÃO DE PONTO -->
+        <article class="case-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="case-header">
+            <span class="case-audience">Quem usa: Escritórios de advocacia e peritos trabalhistas</span>
+            <h3 class="case-title">Sistema de Conferência de Ponto para Processos Trabalhistas</h3>
+          </div>
+          <div class="case-dual-body">
+            <div class="case-subblock">
+              <strong>O Problema</strong>
+              <p>
+                Um processo trabalhista chega com centenas de folhas de cartão-ponto em PDF. Alguém precisa abrir folha por folha, digitar cada horário numa planilha e conferir a conta. São dias de trabalho por processo — e basta um número digitado errado para o cálculo inteiro ir por água abaixo.
+              </p>
+            </div>
+            <div class="case-subblock">
+              <strong>O Que Foi Feito</strong>
+              <p>
+                Um programa instalado no computador do escritório que lê os cartões-ponto sozinho e devolve uma planilha pronta, com cada horário ligado à página de onde veio. Quando o programa não tem certeza de um número, ele avisa em vez de chutar. As regras de hora extra, intervalo e adicional noturno seguem a CLT, a Constituição e as súmulas do TST.
+              </p>
+            </div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead>
+                <tr>
+                  <th>Antes</th>
+                  <th>Depois</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3 a 5 dias por processo</td>
+                  <td><mark>Menos de 1 hora</mark></td>
+                </tr>
+                <tr>
+                  <td>Digitação manual, sujeita a erro</td>
+                  <td>Leitura automática, com aviso de dúvida</td>
+                </tr>
+                <tr>
+                  <td>Sem prova de como se chegou ao número</td>
+                  <td>Cada valor rastreável até a página do PDF</td>
+                </tr>
+                <tr>
+                  <td>Arquivo do processo enviado para serviço externo</td>
+                  <td>Nada sai do computador do escritório</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- CASO 2: PLATAFORMA ELEITORAL -->
+        <article class="case-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="case-header">
+            <span class="case-audience">Quem usa: Consultores, jornalistas e equipes de campanha</span>
+            <h3 class="case-title">Plataforma de Consulta de Dados Eleitorais</h3>
+          </div>
+          <div class="case-dual-body">
+            <div class="case-subblock">
+              <strong>O Problema</strong>
+              <p>
+                Os resultados de todas as eleições são públicos e estão lá, no site oficial. O detalhe é que vêm em dezenas de arquivos enormes, em formatos diferentes a cada ano. Na prática, quem não é técnico não consegue usar — e quem é técnico perde dias organizando antes de conseguir olhar qualquer coisa.
+              </p>
+            </div>
+            <div class="case-subblock">
+              <strong>O Que Foi Feito</strong>
+              <p>
+                Todo o histórico de 2010 a 2024 dos 79 municípios do estado foi tratado e reorganizado num formato moderno de dados. Em cima disso, um aplicativo que abre no celular e responde em segundos: como foi o desempenho de uma candidatura, quem lidera cada município, como dois municípios se comparam, como cada partido se saiu.
+              </p>
+            </div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead>
+                <tr>
+                  <th>Antes</th>
+                  <th>Depois</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dias baixando e organizando planilhas</td>
+                  <td><mark>Resposta em segundos</mark></td>
+                </tr>
+                <tr>
+                  <td>Precisa de computador e conhecimento técnico</td>
+                  <td>Abre no celular, entra pelo e-mail</td>
+                </tr>
+                <tr>
+                  <td>14 anos de dados espalhados</td>
+                  <td>Tudo numa consulta só</td>
+                </tr>
+                <tr>
+                  <td>Arquivos pesados demais para abrir no Excel</td>
+                  <td>Base compactada e leve</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="case-note">
+            Esta é uma ferramenta de consulta a dados públicos. Não prevê resultados, não garante desempenho eleitoral e não tem nenhum vínculo com o TSE.
+          </div>
+        </article>
+
+        <!-- CASO 3: PAINÉIS POR BAIRRO -->
+        <article class="case-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="case-header">
+            <span class="case-audience">Quem usa: Gestores públicos, consultorias e equipes de planejamento</span>
+            <h3 class="case-title">Painéis de Análise por Bairro e Região</h3>
+          </div>
+          <div class="case-dual-body">
+            <div class="case-subblock">
+              <strong>O Problema</strong>
+              <p>
+                Os números de votação estão num lugar, o mapa dos bairros está em outro, e os indicadores sociais em um terceiro. Cruzar isso à mão é inviável. O resultado é que a decisão acaba sendo tomada no "achismo" sobre a região.
+              </p>
+            </div>
+            <div class="case-subblock">
+              <strong>O Que Foi Feito</strong>
+              <p>
+                Um painel visual que junta as três coisas num mapa só: onde estão os votos, onde estão os bairros e como cada região está em termos de renda, infraestrutura e vulnerabilidade. É entregue como um <b>único arquivo</b> que abre com dois cliques no navegador — não precisa instalar nada, não precisa de servidor, não precisa nem de internet.
+              </p>
+            </div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead>
+                <tr>
+                  <th>Antes</th>
+                  <th>Depois</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Três fontes de dados separadas</td>
+                  <td><mark>Um mapa único</mark></td>
+                </tr>
+                <tr>
+                  <td>Leitura só por município</td>
+                  <td>Leitura bairro a bairro</td>
+                </tr>
+                <tr>
+                  <td>Depende de sistema e senha</td>
+                  <td>Um arquivo que roda no seu notebook</td>
+                </tr>
+                <tr>
+                  <td>Dado fica com o fornecedor</td>
+                  <td>Arquivo é seu, inteiro</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- CASO 4: CONVERSOR DE PLANILHAS -->
+        <article class="case-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="case-header">
+            <span class="case-audience">Quem usa: Times de dados, BI e qualquer empresa com planilhas grandes demais</span>
+            <h3 class="case-title">Conversor de Planilhas para Formato Compacto</h3>
+          </div>
+          <div class="case-dual-body">
+            <div class="case-subblock">
+              <strong>O Problema</strong>
+              <p>
+                Planilha de 2 GB que trava o Excel. Relatório que demora dez minutos para carregar. E a alternativa que todo mundo indica — enviar a base para um serviço na nuvem — é justamente a que a empresa não pode fazer quando o dado é sensível.
+              </p>
+            </div>
+            <div class="case-subblock">
+              <strong>O Que Foi Feito</strong>
+              <p>
+                Um programa de um arquivo só, que roda no Windows sem instalação. Você arrasta a planilha, escolhe o perfil de uso e ele converte para Apache Parquet, um formato usado pelas maiores plataformas de dados do mundo. Tudo acontece dentro do seu computador.
+              </p>
+            </div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead>
+                <tr>
+                  <th>Antes</th>
+                  <th>Depois</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Arquivo de 1 GB</td>
+                  <td>Cerca de 200 MB — até <mark>80% menor</mark></td>
+                </tr>
+                <tr>
+                  <td>Consulta em minutos</td>
+                  <td><mark>Consulta em segundos</mark></td>
+                </tr>
+                <tr>
+                  <td>Precisa de programador para converter</td>
+                  <td>Arrasta o arquivo e pronto</td>
+                </tr>
+                <tr>
+                  <td>Dado sobe para a nuvem</td>
+                  <td>100% dentro da sua máquina</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="case-note">
+            A redução de tamanho varia conforme o tipo de dado. Bases com muitas colunas repetitivas encolhem mais; bases de texto livre, menos.
+          </div>
+        </article>
+
+        <!-- CASO 5: CANAL DE DENÚNCIA -->
+        <article class="case-card hud-box">
+          <span class="hud-corner tl"></span>
+          <span class="hud-corner tr"></span>
+          <span class="hud-corner bl"></span>
+          <span class="hud-corner br"></span>
+          <div class="case-header">
+            <span class="case-audience">Quem usa: Órgãos públicos, conselhos e entidades de controle social</span>
+            <h3 class="case-title">Canal de Denúncia e Manifestação do Cidadão</h3>
+          </div>
+          <div class="case-dual-body">
+            <div class="case-subblock">
+              <strong>O Problema</strong>
+              <p>
+                A denúncia chega por WhatsApp, por e-mail, por telefone e por recado. Ninguém sabe quantas existem, quem está cuidando de cada uma, nem o que já foi resolvido. E o cidadão que denunciou nunca mais fica sabendo de nada.
+              </p>
+            </div>
+            <div class="case-subblock">
+              <strong>O Que Foi Feito</strong>
+              <p>
+                Um canal único onde a pessoa escolhe o assunto entre 33 categorias, envia a denúncia com ou sem se identificar, e recebe um número para acompanhar. O sistema já sabe para qual órgão encaminhar cada tipo de assunto e sinaliza os casos urgentes. Toda a configuração — categorias, órgãos, regras — é alterada por quem administra, sem precisar chamar programador.
+              </p>
+            </div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead>
+                <tr>
+                  <th>Antes</th>
+                  <th>Depois</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Denúncias espalhadas em vários canais</td>
+                  <td><mark>Um canal só, com protocolo</mark></td>
+                </tr>
+                <tr>
+                  <td>Encaminhamento manual</td>
+                  <td>Roteamento automático por assunto</td>
+                </tr>
+                <tr>
+                  <td>Cidadão sem retorno</td>
+                  <td>Acompanhamento pelo protocolo</td>
+                </tr>
+                <tr>
+                  <td>Mudar uma regra exigia novo sistema</td>
+                  <td>Administrador altera na hora</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 07: FILOSOFIA (MANIFESTO EDITORIAL) -->
+  <div class="wrap">
+    <section class="section-manifesto rise">
+      <div class="eyebrow">Nossa Filosofia de Trabalho</div>
+      <div class="manifesto-statement">
+        A inteligência artificial adianta semanas de programação em dias. Mas o que garante que o sistema não falhe na segunda-feira <em>é o rigor em ouvir quem opera o negócio.</em>
+      </div>
+
+      <div class="editorial-dual">
+        <div class="dual-col">
+          <span class="dual-index">01 / VELOCIDADE SEM CÓDIGO DESCUIDADO</span>
+          <h3>Acelerado pela Tecnologia</h3>
+          <p>
+            Eliminamos a burocracia do software tradicional. Onde antes eram necessários meses de desenvolvimento e orçamentos inviáveis, a IA permite estruturar telas limpas, bancos de dados modernos e integrações seguras em tempo recorde.
+          </p>
+        </div>
+        <div class="dual-col">
+          <span class="dual-index">02 / VIDA REAL & DADOS PROTEGIDOS</span>
+          <h3>Moldado no Seu Balcão</h3>
+          <p>
+            Nenhum algoritmo substitui o olhar de quem atende o cliente ou confere o estoque. Desenhamos a ferramenta sentando ao seu lado, respeitando as normas da LGPD e garantindo que tudo funcione com clareza para a sua equipe.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 08: QUEM COORDENA (PAULO CARDOSO) -->
+  <div class="wrap">
+    <section class="section-authority rise" id="coordenacao">
+      <div class="eyebrow">Coordenação & Parceria Técnica</div>
+      <div class="bio-layout">
+        <div class="portrait-container">
+          <img src="paulo.jpg" alt="Paulo Cardoso — Girassol Inteligência">
+        </div>
+        <div class="bio-content">
+          <h2>Paulo Cardoso</h2>
+          <span class="bio-tagline">Coordenação Técnica e Arquitetura de Soluções</span>
+          
+          <p>
+            Advogado há mais de 20 anos (OAB/MS 9.633), com atuação nas três esferas de poder — legislativo, executivo e judiciário. Foi diretor da agência municipal de tecnologia da informação de Campo Grande por mais de sete anos.
+          </p>
+
+          <div class="bio-credentials">
+            <span class="credentials-title">[ Formação e Certificações ]</span>
+            <ul class="credentials-list">
+              <li>Pós-graduação em Gestão Pública</li>
+              <li>Pós-graduações em áreas jurídicas</li>
+              <li>Certificações em modelagem e mapeamento de processos (BPMN)</li>
+              <li>Certificação em Design Thinking</li>
+            </ul>
+          </div>
+
+          <p>
+            Essa combinação — engenharia de software, direito, gestão pública e modelagem formal de processos — é o que permite desenhar ferramentas que funcionam tecnicamente <b>e</b> se sustentam do ponto de vista legal e regulatório. Contrato, LGPD, licitação, desenho de processo e arquitetura de dados são tratados na mesma mesa. O Design Thinking entra na etapa de escuta: antes de propor software, o problema é reformulado junto com quem opera.
+          </p>
+
+          <p>
+            O desenvolvimento é realizado a quatro mãos: rigor técnico, inteligência artificial e a vivência direta dos profissionais que conhecem a rotina real da sua empresa.
+          </p>
+
+          <div class="quote-box">
+            <p>
+              "Software bom é aquele que funciona silencioso na rotina."
+            </p>
+          </div>
+
+          <div class="core-pillars">
+            <div class="pillar-item">
+              <strong>Construção Coletiva</strong>
+              <p>Feito junto com quem opera o dia a dia do negócio.</p>
+            </div>
+            <div class="pillar-item">
+              <strong>Foco Prático</strong>
+              <p>Ferramenta desenhada para resolver o gargalo real, não para impressionar.</p>
+            </div>
+            <div class="pillar-item">
+              <strong>Propriedade do Cliente</strong>
+              <p>Nos projetos sob medida, código e dados são integralmente da sua empresa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 09: CAPTURA DE LEAD (GUIA OFICIAL PARQUET) -->
+  <div class="wrap-wide">
+    <section class="section-lead rise" id="guia-parquet">
+      <div class="lead-box hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <div class="lead-grid">
+          <div>
+            <div class="eyebrow"><span class="bracket-tag">Material Gratuito</span> · Conteúdo Técnico</div>
+            <h2>Leve o Guia Oficial Parquet.</h2>
+            <p>
+              20 capítulos sobre o formato colunar que vem reduzindo custo de armazenamento e tempo de consulta em operações de dados. Com benchmarks reais em BigQuery e AWS Athena e o estudo de caso do desenvolvimento do AlltoParquet.
+            </p>
+            <div style="font-family:var(--fm);font-size:.74rem;color:var(--ink-faint)">
+              Entrega imediata em formato digital (PDF técnico).
+            </div>
+          </div>
+          <div>
+            <form class="lead-form" id="leadForm" onsubmit="handleLeadSubmit(event)">
+              <input type="text" id="leadName" class="form-input" placeholder="Seu nome completo" aria-label="Seu nome completo" required>
+              <input type="email" id="leadEmail" class="form-input" placeholder="Seu melhor e-mail" aria-label="Seu melhor e-mail" required>
+              <input type="text" id="leadCompany" class="form-input" placeholder="Empresa (opcional)" aria-label="Nome da sua empresa (opcional)">
+              
+              <label class="form-consent">
+                <input type="checkbox" id="leadConsent" required aria-label="Autorizo o envio de comunicações da Girassol">
+                <span>Autorizo o envio do material e de comunicações da Girassol Inteligência, conforme a Política de Privacidade. Posso cancelar a qualquer momento.</span>
+              </label>
+
+              <button type="submit" class="lead-btn" aria-label="Receber o guia oficial Parquet por e-mail">
+                Receber o guia →
+              </button>
+              <div id="leadFeedback" class="lead-feedback">
+                Pronto. O guia está a caminho do seu e-mail.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TELA 10: O COMPROMISSO & CONVERSÃO DIRETA -->
+  <div class="wrap">
+    <section class="section-cta rise" id="contato">
+      <div class="cta-box hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <div class="eyebrow" style="justify-content:center;margin-bottom:var(--s3)"><span class="bracket-tag">O Compromisso Girassol</span></div>
+        <div class="pact-statement">
+          Uma ferramenta feita sob medida, testada e pronta para o trabalho. Que você compreende, que <mark>resolve a sua rotina</mark> e cujo código pertence a você.
+        </div>
+        <p class="soft" style="margin:0 auto var(--s4);max-width:54ch">
+          Me conta o que você precisa: qual tarefa hoje rouba o tempo da sua loja, clínica ou escritório? Ouvimos o seu caso e explicamos em linguagem comum como transformar isso em uma ferramenta prática.
+        </p>
+
+        <div class="contact-channels">
+          <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20vim%20pelo%20site%20da%20Girassol%20e%20gostaria%20de%20conversar%20sobre%20uma%20ferramenta%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" class="btn-whatsapp hud-box">
+            <span class="hud-corner tl"></span>
+            <span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span>
+            <span class="hud-corner br"></span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Conversar no WhatsApp
+          </a>
+
+          <button type="button" class="btn-email-copy hud-box" id="btnCopyEmail" data-email="girassolinteligencia@gmail.com">
+            <span class="hud-corner tl"></span>
+            <span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span>
+            <span class="hud-corner br"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>Copiar E-mail</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="wrap">
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <strong style="color:var(--ink);font-weight:500">Girassol Inteligência</strong> — Campo Grande, Mato Grosso do Sul
+        </div>
+        <div class="social-links">
+          <a href="https://instagram.com/girassolinteligencia" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <span>·</span>
+          <a href="https://facebook.com/girassolideiasinteligentes" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <span>·</span>
+          <span>Privacidade</span>
+          <span>·</span>
+          <span>Termos</span>
+          <span>·</span>
+          <span>© <span id="currentYear"></span></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- TOAST FEEDBACK -->
+<div id="toast">E-mail copiado para a área de transferência!</div>
+
+<script>
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const DPR = Math.min(devicePixelRatio || 1, 2);
+const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+const ease = t => 1 - Math.pow(1 - t, 3);
+
+// Ano dinâmico no rodapé
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+/* ══ EFEITO: CURSOR GLOW ══ */
+(function(){
+  const glow = document.getElementById('cursor-glow');
+  if(!glow || RM) return;
+  window.addEventListener('pointermove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  }, {passive:true});
+})();
+
+/* ══ FUNDO COSMOLÓGICO DISCRETO ══ */
+(function(){
+  if(RM)return;
+  const c = document.getElementById('bg'), x = c.getContext('2d');
+  let w, h, dust = [], t = 0, sy = 0;
+  function init(){
+    w = c.width = innerWidth * DPR;
+    h = c.height = innerHeight * DPR;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    dust = Array.from({length: Math.round(Math.min(75, innerWidth / 18))}, () => ({
+      x: Math.random() * w, y: Math.random() * h, z: .3 + Math.random() * .7,
+      r: (.6 + Math.random() * 1.5) * DPR, vx: (-.06 - Math.random() * .14) * DPR,
+      vy: (Math.random() - .5) * .03 * DPR, a: .08 + Math.random() * .22, gold: Math.random() > .72
+    }));
+  }
+  addEventListener('scroll', () => { sy = scrollY }, {passive:true});
+  function frame(){
+    t += .002;
+    x.clearRect(0, 0, w, h);
+    const cx = w * .5, cy = h * .5;
+    x.save(); x.translate(cx, cy);
+    for(let i = 0; i < 3; i++){
+      const r = (240 + i * 180) * DPR, d = i % 2 ? -1 : 1;
+      x.save(); x.rotate(t * d * (1 + i * .2) + sy * .00008 * d);
+      x.beginPath(); x.strokeStyle = `rgba(232,179,60,${.022 - i * .005})`;
+      x.lineWidth = 1 * DPR; x.setLineDash([2 * DPR, 30 * DPR]); x.arc(0, 0, r, 0, 6.283); x.stroke(); x.restore();
+    }
+    x.setLineDash([]); x.restore();
+    for(const d of dust){
+      d.x += d.vx * d.z; d.y += d.vy;
+      if(d.x < -8){ d.x = w + 8; d.y = Math.random() * h }
+      let py = (d.y - sy * .05 * d.z) % h; if(py < 0) py += h;
+      x.beginPath();
+      x.fillStyle = d.gold ? `rgba(232,179,60,${d.a * d.z})` : `rgba(167,156,140,${d.a * d.z * .7})`;
+      x.arc(d.x, py, d.r * d.z, 0, 6.283); x.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  init(); addEventListener('resize', init); frame();
+})();
+
+/* ══ GIRASSOL: CONSTRUÇÃO CADENCIADA (5 ESTÁGIOS V2) ══ */
+const CAPS = [
+  {at: .00, t: 'ESTÁGIO 1/5 · A SUA NECESSIDADE', d: 'No centro está o gargalo ou processo que você quer resolver no seu negócio.'},
+  {at: .22, t: 'ESTÁGIO 2/5 · ESCUTA E MAPEAMENTO', d: 'Ouvimos a rotina de quem opera e desenhamos o fluxo em BPMN 2.0 antes de escrever uma linha de código.'},
+  {at: .48, t: 'ESTÁGIO 3/5 · ENGENHARIA & IA', d: 'A inteligência artificial adianta semanas de desenvolvimento, com telas limpas e banco de dados moderno.'},
+  {at: .72, t: 'ESTÁGIO 4/5 · CONFERÊNCIA & LGPD', d: 'Cada cálculo, regra e botão é testado. Dados sensíveis blindados conforme a LGPD.'},
+  {at: .92, t: 'ESTÁGIO 5/5 · FERRAMENTA COMPLETA', d: 'Sua equipe valida na rotina real. Aprovado, vai para produção — e o código é seu.'}
+];
+
+(function(){
+  const cv = document.getElementById('bloom'), g = cv.getContext('2d');
+  const rail = document.getElementById('girassol'), cap = document.getElementById('cap');
+  const mL = document.getElementById('mLock'), mS = document.getElementById('mLoose');
+  const steps = document.querySelectorAll('#stepper .stage-step');
+  const N = 24;
+  let W, H, S, p = 0, t = 0, last = -1;
+
+  const P = Array.from({length: N}, (_, i) => {
+    const a = (i / N) * 6.283;
+    return {
+      a,
+      fx: Math.random() * 2 - 1,
+      fy: Math.random() * 2 - 1,
+      fr: (Math.random() * 2 - 1) * 5,
+      dist: 1.8 + Math.random() * 1.5,
+      lag: (i / N) * .35,
+      len: .88 + Math.random() * .24,
+      ox: 0, oy: 0,
+      vx: 0, vy: 0
+    };
+  });
+
+  function size(){
+    W = cv.width = cv.clientWidth * DPR;
+    H = cv.height = cv.clientHeight * DPR;
+    S = Math.min(W, H) / 2.5;
+  }
+
+  function petal(px, py, rot, sc, al, fill){
+    g.save(); g.translate(px, py); g.rotate(rot); g.scale(sc, sc);
+    g.beginPath(); g.moveTo(0, 0);
+    g.bezierCurveTo(S * .20, -S * .10, S * .72, -S * .15, S * .98, 0);
+    g.bezierCurveTo(S * .72, S * .15, S * .20, S * .10, 0, 0);
+    g.lineWidth = 1.3 * DPR;
+    g.strokeStyle = `rgba(232,179,60,${al})`;
+    if(fill > 0){
+      g.fillStyle = `rgba(232,179,60,${fill})`;
+      g.fill();
+    }
+    g.stroke(); g.restore();
+  }
+
+  function draw(){
+    t += .005;
+    g.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2, spin = t * .06;
+    let lock = 0;
+
+    for(const q of P){
+      const springK = 0.08;
+      const damping = 0.82;
+      q.vx = (q.vx - q.ox * springK) * damping;
+      q.vy = (q.vy - q.oy * springK) * damping;
+      q.ox += q.vx;
+      q.oy += q.vy;
+
+      const k = clamp((p - q.lag) / (1 - q.lag), 0, 1);
+      const e = ease(k);
+      const drift = (1 - e) * q.dist;
+      const wob = (1 - e) * Math.sin(t * 1.5 + q.a * 3) * .18;
+
+      const ax = Math.cos(q.a + spin) * S * .42;
+      const ay = Math.sin(q.a + spin) * S * .42;
+      const px = cx + ax + q.fx * S * drift + q.ox;
+      const py = cy + ay + q.fy * S * drift + q.oy;
+      const rot = q.a + spin + q.fr * (1 - e) + wob;
+
+      if(e > .96) lock++;
+      if(e > .10 && e < .98){
+        g.beginPath(); g.moveTo(cx, cy); g.lineTo(px, py);
+        g.strokeStyle = `rgba(196,106,66,${.18 * e * (1 - e) * 4})`;
+        g.lineWidth = 1 * DPR;
+        g.setLineDash([2 * DPR, 6 * DPR]);
+        g.stroke();
+        g.setLineDash([]);
+      }
+
+      petal(px, py, rot, q.len * (.55 + .45 * e), .22 + .68 * e, e > .96 ? .08 : 0);
+    }
+
+    // Núcleo
+    g.save(); g.translate(cx, cy); g.rotate(spin * 1.5);
+    g.beginPath(); g.arc(0, 0, S * .34, 0, 6.283);
+    g.strokeStyle = 'rgba(242,237,226,.6)'; g.lineWidth = 1.4 * DPR; g.stroke();
+    g.fillStyle = 'rgba(232,179,60,.06)'; g.fill();
+    for(let i = 0; i < 80; i++){
+      const r = S * .32 * Math.sqrt(i / 80), a = i * 2.39996;
+      g.beginPath(); g.arc(Math.cos(a) * r, Math.sin(a) * r, 1.4 * DPR, 0, 6.283);
+      g.fillStyle = `rgba(196,106,66,${.32 + .45 * (i / 80)})`; g.fill();
+    }
+    g.restore();
+
+    g.save(); g.font = `${10.5 * DPR}px "JetBrains Mono",monospace`;
+    g.textAlign = 'center'; g.fillStyle = 'rgba(167,156,140,.85)';
+    g.fillText('SUA IDEIA', cx, cy + S * .52); g.restore();
+
+    mL.textContent = String(lock).padStart(2, '0') + '/' + N;
+    mS.textContent = String(N - lock).padStart(2, '0');
+
+    requestAnimationFrame(draw);
+  }
+
+  function onScroll(){
+    const r = rail.getBoundingClientRect();
+    p = clamp((-r.top) / (r.height - innerHeight), 0, 1);
+    
+    let idx = 0;
+    for(let i = 0; i < CAPS.length; i++) if(p >= CAPS[i].at) idx = i;
+    
+    steps.forEach((step, sIdx) => {
+      if(sIdx < idx){
+        step.classList.add('done');
+        step.classList.remove('active');
+      } else if(sIdx === idx){
+        step.classList.add('active');
+        step.classList.remove('done');
+      } else {
+        step.classList.remove('done', 'active');
+      }
+    });
+
+    if(idx !== last){
+      last = idx; const c = CAPS[idx];
+      cap.style.opacity = 0;
+      setTimeout(() => {
+        cap.innerHTML = `<b>${c.t}</b>${c.d}`;
+        cap.style.opacity = 1;
+      }, 140);
+    }
+  }
+
+  cv.addEventListener('pointermove', ev => {
+    const b = cv.getBoundingClientRect();
+    const px = (ev.clientX - b.left) * DPR, py = (ev.clientY - b.top) * DPR;
+    const cx = W / 2, cy = H / 2, spin = t * .06;
+    P.forEach(q => {
+      const ax = cx + Math.cos(q.a + spin) * S * .42 + q.ox;
+      const ay = cy + Math.sin(q.a + spin) * S * .42 + q.oy;
+      const dx = ax - px, dy = ay - py;
+      const dist = Math.hypot(dx, dy), R = S * 1.05;
+      if(dist < R && dist > 1){
+        const force = (1 - dist / R) * 14 * DPR;
+        q.vx += (dx / dist) * force;
+        q.vy += (dy / dist) * force;
+      }
+    });
+  }, {passive:true});
+
+  size(); addEventListener('resize', size);
+  addEventListener('scroll', () => requestAnimationFrame(onScroll), {passive:true});
+  onScroll(); if(RM) p = 1; draw();
+})();
+
+/* ══ CAPTURA DE LEAD (TELA 09) ══ */
+function handleLeadSubmit(e){
+  e.preventDefault();
+  const feedback = document.getElementById('leadFeedback');
+  const btn = e.target.querySelector('button[type="submit"]');
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  // Grava lead no storage local para o painel admin
+  try {
+    const raw = localStorage.getItem('girassol_site_config');
+    let cfg = raw ? JSON.parse(raw) : {};
+    cfg.leads = cfg.leads || [];
+    const now = new Date();
+    const formattedDate = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + ' ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    cfg.leads.unshift({
+      id: Date.now(),
+      name,
+      email,
+      company: company || 'Pessoa Física',
+      date: formattedDate,
+      consent: true
+    });
+    localStorage.setItem('girassol_site_config', JSON.stringify(cfg));
+  } catch(err){}
+
+  setTimeout(() => {
+    feedback.style.display = 'block';
+    btn.style.display = 'none';
+  }, 700);
+}
+
+// Carregar parametrizações dinâmicas se configuradas no Admin
+(function applyAdminConfig(){
+  try {
+    const raw = localStorage.getItem('girassol_site_config');
+    if(!raw) return;
+    const cfg = JSON.parse(raw);
+    const g = cfg.general || {};
+    if(g.whatsappPhone){
+      document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+        const msg = encodeURIComponent(g.whatsappMessage || "Olá Paulo, vim pelo site da Girassol e gostaria de conversar.");
+        a.href = `https://wa.me/${g.whatsappPhone}?text=${msg}`;
+      });
+    }
+    if(g.contactEmail){
+      const copyBtn = document.getElementById('btnCopyEmail');
+      if(copyBtn) copyBtn.setAttribute('data-email', g.contactEmail);
+    }
+    if(g.proofMetricPlatforms){
+      const el = document.querySelector('.proof-card:nth-child(1) .proof-val');
+      if(el) el.textContent = g.proofMetricPlatforms;
+    }
+    if(g.proofMetricExperience){
+      const el = document.querySelector('.proof-card:nth-child(3) .proof-val');
+      if(el) el.textContent = g.proofMetricExperience;
+    }
+    if(g.proofMetricSla){
+      const el = document.querySelector('.proof-card:nth-child(4) .proof-val');
+      if(el) el.textContent = g.proofMetricSla;
+    }
+  } catch(e){}
+})();
+
+/* ══ COPIAR E-MAIL COM TOAST & FALLBACK ══ */
+const btnCopy = document.getElementById('btnCopyEmail');
+const toast = document.getElementById('toast');
+if(btnCopy){
+  btnCopy.addEventListener('click', () => {
+    const email = btnCopy.getAttribute('data-email');
+    function triggerToast(){
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(email).then(triggerToast).catch(() => {
+        execCopy(email);
+        triggerToast();
+      });
+    } else {
+      execCopy(email);
+      triggerToast();
+    }
+    function execCopy(val){
+      const t = document.createElement('textarea');
+      t.value = val;
+      t.style.position = 'fixed';
+      t.style.opacity = '0';
+      document.body.appendChild(t);
+      t.focus();
+      t.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(t);
+    }
+  });
+}
+
+/* ══ MENU MOBILE TOGGLE ══ */
+const btnMobile = document.getElementById('btnMobileMenu');
+const drawerMobile = document.getElementById('mobileDrawer');
+if(btnMobile && drawerMobile){
+  btnMobile.addEventListener('click', () => {
+    drawerMobile.classList.toggle('open');
+  });
+}
+function closeMobileDrawer(){
+  if(drawerMobile) drawerMobile.classList.remove('open');
+}
+
+/* ══ INTERSECTION OBSERVER PARA REVEAL ══ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.12});
+document.querySelectorAll('.rise').forEach(el => io.observe(el));
+</script>
+<script src="assets/js/chat-widget.js"></script>
+</body>
+</html>

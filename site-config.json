@@ -1,0 +1,54 @@
+{
+  "general": {
+    "whatsappPhone": "5567981151717",
+    "whatsappMessage": "Olá Paulo, vim pelo site da Girassol e gostaria de conversar sobre uma ferramenta para o meu negócio.",
+    "contactEmail": "girassolinteligencia@gmail.com",
+    "instagramUrl": "https://instagram.com/girassolinteligencia",
+    "facebookUrl": "https://facebook.com/girassolideiasinteligentes",
+    "proofMetricPlatforms": "5",
+    "proofMetricBpmn": "BPMN 2.0",
+    "proofMetricExperience": "20+ anos",
+    "proofMetricSla": "< 48h"
+  },
+  "products": {
+    "alltoparquet": {
+      "enabled": true,
+      "price": 99,
+      "priceLabel": "licença definitiva",
+      "badge": "100% Offline · Windows",
+      "supportEmail": "girassolinteligencia@gmail.com",
+      "buyUrl": "https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet."
+    },
+    "plataformaEleitoral": {
+      "enabled": true,
+      "price": 499,
+      "priceLabel": "acesso direto",
+      "badge": "Dados Oficiais TSE · 2010–2024",
+      "demoUrl": "https://plataformaeleitoral.ia.br",
+      "buyUrl": "https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente."
+    },
+    "guiaParquet": {
+      "enabled": true,
+      "badge": "Material Técnico",
+      "priceLabel": "Gratuito"
+    }
+  },
+  "leads": [
+    {
+      "id": 1,
+      "name": "Carlos Eduardo",
+      "email": "carlos.dados@exemplo.com.br",
+      "company": "AgroTech Consultoria",
+      "date": "2026-09-10 14:32",
+      "consent": true
+    },
+    {
+      "id": 2,
+      "name": "Mariana Souza",
+      "email": "mariana.adv@exemplo.jus.br",
+      "company": "Souza & Associados",
+      "date": "2026-09-11 09:15",
+      "consent": true
+    }
+  ]
+}

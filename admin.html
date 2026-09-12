@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Girassol Admin — Painel de Gestão & Parametrização</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0a08;
+  --surface:#14110e;
+  --surface-raised:#1c1813;
+  --line:rgba(242,237,226,0.08);
+  --line-light:rgba(242,237,226,0.16);
+  --ink:#F4EFE6;
+  --ink-soft:#A99E8F;
+  --ink-faint:#6B6256;
+  --earth:#C46A42;
+  --petal:#E8B33C;
+  --petal-glow:rgba(232,179,60,0.18);
+  --success:#52B788;
+  --danger:#E76F51;
+  --fd:"Instrument Serif",Georgia,serif;
+  --fb:"Newsreader",Georgia,serif;
+  --fm:"JetBrains Mono",monospace;
+  --radius:8px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--void);
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:16px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+/* ══ TELA DE LOGIN (BLOQUEIO INICIAL) ══ */
+#loginScreen{
+  position:fixed;
+  inset:0;
+  background:var(--void);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.login-box{
+  background:var(--surface);
+  border:1px solid var(--line-light);
+  border-radius:12px;
+  padding:40px;
+  width:100%;
+  max-width:420px;
+  box-shadow:0 24px 60px rgba(0,0,0,.7);
+  text-align:center;
+}
+.login-box img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  margin-bottom:16px;
+  filter:drop-shadow(0 0 12px rgba(232,179,60,.4));
+}
+.login-title{
+  font-family:var(--fd);
+  font-size:1.8rem;
+  margin:0 0 6px;
+  color:var(--ink);
+}
+.login-sub{
+  font-family:var(--fm);
+  font-size:.76rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin-bottom:24px;
+}
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  text-align:left;
+}
+.field-label{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  display:block;
+  margin-bottom:6px;
+}
+.field-input{
+  width:100%;
+  background:#100d0a;
+  border:1px solid var(--line);
+  color:var(--ink);
+  padding:12px 16px;
+  border-radius:var(--radius);
+  font-family:var(--fm);
+  font-size:.9rem;
+  outline:none;
+  transition:border-color .25s;
+}
+.field-input:focus{
+  border-color:var(--petal);
+}
+.btn-submit{
+  font-family:var(--fm);
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:600;
+  padding:14px;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:all .25s;
+  margin-top:8px;
+}
+.btn-submit:hover{
+  background:#f7c858;
+  transform:translateY(-1px);
+}
+.login-error{
+  color:var(--danger);
+  font-family:var(--fm);
+  font-size:.75rem;
+  margin-top:10px;
+  display:none;
+}
+
+/* ══ LAYOUT DO PAINEL ADMIN ══ */
+.admin-shell{
+  display:none;
+  min-height:100vh;
+  flex-direction:column;
+}
+.admin-header{
+  background:rgba(12,10,8,.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  padding:14px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.admin-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.admin-brand strong{
+  font-family:var(--fd);
+  font-size:1.3rem;
+  color:var(--ink);
+}
+.admin-brand span{
+  font-family:var(--fm);
+  font-size:.65rem;
+  letter-spacing:.16em;
+  color:var(--petal);
+  text-transform:uppercase;
+  background:rgba(232,179,60,.1);
+  padding:3px 8px;
+  border-radius:4px;
+  border:1px solid rgba(232,179,60,.3);
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.btn-ghost{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-decoration:none;
+  background:transparent;
+  border:1px solid var(--line);
+  padding:8px 14px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:all .25s;
+}
+.btn-ghost:hover{
+  border-color:var(--ink);
+  color:var(--ink);
+}
+.btn-save{
+  font-family:var(--fm);
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:var(--petal);
+  color:var(--void);
+  font-weight:600;
+  border:none;
+  padding:9px 18px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:all .25s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-save:hover{
+  background:#f7c858;
+}
+
+/* Corpo Principal & Sidebar */
+.admin-body{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  flex:1;
+}
+@media(max-width:860px){
+  .admin-body{grid-template-columns:1fr}
+}
+.admin-sidebar{
+  background:#110e0b;
+  border-right:1px solid var(--line);
+  padding:24px 16px;
+}
+.nav-group-title{
+  font-family:var(--fm);
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  padding:0 12px;
+  margin-bottom:10px;
+}
+.nav-tab{
+  font-family:var(--fm);
+  font-size:.78rem;
+  letter-spacing:.08em;
+  color:var(--ink-soft);
+  padding:12px 14px;
+  border-radius:6px;
+  margin-bottom:4px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:all .2s;
+}
+.nav-tab:hover{
+  background:rgba(242,237,226,.04);
+  color:var(--ink);
+}
+.nav-tab.active{
+  background:rgba(232,179,60,.12);
+  color:var(--petal);
+  font-weight:500;
+  border:1px solid rgba(232,179,60,.3);
+}
+
+.admin-content{
+  padding:clamp(24px,4vw,40px);
+  max-width:1040px;
+}
+.tab-pane{
+  display:none;
+}
+.tab-pane.active{
+  display:block;
+  animation:fadeIn .3s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.pane-header{
+  margin-bottom:28px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:18px;
+}
+.pane-title{
+  font-family:var(--fd);
+  font-size:2.2rem;
+  margin:0 0 6px;
+  color:var(--ink);
+}
+.pane-desc{
+  color:var(--ink-soft);
+  margin:0;
+  font-size:1rem;
+}
+
+/* Cards & Formulários */
+.card-box{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:24px;
+}
+.card-title{
+  font-family:var(--fm);
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--petal);
+  margin:0 0 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media(max-width:680px){
+  .form-grid{grid-template-columns:1fr}
+}
+.full-span{grid-column:1/-1}
+
+/* Tabela de Leads */
+.leads-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.88rem;
+  text-align:left;
+  margin-top:12px;
+}
+.leads-table th{
+  font-family:var(--fm);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:12px 14px;
+  background:rgba(242,237,226,.04);
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--line);
+}
+.leads-table td{
+  padding:12px 14px;
+  border-bottom:1px solid rgba(242,237,226,.06);
+  color:var(--ink);
+}
+.badge-tag{
+  font-family:var(--fm);
+  font-size:.68rem;
+  padding:2px 8px;
+  border-radius:4px;
+  background:rgba(82,183,136,.12);
+  color:var(--success);
+  border:1px solid rgba(82,183,136,.3);
+}
+
+/* Toast de Notificação */
+#adminToast{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:var(--surface-raised);
+  border:1px solid var(--petal);
+  color:var(--petal);
+  font-family:var(--fm);
+  font-size:.78rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:12px 22px;
+  border-radius:var(--radius);
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  transform:translateY(100px);
+  opacity:0;
+  transition:all .3s var(--ease);
+  z-index:99999;
+}
+#adminToast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+</style>
+</head>
+<body>
+
+<!-- 1. TELA DE LOGIN SEGURA -->
+<div id="loginScreen">
+  <div class="login-box">
+    <img src="logo.png" alt="Girassol">
+    <h1 class="login-title">Girassol Admin</h1>
+    <div class="login-sub">Painel de Parametrização & Controle</div>
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div>
+        <label class="field-label">Senha de Acesso Mestre</label>
+        <input type="password" id="adminPass" class="field-input" placeholder="Digite sua senha..." required autofocus>
+      </div>
+      <button type="submit" class="btn-submit">Acessar Painel →</button>
+      <div id="loginError" class="login-error">Senha incorreta. Tente novamente.</div>
+    </form>
+    <div style="font-family:var(--fm);font-size:.68rem;color:var(--ink-faint);margin-top:20px">
+      Acesso reservado à coordenação técnica.
+    </div>
+  </div>
+</div>
+
+<!-- 2. PAINEL PRINCIPAL -->
+<div class="admin-shell" id="adminShell">
+  <!-- Topo -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <strong>Girassol Inteligência</strong>
+      <span>Admin v2</span>
+    </div>
+    <div class="header-actions">
+      <a href="index.html" target="_blank" class="btn-ghost">Ver Site Público ↗</a>
+      <button type="button" class="btn-save" onclick="saveAllConfigurations()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Salvar Alterações
+      </button>
+      <button type="button" class="btn-ghost" onclick="logout()" title="Encerrar Sessão">Sair</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <!-- Sidebar de Navegação -->
+    <aside class="admin-sidebar">
+      <div class="nav-group-title">Menu Operacional</div>
+      <div class="nav-tab active" onclick="switchTab('tabGeneral', this)">
+        <span>⚙️</span> Geral & Contatos
+      </div>
+      <div class="nav-tab" onclick="switchTab('tabProducts', this)">
+        <span>📦</span> Produtos Prontos
+      </div>
+      <div class="nav-tab" onclick="switchTab('tabServices', this)">
+        <span>🛠️</span> Serviços Sob Medida
+      </div>
+      <div class="nav-tab" onclick="switchTab('tabLeads', this)">
+        <span>📥</span> Leads Capturados
+      </div>
+      <div class="nav-tab" onclick="switchTab('tabBackup', this)">
+        <span>💾</span> Exportar / Backup
+      </div>
+    </aside>
+
+    <!-- Conteúdo das Abas -->
+    <main class="admin-content">
+
+      <!-- ABA 1: GERAL & CONTATOS -->
+      <section id="tabGeneral" class="tab-pane active">
+        <div class="pane-header">
+          <h2 class="pane-title">Geral & Contatos</h2>
+          <p class="pane-desc">Configure WhatsApp oficial, e-mail, redes sociais e selos de prova do topo.</p>
+        </div>
+
+        <div class="card-box">
+          <div class="card-title">Canais de Atendimento</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">WhatsApp (Somente Números)</label>
+              <input type="text" id="cfgWhatsapp" class="field-input" placeholder="5567981151717">
+            </div>
+            <div>
+              <label class="field-label">E-mail de Contato Principal</label>
+              <input type="email" id="cfgEmail" class="field-input" placeholder="girassolinteligencia@gmail.com">
+            </div>
+            <div class="full-span">
+              <label class="field-label">Mensagem Padrão do WhatsApp</label>
+              <input type="text" id="cfgMsg" class="field-input" placeholder="Texto que o cliente envia automaticamente...">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="card-title">Barra de Prova (Hero - 4 Selos de Métricas)</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">Plataformas em Produção</label>
+              <input type="text" id="cfgMetric1" class="field-input" value="5">
+            </div>
+            <div>
+              <label class="field-label">Padrão de Processos</label>
+              <input type="text" id="cfgMetric2" class="field-input" value="BPMN 2.0">
+            </div>
+            <div>
+              <label class="field-label">Anos de Atuação</label>
+              <input type="text" id="cfgMetric3" class="field-input" value="20+ anos">
+            </div>
+            <div>
+              <label class="field-label">Prazo de Blueprint</label>
+              <input type="text" id="cfgMetric4" class="field-input" value="< 48h">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="card-title">Redes Sociais</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">Instagram URL</label>
+              <input type="text" id="cfgInsta" class="field-input" placeholder="https://instagram.com/girassolinteligencia">
+            </div>
+            <div>
+              <label class="field-label">Facebook URL</label>
+              <input type="text" id="cfgFace" class="field-input" placeholder="https://facebook.com/girassolideiasinteligentes">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 2: PRODUTOS PRONTOS -->
+      <section id="tabProducts" class="tab-pane">
+        <div class="pane-header">
+          <h2 class="pane-title">Produtos Prontos (Tela 04)</h2>
+          <p class="pane-desc">Altere preços, links de compra e badges das ferramentas de licença definitiva.</p>
+        </div>
+
+        <!-- AlltoParquet -->
+        <div class="card-box">
+          <div class="card-title">AlltoParquet (Conversor Desktop Offline)</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">Preço da Licença (R$)</label>
+              <input type="number" id="p1Price" class="field-input" value="99">
+            </div>
+            <div>
+              <label class="field-label">Selo em Destaque</label>
+              <input type="text" id="p1Badge" class="field-input" value="100% Offline · Windows">
+            </div>
+            <div class="full-span">
+              <label class="field-label">Link Direto de Compra / WhatsApp</label>
+              <input type="text" id="p1BuyUrl" class="field-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Plataforma Eleitoral -->
+        <div class="card-box">
+          <div class="card-title">Plataforma Eleitoral Inteligente (79 Municípios MS)</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">Valor do Acesso (R$)</label>
+              <input type="number" id="p2Price" class="field-input" value="499">
+            </div>
+            <div>
+              <label class="field-label">Selo em Destaque</label>
+              <input type="text" id="p2Badge" class="field-input" value="Dados Oficiais TSE · 2010–2024">
+            </div>
+            <div class="full-span">
+              <label class="field-label">Link de Demonstração Pública</label>
+              <input type="text" id="p2DemoUrl" class="field-input" value="https://plataformaeleitoral.ia.br">
+            </div>
+            <div class="full-span">
+              <label class="field-label">Link para Assinatura de Acesso</label>
+              <input type="text" id="p2BuyUrl" class="field-input">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 3: SERVIÇOS SOB MEDIDA -->
+      <section id="tabServices" class="tab-pane">
+        <div class="pane-header">
+          <h2 class="pane-title">Serviços Sob Medida (Tela 05)</h2>
+          <p class="pane-desc">Gerencie os 5 pilares personalizados onde o código-fonte pertence ao cliente.</p>
+        </div>
+
+        <div class="card-box">
+          <div class="card-title">Selos de Destaque dos Módulos</div>
+          <div class="form-grid">
+            <div>
+              <label class="field-label">01. Agentes de IA</label>
+              <input type="text" class="field-input" value="Decisão Crítica Sempre Humana" readonly>
+            </div>
+            <div>
+              <label class="field-label">02. Sistemas e Plataformas Web</label>
+              <input type="text" class="field-input" value="Código-Fonte é Seu" readonly>
+            </div>
+            <div>
+              <label class="field-label">03. Engenharia BPMN 2.0</label>
+              <input type="text" class="field-input" value="Padrão Internacional" readonly>
+            </div>
+            <div>
+              <label class="field-label">04. Integrações de Dados</label>
+              <input type="text" class="field-input" value="Fim do Retrabalho Manual" readonly>
+            </div>
+            <div class="full-span">
+              <label class="field-label">05. Governança & LGPD</label>
+              <input type="text" class="field-input" value="Soberania dos Seus Dados" readonly>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 4: LEADS CAPTURADOS -->
+      <section id="tabLeads" class="tab-pane">
+        <div class="pane-header">
+          <h2 class="pane-title">Leads Capturados (Guia Oficial Parquet)</h2>
+          <p class="pane-desc">Pessoas que solicitaram o material técnico através do formulário do site.</p>
+        </div>
+
+        <div class="card-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <div class="card-title" style="margin:0">Lista de Contatos Cadastrados</div>
+            <button type="button" class="btn-ghost" onclick="exportLeadsCSV()">Exportar para CSV ⤓</button>
+          </div>
+
+          <div style="overflow-x:auto">
+            <table class="leads-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Nome</th>
+                  <th>E-mail</th>
+                  <th>Empresa</th>
+                  <th>Consentimento LGPD</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 5: BACKUP / EXPORTAÇÃO -->
+      <section id="tabBackup" class="tab-pane">
+        <div class="pane-header">
+          <h2 class="pane-title">Exportar & Sincronizar</h2>
+          <p class="pane-desc">Baixe ou atualize o arquivo JSON oficial de parametrização da plataforma.</p>
+        </div>
+
+        <div class="card-box">
+          <div class="card-title">JSON de Configuração Ativa</div>
+          <textarea id="configJsonViewer" class="field-input" style="height:320px;font-family:var(--fm);font-size:.8rem" readonly></textarea>
+          <div style="margin-top:16px;display:flex;gap:12px">
+            <button type="button" class="btn-save" onclick="downloadConfigFile()">Baixar site-config.json ⤓</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div id="adminToast">Alterações salvas com sucesso!</div>
+
+<script>
+// Dados ativos em memória
+let currentConfig = {};
+
+// Hash SHA-256 da senha mestra (a senha real nunca fica exposta em texto puro no código)
+const MASTER_HASH = "98b71b6a109b89c0ad3ddd6847cfa581ab0b206a4a6dea5e6bf1ce7d5f3711b9";
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function handleLogin(e){
+  e.preventDefault();
+  const pass = document.getElementById('adminPass').value;
+  const error = document.getElementById('loginError');
+  const hashed = await sha256(pass);
+  if(hashed === MASTER_HASH){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminShell').style.display = 'flex';
+    sessionStorage.setItem('girassol_auth', 'true');
+    loadInitialConfig();
+  } else {
+    error.style.display = 'block';
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('girassol_auth');
+  location.reload();
+}
+
+// Verifica se já estava logado nesta sessão
+if(sessionStorage.getItem('girassol_auth') === 'true'){
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminShell').style.display = 'flex';
+  loadInitialConfig();
+}
+
+function switchTab(tabId, el){
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  el.classList.add('active');
+}
+
+// Carrega o arquivo site-config.json ou usa localStorage
+async function loadInitialConfig(){
+  try {
+    const local = localStorage.getItem('girassol_site_config');
+    if(local){
+      currentConfig = JSON.parse(local);
+    } else {
+      const res = await fetch('site-config.json');
+      currentConfig = await res.json();
+    }
+  } catch(err){
+    console.warn("Usando fallback de dados");
+    currentConfig = {
+      general: {
+        whatsappPhone: "5567981151717",
+        whatsappMessage: "Olá Paulo, vim pelo site da Girassol e gostaria de conversar sobre uma ferramenta para o meu negócio.",
+        contactEmail: "girassolinteligencia@gmail.com",
+        instagramUrl: "https://instagram.com/girassolinteligencia",
+        facebookUrl: "https://facebook.com/girassolideiasinteligentes",
+        proofMetricPlatforms: "5",
+        proofMetricBpmn: "BPMN 2.0",
+        proofMetricExperience: "20+ anos",
+        proofMetricSla: "< 48h"
+      },
+      products: {
+        alltoparquet: { price: 99, badge: "100% Offline · Windows" },
+        plataformaEleitoral: { price: 499, badge: "Dados Oficiais TSE · 2010–2024", demoUrl: "https://plataformaeleitoral.ia.br" }
+      },
+      leads: []
+    };
+  }
+  populateForm();
+}
+
+function populateForm(){
+  const g = currentConfig.general || {};
+  document.getElementById('cfgWhatsapp').value = g.whatsappPhone || '5567981151717';
+  document.getElementById('cfgEmail').value = g.contactEmail || 'girassolinteligencia@gmail.com';
+  document.getElementById('cfgMsg').value = g.whatsappMessage || '';
+  document.getElementById('cfgMetric1').value = g.proofMetricPlatforms || '5';
+  document.getElementById('cfgMetric2').value = g.proofMetricBpmn || 'BPMN 2.0';
+  document.getElementById('cfgMetric3').value = g.proofMetricExperience || '20+ anos';
+  document.getElementById('cfgMetric4').value = g.proofMetricSla || '< 48h';
+  document.getElementById('cfgInsta').value = g.instagramUrl || '';
+  document.getElementById('cfgFace').value = g.facebookUrl || '';
+
+  const p = currentConfig.products || {};
+  if(p.alltoparquet){
+    document.getElementById('p1Price').value = p.alltoparquet.price || 99;
+    document.getElementById('p1Badge').value = p.alltoparquet.badge || '100% Offline · Windows';
+    document.getElementById('p1BuyUrl').value = p.alltoparquet.buyUrl || `https://wa.me/${g.whatsappPhone || '5567981151717'}?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet.`;
+  }
+  if(p.plataformaEleitoral){
+    document.getElementById('p2Price').value = p.plataformaEleitoral.price || 499;
+    document.getElementById('p2Badge').value = p.plataformaEleitoral.badge || 'Dados Oficiais TSE · 2010–2024';
+    document.getElementById('p2DemoUrl').value = p.plataformaEleitoral.demoUrl || 'https://plataformaeleitoral.ia.br';
+    document.getElementById('p2BuyUrl').value = p.plataformaEleitoral.buyUrl || `https://wa.me/${g.whatsappPhone || '5567981151717'}?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente.`;
+  }
+
+  // Leads
+  renderLeadsTable();
+
+  // Json Viewer
+  document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+}
+
+function renderLeadsTable(){
+  const tbody = document.getElementById('leadsTableBody');
+  tbody.innerHTML = '';
+  const leads = currentConfig.leads || [];
+  if(leads.length === 0){
+    tbody.innerHTML = '<tr><td colspan="5" style="color:var(--ink-faint);text-align:center;padding:24px">Nenhum lead capturado até o momento.</td></tr>';
+    return;
+  }
+  leads.forEach(l => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-family:var(--fm);font-size:.78rem;color:var(--ink-soft)">${l.date || '-'}</td>
+      <td><strong>${l.name || '-'}</strong></td>
+      <td><a href="mailto:${l.email}" style="color:var(--petal)">${l.email || '-'}</a></td>
+      <td>${l.company || 'Pessoa Física'}</td>
+      <td><span class="badge-tag">Confirmado</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function saveAllConfigurations(){
+  currentConfig.general = {
+    whatsappPhone: document.getElementById('cfgWhatsapp').value.trim(),
+    whatsappMessage: document.getElementById('cfgMsg').value.trim(),
+    contactEmail: document.getElementById('cfgEmail').value.trim(),
+    instagramUrl: document.getElementById('cfgInsta').value.trim(),
+    facebookUrl: document.getElementById('cfgFace').value.trim(),
+    proofMetricPlatforms: document.getElementById('cfgMetric1').value.trim(),
+    proofMetricBpmn: document.getElementById('cfgMetric2').value.trim(),
+    proofMetricExperience: document.getElementById('cfgMetric3').value.trim(),
+    proofMetricSla: document.getElementById('cfgMetric4').value.trim()
+  };
+
+  currentConfig.products = currentConfig.products || {};
+  currentConfig.products.alltoparquet = {
+    price: Number(document.getElementById('p1Price').value),
+    badge: document.getElementById('p1Badge').value.trim(),
+    buyUrl: document.getElementById('p1BuyUrl').value.trim()
+  };
+  currentConfig.products.plataformaEleitoral = {
+    price: Number(document.getElementById('p2Price').value),
+    badge: document.getElementById('p2Badge').value.trim(),
+    demoUrl: document.getElementById('p2DemoUrl').value.trim(),
+    buyUrl: document.getElementById('p2BuyUrl').value.trim()
+  };
+
+  // Salva no localStorage para persistência imediata no navegador
+  localStorage.setItem('girassol_site_config', JSON.stringify(currentConfig));
+  document.getElementById('configJsonViewer').value = JSON.stringify(currentConfig, null, 2);
+
+  // Exibe Toast de confirmação
+  const toast = document.getElementById('adminToast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function downloadConfigFile(){
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConfig, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "site-config.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
+function exportLeadsCSV(){
+  const leads = currentConfig.leads || [];
+  if(leads.length === 0){
+    alert("Não há leads para exportar.");
+    return;
+  }
+  let csv = "ID,Data,Nome,Email,Empresa,Consentimento\n";
+  leads.forEach(l => {
+    csv += `"${l.id || ''}","${l.date || ''}","${l.name || ''}","${l.email || ''}","${l.company || ''}","LGPD Aceito"\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "leads_guia_parquet.csv");
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+</script>
+</body>
+</html>
