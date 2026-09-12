@@ -37,8 +37,8 @@
   --line:rgba(242,237,226,0.07);
   --line-light:rgba(242,237,226,0.14);
   --ink:#F4EFE6;
-  --ink-soft:#A99E8F;
-  --ink-faint:#6B6256;
+  --ink-soft:#c4baa8;
+  --ink-faint:#8a8072;
   --earth:#C46A42;
   --petal:#D4AF37;
   --petal-bright:#f7c858;
@@ -68,25 +68,14 @@ body{
   color:var(--ink);
   font-family:var(--fb);
   font-size:var(--body);
-  font-weight:300;
+  font-weight:400;
   line-height:1.68;
   overflow-x:hidden;
 }
 
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 .scan{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.14;
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px)}
 
-#cursor-glow{
-  position:fixed;
-  width:480px;height:480px;
-  border-radius:50%;
-  pointer-events:none;
-  z-index:1;
-  transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(212,175,55,0.07) 0%,transparent 70%);
-  transition:width .3s,height .3s,opacity .3s;
-}
 
 .page{position:relative;z-index:3}
 .wrap{max-width:84ch;margin:0 auto;padding:0 var(--s3)}
@@ -136,21 +125,13 @@ body{
   filter:drop-shadow(0 0 10px rgba(212,175,55,.45));
 }
 .brand-title strong{
-  font-family:var(--fd);
-  font-size:1.18rem;
+  font-family:var(--fm);
+  font-size:.95rem;
+  letter-spacing:.12em;
   font-weight:400;
   color:var(--ink);
-  line-height:1;
-  letter-spacing:-.01em;
-}
-.brand-title span{
-  font-family:var(--fm);
-  font-size:.58rem;
-  letter-spacing:.16em;
-  color:var(--petal);
-  text-transform:uppercase;
-  margin-top:2px;
   display:block;
+  white-space:nowrap;
 }
 
 /* Floating Central Nav Dock */
@@ -182,6 +163,7 @@ body{
   align-items:center;
   gap:6px;
   transition:all .22s var(--ease);
+  white-space:nowrap;
 }
 .nav-dock-item span.num{
   color:var(--petal);
@@ -314,6 +296,7 @@ body{
   text-decoration:none;
   padding:8px 0;
   border-bottom:1px solid var(--line);
+  white-space:nowrap;
 }
 .mobile-drawer a:hover{
   color:var(--petal);
@@ -754,26 +737,23 @@ footer{
 </head>
 <body>
 
-<canvas id="bg"></canvas>
 <div class="scan"></div>
-<div id="cursor-glow"></div>
 
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="index.html" class="brand-mark">
+    <a href="index.html" class="brand-mark" aria-label="Voltar ao início">
       <img src="logo.png" alt="Girassol Inteligência">
       <div class="brand-title">
-        <strong>Girassol Inteligência</strong>
-        <span>Campo Grande / MS</span>
+        <strong>GIRASSOL INTELIGÊNCIA</strong>
       </div>
     </a>
     <nav class="header-nav-dock" aria-label="Navegação Principal">
       <a href="index.html#girassol" class="nav-dock-item"><span class="num">01</span><span>O Girassol</span></a>
-      <a href="produtos.html" class="nav-dock-item active"><span class="num">02</span><span>Produtos</span></a>
+      <a href="produtos.html" class="nav-dock-item"><span class="num">02</span><span>Produtos</span></a>
       <a href="artigos.html" class="nav-dock-item"><span class="num">03</span><span>Artigos</span></a>
       <a href="index.html#servicos" class="nav-dock-item"><span class="num">04</span><span>Serviços</span></a>
-      <a href="index.html#casos" class="nav-dock-item"><span class="num">05</span><span>Casos</span></a>
+      <a href="casos.html" class="nav-dock-item"><span class="num">05</span><span>Casos</span></a>
       <a href="index.html#contato" class="nav-dock-item"><span class="num">06</span><span>Contato</span></a>
     </nav>
     <div class="header-actions">
@@ -786,13 +766,6 @@ footer{
         </span>
         <span id="audioStatusText">Áudio [M]</span>
       </button>
-      <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20vim%20pela%20p%C3%A1gina%20de%20produtos%20da%20Girassol%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener noreferrer" class="header-cta hud-box" id="btnHeaderContact" aria-label="Fale conosco no WhatsApp">
-        <span class="hud-corner tl"></span>
-        <span class="hud-corner tr"></span>
-        <span class="hud-corner bl"></span>
-        <span class="hud-corner br"></span>
-        <span>Fale no WhatsApp</span> →
-      </a>
       <button type="button" class="mobile-menu-btn" id="btnMobileMenu" aria-label="Abrir Menu de Navegação">
         <span></span>
         <span></span>
@@ -806,7 +779,7 @@ footer{
     <a href="produtos.html" onclick="closeMobileDrawer()" style="color:var(--petal)">02 Produtos (Ativo)</a>
     <a href="artigos.html" onclick="closeMobileDrawer()">03 Artigos</a>
     <a href="index.html#servicos" onclick="closeMobileDrawer()">04 Serviços</a>
-    <a href="index.html#casos" onclick="closeMobileDrawer()">05 Casos</a>
+    <a href="casos.html" onclick="closeMobileDrawer()">05 Casos</a>
     <a href="index.html#contato" onclick="closeMobileDrawer()">06 Contato</a>
   </nav>
 </header>
@@ -1072,54 +1045,6 @@ if(supportEl && toastEl){
     }
   });
 }
-
-// Cursor glow
-(function(){
-  const glow = document.getElementById('cursor-glow');
-  if(!glow || RM) return;
-  window.addEventListener('pointermove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  }, {passive:true});
-})();
-
-// Fundo cosmológico
-(function(){
-  if(RM) return;
-  const c = document.getElementById('bg'), x = c.getContext('2d');
-  let w, h, dust = [], t = 0;
-  function init(){
-    w = c.width = innerWidth * DPR;
-    h = c.height = innerHeight * DPR;
-    c.style.width = innerWidth + 'px';
-    c.style.height = innerHeight + 'px';
-    dust = Array.from({length: Math.round(Math.min(65, innerWidth / 22))}, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      r: (.6 + Math.random() * 1.4) * DPR,
-      vx: (-.05 - Math.random() * .12) * DPR,
-      vy: (Math.random() - .5) * .03 * DPR,
-      a: .08 + Math.random() * .2,
-      gold: Math.random() > .75
-    }));
-  }
-  function frame(){
-    t += .002;
-    x.clearRect(0, 0, w, h);
-    dust.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if(p.x < 0) p.x = w;
-      if(p.y < 0) p.y = h;
-      if(p.y > h) p.y = 0;
-      x.fillStyle = p.gold ? 'rgba(232,179,60,' + p.a + ')' : 'rgba(244,239,230,' + (p.a * .6) + ')';
-      x.beginPath();
-      x.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      x.fill();
-    });
-    requestAnimationFrame(frame);
-  }
-  init(); frame();
-  addEventListener('resize', init);
-})();
 
 // Mobile Drawer
 const mobileBtn = document.getElementById('btnMobileMenu');

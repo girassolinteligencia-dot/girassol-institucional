@@ -34,7 +34,7 @@
       if (this.messages.length === 0) {
         this.addMessage(
           "assistant",
-          "Olá! Seja bem-vindo à Girassol Inteligência. Sou o Assessor Direto do nosso Núcleo de IA. Como posso ajudar você a transformar a operação da sua empresa com agentes cognitivos autônomos hoje?"
+          "Olá! Seja bem-vindo à Girassol. Me conta: qual tarefa hoje toma tempo demais na sua empresa ou qual rotina você gostaria de organizar no computador?"
         );
       }
     }
@@ -103,7 +103,7 @@
       const launcher = document.createElement("button");
       launcher.className = "girassol-chat-launcher";
       launcher.id = "girassolChatLauncher";
-      launcher.setAttribute("aria-label", "Abrir chat com a IA da Girassol — Fala comigo!");
+      launcher.setAttribute("aria-label", "Conversar com o Assistente Girassol");
       launcher.innerHTML = `
         <div class="launcher-icon-wrap">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,7 +111,7 @@
           </svg>
           <span class="launcher-pulse"></span>
         </div>
-        <span class="launcher-label">Fala comigo!</span>
+        <span class="launcher-label">Assistente Virtual</span>
       `;
       document.body.appendChild(launcher);
       this.launcherEl = launcher;
@@ -138,10 +138,10 @@
               <span class="agent-status-dot"></span>
             </div>
             <div class="agent-titles">
-              <span class="agent-name">Assessor Girassol</span>
+              <span class="agent-name">Assistente Girassol</span>
               <span class="agent-badge">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                Núcleo de IA Conectado
+                Online para te ajudar
               </span>
             </div>
           </div>
@@ -169,7 +169,7 @@
               type="text" 
               class="chat-input" 
               id="girassolChatInput" 
-              placeholder="Digite sua dúvida sobre nossos agentes..." 
+              placeholder="Escreva sua mensagem ou dúvida aqui..." 
               autocomplete="off" 
               maxlength="1000"
             />
