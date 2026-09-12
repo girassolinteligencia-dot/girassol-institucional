@@ -418,7 +418,8 @@ html,body{
       <span>Admin v2</span>
     </div>
     <div class="header-actions">
-      <a href="index.html" target="_blank" class="btn-ghost">Ver Site Público ↗</a>
+      <a href="index.html" target="_blank" class="btn-ghost" title="Abrir Página Inicial">Ver Home ↗</a>
+      <a href="produtos.html" target="_blank" class="btn-ghost" style="color:var(--petal);border-color:rgba(232,179,60,.3)" title="Abrir Catálogo de Produtos">Ver Produtos ↗</a>
       <button type="button" class="btn-save" onclick="saveAllConfigurations()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         Salvar Alterações
@@ -516,8 +517,8 @@ html,body{
       <!-- ABA 2: PRODUTOS PRONTOS -->
       <section id="tabProducts" class="tab-pane">
         <div class="pane-header">
-          <h2 class="pane-title">Produtos Prontos (Tela 04)</h2>
-          <p class="pane-desc">Altere preços, links de compra e badges das ferramentas de licença definitiva.</p>
+          <h2 class="pane-title">Produtos Prontos (Catálogo em produtos.html)</h2>
+          <p class="pane-desc">Altere preços, links de compra, e-mails de suporte e badges das ferramentas exibidas na página dedicada <code>produtos.html</code>.</p>
         </div>
 
         <!-- AlltoParquet -->
@@ -531,6 +532,14 @@ html,body{
             <div>
               <label class="field-label">Selo em Destaque</label>
               <input type="text" id="p1Badge" class="field-input" value="100% Offline · Windows">
+            </div>
+            <div>
+              <label class="field-label">E-mail de Suporte Técnico</label>
+              <input type="email" id="p1Support" class="field-input" value="girassolinteligencia@gmail.com">
+            </div>
+            <div>
+              <label class="field-label">Status no Catálogo</label>
+              <input type="text" class="field-input" value="Ativo em produtos.html" readonly>
             </div>
             <div class="full-span">
               <label class="field-label">Link Direto de Compra / WhatsApp</label>
@@ -747,6 +756,7 @@ function populateForm(){
   if(p.alltoparquet){
     document.getElementById('p1Price').value = p.alltoparquet.price || 99;
     document.getElementById('p1Badge').value = p.alltoparquet.badge || '100% Offline · Windows';
+    document.getElementById('p1Support').value = p.alltoparquet.supportEmail || 'girassolinteligencia@gmail.com';
     document.getElementById('p1BuyUrl').value = p.alltoparquet.buyUrl || `https://wa.me/${g.whatsappPhone || '5567981151717'}?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet.`;
   }
   if(p.plataformaEleitoral){
@@ -801,6 +811,7 @@ function saveAllConfigurations(){
   currentConfig.products.alltoparquet = {
     price: Number(document.getElementById('p1Price').value),
     badge: document.getElementById('p1Badge').value.trim(),
+    supportEmail: document.getElementById('p1Support').value.trim(),
     buyUrl: document.getElementById('p1BuyUrl').value.trim()
   };
   currentConfig.products.plataformaEleitoral = {

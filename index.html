@@ -1515,7 +1515,7 @@ details.modern-details > .details-content {
     </a>
     <nav class="header-nav">
       <a href="#girassol">O Girassol</a>
-      <a href="#produtos">Produtos</a>
+      <a href="produtos.html">Produtos</a>
       <a href="#servicos">Serviços</a>
       <a href="#casos">Casos</a>
       <a href="#coordenacao">Coordenação</a>
@@ -1539,7 +1539,7 @@ details.modern-details > .details-content {
   <!-- Drawer Mobile -->
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navegação Móvel">
     <a href="#girassol" onclick="closeMobileDrawer()">O Girassol</a>
-    <a href="#produtos" onclick="closeMobileDrawer()">Produtos</a>
+    <a href="produtos.html" onclick="closeMobileDrawer()">Produtos</a>
     <a href="#servicos" onclick="closeMobileDrawer()">Serviços</a>
     <a href="#casos" onclick="closeMobileDrawer()">Casos</a>
     <a href="#coordenacao" onclick="closeMobileDrawer()">Coordenação</a>
@@ -1642,129 +1642,34 @@ details.modern-details > .details-content {
     </div>
   </div>
 
-  <!-- TELA 04: PRODUTOS PRONTOS (LICENÇA DEFINITIVA) -->
+  <!-- TELA 04: PRODUTOS PRONTOS (TEASER PARA PÁGINA DEDICADA) -->
   <div class="wrap-wide">
     <section class="section-products rise" id="produtos">
-      <div class="eyebrow"><span class="bracket-tag">Catálogo de Software</span> · Licença Definitiva</div>
-      <h2>Ferramentas prontas, disponíveis hoje.</h2>
-      <p class="products-intro-lead">
-        Além dos projetos sob medida, mantemos produtos próprios em produção. Licença definitiva, sem assinatura recorrente.
-      </p>
-
-      <div class="products-grid">
-        <!-- PRODUTO 1: AlltoParquet -->
-        <article class="product-card hud-box">
-          <span class="hud-corner tl"></span>
-          <span class="hud-corner tr"></span>
-          <span class="hud-corner bl"></span>
-          <span class="hud-corner br"></span>
-          <div class="product-top">
-            <div class="product-badge-row">
-              <span class="product-badge">100% Offline · Windows</span>
-              <div class="product-price">R$ 99 <small>licença definitiva</small></div>
-            </div>
-            <h3 class="product-title">AlltoParquet</h3>
-            <div class="product-tagline">Converta CSV, Excel e JSON para Apache Parquet sem enviar um byte para a internet.</div>
-            <p class="product-desc">
-              Aplicativo desktop portátil para Windows — executável único, sem instalação. Converte CSV, XLSX, JSON, NDJSON e JSONL para Apache Parquet com compressão Snappy, Zstd ou sem compressão, direto na máquina do usuário. Nenhum dado sai do computador.
+      <div class="lead-box hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <div class="lead-grid" style="align-items:center;">
+          <div>
+            <div class="eyebrow"><span class="bracket-tag">Catálogo de Software</span> · Licença Definitiva</div>
+            <h2 style="margin-bottom:14px;">Ferramentas prontas, sem mensalidade.</h2>
+            <p style="color:var(--ink-soft);font-size:1.06rem;line-height:1.65;margin:0 0 18px;">
+              Além dos projetos sob medida, mantemos produtos próprios para uso imediato: o conversor offline <b>AlltoParquet</b>, a <b>Plataforma Eleitoral Inteligente</b> (79 municípios de MS) e o <b>Guia Oficial Parquet</b>.
             </p>
-            <details class="modern-details">
-              <summary>Ver os três perfis de conversão</summary>
-              <div class="details-content">
-                <ul class="product-list" style="margin:0;">
-                  <li><b>Preservação Máxima:</b> mantém tipos e fidelidade total do dado original.</li>
-                  <li><b>BI de Dados:</b> otimizado para leitura em ferramentas analíticas.</li>
-                  <li><b>GIS e Geoprocessamento:</b> preserva estruturas geoespaciais.</li>
-                </ul>
-              </div>
-            </details>
-            <div class="product-disclaimer">
-              Ativação: e-mail da compra + código <code>GP-XXXX-XXXX-XXXX</code><br>
-              Suporte: girassolinteligencia@gmail.com
+            <div style="font-family:var(--fm);font-size:.76rem;color:var(--petal);">
+              100% offline ou em nuvem soberana · Sem aprisionamento
             </div>
           </div>
-          <div class="product-actions">
-            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet." target="_blank" rel="noopener noreferrer" class="product-btn">
-              Comprar AlltoParquet →
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;">
+            <a href="produtos.html" class="lead-btn" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;font-size:.85rem;width:100%;text-align:center;">
+              Acessar Catálogo de Produtos →
             </a>
-          </div>
-        </article>
-
-        <!-- PRODUTO 2: Plataforma Eleitoral Inteligente -->
-        <article class="product-card hud-box">
-          <span class="hud-corner tl"></span>
-          <span class="hud-corner tr"></span>
-          <span class="hud-corner bl"></span>
-          <span class="hud-corner br"></span>
-          <div class="product-top">
-            <div class="product-badge-row">
-              <span class="product-badge">Dados Oficiais TSE · 2010–2024</span>
-              <div class="product-price">R$ 499 <small>acesso direto</small></div>
-            </div>
-            <h3 class="product-title">Plataforma Eleitoral Inteligente</h3>
-            <div class="product-tagline">Todo o histórico eleitoral de Mato Grosso do Sul no seu celular.</div>
-            <p class="product-desc">
-              Plataforma mobile-first de consulta e análise de dados eleitorais públicos dos 79 municípios de MS, construída sobre o repositório oficial do TSE (2010 a 2024). Acesso por e-mail via link direto, sem senha para memorizar.
-            </p>
-            <details class="modern-details">
-              <summary>Ver os 8 Módulos de Análise</summary>
-              <div class="details-content">
-                <ul class="product-list" style="margin:0;">
-                  <li>Perfil Eleitoral e Ranking Geral</li>
-                  <li>Resultados por Município e Comparar Municípios</li>
-                  <li>Evolução da Candidatura e Desempenho dos Partidos</li>
-                  <li>Panorama de MS e Simulador de Vagas 2026</li>
-                </ul>
-              </div>
-            </details>
-            <div class="product-disclaimer">
-              <b>Aviso:</b> A Plataforma Eleitoral Inteligente é uma ferramenta de consulta e análise de dados públicos. Não realiza previsão de resultados, não garante desempenho eleitoral e não possui qualquer vínculo institucional com o Tribunal Superior Eleitoral.
+            <div style="font-family:var(--fm);font-size:.72rem;color:var(--ink-faint);text-align:center;width:100%;">
+              Conheça as especificações, preços e demonstrações em página própria.
             </div>
           </div>
-          <div class="product-actions">
-            <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente." target="_blank" rel="noopener noreferrer" class="product-btn">
-              Assinar acesso →
-            </a>
-            <a href="https://plataformaeleitoral.ia.br" target="_blank" rel="noopener noreferrer" class="product-btn outline">
-              Ver demonstração →
-            </a>
-          </div>
-        </article>
-
-        <!-- PRODUTO 3: Guia Oficial Parquet -->
-        <article class="product-card hud-box">
-          <span class="hud-corner tl"></span>
-          <span class="hud-corner tr"></span>
-          <span class="hud-corner bl"></span>
-          <span class="hud-corner br"></span>
-          <div class="product-top">
-            <div class="product-badge-row">
-              <span class="product-badge">Material Técnico</span>
-              <div class="product-price">Gratuito <small>envio por e-mail</small></div>
-            </div>
-            <h3 class="product-title">Guia Oficial Parquet</h3>
-            <div class="product-tagline">20 capítulos sobre o formato de dados que está cortando custos de armazenamento e consulta.</div>
-            <p class="product-desc">
-              Material técnico completo sobre Apache Parquet: fundamentos do formato colunar, estratégias de compressão, particionamento e benchmarks reais em BigQuery e AWS Athena. Inclui estudo de caso do desenvolvimento do AlltoParquet.
-            </p>
-            <details class="modern-details">
-              <summary>Ver destaques do Guia</summary>
-              <div class="details-content">
-                <ul class="product-list" style="margin:0;">
-                  <li>Fundamentos e anatomia do formato colunar</li>
-                  <li>Comparativo de compressão Snappy vs Zstandard</li>
-                  <li>Benchmarks de redução de custos em nuvem</li>
-                  <li>Engenharia reversa e estudo de caso prático</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-          <div class="product-actions">
-            <a href="#guia-parquet" class="product-btn">
-              Receber o guia por e-mail →
-            </a>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
   </div>
@@ -1793,18 +1698,14 @@ details.modern-details > .details-content {
           <p class="service-desc">
             Implantação de agentes inteligentes acoplados à rotina da empresa: leitura de documentos, conferência fiscal, triagem de tickets, elaboração de minutas e atendimento consultivo de nível 1. Toda decisão de impacto passa por aprovação humana registrada.
           </p>
-          <details class="modern-details">
-            <summary>O que está incluso no escopo?</summary>
-            <div class="details-content">
-              <div class="scope-pills">
-                <span class="scope-pill">Modelos de linguagem de mercado (Claude, GPT, DeepSeek)</span>
-                <span class="scope-pill">Busca inteligente nos documentos da sua empresa (RAG)</span>
-                <span class="scope-pill">Travas contra respostas incorretas (guardrails)</span>
-                <span class="scope-pill">Painel de aprovação humana para ações críticas</span>
-                <span class="scope-pill">Integração com WhatsApp, e-mail e sistemas internos</span>
-              </div>
-            </div>
-          </details>
+          <div class="service-scope-label">Escopo Típico de Entrega</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Modelos de linguagem de mercado (Claude, GPT, DeepSeek)</span>
+            <span class="scope-pill">Busca inteligente nos documentos da sua empresa (RAG)</span>
+            <span class="scope-pill">Travas contra respostas incorretas (guardrails)</span>
+            <span class="scope-pill">Painel de aprovação humana para ações críticas</span>
+            <span class="scope-pill">Integração com WhatsApp, e-mail e sistemas internos</span>
+          </div>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20desenhar%20um%20agente%20de%20IA%20para%20a%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
               Desenhar meu agente <span>→</span>
@@ -1826,18 +1727,14 @@ details.modern-details > .details-content {
           <p class="service-desc">
             Aplicações web modernas e responsivas para substituir planilhas quebradas, centralizar cadastros, emitir relatórios gerenciais em tempo real ou entregar portais de autoatendimento a clientes e parceiros.
           </p>
-          <details class="modern-details">
-            <summary>O que está incluso no escopo?</summary>
-            <div class="details-content">
-              <div class="scope-pills">
-                <span class="scope-pill">Funciona no celular e no computador</span>
-                <span class="scope-pill">Níveis de acesso por função (RBAC)</span>
-                <span class="scope-pill">Painéis com indicadores em tempo real</span>
-                <span class="scope-pill">Banco de dados próprio com backup diário</span>
-                <span class="scope-pill">Entrega do repositório à sua empresa</span>
-              </div>
-            </div>
-          </details>
+          <div class="service-scope-label">Escopo Típico de Entrega</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Funciona no celular e no computador</span>
+            <span class="scope-pill">Níveis de acesso por função (RBAC)</span>
+            <span class="scope-pill">Painéis com indicadores em tempo real</span>
+            <span class="scope-pill">Banco de dados próprio com backup diário</span>
+            <span class="scope-pill">Entrega do repositório à sua empresa</span>
+          </div>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20substituir%20uma%20planilha%20por%20um%20sistema%20sob%20medida." target="_blank" rel="noopener noreferrer" class="service-link">
               Substituir minha planilha <span>→</span>
@@ -1859,17 +1756,13 @@ details.modern-details > .details-content {
           <p class="service-desc">
             Mapeamento dos gargalos operacionais e desenho formal do fluxo de trabalho antes de qualquer linha de código. Em muitos casos, o mapeamento sozinho já resolve — sem necessidade de software novo.
           </p>
-          <details class="modern-details">
-            <summary>O que está incluso no escopo?</summary>
-            <div class="details-content">
-              <div class="scope-pills">
-                <span class="scope-pill">Entrevista com quem opera o processo</span>
-                <span class="scope-pill">Diagrama formal em Bizagi / BPMN 2.0</span>
-                <span class="scope-pill">Identificação dos pontos de perda de tempo e custo</span>
-                <span class="scope-pill">Manual de operação do processo redesenhado</span>
-              </div>
-            </div>
-          </details>
+          <div class="service-scope-label">Escopo Típico de Entrega</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Entrevista com quem opera o processo</span>
+            <span class="scope-pill">Diagrama formal em Bizagi / BPMN 2.0</span>
+            <span class="scope-pill">Identificação dos pontos de perda de tempo e custo</span>
+            <span class="scope-pill">Manual de operação do processo redesenhado</span>
+          </div>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20mapear%20os%20processos%20da%20minha%20empresa%20em%20BPMN." target="_blank" rel="noopener noreferrer" class="service-link">
               Mapear meu processo <span>→</span>
@@ -1891,17 +1784,13 @@ details.modern-details > .details-content {
           <p class="service-desc">
             Conexão contínua entre sistemas legados, ERPs, CRMs, planilhas do Google, gateways de pagamento e canais de mensageria — com rastreabilidade de ponta a ponta.
           </p>
-          <details class="modern-details">
-            <summary>O que está incluso no escopo?</summary>
-            <div class="details-content">
-              <div class="scope-pills">
-                <span class="scope-pill">Comunicação entre sistemas que hoje não conversam</span>
-                <span class="scope-pill">Disparos automáticos por WhatsApp e e-mail</span>
-                <span class="scope-pill">Sincronização entre estoque, vendas e financeiro</span>
-                <span class="scope-pill">Eliminação da digitação duplicada</span>
-              </div>
-            </div>
-          </details>
+          <div class="service-scope-label">Escopo Típico de Entrega</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Comunicação entre sistemas que hoje não conversam</span>
+            <span class="scope-pill">Disparos automáticos por WhatsApp e e-mail</span>
+            <span class="scope-pill">Sincronização entre estoque, vendas e financeiro</span>
+            <span class="scope-pill">Eliminação da digitação duplicada</span>
+          </div>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20conectar%20os%20sistemas%20e%20planilhas%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="service-link">
               Conectar meus sistemas <span>→</span>
@@ -1923,17 +1812,13 @@ details.modern-details > .details-content {
           <p class="service-desc">
             Auditoria técnica de sistemas e modelos de IA, adequação às normas da LGPD e implementação de controles contra vazamento de informação comercial. Inclui a opção de rodar modelos localmente (on-premise) no servidor da sua empresa.
           </p>
-          <details class="modern-details">
-            <summary>O que está incluso no escopo?</summary>
-            <div class="details-content">
-              <div class="scope-pills">
-                <span class="scope-pill">Diagnóstico e plano de adequação à LGPD</span>
-                <span class="scope-pill">Operação de IA sem tráfego de dados pela internet</span>
-                <span class="scope-pill">Garantia de que seus dados não treinam modelos públicos</span>
-                <span class="scope-pill">Treinamento da equipe</span>
-              </div>
-            </div>
-          </details>
+          <div class="service-scope-label">Escopo Típico de Entrega</div>
+          <div class="scope-pills">
+            <span class="scope-pill">Diagnóstico e plano de adequação à LGPD</span>
+            <span class="scope-pill">Operação de IA sem tráfego de dados pela internet</span>
+            <span class="scope-pill">Garantia de que seus dados não treinam modelos públicos</span>
+            <span class="scope-pill">Treinamento da equipe</span>
+          </div>
           <div class="service-action">
             <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20auditar%20a%20seguran%C3%A7a%2C%20governan%C3%A7a%20e%20LGPD%20na%20minha%20opera%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="service-link">
               Auditar minha operação <span>→</span>
