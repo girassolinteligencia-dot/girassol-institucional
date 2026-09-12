@@ -234,6 +234,8 @@ body{
   align-items:center;
   gap:8px;
   position:relative;
+  cursor:pointer;
+  outline:none;
 }
 .header-cta:hover{
   background:var(--petal);
@@ -1467,13 +1469,13 @@ footer{
       <a href="#contato">Contato</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px">
-      <a href="https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20vim%20pelo%20site%20da%20Girassol%20e%20gostaria%20de%20conversar%20sobre%20uma%20ferramenta%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" class="header-cta hud-box">
+      <button type="button" class="header-cta hud-box" id="btnHeaderChat" onclick="window.openGirassolChat && window.openGirassolChat()" aria-label="Abrir assistente inteligente - Fala comigo!">
         <span class="hud-corner tl"></span>
         <span class="hud-corner tr"></span>
         <span class="hud-corner bl"></span>
         <span class="hud-corner br"></span>
-        <span>Conversar</span> →
-      </a>
+        <span>Fala comigo!</span> →
+      </button>
       <button type="button" class="mobile-menu-btn" id="btnMobileMenu" aria-label="Abrir Menu de Navegação">
         <span></span>
         <span></span>

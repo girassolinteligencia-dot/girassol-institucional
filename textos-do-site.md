@@ -24,9 +24,9 @@
   3. Serviços
   4. Coordenação
 
-* **Botão do WhatsApp no Topo:**  
-  *Atual:* Conversar →  
-  *Sua alteração:* ____________________
+* **Botão de Atendimento no Topo (Abre o Chat IA):**  
+  *Atual:* Fala comigo! →  
+  *Ação:* Abre o agente do Núcleo de IA diretamente na tela
 
 ---
 

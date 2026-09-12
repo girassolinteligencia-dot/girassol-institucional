@@ -103,7 +103,7 @@
       const launcher = document.createElement("button");
       launcher.className = "girassol-chat-launcher";
       launcher.id = "girassolChatLauncher";
-      launcher.setAttribute("aria-label", "Abrir chat com a IA da Girassol");
+      launcher.setAttribute("aria-label", "Abrir chat com a IA da Girassol — Fala comigo!");
       launcher.innerHTML = `
         <div class="launcher-icon-wrap">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,7 +111,7 @@
           </svg>
           <span class="launcher-pulse"></span>
         </div>
-        <span class="launcher-label">Falar com a IA</span>
+        <span class="launcher-label">Fala comigo!</span>
       `;
       document.body.appendChild(launcher);
       this.launcherEl = launcher;
@@ -371,10 +371,19 @@
     }
   }
 
-  // Inicializa quando a página estiver carregada
+  // Inicializa quando a página estiver carregada e expõe globalmente
+  function initWidget() {
+    window.girassolChat = new GirassolChatWidget();
+    window.openGirassolChat = function() {
+      if (window.girassolChat) {
+        window.girassolChat.open();
+      }
+    };
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => new GirassolChatWidget());
+    document.addEventListener("DOMContentLoaded", initWidget);
   } else {
-    new GirassolChatWidget();
+    initWidget();
   }
 })();
