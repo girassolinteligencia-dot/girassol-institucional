@@ -2,6 +2,13 @@
   "name": "girassol-institucional",
   "compatibility_date": "2026-08-20",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "exclude": [
+      ".git/**",
+      ".wrangler/**",
+      "node_modules/**",
+      "*.log",
+      "*.bak"
+    ]
   }
 }
