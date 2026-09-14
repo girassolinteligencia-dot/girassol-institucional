@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exclusão de Dados & Revogação de Consentimento — Girassol Inteligência</title>
+<meta name="description" content="Canal direto para solicitação de exclusão definitiva de dados pessoais, revogação de consentimento e atendimento LGPD na Girassol Inteligência.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://girassolinteligencia.com.br/exclusao-dados.html">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Exclusão de Dados — Girassol Inteligência">
+<meta property="og:description" content="Solicite a exclusão dos seus dados pessoais em conformidade com o Art. 18 da LGPD.">
+<meta property="og:image" content="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/chat-widget.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<style>
+:focus-visible{
+  outline: 2px solid var(--petal) !important;
+  outline-offset: 3px !important;
+}
+:root{
+  --void:#000000;
+  --surface:#0a0a0a;
+  --surface-raised:#12100d;
+  --surface-glass:rgba(14,12,10,0.72);
+  --line:rgba(242,237,226,0.07);
+  --line-light:rgba(242,237,226,0.14);
+  --ink:#F4EFE6;
+  --ink-soft:#c4baa8;
+  --ink-faint:#8a8072;
+  --earth:#C46A42;
+  --petal:#D4AF37;
+  --petal-bright:#f7c858;
+  --petal-glow:rgba(212,175,55,0.22);
+  --sky:#7E9AA6;
+  --fd:"Instrument Serif",Georgia,serif;
+  --fb:"Newsreader",Georgia,serif;
+  --fm:"JetBrains Mono",monospace;
+  --hero:clamp(2.4rem,4.5vw,3.6rem);
+  --h2:clamp(1.6rem,2.8vw,2.2rem);
+  --body:clamp(1.05rem,1.2vw,1.2rem);
+  --s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:96px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:var(--body);
+  line-height:1.75;
+  overflow-x:hidden;
+}
+
+.scan{
+  position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.14;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);
+}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 var(--s3)}
+@media(min-width:768px){.wrap{padding:0 var(--s4)}}
+
+/* HEADER DOCK */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;padding:14px 20px;pointer-events:none;
+}
+.header-inner{
+  max-width:1180px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand-mark{
+  pointer-events:auto;display:inline-flex;align-items:center;gap:12px;
+  text-decoration:none;color:var(--ink);
+}
+.brand-mark img{
+  width:32px;height:32px;border-radius:50%;
+  filter:drop-shadow(0 0 8px rgba(212,175,55,0.45));
+}
+.brand-title{display:flex;flex-direction:column}
+.brand-title strong{font-family:var(--fd);font-size:1.05rem;letter-spacing:.02em;line-height:1.1}
+.brand-title span{font-family:var(--fm);font-size:.65rem;color:var(--ink-soft);letter-spacing:.12em}
+
+.nav-dock{
+  pointer-events:auto;display:none;align-items:center;gap:6px;
+  background:var(--surface-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line-light);padding:5px 8px;border-radius:999px;
+  box-shadow:0 16px 36px rgba(0,0,0,.6);
+}
+@media(min-width:860px){.nav-dock{display:inline-flex}}
+.nav-link{
+  font-family:var(--fm);font-size:.76rem;letter-spacing:.04em;color:var(--ink-soft);
+  text-decoration:none;padding:7px 14px;border-radius:999px;transition:all .2s var(--ease);
+}
+.nav-link:hover{color:var(--ink);background:rgba(242,237,226,0.06)}
+
+/* HUD BOX */
+.hud-box{position:relative;background:var(--surface-raised);border:1px solid var(--line-light);border-radius:var(--radius)}
+.hud-corner{position:absolute;width:6px;height:6px;border-color:var(--petal);border-style:solid;pointer-events:none}
+.hud-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.hud-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.hud-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.hud-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+
+/* CONTEÚDO */
+.legal-page{padding:120px 0 var(--s6);position:relative;z-index:3}
+.legal-back{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:.78rem;
+  color:var(--petal);text-decoration:none;margin-bottom:var(--s4);letter-spacing:.06em;
+}
+.legal-back:hover{text-decoration:underline}
+.legal-header{margin-bottom:var(--s5);border-bottom:1px solid var(--line);padding-bottom:var(--s4)}
+.legal-badge{
+  font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--petal);display:inline-block;margin-bottom:8px;
+}
+.legal-title{font-family:var(--fd);font-size:var(--hero);line-height:1.1;margin:0 0 16px;color:var(--ink)}
+.legal-meta{font-family:var(--fm);font-size:.8rem;color:var(--ink-faint)}
+
+.legal-body{font-size:1.08rem;color:var(--ink-soft)}
+.legal-body h2{font-family:var(--fd);font-size:var(--h2);color:var(--ink);margin:48px 0 16px;line-height:1.2}
+.legal-body h3{font-family:var(--fm);font-size:1rem;letter-spacing:.05em;color:var(--petal);margin:28px 0 12px;text-transform:uppercase}
+.legal-body p{margin:0 0 20px}
+.legal-body ul, .legal-body ol{margin:0 0 24px;padding-left:24px}
+.legal-body li{margin-bottom:10px}
+.legal-body strong{color:var(--ink)}
+
+.action-card{
+  padding:32px;margin:32px 0;background:var(--surface);border:1px solid var(--line-light);
+  border-radius:12px;
+}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-family:var(--fm);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.form-input{
+  width:100%;padding:12px 16px;background:var(--surface-raised);border:1px solid var(--line-light);
+  border-radius:8px;color:var(--ink);font-family:inherit;font-size:1rem;outline:none;
+  transition:border-color .2s ease;
+}
+.form-input:focus{border-color:var(--petal)}
+.btn-submit{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--petal);color:var(--void);font-family:var(--fm);font-size:.84rem;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:14px 28px;
+  border:none;border-radius:8px;cursor:pointer;transition:all .2s var(--ease);
+}
+.btn-submit:hover{background:var(--petal-bright);transform:translateY(-1px)}
+.status-msg{
+  display:none;padding:16px;margin-top:20px;border-radius:8px;font-family:var(--fm);
+  font-size:.88rem;background:rgba(82,183,136,0.1);border:1px solid rgba(82,183,136,0.3);color:#4ade80;
+}
+
+/* FOOTER */
+footer{
+  padding:var(--s5) 0;border-top:1px solid var(--line);
+  font-family:var(--fm);font-size:.76rem;color:var(--ink-soft);
+}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.footer-links a{color:var(--ink-soft);text-decoration:none;transition:color .25s}
+.footer-links a:hover{color:var(--petal)}
+.secret-admin-trigger{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:rgba(242,237,226,0.15);cursor:default;transition:all .3s ease;
+  vertical-align:middle;margin-left:4px;
+}
+.secret-admin-trigger:hover{
+  background:var(--petal);box-shadow:0 0 8px var(--petal);cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div class="scan"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand-mark">
+      <img src="logo-girassol.png" alt="Girassol Inteligência">
+      <div class="brand-title">
+        <strong>GIRASSOL INTELIGÊNCIA</strong>
+        <span>CAMPO GRANDE / MS</span>
+      </div>
+    </a>
+    <nav class="nav-dock">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="produtos.html" class="nav-link">Produtos</a>
+      <a href="artigos.html" class="nav-link">Artigos</a>
+      <a href="casos.html" class="nav-link">Casos</a>
+      <a href="index.html#contato" class="nav-link">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page legal-page">
+  <div class="wrap">
+    <a href="index.html" class="legal-back">← Voltar para a Página Inicial</a>
+
+    <header class="legal-header">
+      <span class="legal-badge">Autonomia do Titular · Art. 18 LGPD</span>
+      <h1 class="legal-title">Exclusão de Dados Pessoais</h1>
+      <div class="legal-meta">
+        Procedimento Simplificado de Revogação de Consentimento & Eliminação
+      </div>
+    </header>
+
+    <article class="legal-body">
+      <p>
+        Na <strong>Girassol Inteligência</strong>, você possui total soberania sobre os seus dados. Se você já entrou em contato conosco, solicitou demonstrações, realizou downloads de materiais técnicos ou conversou com nossos canais de atendimento, tem o direito de solicitar a <strong>eliminação completa, definitiva e irrevogável</strong> dos seus dados de contato dos nossos cadastros.
+      </p>
+
+      <h2>Como Funciona a Exclusão</h2>
+      <p>
+        Em atenção ao Artigo 18, inciso VI da Lei nº 13.709/2018 (LGPD), ao recebermos a sua solicitação:
+      </p>
+      <ol>
+        <li>Localizamos todos os registros associados ao seu e-mail ou número de telefone nos nossos bancos de dados de leads e atendimentos;</li>
+        <li>Removemos de forma permanente o seu nome, contatos e histórico de mensagens de triagem;</li>
+        <li>Eliminamos qualquer vínculo de marketing ou comunicações institucionais futuras;</li>
+        <li>Enviamos a confirmação da eliminação para o e-mail informado no prazo máximo legal de até 15 (quinze) dias.</li>
+      </ol>
+
+      <p>
+        <em>Nota técnica: Registros estritamente fiscais ou contratuais vinculados a licenças comerciais adquiridas com emissão de Nota Fiscal serão mantidos unicamente pelo período exigido pelas leis tributárias federais e código civil, sendo expurgados após o término do prazo prescricional.</em>
+      </p>
+
+      <h2>Canal Direto de Solicitação</h2>
+      <p>
+        Para solicitar o expurgo imediato, preencha o formulário simplificado abaixo ou, se preferir, envie uma mensagem direta ao nosso encarregado de dados via e-mail ou WhatsApp:
+      </p>
+
+      <div class="action-card hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+
+        <form id="deleteRequestForm" onsubmit="handleDeleteRequest(event)">
+          <div class="form-group">
+            <label class="form-label" for="reqName">Seu Nome Completo</label>
+            <input type="text" id="reqName" class="form-input" placeholder="Ex: João da Silva" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reqEmail">E-mail Cadastrado para Exclusão</label>
+            <input type="email" id="reqEmail" class="form-input" placeholder="Ex: joao@empresa.com.br" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reqPhone">Telefone / WhatsApp (Opcional)</label>
+            <input type="tel" id="reqPhone" class="form-input" placeholder="Ex: (67) 99999-9999">
+          </div>
+          <button type="submit" class="btn-submit" id="btnReqSubmit">
+            Confirmar Solicitação de Exclusão →
+          </button>
+        </form>
+
+        <div id="deleteSuccessMsg" class="status-msg">
+          ✓ Solicitação registrada com sucesso! Seu pedido de expurgo foi encaminhado para a coordenação da Girassol Inteligência. Em caso de dúvidas, você receberá a confirmação em seu e-mail.
+        </div>
+      </div>
+
+      <h2>Contatos Diretos com o Encarregado (DPO)</h2>
+      <p>
+        Caso deseje atendimento manual ou tenha qualquer dúvida sobre como seus dados foram manuseados:
+      </p>
+      <ul>
+        <li><strong>E-mail Institucional:</strong> <code>girassolinteligencia@gmail.com</code> (Assunto: <em>LGPD — Solicitação de Exclusão</em>)</li>
+        <li><strong>WhatsApp Direto:</strong> <code>+55 (67) 98115-1717</code></li>
+        <li><strong>Sede:</strong> Campo Grande, Mato Grosso do Sul — Brasil.</li>
+      </ul>
+    </article>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner" style="flex-direction:column;align-items:center;text-align:center;gap:12px">
+      <div style="white-space:nowrap;color:var(--ink-soft);font-size:0.8rem;letter-spacing:0.04em">
+        Desenvolvido por Girassol Inteligência - Todos os Direitos Reservados 2026®
+      </div>
+      <div class="footer-links" style="justify-content:center;gap:16px">
+        <a href="index.html">Início</a>
+        <span>·</span>
+        <a href="privacidade.html">Privacidade</a>
+        <span>·</span>
+        <a href="termos.html">Termos de Uso</a>
+        <span>·</span>
+        <a href="exclusao-dados.html" style="color:var(--petal)">Exclusão de Dados</a>
+        <a href="admin.html" class="secret-admin-trigger" title="Sistema" aria-label="Acesso restrito"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+function handleDeleteRequest(e){
+  e.preventDefault();
+  const btn = document.getElementById('btnReqSubmit');
+  const msg = document.getElementById('deleteSuccessMsg');
+  const email = document.getElementById('reqEmail').value.trim();
+  const name = document.getElementById('reqName').value.trim();
+
+  btn.disabled = true;
+  btn.textContent = 'Processando...';
+
+  // Se houver armazenamento local no navegador do próprio cliente, expurga agora
+  try {
+    const raw = localStorage.getItem('girassol_site_config');
+    if(raw){
+      let cfg = JSON.parse(raw);
+      if(cfg.leads && cfg.leads.length > 0){
+        cfg.leads = cfg.leads.filter(l => (l.email || '').toLowerCase() !== email.toLowerCase());
+        localStorage.setItem('girassol_site_config', JSON.stringify(cfg));
+      }
+    }
+  } catch(err){}
+
+  setTimeout(() => {
+    document.getElementById('deleteRequestForm').style.display = 'none';
+    msg.style.display = 'block';
+  }, 600);
+}
+</script>
+<script src="assets/js/chat-widget.js" defer></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Girassol Admin — Painel de Gestão & Parametrização</title>
 <meta name="theme-color" content="#000000">
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -396,7 +396,7 @@ html,body{
 <!-- 1. TELA DE LOGIN SEGURA -->
 <div id="loginScreen">
   <div class="login-box">
-    <img src="logo.png" alt="Girassol">
+    <img src="logo-girassol.png" alt="Girassol">
     <h1 class="login-title">Girassol Admin</h1>
     <div class="login-sub">Painel de Parametrização & Controle</div>
     <form class="login-form" onsubmit="handleLogin(event)">
@@ -425,6 +425,7 @@ html,body{
       <a href="index.html" target="_blank" class="btn-ghost" title="Abrir Página Inicial">Ver Home ↗</a>
       <a href="produtos.html" target="_blank" class="btn-ghost" style="color:var(--petal);border-color:rgba(232,179,60,.3)" title="Abrir Catálogo de Produtos">Ver Produtos ↗</a>
       <a href="artigos.html" target="_blank" class="btn-ghost" style="color:var(--petal-bright);border-color:rgba(212,175,55,.4)" title="Abrir Página de Artigos">Ver Artigos ↗</a>
+      <a href="casos.html" target="_blank" class="btn-ghost" style="color:#7E9AA6;border-color:rgba(126,154,166,.4)" title="Abrir Casos de Sucesso">Ver Casos ↗</a>
       <button type="button" class="btn-save" onclick="saveAllConfigurations()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         Salvar Alterações
@@ -474,7 +475,7 @@ html,body{
       <section id="tabGeneral" class="tab-pane active">
         <div class="pane-header">
           <h2 class="pane-title">Geral & Contatos</h2>
-          <p class="pane-desc">Configure WhatsApp oficial, e-mail, redes sociais e selos de prova do topo.</p>
+          <p class="pane-desc">Configure WhatsApp oficial, e-mail de atendimento e links das redes sociais.</p>
         </div>
 
         <div class="card-box">
@@ -491,28 +492,6 @@ html,body{
             <div class="full-span">
               <label class="field-label">Mensagem Padrão do WhatsApp</label>
               <input type="text" id="cfgMsg" class="field-input" placeholder="Texto que o cliente envia automaticamente...">
-            </div>
-          </div>
-        </div>
-
-        <div class="card-box">
-          <div class="card-title">Barra de Prova (Hero - 4 Selos de Métricas)</div>
-          <div class="form-grid">
-            <div>
-              <label class="field-label">Plataformas em Produção</label>
-              <input type="text" id="cfgMetric1" class="field-input" value="5">
-            </div>
-            <div>
-              <label class="field-label">Padrão de Processos</label>
-              <input type="text" id="cfgMetric2" class="field-input" value="BPMN 2.0">
-            </div>
-            <div>
-              <label class="field-label">Anos de Atuação</label>
-              <input type="text" id="cfgMetric3" class="field-input" value="20+ anos">
-            </div>
-            <div>
-              <label class="field-label">Prazo de Blueprint</label>
-              <input type="text" id="cfgMetric4" class="field-input" value="< 48h">
             </div>
           </div>
         </div>
@@ -776,32 +755,32 @@ html,body{
       <!-- ABA 3: SERVIÇOS SOB MEDIDA -->
       <section id="tabServices" class="tab-pane">
         <div class="pane-header">
-          <h2 class="pane-title">Serviços Sob Medida (Tela 05)</h2>
-          <p class="pane-desc">Gerencie os 5 pilares personalizados onde o código-fonte pertence ao cliente.</p>
+          <h2 class="pane-title">Serviços Sob Medida (Serviços 01 a 04)</h2>
+          <p class="pane-desc">Visão dos pilares de atuação da Girassol Inteligência onde o código-fonte pertence 100% ao cliente.</p>
         </div>
 
         <div class="card-box">
-          <div class="card-title">Selos de Destaque dos Módulos</div>
+          <div class="card-title">Pilares Oficiais em Produção no Site</div>
           <div class="form-grid">
             <div>
-              <label class="field-label">01. Agentes de IA</label>
-              <input type="text" class="field-input" value="Decisão Crítica Sempre Humana" readonly>
+              <label class="field-label">01. Assistentes & Triagem com IA</label>
+              <input type="text" class="field-input" value="Atendimento Rápido e Sem Robôs Burros" readonly>
             </div>
             <div>
-              <label class="field-label">02. Sistemas e Plataformas Web</label>
-              <input type="text" class="field-input" value="Código-Fonte é Seu" readonly>
+              <label class="field-label">02. Sistemas Computador / Celular</label>
+              <input type="text" class="field-input" value="Sem Planilhas Quebradas" readonly>
             </div>
             <div>
-              <label class="field-label">03. Engenharia BPMN 2.0</label>
-              <input type="text" class="field-input" value="Padrão Internacional" readonly>
+              <label class="field-label">03. Aplicações no Fluxo Real</label>
+              <input type="text" class="field-input" value="Software que Respeita sua Rotina" readonly>
             </div>
             <div>
-              <label class="field-label">04. Integrações de Dados</label>
-              <input type="text" class="field-input" value="Fim do Retrabalho Manual" readonly>
+              <label class="field-label">04. Painéis de Dados & Gestão Pública</label>
+              <input type="text" class="field-input" value="Inteligência de Dados & Gestão Pública" readonly>
             </div>
             <div class="full-span">
-              <label class="field-label">05. Governança & LGPD</label>
-              <input type="text" class="field-input" value="Soberania dos Seus Dados" readonly>
+              <label class="field-label">Regra de Negócio Central (Engenharia)</label>
+              <input type="text" class="field-input" value="Integração Nativa — Programas que conversam entre si sem taxas extras" readonly>
             </div>
           </div>
         </div>
@@ -865,11 +844,12 @@ html,body{
 // Dados ativos em memória
 let currentConfig = {};
 
-// Hash SHA-256 da senha mestra (a senha real nunca fica exposta em texto puro no código)
-const MASTER_HASH = "98b71b6a109b89c0ad3ddd6847cfa581ab0b206a4a6dea5e6bf1ce7d5f3711b9";
+// Hash SHA-256 com Sal criptográfico (impossibilita tabelas rainbow e ataques de dicionário direto)
+const SALT = "girassol_salt_2026_securite_";
+const MASTER_HASH = "e14a39703538983fd829ec75679c4a2eda6258a993015d807c16fe8d2281b20a";
 
 async function sha256(str) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(SALT + str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
@@ -925,16 +905,14 @@ async function loadInitialConfig(){
         whatsappMessage: "Olá Paulo, vim pelo site da Girassol e gostaria de conversar sobre uma ferramenta para o meu negócio.",
         contactEmail: "girassolinteligencia@gmail.com",
         instagramUrl: "https://instagram.com/girassolinteligencia",
-        facebookUrl: "https://facebook.com/girassolideiasinteligentes",
-        proofMetricPlatforms: "5",
-        proofMetricBpmn: "BPMN 2.0",
-        proofMetricExperience: "20+ anos",
-        proofMetricSla: "< 48h"
+        facebookUrl: "https://facebook.com/girassolideiasinteligentes"
       },
       products: {
         alltoparquet: { price: 99, badge: "100% Offline · Windows" },
         plataformaEleitoral: { price: 499, badge: "Dados Oficiais TSE · 2010–2024", demoUrl: "https://plataformaeleitoral.ia.br" }
       },
+      articles: [],
+      cases: [],
       leads: []
     };
   }
@@ -946,10 +924,6 @@ function populateForm(){
   document.getElementById('cfgWhatsapp').value = g.whatsappPhone || '5567981151717';
   document.getElementById('cfgEmail').value = g.contactEmail || 'girassolinteligencia@gmail.com';
   document.getElementById('cfgMsg').value = g.whatsappMessage || '';
-  document.getElementById('cfgMetric1').value = g.proofMetricPlatforms || '5';
-  document.getElementById('cfgMetric2').value = g.proofMetricBpmn || 'BPMN 2.0';
-  document.getElementById('cfgMetric3').value = g.proofMetricExperience || '20+ anos';
-  document.getElementById('cfgMetric4').value = g.proofMetricSla || '< 48h';
   document.getElementById('cfgInsta').value = g.instagramUrl || '';
   document.getElementById('cfgFace').value = g.facebookUrl || '';
 
@@ -1354,11 +1328,7 @@ function saveAllConfigurations(){
     whatsappMessage: document.getElementById('cfgMsg').value.trim(),
     contactEmail: document.getElementById('cfgEmail').value.trim(),
     instagramUrl: document.getElementById('cfgInsta').value.trim(),
-    facebookUrl: document.getElementById('cfgFace').value.trim(),
-    proofMetricPlatforms: document.getElementById('cfgMetric1').value.trim(),
-    proofMetricBpmn: document.getElementById('cfgMetric2').value.trim(),
-    proofMetricExperience: document.getElementById('cfgMetric3').value.trim(),
-    proofMetricSla: document.getElementById('cfgMetric4').value.trim()
+    facebookUrl: document.getElementById('cfgFace').value.trim()
   };
 
   currentConfig.products = currentConfig.products || {};

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Política de Privacidade & Proteção de Dados — Girassol Inteligência</title>
+<meta name="description" content="Política de Privacidade e Proteção de Dados da Girassol Inteligência em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://girassolinteligencia.com.br/privacidade.html">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Política de Privacidade — Girassol Inteligência">
+<meta property="og:description" content="Nossos princípios de privacidade, soberania de dados e respeito integral à LGPD.">
+<meta property="og:image" content="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/chat-widget.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<style>
+:focus-visible{
+  outline: 2px solid var(--petal) !important;
+  outline-offset: 3px !important;
+}
+:root{
+  --void:#000000;
+  --surface:#0a0a0a;
+  --surface-raised:#12100d;
+  --surface-glass:rgba(14,12,10,0.72);
+  --line:rgba(242,237,226,0.07);
+  --line-light:rgba(242,237,226,0.14);
+  --ink:#F4EFE6;
+  --ink-soft:#c4baa8;
+  --ink-faint:#8a8072;
+  --earth:#C46A42;
+  --petal:#D4AF37;
+  --petal-bright:#f7c858;
+  --petal-glow:rgba(212,175,55,0.22);
+  --sky:#7E9AA6;
+  --fd:"Instrument Serif",Georgia,serif;
+  --fb:"Newsreader",Georgia,serif;
+  --fm:"JetBrains Mono",monospace;
+  --hero:clamp(2.4rem,4.5vw,3.6rem);
+  --h2:clamp(1.6rem,2.8vw,2.2rem);
+  --body:clamp(1.05rem,1.2vw,1.2rem);
+  --s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:96px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:var(--body);
+  line-height:1.75;
+  overflow-x:hidden;
+}
+
+.scan{
+  position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.14;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);
+}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 var(--s3)}
+@media(min-width:768px){.wrap{padding:0 var(--s4)}}
+
+/* HEADER DOCK */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;padding:14px 20px;pointer-events:none;
+}
+.header-inner{
+  max-width:1180px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand-mark{
+  pointer-events:auto;display:inline-flex;align-items:center;gap:12px;
+  text-decoration:none;color:var(--ink);
+}
+.brand-mark img{
+  width:32px;height:32px;border-radius:50%;
+  filter:drop-shadow(0 0 8px rgba(212,175,55,0.45));
+}
+.brand-title{display:flex;flex-direction:column}
+.brand-title strong{font-family:var(--fd);font-size:1.05rem;letter-spacing:.02em;line-height:1.1}
+.brand-title span{font-family:var(--fm);font-size:.65rem;color:var(--ink-soft);letter-spacing:.12em}
+
+.nav-dock{
+  pointer-events:auto;display:none;align-items:center;gap:6px;
+  background:var(--surface-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line-light);padding:5px 8px;border-radius:999px;
+  box-shadow:0 16px 36px rgba(0,0,0,.6);
+}
+@media(min-width:860px){.nav-dock{display:inline-flex}}
+.nav-link{
+  font-family:var(--fm);font-size:.76rem;letter-spacing:.04em;color:var(--ink-soft);
+  text-decoration:none;padding:7px 14px;border-radius:999px;transition:all .2s var(--ease);
+}
+.nav-link:hover{color:var(--ink);background:rgba(242,237,226,0.06)}
+
+/* HUD BOX */
+.hud-box{position:relative;background:var(--surface-raised);border:1px solid var(--line-light);border-radius:var(--radius)}
+.hud-corner{position:absolute;width:6px;height:6px;border-color:var(--petal);border-style:solid;pointer-events:none}
+.hud-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.hud-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.hud-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.hud-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+
+/* CONTEÚDO */
+.legal-page{padding:120px 0 var(--s6);position:relative;z-index:3}
+.legal-back{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:.78rem;
+  color:var(--petal);text-decoration:none;margin-bottom:var(--s4);letter-spacing:.06em;
+}
+.legal-back:hover{text-decoration:underline}
+.legal-header{margin-bottom:var(--s5);border-bottom:1px solid var(--line);padding-bottom:var(--s4)}
+.legal-badge{
+  font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--petal);display:inline-block;margin-bottom:8px;
+}
+.legal-title{font-family:var(--fd);font-size:var(--hero);line-height:1.1;margin:0 0 16px;color:var(--ink)}
+.legal-meta{font-family:var(--fm);font-size:.8rem;color:var(--ink-faint)}
+
+.legal-body{font-size:1.08rem;color:var(--ink-soft)}
+.legal-body h2{font-family:var(--fd);font-size:var(--h2);color:var(--ink);margin:48px 0 16px;line-height:1.2}
+.legal-body h3{font-family:var(--fm);font-size:1rem;letter-spacing:.05em;color:var(--petal);margin:28px 0 12px;text-transform:uppercase}
+.legal-body p{margin:0 0 20px}
+.legal-body ul{margin:0 0 24px;padding-left:24px}
+.legal-body li{margin-bottom:10px}
+.legal-body strong{color:var(--ink)}
+.legal-card{
+  padding:28px;margin:32px 0;background:rgba(212,175,55,0.03);border:1px solid rgba(212,175,55,0.18);
+  border-radius:12px;font-size:1rem;color:var(--ink);
+}
+.legal-card strong{color:var(--petal-bright)}
+
+/* FOOTER */
+footer{
+  padding:var(--s5) 0;border-top:1px solid var(--line);
+  font-family:var(--fm);font-size:.76rem;color:var(--ink-soft);
+}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.footer-links a{color:var(--ink-soft);text-decoration:none;transition:color .25s}
+.footer-links a:hover{color:var(--petal)}
+.secret-admin-trigger{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:rgba(242,237,226,0.15);cursor:default;transition:all .3s ease;
+  vertical-align:middle;margin-left:4px;
+}
+.secret-admin-trigger:hover{
+  background:var(--petal);box-shadow:0 0 8px var(--petal);cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div class="scan"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand-mark">
+      <img src="logo-girassol.png" alt="Girassol Inteligência">
+      <div class="brand-title">
+        <strong>GIRASSOL INTELIGÊNCIA</strong>
+        <span>CAMPO GRANDE / MS</span>
+      </div>
+    </a>
+    <nav class="nav-dock">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="produtos.html" class="nav-link">Produtos</a>
+      <a href="artigos.html" class="nav-link">Artigos</a>
+      <a href="casos.html" class="nav-link">Casos</a>
+      <a href="index.html#contato" class="nav-link">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page legal-page">
+  <div class="wrap">
+    <a href="index.html" class="legal-back">← Voltar para a Página Inicial</a>
+
+    <header class="legal-header">
+      <span class="legal-badge">Conformidade LGPD & Soberania</span>
+      <h1 class="legal-title">Política de Privacidade</h1>
+      <div class="legal-meta">
+        Última atualização: Setembro de 2026 · Girassol Inteligência (Campo Grande/MS)
+      </div>
+    </header>
+
+    <article class="legal-body">
+      <p>
+        A <strong>Girassol Inteligência</strong> valoriza e prioriza a privacidade, a transparência institucional e o controle absoluto dos dados pessoais de seus clientes, usuários e parceiros. Esta Política de Privacidade formaliza as diretrizes adotadas no tratamento de informações coletadas através do nosso site institucional (<code>girassolinteligencia.com.br</code>), canais de atendimento e aplicações proprietárias, em estrita conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD — Lei Federal nº 13.709/2018)</strong>.
+      </p>
+
+      <div class="legal-card hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <strong>Princípio Fundamental da Girassol: Soberania e Não-Monetização de Dados.</strong><br>
+        A Girassol Inteligência não vende, não aluga, não compartilha com corretores de dados (data brokers) e não utiliza os dados operacionais ou pessoais dos seus clientes para treinamento indiscriminado de modelos de inteligência artificial públicos. Nossos modelos operam em ambientes isolados com garantias estritas de confidencialidade.
+      </div>
+
+      <h2>1. Informações que Coletamos</h2>
+      <p>Coletamos exclusivamente os dados necessários para o atendimento qualificado, prestação de consultoria técnica em engenharia de processos e fornecimento de licenças de software:</p>
+      <ul>
+        <li><strong>Dados Fornecidos Voluntariamente:</strong> Nome, endereço de e-mail corporativo, telefone/WhatsApp, nome da empresa ou órgão público e síntese das rotinas que necessitam de automação. Esses dados são fornecidos quando você entra em contato pelo formulário, pelo chat assistente ou solicita um blueprint técnico.</li>
+        <li><strong>Dados de Conversação no Chat Web:</strong> Mensagens enviadas ao assistente institucional para triagem e direcionamento de projetos. Os diálogos são associados a um identificador de sessão anônimo gerado localmente no seu navegador.</li>
+        <li><strong>Dados Técnicos de Navegação:</strong> Registros essenciais de cabeçalho de rede (endereço IP aproximado, tipo de navegador e timestamps) processados de forma agregada pela rede de proteção anti-DDoS e verificação anti-bot Cloudflare Turnstile, exclusivamente para garantir a segurança da infraestrutura contra ataques automatizados.</li>
+      </ul>
+
+      <h2>2. Finalidade e Bases Legais do Tratamento</h2>
+      <p>Todo tratamento de dados realizado pela Girassol apoia-se nas bases legais previstas no Artigo 7º da LGPD:</p>
+      <ul>
+        <li><strong>Execução de Contrato ou Procedimentos Preliminares (Art. 7º, V):</strong> Para elaborar propostas comerciais, mapear requisitos de software em BPMN 2.0, entregar licenças de ferramentas (como o <em>AlltoParquet</em>) e fornecer suporte técnico direto.</li>
+        <li><strong>Legítimo Interesse do Controlador (Art. 7º, IX):</strong> Para aprimorar a usabilidade das nossas ferramentas, manter a integridade da plataforma e responder com celeridade às dúvidas formuladas no chat.</li>
+        <li><strong>Consentimento do Titular (Art. 7º, I):</strong> Quando expressamente solicitado na submissão de formulários para recebimento de informativos técnicos e guias de engenharia.</li>
+      </ul>
+
+      <h2>3. Inteligência Artificial com Governança</h2>
+      <p>Diferente de soluções convencionais do mercado, a Girassol Inteligência adota premissas rígidas de engenharia em seus projetos:</p>
+      <ul>
+        <li><strong>Isolamento de Contexto:</strong> Dados confidenciais de negócio, fluxogramas de processos e dados de faturamento nunca são compartilhados entre clientes.</li>
+        <li><strong>Opção On-Premise / Local:</strong> Para clientes dos setores público, jurídico e do agronegócio com demandas críticas de sigilo, desenvolvemos soluções capazes de operar 100% desconectadas da internet (on-premise), mantendo o processamento restrito ao maquinário local do contratante.</li>
+        <li><strong>Supervisão Humana:</strong> Decisões críticas, judiciais e organizacionais são sempre apoiadas e validadas por operadores humanos, conforme nossa filosofia de construção a quatro mãos.</li>
+      </ul>
+
+      <h2>4. Armazenamento e Retenção de Dados</h2>
+      <p>
+        Os dados pessoais são mantidos pelo tempo estritamente necessário para atingir as finalidades descritas, cumprir obrigações fiscais e legais ou resguardar o exercício regular de direitos em processos administrativos ou judiciais. Dados temporários de sessão no site podem ser eliminados pelo próprio usuário diretamente na limpeza de cache do navegador.
+      </p>
+
+      <h2>5. Seus Direitos como Titular de Dados</h2>
+      <p>Em consonância com o Artigo 18 da LGPD, você possui a qualquer momento o direito de:</p>
+      <ul>
+        <li>Confirmar a existência de tratamento dos seus dados;</li>
+        <li>Acessar as informações que mantemos a seu respeito;</li>
+        <li>Solicitar a correção de dados incompletos, inexatos ou desatualizados;</li>
+        <li>Requerer a eliminação definitiva de dados desnecessários ou tratados com base no seu consentimento (consulte nossa página dedicada de <a href="exclusao-dados.html" style="color:var(--petal)">Exclusão de Dados</a>);</li>
+        <li>Revogar o consentimento previamente concedido para comunicações.</li>
+      </ul>
+
+      <h2>6. Encarregado de Dados (DPO) e Contato</h2>
+      <p>
+        Para exercer qualquer um dos seus direitos de titular ou esclarecer dúvidas sobre esta Política, disponibilizamos canal direto com a nossa coordenação técnica e de governança:
+      </p>
+      <div class="legal-card hud-box">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+        <strong>Canal Oficial de Privacidade & LGPD:</strong><br>
+        E-mail: <code>girassolinteligencia@gmail.com</code><br>
+        WhatsApp: <code>+55 (67) 98115-1717</code><br>
+        Localização: Campo Grande, Mato Grosso do Sul — Brasil.
+      </div>
+    </article>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner" style="flex-direction:column;align-items:center;text-align:center;gap:12px">
+      <div style="white-space:nowrap;color:var(--ink-soft);font-size:0.8rem;letter-spacing:0.04em">
+        Desenvolvido por Girassol Inteligência - Todos os Direitos Reservados 2026®
+      </div>
+      <div class="footer-links" style="justify-content:center;gap:16px">
+        <a href="index.html">Início</a>
+        <span>·</span>
+        <a href="privacidade.html" style="color:var(--petal)">Privacidade</a>
+        <span>·</span>
+        <a href="termos.html">Termos de Uso</a>
+        <span>·</span>
+        <a href="exclusao-dados.html">Exclusão de Dados</a>
+        <a href="admin.html" class="secret-admin-trigger" title="Sistema" aria-label="Acesso restrito"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+<script src="assets/js/chat-widget.js" defer></script>
+</body>
+</html>

@@ -4,11 +4,7 @@
     "whatsappMessage": "Olá Paulo, vim pelo site da Girassol e gostaria de conversar sobre uma ferramenta para o meu negócio.",
     "contactEmail": "girassolinteligencia@gmail.com",
     "instagramUrl": "https://instagram.com/girassolinteligencia",
-    "facebookUrl": "https://facebook.com/girassolideiasinteligentes",
-    "proofMetricPlatforms": "5",
-    "proofMetricBpmn": "BPMN 2.0",
-    "proofMetricExperience": "20+ anos",
-    "proofMetricSla": "< 48h"
+    "facebookUrl": "https://facebook.com/girassolideiasinteligentes"
   },
   "products": {
     "alltoparquet": {
@@ -55,22 +51,37 @@
       "content": "### O colapso das planilhas e CSVs volumosos\n\nArquivos CSV foram projetados para simplicidade de intercâmbio, não para velocidade analítica. À medida que bases de dados ultrapassam centenas de milhares de linhas, o custo de parsing linha a linha, conversão de tipos de texto e leitura de I/O em disco torna-se insustentável.\n\n### Por que o Parquet é superior?\n\nO Apache Parquet adota armazenamento colunar com compressão SNAPPY ou ZSTD por bloco. Isso confere três vantagens decisivas:\n\n1. **Redução de 75% a 90% no tamanho em disco.**\n2. **Scan de colunas selecionadas:** Se a consulta precisa apenas de `data` e `valor_total`, nenhuma outra coluna do arquivo é lida.\n3. **Estatísticas embutidas (Min/Max por bloco):** O leitor descarta blocos inteiros de dados sem precisar descompactá-los.\n\n### Filosofia de engenharia local\n\nFerramentas como o **AlltoParquet** nasceram justamente dessa percepção: democratizar o acesso a esse padrão de engenharia para analistas, advogados e gestores que precisam de alta velocidade em computadores comuns, 100% offline e com total privacidade."
     }
   ],
-  "leads": [
+  "cases": [
     {
-      "id": 1,
-      "name": "Carlos Eduardo",
-      "email": "carlos.dados@exemplo.com.br",
-      "company": "AgroTech Consultoria",
-      "date": "2026-09-10 14:32",
-      "consent": true
+      "id": "painel-eleitoral-ms",
+      "title": "Plataforma Eleitoral Inteligente: 79 Municípios de MS com Dados Oficiais do TSE",
+      "category": "Governo",
+      "date": "2026-08-15",
+      "readTime": "4 min",
+      "published": true,
+      "summary": "Consolidação analítica de mais de 14 anos de histórico eleitoral oficial em painéis visuais ultrarrápidos para gabinetes, consultores e tomadores de decisão.",
+      "content": "### O Desafio\nLideranças políticas e gabinetes enfrentavam meses de garimpo em planilhas dispersas do Tribunal Superior Eleitoral (TSE) para identificar padrões de votação por seção e município.\n\n### A Solução Girassol\nConstruímos a **Plataforma Eleitoral Inteligente**, agregando as bases oficiais de 2010 a 2024 em um modelo de dados otimizado. Criamos mapas interativos, filtros por coligação e comparativos de votação nominal com resposta em milissegundos.\n\n### O Resultado\nTomada de decisão estratégica acelerada em semanas, com visualização imediata da força política regional em cada um dos 79 municípios de Mato Grosso do Sul."
     },
     {
-      "id": 2,
-      "name": "Mariana Souza",
-      "email": "mariana.adv@exemplo.jus.br",
-      "company": "Souza & Associados",
-      "date": "2026-09-11 09:15",
-      "consent": true
+      "id": "conversor-parquet-offline",
+      "title": "AlltoParquet: Tratamento de Grandes Volumes de Dados com 100% de Privacidade",
+      "category": "Institucional",
+      "date": "2026-07-20",
+      "readTime": "3 min",
+      "published": true,
+      "summary": "Desenvolvimento de um utilitário desktop para transformar bases gigantes em Apache Parquet diretamente no computador do cliente, sem tráfego na nuvem.",
+      "content": "### O Desafio\nProfissionais de inteligência e analistas corporativos lidavam com arquivos CSV imensos que travavam o Excel e dependiam do envio arriscado de dados confidenciais para servidores em nuvem.\n\n### A Solução Girassol\nCriamos o **AlltoParquet**, uma aplicação desktop leve para Windows que realiza a conversão, limpeza de schema e compressão SNAPPY de arquivos CSV, Excel e JSON para Parquet de forma 100% offline.\n\n### O Resultado\nRedução de até 85% no espaço em disco, consultas até 50x mais rápidas em ferramentas analíticas e conformidade total com a LGPD e o sigilo bancário/comercial."
+    },
+    {
+      "id": "automacao-rotina-balcao",
+      "title": "Substituição de Planilhas Manuais por Sistema Direto de Atendimento e Caixa",
+      "category": "IA",
+      "date": "2026-06-10",
+      "readTime": "4 min",
+      "published": true,
+      "summary": "Eliminação de erros diários de fechamento e retrabalho operacional através de um sistema feito à mão para a rotina específica do comércio.",
+      "content": "### O Desafio\nO cliente operava com 4 planilhas diferentes que viviam se desregulando, gerando divergências entre o estoque físico e o financeiro.\n\n### A Solução Girassol\nOuvimos quem atende no balcão e mapeamos o fluxo passo a passo. Desenhamos um sistema com telas simples, sem botões inúteis, acessível do celular e do computador, com backup automático diário.\n\n### O Resultado\nFechamento de caixa que levava 2 horas passou a ser automático, o retrabalho manual foi eliminado e a ferramenta foi entregue como patrimônio definitivo da empresa contratante."
     }
-  ]
+  ],
+  "leads": []
 }

@@ -7,7 +7,7 @@
 <meta name="description" content="Artigos sobre engenharia de software, modelagem BPMN 2.0, inteligência artificial aplicada, governança de dados e LGPD.">
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://girassolinteligencia.com.br/artigos.html">
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="favicon.png">
 
 <!-- Open Graph / Redes Sociais & WhatsApp -->
 <meta property="og:type" content="website">
@@ -186,61 +186,6 @@ body{
   align-items:center;
   gap:10px;
 }
-.audio-toggle-btn{
-  background:var(--surface-glass);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border:1px solid var(--line-light);
-  color:var(--ink-soft);
-  font-family:var(--fm);
-  font-size:.64rem;
-  letter-spacing:.14em;
-  padding:7px 12px;
-  border-radius:999px;
-  cursor:pointer;
-  display:none;
-  align-items:center;
-  gap:7px;
-  text-transform:uppercase;
-  transition:all .25s var(--ease);
-}
-@media(min-width:640px){
-  .audio-toggle-btn{display:inline-flex}
-}
-.audio-toggle-btn .sound-bars{
-  display:inline-flex;
-  align-items:center;
-  gap:2px;
-  height:10px;
-}
-.audio-toggle-btn .bar{
-  width:2px;
-  height:3px;
-  background:var(--ink-faint);
-  border-radius:1px;
-  transition:all .2s;
-}
-.audio-toggle-btn.sound-on{
-  border-color:rgba(212,175,55,0.45);
-  color:var(--petal);
-}
-.audio-toggle-btn.sound-on .bar{
-  background:var(--petal);
-  animation:soundPulse .8s infinite alternate ease-in-out;
-}
-.audio-toggle-btn.sound-on .bar:nth-child(2){animation-delay:.15s;height:7px}
-.audio-toggle-btn.sound-on .bar:nth-child(3){animation-delay:.3s;height:10px}
-.audio-toggle-btn.sound-on .bar:nth-child(4){animation-delay:.45s;height:5px}
-
-@keyframes soundPulse{
-  0%{height:2px}
-  100%{height:10px}
-}
-.audio-toggle-btn:hover{
-  border-color:var(--petal);
-  color:var(--ink);
-}
-
 .mobile-menu-btn{
   display:flex;
   flex-direction:column;
@@ -680,6 +625,52 @@ h3{font-size:var(--h3);line-height:1.24;margin-bottom:12px}
 .reader-content li{
   margin-bottom:8px;
 }
+
+/* ══ FOOTER ══ */
+footer{
+  padding:var(--s5) 0 var(--s6);
+  border-top:1px solid var(--line);
+  font-family:var(--fm);
+  font-size:.76rem;
+  color:var(--ink-soft);
+}
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+}
+.social-links{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.social-links a{
+  color:var(--ink-soft);
+  text-decoration:none;
+  transition:color .25s;
+}
+.social-links a:hover{
+  color:var(--petal);
+}
+.secret-admin-trigger{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(242,237,226,0.15);
+  cursor:default;
+  transition:all .3s ease;
+  vertical-align:middle;
+  margin-left:4px;
+}
+.secret-admin-trigger:hover{
+  background:var(--petal);
+  box-shadow:0 0 8px var(--petal);
+  cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -689,30 +680,18 @@ h3{font-size:var(--h3);line-height:1.24;margin-bottom:12px}
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="brand-mark" aria-label="Voltar ao início">
-      <img src="logo.png" alt="Girassol Inteligência">
+      <img src="logo-girassol.png" alt="Girassol Inteligência">
       <div class="brand-title">
         <strong>GIRASSOL INTELIGÊNCIA</strong>
       </div>
     </a>
     <nav class="header-nav-dock" aria-label="Navegação Principal">
-      <a href="index.html#girassol" class="nav-dock-item"><span class="num">01</span><span>O Girassol</span></a>
+      <a href="index.html" class="nav-dock-item"><span class="num">01</span><span>Início</span></a>
       <a href="produtos.html" class="nav-dock-item"><span class="num">02</span><span>Produtos</span></a>
       <a href="artigos.html" class="nav-dock-item active"><span class="num">03</span><span>Artigos</span></a>
-      <a href="index.html#servicos" class="nav-dock-item"><span class="num">04</span><span>Serviços</span></a>
-      <a href="casos.html" class="nav-dock-item"><span class="num">05</span><span>Casos</span></a>
-      <a href="index.html#contato" class="nav-dock-item"><span class="num">06</span><span>Contato</span></a>
+      <a href="casos.html" class="nav-dock-item"><span class="num">04</span><span>Casos</span></a>
     </nav>
     <div class="header-actions">
-      <button type="button" class="audio-toggle-btn" id="audioToggleBtn" title="Ativar/desativar sons táteis do site (Atalho: M)" aria-label="Alternar áudio tátil">
-        <span class="sound-bars">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </span>
-        <span id="audioStatusText">Áudio [M]</span>
-      </button>
-
       <button type="button" class="mobile-menu-btn" id="btnMobileMenu" aria-label="Abrir Menu de Navegação">
         <span></span>
         <span></span>
@@ -722,12 +701,10 @@ h3{font-size:var(--h3);line-height:1.24;margin-bottom:12px}
   </div>
   <!-- Drawer Mobile -->
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navegação Móvel">
-    <a href="index.html#girassol" onclick="closeMobileDrawer()">01 O Girassol</a>
+    <a href="index.html" onclick="closeMobileDrawer()">01 Início</a>
     <a href="produtos.html" onclick="closeMobileDrawer()">02 Produtos</a>
     <a href="artigos.html" onclick="closeMobileDrawer()" style="color:var(--petal)">03 Artigos (Ativo)</a>
-    <a href="index.html#servicos" onclick="closeMobileDrawer()">04 Serviços</a>
-    <a href="casos.html" onclick="closeMobileDrawer()">05 Casos</a>
-    <a href="index.html#contato" onclick="closeMobileDrawer()">06 Contato</a>
+    <a href="casos.html" onclick="closeMobileDrawer()">04 Casos</a>
   </nav>
 </header>
 
@@ -773,16 +750,17 @@ h3{font-size:var(--h3);line-height:1.24;margin-bottom:12px}
   <!-- FOOTER -->
   <div class="wrap-wide">
     <footer>
-      <div class="footer-inner">
-        <div>
-          <strong style="color:var(--ink);font-weight:500">Girassol Inteligência</strong> — Campo Grande, MS
+      <div class="footer-inner" style="flex-direction:column;align-items:center;text-align:center;gap:12px">
+        <div style="white-space:nowrap;color:var(--ink-soft);font-size:0.8rem;letter-spacing:0.04em">
+          Desenvolvido por Girassol Inteligência - Todos os Direitos Reservados 2026®
         </div>
-        <div class="social-links">
-          <a href="https://instagram.com/girassolinteligencia" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <div class="social-links" style="justify-content:center;gap:16px">
+          <a href="privacidade.html">Privacidade</a>
           <span>·</span>
-          <a href="https://facebook.com/girassolideiasinteligentes" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a href="termos.html">Termos</a>
           <span>·</span>
-          <span>© <span id="currentYear"></span></span>
+          <a href="exclusao-dados.html">Exclusão de Dados</a>
+          <a href="admin.html" class="secret-admin-trigger" title="Sistema" aria-label="Acesso restrito"></a>
         </div>
       </div>
     </footer>
@@ -951,10 +929,6 @@ function openReader(articleId){
 
   document.getElementById('readerOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  if(window.AudioEngine && window.AudioEngine.enabled){
-    window.AudioEngine.playTick(720, 0.04, 'triangle', 0.03);
-  }
 }
 
 function closeReader(){
@@ -1024,91 +998,6 @@ if(searchInp){
     });
 })();
 
-/* ══ WEB AUDIO API: SINTETIZADOR DE MICRO-SONS TÁTEIS (AUSTENSOR-STYLE) ══ */
-(function(){
-  let audioCtx = null;
-  let isSoundEnabled = false;
-
-  function initAudio(){
-    if(!audioCtx){
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if(AudioContext){
-        audioCtx = new AudioContext();
-      }
-    }
-    if(audioCtx && audioCtx.state === 'suspended'){
-      audioCtx.resume();
-    }
-  }
-
-  function playTick(freq = 820, duration = 0.035, type = 'sine', gainVal = 0.028){
-    if(!isSoundEnabled) return;
-    initAudio();
-    if(!audioCtx) return;
-
-    try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(freq * 0.4, audioCtx.currentTime + duration);
-
-      gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch(err){}
-  }
-
-  window.AudioEngine = {
-    enabled: false,
-    playTick,
-    toggle: function(){
-      isSoundEnabled = !isSoundEnabled;
-      this.enabled = isSoundEnabled;
-      initAudio();
-      const btn = document.getElementById('audioToggleBtn');
-      const text = document.getElementById('audioStatusText');
-      if(btn && text){
-        if(isSoundEnabled){
-          btn.classList.add('sound-on');
-          text.textContent = 'Áudio [ON]';
-          playTick(880, 0.06, 'sine', 0.05);
-        } else {
-          btn.classList.remove('sound-on');
-          text.textContent = 'Áudio [M]';
-        }
-      }
-    }
-  };
-
-  const audioBtn = document.getElementById('audioToggleBtn');
-  if(audioBtn){
-    audioBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.AudioEngine.toggle();
-    });
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if(e.key === 'm' || e.key === 'M'){
-      window.AudioEngine.toggle();
-    }
-  });
-
-  document.querySelectorAll('a, button, details summary').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      if(isSoundEnabled) playTick(1100, 0.018, 'sine', 0.015);
-    }, {passive:true});
-    el.addEventListener('click', () => {
-      if(isSoundEnabled) playTick(680, 0.045, 'triangle', 0.035);
-    });
-  });
-})();
 </script>
 
 <!-- WIDGET FLUTUANTE DE IA (FALA COMIGO!) -->
