@@ -540,7 +540,20 @@
         </nav>
         <div class="rodape">
           <div id="usuario">Conectando…</div>
-          <a href="/" target="_blank" rel="noopener">Abrir o site ↗</a>
+          <a href="/" target="_blank" rel="noopener">Abrir o site ↗</a><br />
+          <button
+            type="button"
+            id="btnSair"
+            class="btn sec"
+            style="margin-top: 12px; width: 100%"
+            onclick="
+              fetch('/api/logout', { method: 'POST' }).finally(
+                () => (location.href = '/admin.html'),
+              )
+            "
+          >
+            Sair
+          </button>
         </div>
       </aside>
 
@@ -812,10 +825,11 @@
             headers: { "Content-Type": "application/json" },
             credentials: "same-origin",
           });
-          if (r.status === 401)
-            throw new Error(
-              "Sessão expirada. Recarregue a página para entrar de novo.",
-            );
+          if (r.status === 401) {
+            // Sessão expirada: volta para a tela de login
+            location.href = "/admin.html";
+            throw new Error("Sessão expirada. Entre novamente.");
+          }
           if (!r.ok)
             throw new Error(
               (await r.json().catch(() => ({}))).erro || "Falha " + r.status,
@@ -1530,6 +1544,7 @@
           titulo1: "título, linha 1",
           titulo2: "título, linha 2 (destaque)",
           texto: "texto",
+          texto2: "texto (2º parágrafo)",
           nota: "nota",
           coordenacao: "coordenação",
         };
@@ -1568,7 +1583,7 @@
                 `<details class="cartao" style="margin-bottom:16px" ${g === "abertura" ? "open" : ""}><summary><h3 style="display:inline">${SECOES_TEXTO[g]}</h3></summary><br>` +
                 grupos[g]
                   .map((k) => {
-                    const longo = /texto$|nota$/.test(k);
+                    const longo = /texto\d*$|nota$|coordenacao$/.test(k);
                     return `<label class="campo"><span>${esc(rotuloTexto(k))}</span>${
                       longo
                         ? `<textarea data-t="${k}" rows="3">${esc(t[k])}</textarea>`

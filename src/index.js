@@ -11,7 +11,8 @@
  *   GET  /casos/<id>           página de um caso, montada no servidor
  *   GET  /sitemap.xml          sitemap com as páginas fixas e cada caso publicado
  *   Cron (dia 1, 08h de Brasília): relatório do mês anterior
- *   /admin.html e /api/admin/* exigem login do Cloudflare Access (JWT verificado aqui)
+ *   POST /api/login, /api/logout  login do painel (senha + código de duas etapas)
+ *   /admin.html e /api/admin/* exigem sessão válida (ou login do Cloudflare Access)
  */
 
 const TIPOS_EVENTO = new Set([
@@ -57,6 +58,10 @@ export default {
         return paginaCaso(request, env, url, caso[1]);
       }
       if (pathname === "/sitemap.xml") return sitemap(env, url);
+      if (pathname === "/api/login" && request.method === "POST")
+        return login(request, env);
+      if (pathname === "/api/logout" && request.method === "POST")
+        return logout();
       if (
         pathname === "/admin.html" ||
         pathname === "/admin" ||
@@ -64,13 +69,29 @@ export default {
       ) {
         const usuario = await autenticarAdmin(request, env);
         if (!usuario) {
-          return pathname.startsWith("/api/")
-            ? json({ erro: "não autorizado" }, 401)
-            : new Response("Acesso restrito.", { status: 403 });
+          if (pathname.startsWith("/api/"))
+            return json({ erro: "não autorizado" }, 401);
+          // Sem sessão: mostra a tela de login no lugar do painel
+          const tela = await env.ASSETS.fetch(
+            new Request(new URL("/entrar", url)),
+          );
+          return new Response(tela.body, {
+            status: 200,
+            headers: {
+              "Content-Type": "text/html; charset=utf-8",
+              "Cache-Control": "no-store",
+            },
+          });
         }
-        if (pathname.startsWith("/api/admin/"))
+        if (pathname.startsWith("/api/admin/")) {
+          if (!origemValida(request))
+            return json({ erro: "origem não permitida" }, 403);
           return apiAdmin(request, env, url, usuario);
-        return env.ASSETS.fetch(request);
+        }
+        const painel = await env.ASSETS.fetch(request);
+        const h = new Headers(painel.headers);
+        h.set("Cache-Control", "no-store");
+        return new Response(painel.body, { status: painel.status, headers: h });
       }
       if (pathname.startsWith("/api/"))
         return json({ erro: "rota inexistente" }, 404);
@@ -401,6 +422,215 @@ async function sitemap(env, url) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Login do painel: senha + código de duas etapas, conferidos aqui     */
+/* Segredos (wrangler secret, gerados por scripts/configurar-acesso.mjs):
+ *   ADMIN_SENHA_HASH   pbkdf2$<iterações>$<sal base64>$<hash base64>
+ *   ADMIN_TOTP_SEGREDO segredo base32 do aplicativo autenticador
+ *   SESSAO_CHAVE       chave das sessões (trocar derruba todas as sessões)
+/* ------------------------------------------------------------------ */
+
+const SESSAO_HORAS = 8;
+const LIMITE_ERROS = 5;
+const JANELA_BLOQUEIO = "-15 minutes";
+
+const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+const deB64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+const b64u = (buf) =>
+  b64(buf).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+
+function iguais(a, b) {
+  // Comparação em tempo constante
+  if (a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a[i] ^ b[i];
+  return d === 0;
+}
+
+async function conferirSenha(senha, registro) {
+  const [tipo, iter, sal, hash] = String(registro || "").split("$");
+  if (tipo !== "pbkdf2" || !iter || !sal || !hash) return false;
+  const chave = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(senha),
+    "PBKDF2",
+    false,
+    ["deriveBits"],
+  );
+  const bits = await crypto.subtle.deriveBits(
+    {
+      name: "PBKDF2",
+      hash: "SHA-256",
+      salt: deB64(sal),
+      iterations: Number(iter),
+    },
+    chave,
+    256,
+  );
+  return iguais(new Uint8Array(bits), deB64(hash));
+}
+
+function base32(s) {
+  const alfa = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let bits = "";
+  for (const c of String(s)
+    .toUpperCase()
+    .replace(/[^A-Z2-7]/g, ""))
+    bits += alfa.indexOf(c).toString(2).padStart(5, "0");
+  const out = [];
+  for (let i = 0; i + 8 <= bits.length; i += 8)
+    out.push(parseInt(bits.slice(i, i + 8), 2));
+  return new Uint8Array(out);
+}
+
+async function codigoTotp(segredo, contador) {
+  const chave = await crypto.subtle.importKey(
+    "raw",
+    base32(segredo),
+    { name: "HMAC", hash: "SHA-1" },
+    false,
+    ["sign"],
+  );
+  const msg = new ArrayBuffer(8);
+  new DataView(msg).setUint32(4, contador);
+  new DataView(msg).setUint32(0, Math.floor(contador / 2 ** 32));
+  const h = new Uint8Array(await crypto.subtle.sign("HMAC", chave, msg));
+  const o = h[h.length - 1] & 15;
+  const n =
+    ((h[o] & 127) << 24) | (h[o + 1] << 16) | (h[o + 2] << 8) | h[o + 3];
+  return String(n % 1e6).padStart(6, "0");
+}
+
+// Aceita o código atual e o vizinho (±30 s de diferença de relógio); nunca o mesmo código duas vezes
+async function conferirTotp(env, codigo) {
+  if (!/^\d{6}$/.test(codigo || "")) return false;
+  const agora = Math.floor(Date.now() / 30000);
+  const uso = await env.DB.prepare(
+    "SELECT ultimo_contador FROM totp_uso WHERE id = 1",
+  ).first();
+  for (const c of [agora - 1, agora, agora + 1]) {
+    if (uso && c <= uso.ultimo_contador) continue;
+    if ((await codigoTotp(env.ADMIN_TOTP_SEGREDO, c)) === codigo) {
+      await env.DB.prepare(
+        "INSERT INTO totp_uso (id, ultimo_contador) VALUES (1, ?) ON CONFLICT(id) DO UPDATE SET ultimo_contador = excluded.ultimo_contador",
+      )
+        .bind(c)
+        .run();
+      return true;
+    }
+  }
+  return false;
+}
+
+async function assinar(env, texto) {
+  const chave = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(env.SESSAO_CHAVE),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  return b64u(
+    await crypto.subtle.sign("HMAC", chave, new TextEncoder().encode(texto)),
+  );
+}
+
+async function criarSessao(env) {
+  const carga = b64u(
+    new TextEncoder().encode(
+      JSON.stringify({ u: "admin", exp: Date.now() + SESSAO_HORAS * 3600e3 }),
+    ),
+  );
+  return carga + "." + (await assinar(env, carga));
+}
+
+async function lerSessao(request, env) {
+  if (!env.SESSAO_CHAVE) return null;
+  const cookie = request.headers.get("cookie") || "";
+  const valor = (cookie.match(/(?:^|;\s*)gi_sessao=([^;]+)/) || [])[1];
+  if (!valor || !valor.includes(".")) return null;
+  const [carga, assinatura] = valor.split(".");
+  const esperado = await assinar(env, carga);
+  if (
+    !iguais(
+      new TextEncoder().encode(assinatura),
+      new TextEncoder().encode(esperado),
+    )
+  )
+    return null;
+  try {
+    const d = JSON.parse(atob(carga.replace(/-/g, "+").replace(/_/g, "/")));
+    return d.exp > Date.now() ? d.u : null;
+  } catch {
+    return null;
+  }
+}
+
+const cookieSessao = (valor, maxAge) =>
+  `gi_sessao=${valor}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
+
+async function login(request, env) {
+  if (!env.ADMIN_SENHA_HASH || !env.ADMIN_TOTP_SEGREDO || !env.SESSAO_CHAVE) {
+    return json(
+      {
+        erro: "Login ainda não configurado. Rode scripts/configurar-acesso.mjs.",
+      },
+      503,
+    );
+  }
+  const ip = request.headers.get("cf-connecting-ip") || "local";
+  const erros = await env.DB.prepare(
+    "SELECT COUNT(*) n FROM login_tentativas WHERE ip = ? AND sucesso = 0 AND criado_em >= datetime('now', ?)",
+  )
+    .bind(ip, JANELA_BLOQUEIO)
+    .first();
+  if (erros.n >= LIMITE_ERROS) {
+    return json(
+      { erro: "Muitas tentativas. Aguarde 15 minutos e tente novamente." },
+      429,
+    );
+  }
+  const c = await lerCorpo(request, 1000);
+  const ok =
+    c &&
+    typeof c.senha === "string" &&
+    (await conferirSenha(c.senha, env.ADMIN_SENHA_HASH)) &&
+    (await conferirTotp(env, String(c.codigo || "")));
+  await env.DB.prepare(
+    "INSERT INTO login_tentativas (ip, sucesso) VALUES (?, ?)",
+  )
+    .bind(ip, ok ? 1 : 0)
+    .run();
+  await env.DB.prepare(
+    "DELETE FROM login_tentativas WHERE criado_em < datetime('now', '-90 days')",
+  ).run();
+  if (!ok) return json({ erro: "Senha ou código inválidos." }, 401);
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": cookieSessao(await criarSessao(env), SESSAO_HORAS * 3600),
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
+function logout() {
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": cookieSessao("", 0),
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
+// Pedidos que alteram dados só são aceitos vindos do próprio site
+function origemValida(request) {
+  if (["GET", "HEAD"].includes(request.method)) return true;
+  const origem = request.headers.get("origin");
+  return !origem || origem === new URL(request.url).origin;
+}
+
+/* ------------------------------------------------------------------ */
 /* Autenticação do painel: JWT do Cloudflare Access                    */
 /* ------------------------------------------------------------------ */
 
@@ -423,6 +653,9 @@ const b64url = (s) =>
   );
 
 async function autenticarAdmin(request, env) {
+  const sessao = await lerSessao(request, env);
+  if (sessao) return sessao;
+
   // Desenvolvimento local (wrangler dev com .dev.vars): nunca definido em produção
   if (
     env.ADMIN_DEV_BYPASS === "1" &&
