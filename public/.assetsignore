@@ -1,0 +1,4 @@
+# Arquivos de public/ que NÃO são publicados (sintaxe .gitignore)
+.assetsignore
+index-v2.html
+index-v3.html

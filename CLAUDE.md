@@ -27,4 +27,4 @@ CTA único: chat com IA — "Iniciar diagnóstico"
 
 - Nunca: neon/brilho, gíria, emojis, "compre agora", jargão como título, fundador em destaque, múltiplos CTAs.
 - Produtos = "Soluções desenvolvidas" (prova de capacidade adaptável).
-- Site estático publicado via Cloudflare Workers; arquivos fora do deploy ficam em `.assetsignore`.
+- Site em `public/` (só essa pasta é publicada). Worker em `src/index.js` (API de métricas, leads e painel) com banco D1 (`migrations/`). Painel em `public/admin.html`, protegido pelo Cloudflare Access.

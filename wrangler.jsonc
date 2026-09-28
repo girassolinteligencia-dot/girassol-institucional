@@ -1,7 +1,30 @@
 {
   "name": "girassol-institucional",
+  "main": "src/index.js",
   "compatibility_date": "2026-08-20",
   "assets": {
-    "directory": ".",
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Rotas atendidas pelo Worker; todo o resto é arquivo estático
+    "run_worker_first": [
+      "/api/*",
+      "/admin",
+      "/admin.html",
+      "/site-config.json",
+    ],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "girassol-site",
+      // Preencher com o ID gerado por: npx wrangler d1 create girassol-site
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "vars": {
+    // Cloudflare Access que protege o painel (/admin.html e /api/admin/*)
+    "ACCESS_TEAM_DOMAIN": "girassolteam.cloudflareaccess.com",
+    "ACCESS_AUD": "7b079362349595677ad4ccac3b800edb96b619c36a09f9b0b3ce2f1978aa176e",
   },
 }

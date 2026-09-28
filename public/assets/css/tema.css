@@ -46,11 +46,13 @@ html[data-theme="dark"] .comparativo > div + div {
 html[data-theme="dark"] .dores li {
   background: rgba(29, 23, 15, 0.85) !important;
 }
-html[data-theme="dark"] .btn:not(.final .btn) {
+html[data-theme="dark"] header#topbar .btn,
+html[data-theme="dark"] .hero .btn {
   background: var(--girassol, #f2b705);
   color: #15110b;
 }
-html[data-theme="dark"] .btn .dot {
+html[data-theme="dark"] header#topbar .btn .dot,
+html[data-theme="dark"] .hero .btn .dot {
   background: #15110b;
 }
 html[data-theme="dark"] .final,

@@ -1,34 +1,47 @@
 {
   "general": {
     "whatsappPhone": "5567981151717",
-    "whatsappMessage": "Olá Paulo, vim pelo site da Girassol e gostaria de conversar sobre uma ferramenta para o meu negócio.",
+    "whatsappMessage": "Olá, vim pelo site da Girassol Inteligência e gostaria de falar com a equipe.",
     "contactEmail": "girassolinteligencia@gmail.com",
     "instagramUrl": "https://instagram.com/girassolinteligencia",
-    "facebookUrl": "https://facebook.com/girassolideiasinteligentes"
+    "facebookUrl": "https://facebook.com/girassolideiasinteligentes",
+    "linkedinUrl": ""
   },
-  "products": {
-    "alltoparquet": {
-      "enabled": true,
-      "price": 99,
-      "priceLabel": "licença definitiva",
-      "badge": "100% Offline · Windows",
-      "supportEmail": "girassolinteligencia@gmail.com",
-      "buyUrl": "https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20adquirir%20uma%20licen%C3%A7a%20do%20AlltoParquet."
+  "solutions": [
+    {
+      "id": "alltoparquet",
+      "ativo": true,
+      "titulo": "AlltoParquet",
+      "categoria": "Dados · Aplicativo desktop Windows",
+      "descricao": "Converte CSV, Excel, JSON, NDJSON e JSONL para Apache Parquet diretamente no computador do usuário, sem instalação e sem enviar dados para a internet. Compressão Snappy ou Zstandard.",
+      "demonstra": "processamento local e soberania de dados.",
+      "demoUrl": "",
+      "chamada": "Conversar sobre esta solução",
+      "assunto": "alltoparquet"
     },
-    "plataformaEleitoral": {
-      "enabled": true,
-      "price": 499,
-      "priceLabel": "acesso direto",
-      "badge": "Dados Oficiais TSE · 2010–2024",
+    {
+      "id": "plataforma-eleitoral",
+      "ativo": true,
+      "titulo": "Plataforma Eleitoral Inteligente",
+      "categoria": "Dados públicos · Plataforma web",
+      "descricao": "Consulta e análise dos dados eleitorais oficiais do TSE (2010 a 2024) para os 79 municípios de Mato Grosso do Sul, com acesso seguro por link enviado ao e-mail.",
+      "demonstra": "integração de bases oficiais e análise em escala.",
       "demoUrl": "https://plataformaeleitoral.ia.br",
-      "buyUrl": "https://wa.me/5567981151717?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20assinar%20o%20acesso%20%C3%A0%20Plataforma%20Eleitoral%20Inteligente."
+      "chamada": "Conversar sobre esta solução",
+      "assunto": "plataforma-eleitoral"
     },
-    "guiaParquet": {
-      "enabled": true,
-      "badge": "Material Técnico",
-      "priceLabel": "Gratuito"
+    {
+      "id": "guia-parquet",
+      "ativo": true,
+      "titulo": "Guia Apache Parquet",
+      "categoria": "Material técnico · Gratuito",
+      "descricao": "Vinte capítulos sobre o formato colunar: anatomia dos arquivos, compressão, particionamento e testes de desempenho com BigQuery, AWS Athena e DuckDB.",
+      "demonstra": "profundidade técnica em engenharia de dados.",
+      "demoUrl": "",
+      "chamada": "Solicitar o guia",
+      "assunto": "guia-parquet"
     }
-  },
+  ],
   "articles": [
     {
       "id": "bpmn-ia-arquitetura",
@@ -82,6 +95,5 @@
       "summary": "Eliminação de erros diários de fechamento e retrabalho operacional através de um sistema feito à mão para a rotina específica do comércio.",
       "content": "### O Desafio\nO cliente operava com 4 planilhas diferentes que viviam se desregulando, gerando divergências entre o estoque físico e o financeiro.\n\n### A Solução Girassol\nOuvimos quem atende no balcão e mapeamos o fluxo passo a passo. Desenhamos um sistema com telas simples, sem botões inúteis, acessível do celular e do computador, com backup automático diário.\n\n### O Resultado\nFechamento de caixa que levava 2 horas passou a ser automático, o retrabalho manual foi eliminado e a ferramenta foi entregue como patrimônio definitivo da empresa contratante."
     }
-  ],
-  "leads": []
+  ]
 }

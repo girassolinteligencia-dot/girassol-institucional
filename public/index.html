@@ -2079,6 +2079,11 @@
             const idx = Math.min(5, Math.floor(alvo * 6));
             if (idx !== atual) {
               atual = idx;
+              if (idx === 5 && !window.__florCompleta) {
+                window.__florCompleta = true;
+                window.girassolMetrica &&
+                  window.girassolMetrica("flor_completa");
+              }
               etapas.forEach((e, i) => e.classList.toggle("on", i === idx));
               num.textContent = "0" + (idx + 1) + " / 06";
             }
@@ -2397,9 +2402,84 @@
               )
               .join("")
               .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+          // Soluções do painel; sem dados, os cartões fixos do HTML permanecem
+          function renderSolucoes(lista) {
+            const ativas = (lista || []).filter((s) => s.ativo !== false);
+            if (!ativas.length) return;
+            const alvo = document.querySelector("#solucoes .cards");
+            alvo.innerHTML = ativas
+              .map(
+                (s) =>
+                  '<article class="card spot tilt rise in"><small>' +
+                  esc(s.categoria || "") +
+                  "</small><h3>" +
+                  esc(s.titulo) +
+                  "</h3><p>" +
+                  esc(s.descricao || "") +
+                  "</p>" +
+                  (s.demonstra
+                    ? '<div class="prova">Demonstra: ' +
+                      esc(s.demonstra) +
+                      "</div>"
+                    : "") +
+                  (s.demoUrl
+                    ? '<a class="btn-link" data-evento="demo" data-assunto="' +
+                      esc(s.assunto || s.id) +
+                      '" href="' +
+                      esc(s.demoUrl) +
+                      '" target="_blank" rel="noopener">Ver demonstração</a>'
+                    : "") +
+                  '<a class="btn-link js-chat" data-assunto="' +
+                  esc(s.assunto || s.id) +
+                  '" href="#" role="button">' +
+                  esc(s.chamada || "Conversar sobre esta solução") +
+                  "</a></article>",
+              )
+              .join("");
+            alvo.querySelectorAll(".js-chat").forEach((el) =>
+              el.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.girassolChat &&
+                  window.girassolChat.open(el.dataset.assunto);
+              }),
+            );
+          }
+
+          // WhatsApp e redes do painel no rodapé
+          function renderContatos(g) {
+            if (!g) return;
+            const nav = document.querySelector("footer nav");
+            const links = [];
+            if (g.whatsappPhone)
+              links.push([
+                "WhatsApp",
+                "https://wa.me/" +
+                  String(g.whatsappPhone).replace(/\D/g, "") +
+                  "?text=" +
+                  encodeURIComponent(g.whatsappMessage || ""),
+              ]);
+            if (g.contactEmail)
+              links.push(["E-mail", "mailto:" + g.contactEmail]);
+            if (g.instagramUrl) links.push(["Instagram", g.instagramUrl]);
+            if (g.linkedinUrl) links.push(["LinkedIn", g.linkedinUrl]);
+            if (g.facebookUrl) links.push(["Facebook", g.facebookUrl]);
+            links.forEach(([nome, href]) => {
+              const a = document.createElement("a");
+              a.textContent = nome;
+              a.href = href;
+              if (!href.startsWith("mailto:")) {
+                a.target = "_blank";
+                a.rel = "noopener";
+              }
+              nav.appendChild(a);
+            });
+          }
+
           fetch("site-config.json", { cache: "no-store" })
             .then((r) => r.json())
             .then((cfg) => {
+              renderSolucoes(cfg.solutions);
+              renderContatos(cfg.general);
               const casos = (cfg.cases || []).filter(
                 (c) => c.published !== false,
               );
@@ -2457,5 +2537,6 @@
       })();
     </script>
     <script src="assets/js/chat-widget.js"></script>
+    <script src="assets/js/metricas.js" defer></script>
   </body>
 </html>

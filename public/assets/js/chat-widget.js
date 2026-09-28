@@ -10,11 +10,21 @@
   const STORAGE_KEY = "girassol_web_session";
   const DEFAULT_API_BASE = "https://api.girassolinteligencia.com.br";
   const TURNSTILE_SITE_KEY = "0x4AAAAAAEw5N47esEJTOqpj";
-  const WHATSAPP_NUMERO = "5567981151717";
-  const WHATSAPP_LINK =
+  // Número e mensagem padrão; substituídos pelo que estiver no painel (site-config.json → general)
+  let WHATSAPP_NUMERO = "5567981151717";
+  let WHATSAPP_MENSAGEM =
+    "Olá, vim pelo site da Girassol Inteligência e gostaria de falar com a equipe.";
+  const linkWhatsapp = (texto) =>
     "https://wa.me/" +
     WHATSAPP_NUMERO +
-    "?text=Ol%C3%A1%2C+estou+no+site+da+Girassol+e+gostaria+de+falar+com+a+equipe.";
+    "?text=" +
+    encodeURIComponent(texto || WHATSAPP_MENSAGEM);
+  const metrica = (tipo, extra) =>
+    window.dispatchEvent(
+      new CustomEvent("girassol:metrica", {
+        detail: Object.assign({ tipo: tipo }, extra || {}),
+      }),
+    );
   // Sem sinal do agente (data.handoff), oferece a passagem após este número de respostas do visitante
   const RESPOSTAS_PARA_PASSAGEM = 4;
 
@@ -47,6 +57,7 @@
     async init() {
       this.restoreSession();
       this.createDOM();
+      this.carregarContato();
       this.attachEvents();
       this.initTurnstile();
 
@@ -54,6 +65,22 @@
       if (this.messages.length === 0) {
         this.addMessage("assistant", SAUDACOES.diagnostico);
       }
+    }
+
+    // Usa o WhatsApp configurado no painel
+    carregarContato() {
+      fetch("/site-config.json")
+        .then((r) => r.json())
+        .then((cfg) => {
+          const g = (cfg && cfg.general) || {};
+          if (g.whatsappPhone)
+            WHATSAPP_NUMERO = String(g.whatsappPhone).replace(/\D/g, "");
+          if (g.whatsappMessage) WHATSAPP_MENSAGEM = g.whatsappMessage;
+          this.windowEl
+            .querySelectorAll(".chat-direct-link")
+            .forEach((a) => (a.href = linkWhatsapp()));
+        })
+        .catch(() => {});
     }
 
     initTurnstile() {
@@ -190,7 +217,7 @@
           <!-- Container invisível do Turnstile -->
           <div id="girassolTurnstileContainer" style="display:none;"></div>
 
-          <a class="chat-direct-link" href="${WHATSAPP_LINK}" target="_blank" rel="noopener noreferrer">Prefiro falar direto com a equipe no WhatsApp</a>
+          <a class="chat-direct-link" href="${linkWhatsapp()}" target="_blank" rel="noopener noreferrer">Prefiro falar direto com a equipe no WhatsApp</a>
           <form class="chat-form" id="girassolChatForm">
             <input 
               type="text" 
@@ -257,6 +284,7 @@
         this.addMessage("assistant", SAUDACOES[assunto]);
       }
       this.isOpen = true;
+      metrica("chat_aberto", { assunto: this.assunto });
       this.windowEl.classList.add("active");
       this.launcherEl.style.opacity = "0.4";
       setTimeout(() => this.inputEl.focus(), 300);
@@ -348,6 +376,7 @@
 
       this.inputEl.value = "";
       this.addMessage("user", text);
+      metrica("chat_mensagem", { assunto: this.assunto });
 
       this.isLoading = true;
       this.setTyping(true);
@@ -437,6 +466,7 @@
 
     renderHandoff(resumoAgente) {
       this.passagemOferecida = true;
+      metrica("passagem_exibida", { assunto: this.assunto });
       const bloco = document.createElement("div");
       bloco.className = "chat-bubble assistant chat-handoff";
       const aviso = document.createElement("span");
@@ -453,11 +483,7 @@
       botao.rel = "noopener noreferrer";
       botao.textContent = "Enviar resumo à equipe pelo WhatsApp";
       const atualizar = () => {
-        botao.href =
-          "https://wa.me/" +
-          WHATSAPP_NUMERO +
-          "?text=" +
-          encodeURIComponent(campo.value);
+        botao.href = linkWhatsapp(campo.value);
       };
       campo.addEventListener("input", atualizar);
       atualizar();
@@ -465,6 +491,12 @@
       nota.className = "chat-handoff-nota";
       nota.textContent =
         "O envio só acontece quando você tocar no botão. Tratamento conforme a nossa Política de Privacidade.";
+      botao.addEventListener("click", () =>
+        metrica("passagem_whatsapp", {
+          assunto: this.assunto,
+          resumo: campo.value,
+        }),
+      );
       bloco.append(aviso, campo, botao, nota);
       this.messagesContainer.appendChild(bloco);
       this.scrollToBottom();
@@ -476,7 +508,7 @@
       bubble.innerHTML = `
         <span>Nosso Núcleo de IA está em processo de sincronização de rede. Se preferir atendimento imediato você pode falar diretamente com a nossa equipe pelo WhatsApp:</span>
         <div class="chat-whatsapp-banner">
-          <a href="${WHATSAPP_LINK}" target="_blank" rel="noopener noreferrer" class="chat-whatsapp-link">
+          <a href="${linkWhatsapp()}" target="_blank" rel="noopener noreferrer" class="chat-whatsapp-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
             Falar com a equipe no WhatsApp
           </a>
