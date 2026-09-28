@@ -173,3 +173,47 @@ select,
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* =====================================================================
+   Cabeçalho e rodapé iguais aos da home (classes gi-*)
+   ===================================================================== */
+.gi-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.gi-topo {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--papel) !important;
+  border-bottom: 1px solid var(--linha) !important;
+}
+.gi-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+.gi-marca { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta) !important; }
+.gi-marca img { width: 36px; height: 36px; }
+.gi-marca span { font: 600 18px/1.1 var(--fb); letter-spacing: -0.01em; }
+.gi-topo nav { display: flex; gap: 28px; }
+.gi-topo nav a { font: 400 15px/1 var(--fb); color: var(--tinta-2) !important; text-decoration: none; }
+.gi-topo nav a:hover, .gi-topo nav a[aria-current="page"] { color: var(--tinta) !important; }
+.gi-topo nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--ambar); text-underline-offset: 6px; }
+.gi-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 600 14px/1 var(--fb); padding: 12px 18px; border-radius: 4px;
+  background: var(--tinta); color: var(--papel) !important; text-decoration: none;
+}
+.gi-cursor { width: 8px; height: 16px; background: var(--girassol); animation: gi-cursor 1.06s steps(1) infinite; }
+@keyframes gi-cursor { 50% { opacity: 0; } }
+@media (max-width: 900px) { .gi-topo nav { display: none; } }
+@media (max-width: 520px) { .gi-cta { display: none; } .gi-marca span { font-size: 16px; } }
+
+.gi-rodape {
+  background: var(--miolo) !important; color: #b9ae9c !important;
+  border-top: 0 !important; padding: 40px 0 !important; margin-top: 64px;
+  font: 400 14px/1.6 var(--fb) !important;
+}
+.gi-rodape-in { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+.gi-rodape .gi-marca, .gi-rodape .gi-marca span { color: #faf7f0 !important; font-size: 17px; }
+.gi-rodape .gi-marca img { width: 30px; height: 30px; }
+.gi-rodape nav { display: flex; gap: 24px; flex-wrap: wrap; }
+.gi-rodape a { color: #b9ae9c !important; text-decoration: none; }
+.gi-rodape a:hover { color: #faf7f0 !important; }
+.gi-rodape .credito-fonte { display: inline; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .gi-cursor { animation: none; } }
+/* Rodapé sempre na largura da tela, mesmo dentro de colunas (ex.: Artigos) */
+html { overflow-x: clip; }
+.gi-rodape { width: 100vw; margin-left: calc(50% - 50vw) !important; margin-right: calc(50% - 50vw) !important; }

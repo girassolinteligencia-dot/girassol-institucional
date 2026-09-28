@@ -435,26 +435,9 @@
     <script src="assets/js/tema.js"></script>
   </head>
   <body>
-    <div class="scan"></div>
+    
 
-    <header class="site-header">
-      <div class="header-inner">
-        <a href="index.html" class="brand-mark">
-          <img src="logo-girassol.png" alt="Girassol Inteligência" />
-          <div class="brand-title">
-            <strong>GIRASSOL INTELIGÊNCIA</strong>
-            <span>CAMPO GRANDE / MS</span>
-          </div>
-        </a>
-        <nav class="nav-dock">
-          <a href="index.html" class="nav-link">Início</a>
-          <a href="index.html#solucoes" class="nav-link">Produtos</a>
-          <a href="artigos.html" class="nav-link">Artigos</a>
-          <a href="index.html#casos" class="nav-link">Casos</a>
-          <a href="index.html#contato" class="nav-link">Contato</a>
-        </nav>
-      </div>
-    </header>
+    <header class="gi-topo"><div class="gi-wrap gi-nav"><a class="gi-marca" href="index.html" aria-label="Girassol Inteligência — início"><img src="assets/img/logo-marca.png" alt="" width="36" height="36"><span>Girassol Inteligência</span></a><nav aria-label="Navegação principal"><a href="index.html#metodo">Método</a><a href="index.html#equipe">Equipe</a><a href="index.html#solucoes">Soluções</a><a href="index.html#casos">Casos</a><a href="artigos.html">Artigos</a></nav><a class="gi-cta js-chat" data-assunto="diagnostico" href="#" role="button"><span class="gi-cursor"></span>Iniciar diagnóstico</a></div></header>
 
     <div class="page legal-page">
       <div class="wrap">
@@ -597,48 +580,11 @@
       </div>
     </div>
 
-    <footer>
-      <div class="wrap">
-        <div
-          class="footer-inner"
-          style="
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 12px;
-          "
-        >
-          <div
-            style="
-              white-space: nowrap;
-              color: var(--ink-soft);
-              font-size: 0.8rem;
-              letter-spacing: 0.04em;
-            "
-          >
-            Desenvolvido por Girassol Inteligência - Todos os Direitos
-            Reservados 2026®
-          </div>
-          <div class="footer-links" style="justify-content: center; gap: 16px">
-            <a href="index.html">Início</a>
-            <span>·</span>
-            <a href="privacidade.html">Privacidade</a>
-            <span>·</span>
-            <a href="termos.html">Termos de Uso</a>
-            <span>·</span>
-            <a href="exclusao-dados.html" style="color: var(--petal)"
-              >Exclusão de Dados</a
-            >
-          </div>
-        </div>
-        <a
-          class="credito-fonte"
-          href="https://int10h.org/oldschool-pc-fonts/"
-          rel="noopener"
-          >Fonte IBM VGA: VileR, int10h.org (CC BY-SA 4.0)</a
-        >
-      </div>
-    </footer>
+    <footer class="gi-rodape"><div class="gi-wrap gi-rodape-in"><a class="gi-marca" href="index.html"><img src="assets/img/logo-marca.png" alt="" width="30" height="30"><span>Girassol Inteligência</span></a><nav><a href="index.html#solucoes">Soluções</a><a href="index.html#casos">Casos</a><a href="artigos.html">Artigos</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a><a href="exclusao-dados.html">Exclusão de dados</a></nav><span>Campo Grande/MS · © <span id="currentYear">2026</span> · <a class="credito-fonte" href="https://int10h.org/oldschool-pc-fonts/" rel="noopener">Fonte IBM VGA: VileR, int10h.org (CC BY-SA 4.0)</a></span></div></footer>
+    <script>
+      // Botões "Iniciar diagnóstico" abrem o chat
+      document.querySelectorAll(".js-chat").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); window.girassolChat && window.girassolChat.open(el.dataset.assunto || "diagnostico"); }));
+    </script>
 
     <script>
       document.getElementById("currentYear").textContent =
