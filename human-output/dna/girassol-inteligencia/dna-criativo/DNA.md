@@ -59,7 +59,7 @@ Profissionais de projetos, analistas de sistemas, engenheiros de software, espec
 
 Metáfora oficial: **o girassol se constrói em torno do miolo** — o miolo é a necessidade do cliente; as pétalas são as etapas do método que a transformam em ferramenta. As especialidades da equipe aparecem na seção Equipe (quem faz), separadas do método (como é feito).
 
-**Regra:** a marca fala como equipe. O fundador/CEO aparece com discrição (ex.: uma linha de "coordenação técnica"), nunca como rosto ou protagonista.
+**Regra:** a marca fala como equipe. O fundador/CEO aparece com discrição, nunca como rosto ou protagonista. Na seção Equipe da home, um parágrafo de coordenação técnica cita a experiência de Paulo Cardoso (áreas de TI que liderou e certificações BPM e Design Thinking), sem foto e sem números não confirmados.
 
 ### Oferta
 

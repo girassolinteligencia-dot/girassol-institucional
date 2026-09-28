@@ -1,0 +1,237 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-tema-padrao="escuro"
+  data-tema-chave="girassol-tema-admin"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Entrar — Painel Girassol</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon-64.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/tema.css" />
+    <script src="/assets/js/tema.js"></script>
+    <style>
+      @font-face {
+        font-family: "IBM VGA";
+        src: url("/assets/fonts/WebPlus_IBM_VGA_9x16.woff") format("woff");
+        font-display: swap;
+      }
+      :root {
+        --papel: #faf7f0;
+        --superficie: #f2ede3;
+        --linha: #e3dbcc;
+        --tinta: #1c1812;
+        --tinta-2: #5e574c;
+        --girassol: #f2b705;
+        --ambar: #9a6400;
+        --erro: #b23b2a;
+      }
+      html[data-theme="dark"] {
+        --erro: #ff7a66;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--papel);
+        color: var(--tinta);
+        font:
+          400 16px/1.5 "IBM Plex Sans",
+          system-ui,
+          sans-serif;
+        padding: 24px;
+      }
+      .caixa {
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid var(--linha);
+        background: var(--superficie);
+        padding: 40px 32px;
+      }
+      .marca {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .marca img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+      .marca span {
+        font:
+          400 16px/1.2 "IBM VGA",
+          monospace;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .sub {
+        color: var(--tinta-2);
+        margin-bottom: 28px;
+        font-size: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 20px;
+      }
+      label span {
+        display: block;
+        font:
+          400 13px/1 "IBM Plex Mono",
+          monospace;
+        color: var(--tinta-2);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        font: inherit;
+        color: inherit;
+        background: var(--papel);
+        border: 1px solid var(--linha);
+        border-radius: 0;
+      }
+      input:focus {
+        outline: 2px solid var(--ambar);
+        outline-offset: 1px;
+      }
+      #codigo {
+        font:
+          400 24px/1 "IBM Plex Mono",
+          monospace;
+        letter-spacing: 0.4em;
+        text-align: center;
+      }
+      form button {
+        width: 100%;
+        padding: 14px;
+        font:
+          600 16px/1 "IBM Plex Sans",
+          sans-serif;
+        background: var(--girassol);
+        color: #15110b;
+        border: 0;
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+      }
+      form button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      .cursor {
+        width: 8px;
+        height: 16px;
+        background: #15110b;
+        animation: pisca 1.06s steps(1) infinite;
+      }
+      @keyframes pisca {
+        50% {
+          opacity: 0;
+        }
+      }
+      .erro {
+        color: var(--erro);
+        min-height: 24px;
+        margin-top: 16px;
+        font-size: 15px;
+      }
+      .nota {
+        margin-top: 24px;
+        color: var(--tinta-2);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="caixa">
+      <div class="marca">
+        <img src="/assets/img/icone-gi.png" alt="" /><span
+          >Girassol<br />Painel</span
+        >
+      </div>
+      <h1>Entrar no painel</h1>
+      <p class="sub">
+        Informe a senha e o código de 6 dígitos do seu aplicativo autenticador.
+      </p>
+      <form id="form" autocomplete="on">
+        <label
+          ><span>Senha</span
+          ><input
+            type="password"
+            id="senha"
+            autocomplete="current-password"
+            required
+            autofocus
+        /></label>
+        <label
+          ><span>Código de verificação</span
+          ><input
+            type="text"
+            id="codigo"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="\d{6}"
+            maxlength="6"
+            placeholder="000000"
+            required
+        /></label>
+        <button type="submit" id="btn">
+          <span class="cursor"></span>Entrar
+        </button>
+        <p class="erro" id="erro" role="alert"></p>
+      </form>
+      <p class="nota">
+        Acesso restrito à equipe. Após 5 tentativas erradas, o acesso fica
+        bloqueado por 15 minutos.
+      </p>
+    </main>
+    <script>
+      const form = document.getElementById("form"),
+        btn = document.getElementById("btn"),
+        erro = document.getElementById("erro");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        erro.textContent = "";
+        try {
+          const r = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              senha: document.getElementById("senha").value,
+              codigo: document.getElementById("codigo").value.trim(),
+            }),
+          });
+          const d = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(d.erro || "Não foi possível entrar.");
+          location.href = "/admin.html";
+        } catch (x) {
+          erro.textContent = x.message;
+          document.getElementById("codigo").value = "";
+          btn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
