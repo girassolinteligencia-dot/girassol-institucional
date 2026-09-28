@@ -11,7 +11,10 @@
     <title>Painel — Girassol Inteligência</title>
     <link rel="icon" type="image/png" href="assets/img/favicon-64.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/tema.css" />
     <script src="assets/js/tema.js"></script>
     <style>
@@ -50,7 +53,6 @@
         color: var(--tinta);
         font-size: 16px;
         line-height: 24px;
-        
       }
       a {
         color: var(--ambar);
@@ -469,9 +471,25 @@
         border: 1px dashed var(--linha);
       }
       /* Tipografia do DNA: títulos em Plex Sans 600; números e rótulos técnicos em Plex Mono */
-      h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
-      .kpi b, .kpi small, .n, .tag, .lead header .data, td.num, .funil .taxa, .legenda { font-family: var(--fm); }
-      .tema-toggle { font-family: "IBM VGA", monospace; }
+      h1,
+      h2,
+      h3 {
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .kpi b,
+      .kpi small,
+      .n,
+      .tag,
+      .lead header .data,
+      td.num,
+      .funil .taxa,
+      .legenda {
+        font-family: var(--fm);
+      }
+      .tema-toggle {
+        font-family: "IBM VGA", monospace;
+      }
       @media print {
         body.imprimindo-relatorio aside,
         body.imprimindo-relatorio .barra,
@@ -1498,8 +1516,7 @@
         const SECOES_TEXTO = {
           abertura: "Abertura",
           dores: "O ponto de partida",
-          girassol: "Girassol (como a equipe se forma)",
-          metodo: "Método",
+          metodo: "Método (girassol)",
           propriedade: "Propriedade",
           equipe: "Equipe",
           solucoes: "Soluções",
@@ -1519,6 +1536,7 @@
           const partes = chave.split(".").slice(1);
           return partes
             .map((p) => {
+              if (p === "miolo") return "Miolo (ponto de partida)";
               const m = p.match(/^(prova|item|etapa|passo|area)(\d+)$/);
               if (m)
                 return (

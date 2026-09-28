@@ -38,6 +38,8 @@ Empresa pequena ou média, **já organizada**, mas presa em:
 4. **Homologação e segurança** — testes, segurança da informação e LGPD antes da entrega.
 5. **Entrega com propriedade** — a ferramenta fica com o cliente, com a identidade dele.
 
+**No site, o método é contado uma única vez, pelo girassol que se constrói** (decisão de 28/09/2026): o miolo é o ponto de partida (a necessidade do cliente, "00"), cada etapa de 01 a 04 acende um grupo de pétalas, e a etapa 05 completa a flor ("SUA FERRAMENTA"). Não repetir o método em outra seção nem criar sequências paralelas com nomes diferentes.
+
 ### Pilares
 
 | Pilar                 | O que significa                                         | Como provar                                                            |
@@ -55,7 +57,7 @@ Experiência acumulada na condução de equipes de TI: service desk e help desk,
 
 Profissionais de projetos, analistas de sistemas, engenheiros de software, especialistas em banco de dados e em segurança da informação. **Um time que trabalhou junto durante anos e se reúne conforme o tipo de projeto.**
 
-Metáfora oficial: **as pétalas se reúnem em torno do miolo** — o miolo é a necessidade do cliente; as pétalas são as especialidades convocadas para ela.
+Metáfora oficial: **o girassol se constrói em torno do miolo** — o miolo é a necessidade do cliente; as pétalas são as etapas do método que a transformam em ferramenta. As especialidades da equipe aparecem na seção Equipe (quem faz), separadas do método (como é feito).
 
 **Regra:** a marca fala como equipe. O fundador/CEO aparece com discrição (ex.: uma linha de "coordenação técnica"), nunca como rosto ou protagonista.
 
@@ -121,10 +123,10 @@ Regra de contraste: amarelo `#F2B705` **nunca** como cor de texto sobre fundo cl
 
 **Decisão de 28/09/2026 (revisada): família IBM Plex, com a IBM VGA como assinatura.** Do terminal da IBM ao presente — coerente com uma equipe que vem de décadas de TI.
 
-| Uso | Fonte |
-|---|---|
-| Títulos (600) e texto (400) | **IBM Plex Sans** |
-| Rótulos, números, contadores, datas | **IBM Plex Mono** |
+| Uso                                                                                                                            | Fonte                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Títulos (600) e texto (400)                                                                                                    | **IBM Plex Sans**                                                                         |
+| Rótulos, números, contadores, datas                                                                                            | **IBM Plex Mono**                                                                         |
 | Detalhes de assinatura: rótulo da abertura que se decodifica, cursor de bloco nos botões, rótulos do girassol, seletor de tema | **IBM VGA** (bitmap 9x16, só em 16px; crédito CC BY-SA 4.0 no rodapé — VileR, int10h.org) |
 
 - Plex: licença aberta (OFL), Google Fonts, acentos completos, negrito e itálico reais.
