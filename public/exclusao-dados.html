@@ -570,9 +570,8 @@
             </form>
 
             <div id="deleteSuccessMsg" class="status-msg">
-              ✓ Solicitação registrada com sucesso! Seu pedido de expurgo foi
-              encaminhado para a coordenação da Girassol Inteligência. Em caso
-              de dúvidas, você receberá a confirmação em seu e-mail.
+              ✓ Solicitação registrada. Nossa equipe concluirá a exclusão em até
+              15 dias e enviará a confirmação para o e-mail informado.
             </div>
           </div>
 
@@ -652,27 +651,32 @@
         const email = document.getElementById("reqEmail").value.trim();
         const name = document.getElementById("reqName").value.trim();
 
+        const phone = document.getElementById("reqPhone").value.trim();
+
         btn.disabled = true;
-        btn.textContent = "Processando...";
+        btn.textContent = "Enviando...";
 
-        // Se houver armazenamento local no navegador do próprio cliente, expurga agora
-        try {
-          const raw = localStorage.getItem("girassol_site_config");
-          if (raw) {
-            let cfg = JSON.parse(raw);
-            if (cfg.leads && cfg.leads.length > 0) {
-              cfg.leads = cfg.leads.filter(
-                (l) => (l.email || "").toLowerCase() !== email.toLowerCase(),
-              );
-              localStorage.setItem("girassol_site_config", JSON.stringify(cfg));
-            }
-          }
-        } catch (err) {}
-
-        setTimeout(() => {
-          document.getElementById("deleteRequestForm").style.display = "none";
-          msg.style.display = "block";
-        }, 600);
+        // Registra o pedido no sistema da Girassol (aparece no painel, aba Exclusão de dados)
+        fetch("/api/exclusao", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome: name, email: email, telefone: phone }),
+        })
+          .then((r) =>
+            r.json().then((d) => ({ ok: r.ok && d.ok, erro: d.erro })),
+          )
+          .then((r) => {
+            if (!r.ok) throw new Error(r.erro || "falha");
+            document.getElementById("deleteRequestForm").style.display = "none";
+            msg.style.display = "block";
+          })
+          .catch(() => {
+            btn.disabled = false;
+            btn.textContent = "Confirmar Solicitação de Exclusão →";
+            alert(
+              'Não foi possível registrar o pedido agora. Envie um e-mail para girassolinteligencia@gmail.com com o assunto "LGPD — Solicitação de Exclusão" ou tente novamente.',
+            );
+          });
       }
     </script>
     <script src="assets/js/chat-widget.js" defer></script>

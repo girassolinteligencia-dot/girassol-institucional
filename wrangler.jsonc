@@ -22,6 +22,8 @@
       "migrations_dir": "migrations",
     },
   ],
+  // Relatório mensal: dia 1 às 11h UTC (08h de Brasília)
+  "triggers": { "crons": ["0 11 1 * *"] },
   "vars": {
     // Cloudflare Access que protege o painel (/admin.html e /api/admin/*)
     "ACCESS_TEAM_DOMAIN": "girassolteam.cloudflareaccess.com",

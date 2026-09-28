@@ -466,6 +466,13 @@
         color: var(--tinta-2);
         border: 1px dashed var(--linha);
       }
+      @media print {
+        body.imprimindo-relatorio aside, body.imprimindo-relatorio .barra, body.imprimindo-relatorio .painel:not(#p-relatorios),
+        body.imprimindo-relatorio #p-relatorios > .intro, body.imprimindo-relatorio #p-relatorios > .acoes,
+        body.imprimindo-relatorio #listaRelatorios, body.imprimindo-relatorio .tema-toggle, body.imprimindo-relatorio .toast { display: none !important; }
+        body.imprimindo-relatorio .app, body.imprimindo-relatorio .editor { display: block; }
+        body.imprimindo-relatorio { background: #fff; color: #000; }
+      }
     </style>
   </head>
   <body>
@@ -486,7 +493,10 @@
           <button role="tab" data-aba="solucoes">Soluções</button>
           <button role="tab" data-aba="casos">Casos</button>
           <button role="tab" data-aba="artigos">Artigos</button>
+          <button role="tab" data-aba="textos">Textos da home</button>
           <button role="tab" data-aba="geral">Geral e contatos</button>
+          <button role="tab" data-aba="exclusoes">Exclusão de dados <span class="n" id="nExclusoes"></span></button>
+          <button role="tab" data-aba="relatorios">Relatórios</button>
           <button role="tab" data-aba="versoes">Versões e backup</button>
         </nav>
         <div class="rodape">
@@ -645,6 +655,32 @@
             ><span>Facebook (URL)</span><input type="url" data-g="facebookUrl"
           /></label>
           <p class="muted" id="testeWhats"></p>
+        </section>
+
+        <!-- TEXTOS DA HOME -->
+        <section class="painel" id="p-textos" role="tabpanel">
+          <p class="intro">Textos da página inicial. Deixe um campo vazio para manter o texto original do site. As alterações vão ao ar ao clicar em "Publicar no site".</p>
+          <div id="formTextos"></div>
+        </section>
+
+        <!-- EXCLUSÃO DE DADOS -->
+        <section class="painel" id="p-exclusoes" role="tabpanel">
+          <p class="intro">Pedidos enviados pela página Exclusão de Dados (LGPD, art. 18). O prazo informado ao titular é de 15 dias. Para cada pedido: procure os leads do titular, exclua-os, marque como concluído e envie a confirmação por e-mail.</p>
+          <div id="listaExclusoes"></div>
+        </section>
+
+        <!-- RELATÓRIOS -->
+        <section class="painel" id="p-relatorios" role="tabpanel">
+          <p class="intro">Relatório mensal gerado automaticamente no dia 1 de cada mês (08h), com os números do mês anterior. Também é possível gerar um mês a qualquer momento.</p>
+          <div class="acoes" style="margin-bottom: 24px">
+            <input type="month" id="mesRelatorio" aria-label="Mês do relatório" style="width: auto" />
+            <button class="btn sec" id="btnGerarRel">Gerar relatório</button>
+            <button class="btn sec" id="btnImprimirRel" disabled>Imprimir / salvar PDF</button>
+          </div>
+          <div class="editor">
+            <div class="lista-itens" id="listaRelatorios"></div>
+            <div id="relatorio"></div>
+          </div>
         </section>
 
         <!-- VERSÕES -->
@@ -807,6 +843,7 @@
 
         function renderTudo() {
           renderGeral();
+          renderTextos();
           editores.forEach((e) => e.render());
           alterado();
         }
@@ -825,6 +862,8 @@
               .trim();
             if (b.dataset.aba === "leads") carregarLeads();
             if (b.dataset.aba === "versoes") carregarVersoes();
+              if (b.dataset.aba === "exclusoes") carregarExclusoes();
+              if (b.dataset.aba === "relatorios") carregarRelatorios();
           }),
         );
 
@@ -1414,6 +1453,190 @@
           e.target.value = "";
         });
 
+        /* ---------------- Textos da home ---------------- */
+        const SECOES_TEXTO = {
+          abertura: "Abertura",
+          dores: "O ponto de partida",
+          girassol: "Girassol (como a equipe se forma)",
+          metodo: "Método",
+          propriedade: "Propriedade",
+          equipe: "Equipe",
+          solucoes: "Soluções",
+          casos: "Casos",
+          final: "Chamada final",
+        };
+        const NOMES_CAMPO = { rotulo: "rótulo", titulo: "título", titulo1: "título, linha 1", titulo2: "título, linha 2 (destaque)", texto: "texto", nota: "nota", coordenacao: "coordenação" };
+        function rotuloTexto(chave) {
+          const partes = chave.split(".").slice(1);
+          return partes
+            .map((p) => {
+              const m = p.match(/^(prova|item|etapa|passo|area)(\d+)$/);
+              if (m) return { prova: "Prova", item: "Dor", etapa: "Etapa", passo: "Passo", area: "Área" }[m[1]] + " " + m[2];
+              return NOMES_CAMPO[p] || p;
+            })
+            .join(" · ");
+        }
+        function renderTextos() {
+          const t = (cfg.home = cfg.home || {});
+          const grupos = {};
+          Object.keys(t).forEach((k) => (grupos[k.split(".")[0]] = grupos[k.split(".")[0]] || []).push(k));
+          $("#formTextos").innerHTML = Object.keys(SECOES_TEXTO)
+            .filter((g) => grupos[g])
+            .map(
+              (g) =>
+                `<details class="cartao" style="margin-bottom:16px" ${g === "abertura" ? "open" : ""}><summary><h3 style="display:inline">${SECOES_TEXTO[g]}</h3></summary><br>` +
+                grupos[g]
+                  .map((k) => {
+                    const longo = /texto$|nota$/.test(k);
+                    return `<label class="campo"><span>${esc(rotuloTexto(k))}</span>${
+                      longo
+                        ? `<textarea data-t="${k}" rows="3">${esc(t[k])}</textarea>`
+                        : `<input type="text" data-t="${k}" value="${esc(t[k])}">`
+                    }</label>`;
+                  })
+                  .join("") +
+                "</details>",
+            )
+            .join("");
+          $$("[data-t]").forEach((inp) =>
+            inp.addEventListener("input", () => {
+              cfg.home[inp.dataset.t] = inp.value;
+              alterado();
+            }),
+          );
+        }
+
+        /* ---------------- Exclusão de dados ---------------- */
+        const ROTULO_EXC = { recebido: "Recebido", em_andamento: "Em andamento", concluido: "Concluído" };
+        let exclusoes = [];
+        async function carregarExclusoes() {
+          try {
+            exclusoes = await api("exclusoes");
+          } catch (e) {
+            $("#listaExclusoes").innerHTML = '<div class="vazio">' + esc(e.message) + "</div>";
+            return;
+          }
+          const abertas = exclusoes.filter((x) => x.status !== "concluido").length;
+          $("#nExclusoes").textContent = abertas || "";
+          if (!exclusoes.length) return ($("#listaExclusoes").innerHTML = '<div class="vazio">Nenhum pedido de exclusão.</div>');
+          $("#listaExclusoes").innerHTML = exclusoes
+            .map((x) => {
+              const aberto = x.status !== "concluido";
+              const prazo = aberto
+                ? x.dias_restantes < 0
+                  ? `<span class="tag" style="border-color:var(--erro);color:var(--erro)">prazo vencido há ${-x.dias_restantes} dia(s)</span>`
+                  : `<span class="tag">${x.dias_restantes} dia(s) restantes</span>`
+                : `<span class="muted">concluído em ${dataBR(x.concluido_em)}</span>`;
+              const assunto = encodeURIComponent("LGPD — Confirmação de exclusão de dados");
+              const corpo = encodeURIComponent(
+                `Olá, ${x.nome}.\n\nConfirmamos a exclusão dos seus dados pessoais dos cadastros da Girassol Inteligência, conforme solicitado em ${dataBR(x.criado_em)}.\n\nAtenciosamente,\nEquipe Girassol Inteligência`,
+              );
+              return `<article class="lead" data-id="${x.id}">
+                <header><span class="data">${dataBR(x.criado_em)}</span>${prazo}
+                  <select aria-label="Status do pedido">${Object.entries(ROTULO_EXC).map(([k, v]) => `<option value="${k}" ${k === x.status ? "selected" : ""}>${v}</option>`).join("")}</select></header>
+                <pre>Titular: ${esc(x.nome)}\nE-mail: ${esc(x.email)}${x.telefone ? "\nTelefone: " + esc(x.telefone) : ""}</pre>
+                <div class="achados" style="padding:0 16px"></div>
+                <footer><input type="text" placeholder="Nota interna (ex.: 2 leads excluídos)" value="${esc(x.nota || "")}" aria-label="Nota interna">
+                  <button class="btn sec" data-acao="nota">Salvar nota</button>
+                  <button class="btn sec" data-acao="buscar">Procurar leads do titular</button>
+                  <a class="btn sec" href="mailto:${esc(x.email)}?subject=${assunto}&body=${corpo}">E-mail de confirmação</a></footer>
+              </article>`;
+            })
+            .join("");
+          $$("#listaExclusoes .lead").forEach((el) => {
+            const id = el.dataset.id;
+            $("select", el).addEventListener("change", async (e) => {
+              await api("exclusoes/" + id, { method: "PATCH", body: JSON.stringify({ status: e.target.value }) }).catch((x) => toast(x.message));
+              toast("Status atualizado.");
+              carregarExclusoes();
+            });
+            $('[data-acao="nota"]', el).addEventListener("click", async () => {
+              await api("exclusoes/" + id, { method: "PATCH", body: JSON.stringify({ nota: $("input", el).value }) }).catch((x) => toast(x.message));
+              toast("Nota salva.");
+            });
+            $('[data-acao="buscar"]', el).addEventListener("click", async () => {
+              const alvo = $(".achados", el);
+              const achados = await api("exclusoes/" + id + "/leads").catch((x) => (toast(x.message), []));
+              alvo.innerHTML = achados.length
+                ? `<p class="muted">Leads que mencionam este titular:</p>` +
+                  achados.map((l) => `<div class="cartao" style="margin:8px 0"><span class="muted">${dataBR(l.criado_em)}</span><pre style="padding:8px 0">${esc(l.resumo)}</pre><button class="btn perigo" data-lead="${l.id}">Excluir este lead</button></div>`).join("")
+                : '<p class="muted" style="padding:8px 0">Nenhum lead encontrado com o e-mail, nome ou telefone do titular.</p>';
+              $$("[data-lead]", alvo).forEach((b) =>
+                b.addEventListener("click", async () => {
+                  if (!confirm("Excluir este lead definitivamente?")) return;
+                  await api("leads/" + b.dataset.lead, { method: "DELETE" }).catch((x) => toast(x.message));
+                  b.closest(".cartao").remove();
+                  toast("Lead excluído.");
+                  carregarLeads();
+                }),
+              );
+            });
+          });
+        }
+
+        /* ---------------- Relatórios ---------------- */
+        const NOME_MES = (m) => new Date(m + "-15").toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+        let relAtual = null;
+        async function carregarRelatorios() {
+          const lista = await api("relatorios").catch((e) => (toast(e.message), []));
+          $("#listaRelatorios").innerHTML = lista.length
+            ? lista.map((r) => `<button type="button" data-mes="${r.mes}" aria-current="${r.mes === relAtual}">${NOME_MES(r.mes)}</button>`).join("")
+            : '<div class="vazio">Nenhum relatório ainda.</div>';
+          $$("#listaRelatorios [data-mes]").forEach((b) => b.addEventListener("click", () => abrirRelatorio(b.dataset.mes)));
+          if (!relAtual && lista.length) abrirRelatorio(lista[0].mes);
+        }
+        async function abrirRelatorio(mes) {
+          relAtual = mes;
+          $$("#listaRelatorios [data-mes]").forEach((b) => b.setAttribute("aria-current", b.dataset.mes === mes));
+          const r = await api("relatorios/" + mes).catch((e) => (toast(e.message), null));
+          if (!r) return;
+          const [a, m] = mes.split("-").map(Number);
+          const mesAnt = new Date(Date.UTC(a, m - 2, 1)).toISOString().slice(0, 7);
+          const ant = await api("relatorios/" + mesAnt).catch(() => null);
+          const tipo = (rel) => Object.fromEntries(((rel && rel.porTipo) || []).map((x) => [x.tipo, x.total]));
+          const t = tipo(r), ta = tipo(ant);
+          const variacao = (k) => {
+            if (!ant) return "";
+            const x = t[k] || 0, y = ta[k] || 0;
+            if (!y) return x ? '<small>novo em relação ao mês anterior</small>' : "";
+            const d = Math.round(((x - y) / y) * 100);
+            return `<small>${d >= 0 ? "+" : ""}${d}% vs. mês anterior</small>`;
+          };
+          const kpi = (n, k) => `<div class="kpi"><span>${n}</span><b>${fmt(t[k] || 0)}</b>${variacao(k)}</div>`;
+          const tab = (titulo, cab, linhas) =>
+            `<h3 style="margin-top:24px">${titulo}</h3><table>${"<tr>" + cab.map((c, i) => `<th class="${i ? "num" : ""}">${c}</th>`).join("") + "</tr>"}${
+              linhas.length ? linhas.map((l) => "<tr>" + l.map((c, i) => `<td class="${i ? "num" : ""}">${i ? fmt(c) : esc(c)}</td>`).join("") + "</tr>").join("") : `<tr><td colspan="${cab.length}" class="muted">Sem dados.</td></tr>`
+            }</table>`;
+          const leadsTotal = (r.leadsPorStatus || []).reduce((s, x) => s + x.total, 0);
+          const fechados = ((r.leadsPorStatus || []).find((x) => x.status === "fechado") || {}).total || 0;
+          $("#relatorio").innerHTML =
+            `<h2>Relatório de ${NOME_MES(mes)}</h2><p class="muted">Gerado em ${dataBR(r.geradoEm)}. Girassol Inteligência.</p><br>` +
+            `<div class="kpis">${kpi("Visitas", "visita")}${kpi("Cliques nos botões", "cta")}${kpi("Conversas no chat", "chat_aberto")}${kpi("Diagnósticos concluídos", "passagem_exibida")}${kpi("Leads enviados", "passagem_whatsapp")}${kpi("WhatsApp direto", "whatsapp_direto")}</div>` +
+            `<p>Conversão de visitas em leads: <b>${pct(t.passagem_whatsapp || 0, t.visita || 0)}</b>. Leads do mês fechados até agora: <b>${fmt(fechados)}</b> de ${fmt(leadsTotal)}.</p>` +
+            tab("Por assunto", ["Assunto", "Cliques", "Conversas", "Leads"], (r.porAssunto || []).map((x) => [x.assunto, x.cliques, x.conversas, x.leads])) +
+            tab("Leads por status", ["Status", "Total"], (r.leadsPorStatus || []).map((x) => [ROTULO_STATUS[x.status] || x.status, x.total])) +
+            tab("Origem das visitas", ["Origem", "Visitas"], (r.porOrigem || []).map((x) => [x.origem, x.total])) +
+            tab("Páginas", ["Página", "Visitas"], (r.porPagina || []).map((x) => [x.pagina, x.total])) +
+            tab("Dispositivo", ["Dispositivo", "Visitas"], (r.porDispositivo || []).map((x) => [x.dispositivo, x.total])) +
+            tab("Pedidos de exclusão (LGPD)", ["Status", "Total"], (r.exclusoes || []).map((x) => [ROTULO_EXC[x.status] || x.status, x.total]));
+          $("#btnImprimirRel").disabled = false;
+        }
+        $("#mesRelatorio").value = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth() - 1, 1)).toISOString().slice(0, 7);
+        $("#btnGerarRel").addEventListener("click", async () => {
+          const mes = $("#mesRelatorio").value;
+          if (!mes) return toast("Escolha o mês.");
+          await api("relatorios", { method: "POST", body: JSON.stringify({ mes }) }).catch((e) => toast(e.message));
+          relAtual = mes;
+          await carregarRelatorios();
+          abrirRelatorio(mes);
+          toast("Relatório gerado.");
+        });
+        $("#btnImprimirRel").addEventListener("click", () => {
+          document.body.classList.add("imprimindo-relatorio");
+          window.print();
+          document.body.classList.remove("imprimindo-relatorio");
+        });
+
         /* ---------------- Início ---------------- */
         api("eu")
           .then((r) => ($("#usuario").textContent = r.usuario))
@@ -1421,6 +1644,7 @@
         carregarConfig().catch((e) => ($("#estado").textContent = e.message));
         carregarMetricas();
         carregarLeads();
+        carregarExclusoes();
         // Abre a aba indicada no endereço (ex.: admin.html#leads)
         const abaInicial = $(
           `nav.abas button[data-aba="${location.hash.slice(1)}"]`,

@@ -7,6 +7,8 @@
  *   GET  /site-config.json     configuração publicada (D1), com o arquivo estático como reserva
  *   POST /api/evento           métrica anônima (sem cookies, sem dado pessoal)
  *   POST /api/lead             lead gerado quando o visitante envia o resumo à equipe
+ *   POST /api/exclusao         pedido de exclusão de dados (LGPD, art. 18)
+ *   Cron (dia 1, 08h de Brasília): relatório do mês anterior
  *   /admin.html e /api/admin/* exigem login do Cloudflare Access (JWT verificado aqui)
  */
 
@@ -21,6 +23,7 @@ const TIPOS_EVENTO = new Set([
   "flor_completa",
   "demo",
 ]);
+const STATUS_EXCLUSAO = new Set(["recebido", "em_andamento", "concluido"]);
 const STATUS_LEAD = new Set([
   "novo",
   "em_contato",
@@ -44,6 +47,9 @@ export default {
       if (pathname === "/api/lead" && request.method === "POST") {
         return registrarLead(request, env);
       }
+      if (pathname === "/api/exclusao" && request.method === "POST") {
+        return registrarExclusao(request, env);
+      }
       if (
         pathname === "/admin.html" ||
         pathname === "/admin" ||
@@ -66,6 +72,11 @@ export default {
       console.error(e);
       return json({ erro: "falha interna" }, 500);
     }
+  },
+
+  // Relatório mensal automático (ver "triggers" em wrangler.jsonc)
+  async scheduled(evento, env, ctx) {
+    ctx.waitUntil(gerarRelatorio(env, mesAnterior()));
   },
 };
 
@@ -151,6 +162,95 @@ async function registrarLead(request, env) {
     )
     .run();
   return json({ ok: true });
+}
+
+async function registrarExclusao(request, env) {
+  const c = await lerCorpo(request, 2000);
+  const nome = c && texto(c.nome, 120);
+  const email = c && texto(c.email, 160);
+  if (!nome || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ ok: false, erro: "Informe nome e e-mail válidos." }, 400);
+  }
+  await env.DB.prepare(
+    "INSERT INTO pedidos_exclusao (nome, email, telefone) VALUES (?, ?, ?)",
+  )
+    .bind(nome, email.toLowerCase(), texto(c.telefone, 40))
+    .run();
+  return json({ ok: true });
+}
+
+/* ------------------------------------------------------------------ */
+/* Relatório mensal                                                    */
+/* ------------------------------------------------------------------ */
+
+function mesAnterior(base = new Date()) {
+  return new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth() - 1, 1))
+    .toISOString()
+    .slice(0, 7);
+}
+
+async function gerarRelatorio(env, mes) {
+  if (!/^\d{4}-\d{2}$/.test(mes)) throw new Error("mês inválido");
+  const [a, m] = mes.split("-").map(Number);
+  const ini = mes + "-01";
+  const fim = new Date(Date.UTC(a, m, 1)).toISOString().slice(0, 10);
+  const faixa = "criado_em >= ? AND criado_em < ?";
+  const q = (sql) =>
+    env.DB.prepare(sql)
+      .bind(ini, fim)
+      .all()
+      .then((r) => r.results);
+  const [
+    porTipo,
+    porAssunto,
+    porOrigem,
+    porPagina,
+    porDispositivo,
+    leadsPorStatus,
+    leadsPorAssunto,
+    exclusoes,
+  ] = await Promise.all([
+    q(`SELECT tipo, COUNT(*) total FROM eventos WHERE ${faixa} GROUP BY tipo`),
+    q(
+      `SELECT COALESCE(assunto,'—') assunto, SUM(tipo='cta') cliques, SUM(tipo='chat_aberto') conversas, SUM(tipo='passagem_whatsapp') leads FROM eventos WHERE ${faixa} AND tipo IN ('cta','chat_aberto','passagem_whatsapp') GROUP BY assunto ORDER BY cliques DESC`,
+    ),
+    q(
+      `SELECT COALESCE(origem,'acesso direto') origem, COUNT(*) total FROM eventos WHERE tipo='visita' AND ${faixa} GROUP BY origem ORDER BY total DESC LIMIT 10`,
+    ),
+    q(
+      `SELECT COALESCE(pagina,'—') pagina, COUNT(*) total FROM eventos WHERE tipo='visita' AND ${faixa} GROUP BY pagina ORDER BY total DESC LIMIT 10`,
+    ),
+    q(
+      `SELECT dispositivo, COUNT(*) total FROM eventos WHERE tipo='visita' AND ${faixa} GROUP BY dispositivo`,
+    ),
+    q(
+      `SELECT status, COUNT(*) total FROM leads WHERE ${faixa} GROUP BY status`,
+    ),
+    q(
+      `SELECT COALESCE(assunto,'—') assunto, COUNT(*) total FROM leads WHERE ${faixa} GROUP BY assunto ORDER BY total DESC`,
+    ),
+    q(
+      `SELECT status, COUNT(*) total FROM pedidos_exclusao WHERE ${faixa} GROUP BY status`,
+    ),
+  ]);
+  const dados = {
+    mes,
+    porTipo,
+    porAssunto,
+    porOrigem,
+    porPagina,
+    porDispositivo,
+    leadsPorStatus,
+    leadsPorAssunto,
+    exclusoes,
+  };
+  await env.DB.prepare(
+    "INSERT INTO relatorios (mes, dados, gerado_em) VALUES (?, ?, datetime('now')) " +
+      "ON CONFLICT(mes) DO UPDATE SET dados = excluded.dados, gerado_em = excluded.gerado_em",
+  )
+    .bind(mes, JSON.stringify(dados))
+    .run();
+  return dados;
 }
 
 /* ------------------------------------------------------------------ */
@@ -370,6 +470,86 @@ async function apiAdmin(request, env, url, usuario) {
       porPagina,
       leadsPorStatus,
     });
+  }
+
+  if (rota === "exclusoes" && m === "GET") {
+    // dias_restantes: prazo de 15 dias informado na página de Exclusão de Dados
+    const { results } = await env.DB.prepare(
+      "SELECT id, criado_em, nome, email, telefone, status, nota, concluido_em, " +
+        "CAST(ROUND(julianday(datetime(criado_em, '+15 days')) - julianday('now')) AS INTEGER) dias_restantes " +
+        "FROM pedidos_exclusao ORDER BY (status = 'concluido'), id DESC LIMIT 500",
+    ).all();
+    return json(results);
+  }
+
+  const exc = rota.match(/^exclusoes\/(\d+)$/);
+  if (exc && m === "PATCH") {
+    const c = await lerCorpo(request, 4000);
+    if (!c || (c.status && !STATUS_EXCLUSAO.has(c.status)))
+      return json({ erro: "dados inválidos" }, 400);
+    await env.DB.prepare(
+      "UPDATE pedidos_exclusao SET status = COALESCE(?, status), nota = COALESCE(?, nota), " +
+        "concluido_em = CASE WHEN ? = 'concluido' THEN datetime('now') ELSE concluido_em END WHERE id = ?",
+    )
+      .bind(
+        c.status || null,
+        texto(c.nota, 2000),
+        c.status || null,
+        Number(exc[1]),
+      )
+      .run();
+    return json({ ok: true });
+  }
+
+  // Leads que mencionam o e-mail, o nome ou o telefone do titular, para excluir antes de concluir o pedido
+  const busca = rota.match(/^exclusoes\/(\d+)\/leads$/);
+  if (busca && m === "GET") {
+    const p = await env.DB.prepare(
+      "SELECT nome, email, telefone FROM pedidos_exclusao WHERE id = ?",
+    )
+      .bind(Number(busca[1]))
+      .first();
+    if (!p) return json({ erro: "pedido não encontrado" }, 404);
+    const digitos = (p.telefone || "").replace(/\D/g, "");
+    const termos = [
+      p.email,
+      p.nome,
+      digitos.length >= 8 ? digitos.slice(-8) : null,
+    ].filter(Boolean);
+    const normalizado =
+      "REPLACE(REPLACE(REPLACE(REPLACE(LOWER(resumo),'-',''),' ',''),'.',''),'(','')";
+    const cond = termos.map(() => normalizado + " LIKE ?").join(" OR ");
+    const valores = termos.map(
+      (t) => "%" + t.toLowerCase().replace(/[-\s.(]/g, "") + "%",
+    );
+    const { results } = await env.DB.prepare(
+      `SELECT id, criado_em, assunto, resumo FROM leads WHERE ${cond}`,
+    )
+      .bind(...valores)
+      .all();
+    return json(results);
+  }
+
+  if (rota === "relatorios" && m === "GET") {
+    const { results } = await env.DB.prepare(
+      "SELECT mes, gerado_em FROM relatorios ORDER BY mes DESC LIMIT 36",
+    ).all();
+    return json(results);
+  }
+  if (rota === "relatorios" && m === "POST") {
+    const c = await lerCorpo(request, 200);
+    return json(await gerarRelatorio(env, (c && c.mes) || mesAnterior()));
+  }
+  const rel = rota.match(/^relatorios\/(\d{4}-\d{2})$/);
+  if (rel && m === "GET") {
+    const linha = await env.DB.prepare(
+      "SELECT dados, gerado_em FROM relatorios WHERE mes = ?",
+    )
+      .bind(rel[1])
+      .first();
+    return linha
+      ? json({ ...JSON.parse(linha.dados), geradoEm: linha.gerado_em })
+      : json({ erro: "relatório não encontrado" }, 404);
   }
 
   return json({ erro: "rota inexistente" }, 404);
