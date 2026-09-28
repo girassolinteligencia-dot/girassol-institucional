@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Soluções desenvolvidas — Girassol Inteligência</title>
+    <meta
+      name="description"
+      content="Soluções já construídas pela equipe da Girassol Inteligência — AlltoParquet, Plataforma Eleitoral Inteligente e Guia Apache Parquet — que demonstram nossa capacidade técnica e podem ser adaptadas à sua empresa."
+    />
+    <link rel="canonical" href="https://girassolinteligencia.com.br/solucoes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Girassol Inteligência" />
+    <meta
+      property="og:title"
+      content="Soluções desenvolvidas — Girassol Inteligência"
+    />
+    <meta
+      property="og:description"
+      content="O que a equipe já construiu, e pode adaptar à sua realidade."
+    />
+    <meta
+      property="og:url"
+      content="https://girassolinteligencia.com.br/solucoes"
+    />
+    <meta
+      property="og:image"
+      content="https://girassolinteligencia.com.br/logo.png"
+    />
+    <link rel="icon" type="image/png" href="/assets/img/favicon-64.png" />
+    <link rel="stylesheet" href="/assets/css/girassol-marca.css" />
+    <link rel="stylesheet" href="/assets/css/chat-widget.css" />
+    <link rel="stylesheet" href="/assets/css/tema.css" />
+    <script src="/assets/js/tema.js"></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      defer
+    ></script>
+    <style>
+      body {
+        font: 400 17px/1.65 var(--fb);
+      }
+      .pg {
+        padding: 72px 0 32px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font:
+          400 16px/1 "IBM VGA",
+          monospace;
+        color: var(--ambar);
+        margin-bottom: 20px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: currentColor;
+      }
+      .pg h1 {
+        font-size: clamp(36px, 5vw, 56px);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        max-width: 880px;
+      }
+      .lead {
+        font-size: clamp(18px, 2vw, 20px);
+        color: var(--tinta-2);
+        max-width: 680px;
+        margin: 20px 0 56px;
+      }
+      .solucao {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 40px;
+        padding: 40px 0;
+        border-top: 1px solid var(--linha);
+        scroll-margin-top: 96px;
+      }
+      .solucao:last-child {
+        border-bottom: 1px solid var(--linha);
+      }
+      .solucao small {
+        font: 500 12px/1.4 var(--fm);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ambar);
+      }
+      .solucao h2 {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-top: 12px;
+      }
+      .solucao p {
+        color: var(--tinta-2);
+        margin-bottom: 16px;
+        max-width: 680px;
+      }
+      .solucao .prova {
+        color: var(--tinta);
+        font-size: 15px;
+        border-left: 2px solid var(--girassol);
+        padding-left: 12px;
+      }
+      .acoes {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+        align-items: center;
+      }
+      .link {
+        font: 600 16px/1 var(--fb);
+        color: var(--ambar);
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 3px;
+      }
+      .btn-chat {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font: 600 16px/1 var(--fb);
+        padding: 14px 20px;
+        border-radius: 4px;
+        background: var(--tinta);
+        color: var(--papel);
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+      }
+      @media (max-width: 800px) {
+        .solucao {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+      }
+      .chamada {
+        margin: 64px 0 0;
+        padding: 40px;
+        background: var(--miolo);
+        color: #faf7f0;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .chamada h2 {
+        font-size: 26px;
+        color: #faf7f0;
+      }
+      .chamada p {
+        color: #d9cfbe;
+        margin-top: 8px;
+      }
+      .chamada .btn-chat {
+        background: var(--girassol);
+        color: #15110b;
+      }
+      .chamada .btn-chat .gi-cursor {
+        background: #15110b;
+      }
+      .vazio {
+        color: var(--tinta-2);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="gi-topo">
+      <div class="gi-wrap gi-nav">
+        <a class="gi-marca" href="/" aria-label="Girassol Inteligência — início"
+          ><img
+            src="/assets/img/logo-marca.png"
+            alt=""
+            width="36"
+            height="36"
+          /><span>Girassol Inteligência</span></a
+        >
+        <nav aria-label="Navegação principal">
+          <a href="/#metodo">Método</a><a href="/#equipe">Equipe</a
+          ><a href="/solucoes" aria-current="page">Soluções</a
+          ><a href="/casos">Casos</a><a href="/artigos">Artigos</a>
+        </nav>
+        <a
+          class="gi-cta js-chat"
+          data-assunto="diagnostico"
+          href="#"
+          role="button"
+          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+        >
+      </div>
+    </header>
+
+    <main class="pg">
+      <div class="gi-wrap">
+        <span class="eyebrow">Soluções desenvolvidas</span>
+        <h1>O que a equipe já construiu.</h1>
+        <p class="lead">
+          Soluções em operação que demonstram nossa capacidade técnica e podem
+          ser adaptadas à realidade da sua empresa.
+        </p>
+        <div id="listaSolucoes"><p class="vazio">Carregando soluções…</p></div>
+        <aside class="chamada">
+          <div>
+            <h2>Precisa de algo diferente?</h2>
+            <p>
+              A maior parte do nosso trabalho é sob medida. Conte o que trava a
+              sua operação.
+            </p>
+          </div>
+          <button
+            class="btn-chat js-chat"
+            data-assunto="diagnostico"
+            type="button"
+          >
+            <span class="gi-cursor"></span>Iniciar diagnóstico
+          </button>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="gi-rodape">
+      <div class="gi-wrap gi-rodape-in">
+        <a class="gi-marca" href="/"
+          ><img
+            src="/assets/img/logo-marca.png"
+            alt=""
+            width="30"
+            height="30"
+          /><span>Girassol Inteligência</span></a
+        >
+        <nav>
+          <a href="/solucoes">Soluções</a><a href="/casos">Casos</a
+          ><a href="/artigos">Artigos</a><a href="/privacidade">Privacidade</a
+          ><a href="/termos">Termos</a
+          ><a href="/exclusao-dados">Exclusão de dados</a>
+        </nav>
+        <span
+          >Campo Grande/MS · © <span id="currentYear">2026</span> ·
+          <a
+            class="credito-fonte"
+            href="https://int10h.org/oldschool-pc-fonts/"
+            rel="noopener"
+            >Fonte IBM VGA: VileR, int10h.org (CC BY-SA 4.0)</a
+          ></span
+        >
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const esc = (t) =>
+          String(t ?? "").replace(
+            /[&<>"]/g,
+            (c) =>
+              ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+          );
+        const ligarChat = (raiz) =>
+          raiz.querySelectorAll(".js-chat").forEach((el) =>
+            el.addEventListener("click", (e) => {
+              e.preventDefault();
+              window.girassolChat &&
+                window.girassolChat.open(el.dataset.assunto || "diagnostico");
+            }),
+          );
+        ligarChat(document);
+
+        fetch("/site-config.json")
+          .then((r) => r.json())
+          .then((cfg) => {
+            const lista = (cfg.solutions || []).filter(
+              (s) => s.ativo !== false,
+            );
+            const alvo = document.getElementById("listaSolucoes");
+            alvo.innerHTML =
+              lista
+                .map(
+                  (s) =>
+                    '<article class="solucao" id="' +
+                    esc(s.id) +
+                    '"><div><small>' +
+                    esc(s.categoria || "") +
+                    "</small><h2>" +
+                    esc(s.titulo) +
+                    "</h2></div><div><p>" +
+                    esc(s.descricao || "") +
+                    "</p>" +
+                    (s.demonstra
+                      ? '<p class="prova">Demonstra: ' +
+                        esc(s.demonstra) +
+                        "</p>"
+                      : "") +
+                    '<div class="acoes"><a class="btn-chat js-chat" data-assunto="' +
+                    esc(s.assunto || s.id) +
+                    '" href="#" role="button">' +
+                    esc(s.chamada || "Conversar sobre esta solução") +
+                    "</a>" +
+                    (s.demoUrl
+                      ? '<a class="link" data-evento="demo" data-assunto="' +
+                        esc(s.assunto || s.id) +
+                        '" href="' +
+                        esc(s.demoUrl) +
+                        '" target="_blank" rel="noopener">Ver demonstração ↗</a>'
+                      : "") +
+                    "</div></div></article>",
+                )
+                .join("") || '<p class="vazio">Em breve.</p>';
+            ligarChat(alvo);
+            if (location.hash) {
+              const el = document.getElementById(location.hash.slice(1));
+              el && el.scrollIntoView();
+            }
+          })
+          .catch(() => {
+            document.getElementById("listaSolucoes").innerHTML =
+              '<p class="vazio">Não foi possível carregar as soluções agora.</p>';
+          });
+      })();
+    </script>
+    <script src="/assets/js/chat-widget.js"></script>
+    <script src="/assets/js/metricas.js" defer></script>
+  </body>
+</html>

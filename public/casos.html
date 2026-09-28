@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Casos — Girassol Inteligência</title>
+    <meta
+      name="description"
+      content="Problemas reais, ferramentas entregues: casos de ferramentas sob medida desenvolvidas pela Girassol Inteligência."
+    />
+    <link rel="canonical" href="https://girassolinteligencia.com.br/casos" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Girassol Inteligência" />
+    <meta property="og:title" content="Casos — Girassol Inteligência" />
+    <meta
+      property="og:description"
+      content="Problemas reais, ferramentas entregues."
+    />
+    <meta
+      property="og:url"
+      content="https://girassolinteligencia.com.br/casos"
+    />
+    <meta
+      property="og:image"
+      content="https://girassolinteligencia.com.br/logo.png"
+    />
+    <link rel="icon" type="image/png" href="/assets/img/favicon-64.png" />
+    <link rel="stylesheet" href="/assets/css/girassol-marca.css" />
+    <link rel="stylesheet" href="/assets/css/chat-widget.css" />
+    <link rel="stylesheet" href="/assets/css/tema.css" />
+    <script src="/assets/js/tema.js"></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      defer
+    ></script>
+    <style>
+      body {
+        font: 400 17px/1.65 var(--fb);
+      }
+      .pg {
+        padding: 72px 0 32px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font:
+          400 16px/1 "IBM VGA",
+          monospace;
+        color: var(--ambar);
+        margin-bottom: 20px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: currentColor;
+      }
+      .pg h1 {
+        font-size: clamp(36px, 5vw, 56px);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        max-width: 880px;
+      }
+      .lead {
+        font-size: clamp(18px, 2vw, 20px);
+        color: var(--tinta-2);
+        max-width: 680px;
+        margin: 20px 0 48px;
+      }
+      .trilha {
+        font: 400 14px/1 var(--fm);
+        color: var(--tinta-2);
+        margin-bottom: 40px;
+      }
+      .trilha a {
+        color: var(--ambar);
+        text-decoration: none;
+      }
+      .lista-casos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+      }
+      .caso-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 32px;
+        border: 1px solid var(--linha);
+        background: var(--surface-raised);
+        border-radius: 4px;
+        text-decoration: none;
+        color: var(--tinta);
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .caso-card:hover {
+        border-color: var(--ambar);
+        transform: translateY(-2px);
+      }
+      .caso-card small {
+        font: 500 12px/1 var(--fm);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ambar);
+      }
+      .caso-card h2 {
+        font-size: 21px;
+        line-height: 1.3;
+      }
+      .caso-card p {
+        color: var(--tinta-2);
+        font-size: 16px;
+        flex: 1;
+      }
+      .caso-card span {
+        font: 600 15px/1 var(--fb);
+        color: var(--ambar);
+      }
+      .caso-meta {
+        font: 400 14px/1 var(--fm);
+        color: var(--tinta-2);
+        margin-top: 12px;
+      }
+      .caso-corpo {
+        max-width: 760px;
+        margin-top: 16px;
+      }
+      .caso-corpo h2 {
+        font-size: 24px;
+        margin: 40px 0 12px;
+      }
+      .caso-corpo p {
+        margin-bottom: 16px;
+        color: var(--tinta);
+      }
+      .chamada {
+        margin: 64px 0 0;
+        padding: 40px;
+        background: var(--miolo);
+        color: #faf7f0;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .chamada h2 {
+        font-size: 26px;
+        color: #faf7f0;
+      }
+      .chamada p {
+        color: #d9cfbe;
+        margin-top: 8px;
+      }
+      .btn-chat {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font: 600 16px/1 var(--fb);
+        padding: 16px 24px;
+        border-radius: 4px;
+        background: var(--girassol);
+        color: #15110b;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+      }
+      .btn-chat .gi-cursor {
+        background: #15110b;
+      }
+      .outros {
+        margin-top: 64px;
+      }
+      .outros h2 {
+        font-size: 21px;
+        margin-bottom: 20px;
+      }
+      .vazio {
+        color: var(--tinta-2);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="gi-topo">
+      <div class="gi-wrap gi-nav">
+        <a class="gi-marca" href="/" aria-label="Girassol Inteligência — início"
+          ><img
+            src="/assets/img/logo-marca.png"
+            alt=""
+            width="36"
+            height="36"
+          /><span>Girassol Inteligência</span></a
+        >
+        <nav aria-label="Navegação principal">
+          <a href="/#metodo">Método</a><a href="/#equipe">Equipe</a
+          ><a href="/solucoes">Soluções</a
+          ><a href="/casos" aria-current="page">Casos</a
+          ><a href="/artigos">Artigos</a>
+        </nav>
+        <a
+          class="gi-cta js-chat"
+          data-assunto="diagnostico"
+          href="#"
+          role="button"
+          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+        >
+      </div>
+    </header>
+
+    <main class="pg">
+      <div class="gi-wrap">
+        <!-- Lista de casos (/casos) -->
+        <section id="casoLista">
+          <span class="eyebrow">Casos</span>
+          <h1>Problemas reais, ferramentas entregues.</h1>
+          <p class="lead">
+            Cada caso segue o mesmo percurso: o desafio da operação, a solução
+            construída com quem opera e o resultado entregue.
+          </p>
+          <div class="lista-casos" id="listaCasos">
+            <p class="vazio">Carregando casos…</p>
+          </div>
+        </section>
+
+        <!-- Caso individual (/casos/<id>): preenchido no servidor pelo Worker -->
+        <article id="casoDetalhe" hidden>
+          <div class="trilha"><a href="/casos">← Todos os casos</a></div>
+          <span class="eyebrow" id="casoCategoria">Caso</span>
+          <h1 id="casoTitulo"></h1>
+          <div class="caso-meta" id="casoMeta"></div>
+          <p class="lead" id="casoResumo"></p>
+          <div class="caso-corpo" id="casoConteudo"></div>
+          <aside class="chamada">
+            <div>
+              <h2>Sua operação tem um desafio parecido?</h2>
+              <p>
+                Comece pelo diagnóstico: uma conversa para entender onde uma
+                ferramenta sob medida gera mais resultado.
+              </p>
+            </div>
+            <button
+              class="btn-chat js-chat"
+              data-assunto="diagnostico"
+              type="button"
+            >
+              <span class="gi-cursor"></span>Iniciar diagnóstico
+            </button>
+          </aside>
+          <section class="outros">
+            <h2>Outros casos</h2>
+            <div class="lista-casos" id="outrosCasos"></div>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="gi-rodape">
+      <div class="gi-wrap gi-rodape-in">
+        <a class="gi-marca" href="/"
+          ><img
+            src="/assets/img/logo-marca.png"
+            alt=""
+            width="30"
+            height="30"
+          /><span>Girassol Inteligência</span></a
+        >
+        <nav>
+          <a href="/solucoes">Soluções</a><a href="/casos">Casos</a
+          ><a href="/artigos">Artigos</a><a href="/privacidade">Privacidade</a
+          ><a href="/termos">Termos</a
+          ><a href="/exclusao-dados">Exclusão de dados</a>
+        </nav>
+        <span
+          >Campo Grande/MS · © <span id="currentYear">2026</span> ·
+          <a
+            class="credito-fonte"
+            href="https://int10h.org/oldschool-pc-fonts/"
+            rel="noopener"
+            >Fonte IBM VGA: VileR, int10h.org (CC BY-SA 4.0)</a
+          ></span
+        >
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const esc = (t) =>
+          String(t ?? "").replace(
+            /[&<>"]/g,
+            (c) =>
+              ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+          );
+        const cartao = (c) =>
+          '<a class="caso-card" href="/casos/' +
+          encodeURIComponent(c.id) +
+          '"><small>' +
+          esc(c.category || "Caso") +
+          "</small><h2>" +
+          esc(c.title) +
+          "</h2><p>" +
+          esc(c.summary || "") +
+          "</p><span>Ler o caso →</span></a>";
+
+        document.querySelectorAll(".js-chat").forEach((el) =>
+          el.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.girassolChat &&
+              window.girassolChat.open(el.dataset.assunto || "diagnostico");
+          }),
+        );
+
+        fetch("/site-config.json")
+          .then((r) => r.json())
+          .then((cfg) => {
+            const casos = (cfg.cases || []).filter(
+              (c) => c.published !== false,
+            );
+            const atual = document.getElementById("casoDetalhe").dataset.caso;
+            if (atual) {
+              const outros = casos.filter((c) => c.id !== atual).slice(0, 3);
+              document.getElementById("outrosCasos").innerHTML =
+                outros.map(cartao).join("") ||
+                '<p class="vazio">Em breve, novos casos.</p>';
+            } else {
+              document.getElementById("listaCasos").innerHTML =
+                casos.map(cartao).join("") || '<p class="vazio">Em breve.</p>';
+            }
+          })
+          .catch(() => {
+            document.getElementById("listaCasos").innerHTML =
+              '<p class="vazio">Não foi possível carregar os casos agora.</p>';
+          });
+      })();
+    </script>
+    <script src="/assets/js/chat-widget.js"></script>
+    <script src="/assets/js/metricas.js" defer></script>
+  </body>
+</html>
