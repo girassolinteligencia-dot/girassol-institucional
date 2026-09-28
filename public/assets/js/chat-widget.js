@@ -152,6 +152,7 @@
       // 1. Botão Flutuante (Trigger)
       const launcher = document.createElement("button");
       launcher.className = "girassol-chat-launcher";
+      launcher.title = "Falar com o assistente";
       launcher.id = "girassolChatLauncher";
       launcher.setAttribute(
         "aria-label",

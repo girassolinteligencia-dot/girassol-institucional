@@ -587,3 +587,15 @@
   font-size: 11px;
   opacity: 0.7;
 }
+
+/* Botão do assistente: círculo só com o ícone também no computador (igual ao celular) */
+.girassol-chat-launcher {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
+.launcher-label {
+  display: none !important;
+}
