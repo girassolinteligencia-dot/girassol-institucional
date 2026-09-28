@@ -1,0 +1,16 @@
+# Arquivos que NÃO são publicados pelo Cloudflare Workers (sintaxe .gitignore)
+.git
+.wrangler
+node_modules
+.assetsignore
+.gitignore
+wrangler.jsonc
+textos-do-site.md
+admin.html
+*.log
+*.bak
+*.md
+human-output
+CLAUDE.md
+index-v2.html
+index-v3.html

@@ -3,33 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="canonical" href="https://girassolinteligencia.com.br/" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Girassol Inteligência — sua ideia vira ferramenta"
-    />
-    <meta
-      property="og:description"
-      content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS."
-    />
-    <meta
-      property="og:image"
-      content="https://girassolinteligencia.com.br/logo.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Girassol Inteligência — sua ideia vira ferramenta"
-    />
-    <meta
-      name="twitter:description"
-      content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS."
-    />
-    <meta
-      name="twitter:image"
-      content="https://girassolinteligencia.com.br/logo.png"
-    />
+    <meta name="robots" content="noindex" />
     <title>
       Girassol Inteligência — Ferramentas sob medida para a sua operação
     </title>
@@ -1094,62 +1068,37 @@
         }
       }
 
-      /* ===== MODO IBM VGA — The Ultimate Oldschool PC Font Pack (VileR, int10h.org, CC BY-SA 4.0) =====
-         Fonte de bitmap 9x16: usar apenas múltiplos de 16px para manter os pixels nítidos. */
-      @font-face {
-        font-family: "IBM VGA";
-        src: url("assets/fonts/WebPlus_IBM_VGA_9x16.woff") format("woff");
-        font-display: swap;
-      }
+      /* ===== MODO TERMINAL (teste) — VT323 em todo o site. Para reverter, apague este bloco. ===== */
       :root {
-        --serif: "IBM VGA", ui-monospace, monospace;
-        --sans: "IBM VGA", ui-monospace, monospace;
-        --mono: "IBM VGA", ui-monospace, monospace;
+        --serif: "VT323", ui-monospace, monospace;
+        --sans: "VT323", ui-monospace, monospace;
       }
       body {
-        font-size: 16px;
-        line-height: 24px;
-        -webkit-font-smoothing: none;
-        font-smooth: never;
-        text-rendering: optimizeSpeed;
+        font-size: 22px;
+        line-height: 1.45;
       }
-      * {
-        font-weight: 400 !important;
-        letter-spacing: 0 !important;
-        font-synthesis: none;
+      .lead {
+        font-size: clamp(22px, 2.4vw, 26px);
       }
-      h1 {
-        font-size: 64px;
-        line-height: 72px;
+      .nav ul {
+        font-size: 20px;
       }
-      h2 {
-        font-size: 32px;
-        line-height: 40px;
+      .nav .btn {
+        font-size: 19px;
       }
-      h3,
-      .etapa h3,
-      .card h3 {
-        font-size: 16px;
-        line-height: 24px;
-        text-transform: uppercase;
-        color: var(--tinta);
+      .btn {
+        font-size: 21px;
       }
-      .flor h3,
-      .etapa h3 {
-        color: var(--papel);
+      .brand span {
+        font-size: 24px;
       }
-      .etapa h3,
-      .card h3 {
-        font-size: 32px;
-        line-height: 40px;
-        text-transform: none;
+      .proof strong,
+      .dores h3,
+      .passo h3,
+      .area h3,
+      .comparativo h3 {
+        font-size: 25px;
       }
-      .final h2 {
-        font-size: 48px;
-        line-height: 56px;
-      }
-      .lead,
-      .etapa p,
       .proof p,
       .dores p,
       .passo p,
@@ -1159,19 +1108,34 @@
       .nota,
       .coord,
       .card .prova,
-      footer,
-      .nav ul,
+      footer {
+        font-size: 22px;
+      }
+      .etapa h3 {
+        font-size: 36px;
+      }
+      .etapa p {
+        font-size: 22px;
+      }
+      .card h3 {
+        font-size: 32px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.05;
+      }
+      h1 {
+        letter-spacing: -0.01em;
+      }
       .btn,
-      .nav .btn,
-      .proof strong {
-        font-size: 16px;
-        line-height: 24px;
-      }
-      .lead {
-        color: var(--tinta);
-      }
-      .brand span {
-        font-size: 16px;
+      .brand span,
+      strong,
+      b,
+      .nav .btn {
+        font-weight: 400;
       }
       .eyebrow,
       .etapa small,
@@ -1181,147 +1145,15 @@
       .card small,
       .hint,
       .dores b {
-        font-size: 16px;
-        line-height: 16px;
-      }
-      .proof strong {
-        text-transform: uppercase;
-      }
-      .btn {
-        border-radius: 0;
-        padding: 16px 24px;
-      }
-      .btn .dot {
-        border-radius: 0;
-        width: 8px;
-        height: 16px;
-        animation: cursor 1.06s steps(1) infinite;
-        box-shadow: none;
-      }
-      @keyframes cursor {
-        50% {
-          opacity: 0;
-        }
+        letter-spacing: 0.06em;
       }
       .hero h1 em {
-        text-shadow: 0 0 16px rgba(154, 100, 0, 0.28);
+        text-shadow: 0 0 18px rgba(154, 100, 0, 0.25);
       }
       .flor h2,
       .etapa h3,
       .final h2 {
-        text-shadow: 0 0 12px rgba(242, 183, 5, 0.22);
-      }
-      .card,
-      .comparativo,
-      .areas {
-        border-radius: 0;
-      }
-      @media (max-width: 900px) {
-        h1 {
-          font-size: 48px;
-          line-height: 56px;
-        }
-        h2 {
-          font-size: 32px;
-          line-height: 40px;
-        }
-        .final h2 {
-          font-size: 32px;
-          line-height: 40px;
-        }
-      }
-      @media (max-width: 420px) {
-        h1 {
-          font-size: 32px;
-          line-height: 40px;
-        }
-      }
-      .credito {
-        font-size: 16px;
-        opacity: 0.6;
-      }
-
-      /* Soluções em 3 colunas e casos (conteúdo trazido de produtos.html e casos.html) */
-      .cards-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .cards-3 .card {
-        gap: 16px;
-      }
-      @media (max-width: 1000px) {
-        .cards-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-      .casos {
-        background: var(--superficie);
-      }
-      .casos-lista {
-        margin-top: 48px;
-        border-top: 1px solid var(--linha);
-      }
-      .caso {
-        border-bottom: 1px solid var(--linha);
-      }
-      .caso summary {
-        list-style: none;
-        cursor: pointer;
-        display: grid;
-        grid-template-columns: 160px 1fr 32px;
-        gap: 24px;
-        padding: 32px 0;
-        align-items: start;
-      }
-      .caso summary::-webkit-details-marker {
-        display: none;
-      }
-      .caso summary small {
-        color: var(--ambar);
-        text-transform: uppercase;
-      }
-      .caso summary h3 {
-        font-size: 16px;
-        line-height: 24px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-      .caso summary p {
-        color: var(--tinta-2);
-      }
-      .caso summary::after {
-        content: "[+]";
-        color: var(--ambar);
-      }
-      .caso[open] summary::after {
-        content: "[-]";
-      }
-      .caso summary:hover h3 {
-        color: var(--ambar);
-      }
-      .caso-corpo {
-        padding: 0 56px 40px 184px;
-        color: var(--tinta-2);
-        max-width: 900px;
-      }
-      .caso-corpo h4 {
-        color: var(--tinta);
-        text-transform: uppercase;
-        margin: 24px 0 8px;
-        font-size: 16px;
-      }
-      .caso-corpo strong {
-        color: var(--tinta);
-      }
-      @media (max-width: 800px) {
-        .caso summary {
-          grid-template-columns: 1fr 32px;
-        }
-        .caso summary small {
-          grid-column: 1/-1;
-        }
-        .caso-corpo {
-          padding: 0 0 32px;
-        }
+        text-shadow: 0 0 14px rgba(242, 183, 5, 0.18);
       }
     </style>
     <link rel="stylesheet" href="assets/css/tema.css" />
@@ -1345,7 +1177,6 @@
           <li><a href="#metodo">Método</a></li>
           <li><a href="#equipe">Equipe</a></li>
           <li><a href="#solucoes">Soluções</a></li>
-          <li><a href="#casos">Casos</a></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
         <button class="btn js-chat mag" type="button">
@@ -1687,20 +1518,19 @@
               que podem ser adaptadas à sua realidade.
             </p>
           </div>
-          <div class="cards cards-3">
+          <div class="cards">
             <article class="card spot tilt rise">
-              <small>Dados · Aplicativo desktop Windows</small>
+              <small>Dados · Aplicativo desktop</small>
               <h3>AlltoParquet</h3>
               <p>
-                Converte CSV, Excel, JSON, NDJSON e JSONL para Apache Parquet
-                diretamente no computador do usuário, sem instalação e sem
-                enviar dados para a internet. Compressão Snappy ou Zstandard.
+                Converte CSV, Excel e JSON para Apache Parquet diretamente no
+                computador do usuário, sem enviar dados para a internet.
               </p>
               <div class="prova">
                 Demonstra: processamento local e soberania de dados.
               </div>
               <a class="btn-link js-chat" href="#" role="button"
-                >Conversar sobre esta solução</a
+                >Conversar sobre uma solução semelhante</a
               >
             </article>
             <article class="card spot tilt rise">
@@ -1708,55 +1538,19 @@
               <h3>Plataforma Eleitoral Inteligente</h3>
               <p>
                 Consulta e análise dos dados eleitorais oficiais do TSE (2010 a
-                2024) para os 79 municípios de Mato Grosso do Sul, com acesso
-                seguro por link enviado ao e-mail.
+                2024) para os 79 municípios de Mato Grosso do Sul.
               </p>
               <div class="prova">
                 Demonstra: integração de bases oficiais e análise em escala.
               </div>
-              <a
-                class="btn-link"
-                href="https://plataformaeleitoral.ia.br"
-                target="_blank"
-                rel="noopener"
-                >Ver demonstração</a
-              >
               <a class="btn-link js-chat" href="#" role="button"
-                >Conversar sobre esta solução</a
-              >
-            </article>
-            <article class="card spot tilt rise">
-              <small>Material técnico · Gratuito</small>
-              <h3>Guia Apache Parquet</h3>
-              <p>
-                Vinte capítulos sobre o formato colunar: anatomia dos arquivos,
-                compressão, particionamento e testes de desempenho com BigQuery,
-                AWS Athena e DuckDB.
-              </p>
-              <div class="prova">
-                Demonstra: profundidade técnica em engenharia de dados.
-              </div>
-              <a class="btn-link js-chat" href="#" role="button"
-                >Solicitar o guia</a
+                >Conversar sobre uma solução semelhante</a
               >
             </article>
           </div>
-        </div>
-      </section>
-
-      <section class="casos" id="casos">
-        <div class="wrap">
-          <div class="rise">
-            <span class="eyebrow scramble">Casos</span>
-            <h2>Problemas reais, ferramentas entregues.</h2>
-            <p class="lead" style="margin-top: 16px">
-              Cada caso segue o mesmo percurso: o desafio da operação, a solução
-              construída com quem opera e o resultado entregue.
-            </p>
-          </div>
-          <div class="casos-lista" id="casosLista" aria-live="polite">
-            <p class="nota">Carregando casos…</p>
-          </div>
+          <p class="nota rise">
+            <a class="btn-link" href="casos.html">Ver casos e aplicações</a>
+          </p>
         </div>
       </section>
 
@@ -1787,22 +1581,14 @@
           /><span>Girassol Inteligência</span></a
         >
         <nav>
-          <a href="#solucoes">Soluções</a>
-          <a href="#casos">Casos</a>
+          <a href="produtos.html">Soluções</a>
+          <a href="casos.html">Casos</a>
           <a href="artigos.html">Artigos</a>
           <a href="privacidade.html">Privacidade</a>
           <a href="termos.html">Termos</a>
           <a href="exclusao-dados.html">Exclusão de dados</a>
         </nav>
-        <span
-          >Campo Grande/MS · © 2026 ·
-          <a
-            class="credito"
-            href="https://int10h.org/oldschool-pc-fonts/"
-            rel="noopener"
-            >Fonte IBM VGA: VileR, int10h.org (CC BY-SA 4.0)</a
-          ></span
-        >
+        <span>Campo Grande/MS · © 2026</span>
       </div>
     </footer>
 
@@ -2230,7 +2016,8 @@
 
             // rótulos das especialidades e centro
             if (escuro > 0.9) {
-              ctx.font = "500 " + 16 + 'px \"IBM VGA\",monospace';
+              ctx.font =
+                "500 " + Math.max(13, S * 0.027) + "px VT323,monospace";
               for (let g = 0; g < GRUPOS.length; g++) {
                 const lp = clamp(P - (g + 1), 0, 1);
                 if (lp <= 0 || fim >= 1) continue;
@@ -2278,7 +2065,7 @@
                 S * 0.03,
               );
               ctx.fill();
-              ctx.font = "400 " + 16 + 'px "IBM VGA",monospace';
+              ctx.font = "400 " + Math.max(13, S * 0.03) + "px VT323,monospace";
               ctx.textAlign = "center";
               ctx.textBaseline = "middle";
               ctx.globalAlpha = (1 - sai) * (1 - fim);
@@ -2343,70 +2130,6 @@
             (es) => (vis = es[0].isIntersecting),
           ).observe(canvas);
           requestAnimationFrame(draw);
-        })();
-
-        // Casos: carregados do site-config.json (o mesmo arquivo que o painel edita)
-        (function () {
-          const lista = document.getElementById("casosLista");
-          const esc = (t) =>
-            String(t).replace(
-              /[&<>"]/g,
-              (c) =>
-                ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
-            );
-          // Markdown simples dos casos: "### Título" vira subtítulo, **texto** vira destaque
-          const md = (t) =>
-            esc(t)
-              .split(/\n{2,}/)
-              .map((bloco) =>
-                bloco
-                  .split("\n")
-                  .map((l) =>
-                    l.startsWith("### ")
-                      ? "<h4>" + l.slice(4) + "</h4>"
-                      : l
-                        ? "<p>" + l + "</p>"
-                        : "",
-                  )
-                  .join(""),
-              )
-              .join("")
-              .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-          fetch("site-config.json", { cache: "no-store" })
-            .then((r) => r.json())
-            .then((cfg) => {
-              const casos = (cfg.cases || []).filter(
-                (c) => c.published !== false,
-              );
-              if (!casos.length) {
-                lista.innerHTML = '<p class="nota">Em breve.</p>';
-                return;
-              }
-              lista.innerHTML = casos
-                .map(
-                  (c) =>
-                    '<details class="caso" id="caso-' +
-                    esc(c.id) +
-                    '"><summary><small>' +
-                    esc(c.category || "") +
-                    "</small><div><h3>" +
-                    esc(c.title) +
-                    "</h3><p>" +
-                    esc(c.summary || "") +
-                    '</p></div></summary><div class="caso-corpo">' +
-                    md(c.content || "") +
-                    "</div></details>",
-                )
-                .join("");
-            })
-            .catch(() => {
-              lista.innerHTML =
-                '<p class="nota">Não foi possível carregar os casos agora. <a class="btn-link js-chat" href="#" role="button">Pergunte à nossa equipe</a>.</p>';
-              lista.querySelector(".js-chat").addEventListener("click", (e) => {
-                e.preventDefault();
-                window.girassolChat && window.girassolChat.open();
-              });
-            });
         })();
 
         // Trilho do método

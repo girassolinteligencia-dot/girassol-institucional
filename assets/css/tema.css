@@ -1,0 +1,90 @@
+/* =====================================================================
+   Girassol Inteligência — modo escuro e seletor de tema
+   Ativado por <html data-theme="dark"> (controlado por assets/js/tema.js).
+   Site: padrão claro. Painel administrativo: padrão escuro.
+   ===================================================================== */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Paleta do DNA, versão escura */
+  --papel: #15110b;
+  --superficie: #1d170f;
+  --linha: #3a2f22;
+  --tinta: #f2ede3;
+  --tinta-2: #bfb3a0;
+  --miolo: #0d0a06;
+  --miolo-2: #241b10;
+  --ambar: #f2b705;
+
+  /* Tokens das páginas internas e do painel */
+  --void: var(--papel);
+  --surface: var(--superficie);
+  --surface-raised: #241c12;
+  --surface-glass: rgba(21, 17, 11, 0.92);
+  --line: var(--linha);
+  --line-light: #4a3d2c;
+  --ink: var(--tinta);
+  --ink-soft: var(--tinta-2);
+  --ink-faint: #8e806b;
+  --earth: #e0a040;
+  --petal: var(--ambar);
+  --petal-bright: #ffd34d;
+  --petal-glow: rgba(242, 183, 5, 0.22);
+}
+
+/* Superfícies com cor fixa na home */
+html[data-theme="dark"] header#topbar,
+html[data-theme="dark"] .site-header {
+  background: rgba(21, 17, 11, 0.88) !important;
+  border-color: var(--linha) !important;
+}
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .comparativo > div + div {
+  background: var(--superficie) !important;
+}
+html[data-theme="dark"] .dores li {
+  background: rgba(29, 23, 15, 0.85) !important;
+}
+html[data-theme="dark"] .btn:not(.final .btn) {
+  background: var(--girassol, #f2b705);
+  color: #15110b;
+}
+html[data-theme="dark"] .btn .dot {
+  background: #15110b;
+}
+html[data-theme="dark"] .final,
+html[data-theme="dark"] .flor,
+html[data-theme="dark"] footer {
+  background: var(--miolo) !important;
+}
+html[data-theme="dark"] .hero h1 em {
+  text-shadow: 0 0 18px rgba(242, 183, 5, 0.35);
+}
+
+/* Seletor de tema (estilo terminal) */
+.tema-toggle {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 70;
+  font:
+    16px/16px "IBM VGA",
+    ui-monospace,
+    monospace;
+  padding: 8px 12px;
+  border: 1px solid var(--linha, #e3dbcc);
+  border-radius: 0;
+  background: var(--papel, #faf7f0);
+  color: var(--tinta, #1c1812);
+  cursor: pointer;
+}
+.tema-toggle:hover {
+  border-color: var(--ambar, #9a6400);
+  color: var(--ambar, #9a6400);
+}
+@media print {
+  .tema-toggle {
+    display: none;
+  }
+}

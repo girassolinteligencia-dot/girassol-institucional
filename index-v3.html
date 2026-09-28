@@ -3,33 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="canonical" href="https://girassolinteligencia.com.br/" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Girassol Inteligência — sua ideia vira ferramenta"
-    />
-    <meta
-      property="og:description"
-      content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS."
-    />
-    <meta
-      property="og:image"
-      content="https://girassolinteligencia.com.br/logo.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Girassol Inteligência — sua ideia vira ferramenta"
-    />
-    <meta
-      name="twitter:description"
-      content="Engenharia de software e inteligência artificial aplicada com rigor técnico, governança e validação humana. Campo Grande, MS."
-    />
-    <meta
-      name="twitter:image"
-      content="https://girassolinteligencia.com.br/logo.png"
-    />
+    <meta name="robots" content="noindex" />
     <title>
       Girassol Inteligência — Ferramentas sob medida para a sua operação
     </title>
@@ -1240,89 +1214,6 @@
         font-size: 16px;
         opacity: 0.6;
       }
-
-      /* Soluções em 3 colunas e casos (conteúdo trazido de produtos.html e casos.html) */
-      .cards-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .cards-3 .card {
-        gap: 16px;
-      }
-      @media (max-width: 1000px) {
-        .cards-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-      .casos {
-        background: var(--superficie);
-      }
-      .casos-lista {
-        margin-top: 48px;
-        border-top: 1px solid var(--linha);
-      }
-      .caso {
-        border-bottom: 1px solid var(--linha);
-      }
-      .caso summary {
-        list-style: none;
-        cursor: pointer;
-        display: grid;
-        grid-template-columns: 160px 1fr 32px;
-        gap: 24px;
-        padding: 32px 0;
-        align-items: start;
-      }
-      .caso summary::-webkit-details-marker {
-        display: none;
-      }
-      .caso summary small {
-        color: var(--ambar);
-        text-transform: uppercase;
-      }
-      .caso summary h3 {
-        font-size: 16px;
-        line-height: 24px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-      .caso summary p {
-        color: var(--tinta-2);
-      }
-      .caso summary::after {
-        content: "[+]";
-        color: var(--ambar);
-      }
-      .caso[open] summary::after {
-        content: "[-]";
-      }
-      .caso summary:hover h3 {
-        color: var(--ambar);
-      }
-      .caso-corpo {
-        padding: 0 56px 40px 184px;
-        color: var(--tinta-2);
-        max-width: 900px;
-      }
-      .caso-corpo h4 {
-        color: var(--tinta);
-        text-transform: uppercase;
-        margin: 24px 0 8px;
-        font-size: 16px;
-      }
-      .caso-corpo strong {
-        color: var(--tinta);
-      }
-      @media (max-width: 800px) {
-        .caso summary {
-          grid-template-columns: 1fr 32px;
-        }
-        .caso summary small {
-          grid-column: 1/-1;
-        }
-        .caso-corpo {
-          padding: 0 0 32px;
-        }
-      }
     </style>
     <link rel="stylesheet" href="assets/css/tema.css" />
     <script src="assets/js/tema.js"></script>
@@ -1345,7 +1236,6 @@
           <li><a href="#metodo">Método</a></li>
           <li><a href="#equipe">Equipe</a></li>
           <li><a href="#solucoes">Soluções</a></li>
-          <li><a href="#casos">Casos</a></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
         <button class="btn js-chat mag" type="button">
@@ -1687,20 +1577,19 @@
               que podem ser adaptadas à sua realidade.
             </p>
           </div>
-          <div class="cards cards-3">
+          <div class="cards">
             <article class="card spot tilt rise">
-              <small>Dados · Aplicativo desktop Windows</small>
+              <small>Dados · Aplicativo desktop</small>
               <h3>AlltoParquet</h3>
               <p>
-                Converte CSV, Excel, JSON, NDJSON e JSONL para Apache Parquet
-                diretamente no computador do usuário, sem instalação e sem
-                enviar dados para a internet. Compressão Snappy ou Zstandard.
+                Converte CSV, Excel e JSON para Apache Parquet diretamente no
+                computador do usuário, sem enviar dados para a internet.
               </p>
               <div class="prova">
                 Demonstra: processamento local e soberania de dados.
               </div>
               <a class="btn-link js-chat" href="#" role="button"
-                >Conversar sobre esta solução</a
+                >Conversar sobre uma solução semelhante</a
               >
             </article>
             <article class="card spot tilt rise">
@@ -1708,55 +1597,19 @@
               <h3>Plataforma Eleitoral Inteligente</h3>
               <p>
                 Consulta e análise dos dados eleitorais oficiais do TSE (2010 a
-                2024) para os 79 municípios de Mato Grosso do Sul, com acesso
-                seguro por link enviado ao e-mail.
+                2024) para os 79 municípios de Mato Grosso do Sul.
               </p>
               <div class="prova">
                 Demonstra: integração de bases oficiais e análise em escala.
               </div>
-              <a
-                class="btn-link"
-                href="https://plataformaeleitoral.ia.br"
-                target="_blank"
-                rel="noopener"
-                >Ver demonstração</a
-              >
               <a class="btn-link js-chat" href="#" role="button"
-                >Conversar sobre esta solução</a
-              >
-            </article>
-            <article class="card spot tilt rise">
-              <small>Material técnico · Gratuito</small>
-              <h3>Guia Apache Parquet</h3>
-              <p>
-                Vinte capítulos sobre o formato colunar: anatomia dos arquivos,
-                compressão, particionamento e testes de desempenho com BigQuery,
-                AWS Athena e DuckDB.
-              </p>
-              <div class="prova">
-                Demonstra: profundidade técnica em engenharia de dados.
-              </div>
-              <a class="btn-link js-chat" href="#" role="button"
-                >Solicitar o guia</a
+                >Conversar sobre uma solução semelhante</a
               >
             </article>
           </div>
-        </div>
-      </section>
-
-      <section class="casos" id="casos">
-        <div class="wrap">
-          <div class="rise">
-            <span class="eyebrow scramble">Casos</span>
-            <h2>Problemas reais, ferramentas entregues.</h2>
-            <p class="lead" style="margin-top: 16px">
-              Cada caso segue o mesmo percurso: o desafio da operação, a solução
-              construída com quem opera e o resultado entregue.
-            </p>
-          </div>
-          <div class="casos-lista" id="casosLista" aria-live="polite">
-            <p class="nota">Carregando casos…</p>
-          </div>
+          <p class="nota rise">
+            <a class="btn-link" href="casos.html">Ver casos e aplicações</a>
+          </p>
         </div>
       </section>
 
@@ -1787,8 +1640,8 @@
           /><span>Girassol Inteligência</span></a
         >
         <nav>
-          <a href="#solucoes">Soluções</a>
-          <a href="#casos">Casos</a>
+          <a href="produtos.html">Soluções</a>
+          <a href="casos.html">Casos</a>
           <a href="artigos.html">Artigos</a>
           <a href="privacidade.html">Privacidade</a>
           <a href="termos.html">Termos</a>
@@ -2343,70 +2196,6 @@
             (es) => (vis = es[0].isIntersecting),
           ).observe(canvas);
           requestAnimationFrame(draw);
-        })();
-
-        // Casos: carregados do site-config.json (o mesmo arquivo que o painel edita)
-        (function () {
-          const lista = document.getElementById("casosLista");
-          const esc = (t) =>
-            String(t).replace(
-              /[&<>"]/g,
-              (c) =>
-                ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
-            );
-          // Markdown simples dos casos: "### Título" vira subtítulo, **texto** vira destaque
-          const md = (t) =>
-            esc(t)
-              .split(/\n{2,}/)
-              .map((bloco) =>
-                bloco
-                  .split("\n")
-                  .map((l) =>
-                    l.startsWith("### ")
-                      ? "<h4>" + l.slice(4) + "</h4>"
-                      : l
-                        ? "<p>" + l + "</p>"
-                        : "",
-                  )
-                  .join(""),
-              )
-              .join("")
-              .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-          fetch("site-config.json", { cache: "no-store" })
-            .then((r) => r.json())
-            .then((cfg) => {
-              const casos = (cfg.cases || []).filter(
-                (c) => c.published !== false,
-              );
-              if (!casos.length) {
-                lista.innerHTML = '<p class="nota">Em breve.</p>';
-                return;
-              }
-              lista.innerHTML = casos
-                .map(
-                  (c) =>
-                    '<details class="caso" id="caso-' +
-                    esc(c.id) +
-                    '"><summary><small>' +
-                    esc(c.category || "") +
-                    "</small><div><h3>" +
-                    esc(c.title) +
-                    "</h3><p>" +
-                    esc(c.summary || "") +
-                    '</p></div></summary><div class="caso-corpo">' +
-                    md(c.content || "") +
-                    "</div></details>",
-                )
-                .join("");
-            })
-            .catch(() => {
-              lista.innerHTML =
-                '<p class="nota">Não foi possível carregar os casos agora. <a class="btn-link js-chat" href="#" role="button">Pergunte à nossa equipe</a>.</p>';
-              lista.querySelector(".js-chat").addEventListener("click", (e) => {
-                e.preventDefault();
-                window.girassolChat && window.girassolChat.open();
-              });
-            });
         })();
 
         // Trilho do método

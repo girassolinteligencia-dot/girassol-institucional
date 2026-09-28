@@ -10,7 +10,8 @@
   const STORAGE_KEY = "girassol_web_session";
   const DEFAULT_API_BASE = "https://api.girassolinteligencia.com.br";
   const TURNSTILE_SITE_KEY = "0x4AAAAAAEw5N47esEJTOqpj";
-  const WHATSAPP_LINK = "https://wa.me/5567999818818?text=Ol%C3%A1%2C+estou+no+site+da+Girassol+e+gostaria+de+continuar+meu+atendimento.";
+  const WHATSAPP_LINK =
+    "https://wa.me/5567981151717?text=Ol%C3%A1%2C+estou+no+site+da+Girassol+e+gostaria+de+continuar+meu+atendimento.";
 
   class GirassolChatWidget {
     constructor() {
@@ -34,14 +35,17 @@
       if (this.messages.length === 0) {
         this.addMessage(
           "assistant",
-          "Olá! Seja bem-vindo à Girassol. Me conta: qual tarefa hoje toma tempo demais na sua empresa ou qual rotina você gostaria de organizar no computador?"
+          "Olá! Seja bem-vindo à Girassol. Me conta: qual tarefa hoje toma tempo demais na sua empresa ou qual rotina você gostaria de organizar no computador?",
         );
       }
     }
 
     initTurnstile() {
       const checkTurnstile = setInterval(() => {
-        if (window.turnstile && document.getElementById("girassolTurnstileContainer")) {
+        if (
+          window.turnstile &&
+          document.getElementById("girassolTurnstileContainer")
+        ) {
           clearInterval(checkTurnstile);
           try {
             this.turnstileWidgetId = window.turnstile.render(
@@ -53,14 +57,17 @@
                 },
                 "expired-callback": () => {
                   this.turnstileToken = null;
-                  if (this.turnstileWidgetId) window.turnstile.reset(this.turnstileWidgetId);
+                  if (this.turnstileWidgetId)
+                    window.turnstile.reset(this.turnstileWidgetId);
                 },
                 "error-callback": () => {
-                  console.warn("[Turnstile] Verificação local ignorada em modo de teste.");
+                  console.warn(
+                    "[Turnstile] Verificação local ignorada em modo de teste.",
+                  );
                 },
                 theme: "dark",
                 size: "invisible",
-              }
+              },
             );
           } catch (e) {
             console.warn("[Turnstile] Render error:", e);
@@ -91,7 +98,7 @@
           JSON.stringify({
             sessionId: this.sessionId,
             messages: this.messages,
-          })
+          }),
         );
       } catch (e) {
         console.warn("[GirassolChat] Falha ao salvar sessão:", e);
@@ -103,7 +110,10 @@
       const launcher = document.createElement("button");
       launcher.className = "girassol-chat-launcher";
       launcher.id = "girassolChatLauncher";
-      launcher.setAttribute("aria-label", "Conversar com o Assistente Girassol");
+      launcher.setAttribute(
+        "aria-label",
+        "Conversar com o Assistente Girassol",
+      );
       launcher.innerHTML = `
         <div class="launcher-icon-wrap">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -187,7 +197,9 @@
       `;
       document.body.appendChild(chatWindow);
       this.windowEl = chatWindow;
-      this.messagesContainer = chatWindow.querySelector("#girassolChatMessages");
+      this.messagesContainer = chatWindow.querySelector(
+        "#girassolChatMessages",
+      );
       this.typingIndicator = chatWindow.querySelector("#girassolChatTyping");
       this.inputEl = chatWindow.querySelector("#girassolChatInput");
       this.formEl = chatWindow.querySelector("#girassolChatForm");
@@ -198,7 +210,9 @@
 
     attachEvents() {
       this.launcherEl.addEventListener("click", () => this.toggle());
-      this.windowEl.querySelector("#girassolChatMinimize").addEventListener("click", () => this.close());
+      this.windowEl
+        .querySelector("#girassolChatMinimize")
+        .addEventListener("click", () => this.close());
 
       this.formEl.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -242,9 +256,14 @@
     renderMessageDOM(msg) {
       const bubble = document.createElement("div");
       bubble.className = `chat-bubble ${msg.role}`;
-      
-      const timeStr = msg.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      
+
+      const timeStr =
+        msg.time ||
+        new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
       const textNode = document.createTextNode(msg.text);
       bubble.appendChild(textNode);
 
@@ -261,7 +280,10 @@
       const msg = {
         role,
         text,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       this.messages.push(msg);
       this.renderMessageDOM(msg);
@@ -337,7 +359,10 @@
         if (response.ok) {
           const data = await response.json();
           this.setTyping(false);
-          this.addMessage("assistant", data.reply || "Resposta recebida do núcleo.");
+          this.addMessage(
+            "assistant",
+            data.reply || "Resposta recebida do núcleo.",
+          );
           if (data.sessionId) {
             this.sessionId = data.sessionId;
             this.saveSession();
@@ -374,7 +399,7 @@
   // Inicializa quando a página estiver carregada e expõe globalmente
   function initWidget() {
     window.girassolChat = new GirassolChatWidget();
-    window.openGirassolChat = function() {
+    window.openGirassolChat = function () {
       if (window.girassolChat) {
         window.girassolChat.open();
       }
