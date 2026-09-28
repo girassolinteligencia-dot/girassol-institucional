@@ -17,8 +17,8 @@
     {
       "binding": "DB",
       "database_name": "girassol-site",
-      // Preencher com o ID gerado por: npx wrangler d1 create girassol-site
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      // Banco criado em 28/09/2026 (região ENAM)
+      "database_id": "e2e75ac1-fd81-4669-8b81-dc1f3b3dd01e",
       "migrations_dir": "migrations",
     },
   ],
