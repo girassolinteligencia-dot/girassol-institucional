@@ -1,12 +1,13 @@
 /* =====================================================================
-   Girassol Inteligência — camada de identidade (DNA v1)
-   Aplica às páginas internas a paleta clara do DNA e a fonte IBM VGA.
+   Girassol Inteligência — camada de identidade (DNA)
+   Aplica às páginas internas a paleta clara do DNA e a tipografia:
+   IBM Plex Sans (texto e títulos) + IBM Plex Mono (rótulos).
+   A IBM VGA fica só em detalhes (seletor de tema), com crédito no rodapé:
+   The Ultimate Oldschool PC Font Pack — VileR, int10h.org, CC BY-SA 4.0.
    Carregar DEPOIS do <style> da página: redefine os tokens antigos.
-
-   Fonte: The Ultimate Oldschool PC Font Pack — VileR, int10h.org
-   Licença CC BY-SA 4.0 (ver assets/fonts/LICENSE-oldschool-pc-fonts.txt)
-   Fonte de bitmap 9x16: usar apenas múltiplos de 16px.
    ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 @font-face {
   font-family: "IBM VGA";
@@ -41,16 +42,10 @@
   --petal-glow: rgba(242, 183, 5, 0.18);
   --sky: #4f6b77;
 
-  --fd: "IBM VGA", ui-monospace, monospace;
-  --fb: "IBM VGA", ui-monospace, monospace;
-  --fm: "IBM VGA", ui-monospace, monospace;
-
-  --hero: 48px;
-  --h2: 32px;
-  --h3: 16px;
-  --body: 16px;
-  --sm: 16px;
-  --radius: 0px;
+  --fd: "IBM Plex Sans", system-ui, sans-serif;
+  --fb: "IBM Plex Sans", system-ui, sans-serif;
+  --fm: "IBM Plex Mono", ui-monospace, monospace;
+  --radius: 4px;
 }
 
 html,
@@ -59,71 +54,25 @@ body {
   color: var(--tinta);
 }
 
-body {
-  font-size: 16px;
-  line-height: 24px;
-  -webkit-font-smoothing: none;
-  text-rendering: optimizeSpeed;
-}
-
-/* Fonte única, sem negrito ou itálico sintéticos (o bitmap não tem variações) */
-*,
-*::before,
-*::after {
-  font-family: "IBM VGA", ui-monospace, monospace !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
-  letter-spacing: 0 !important;
-  font-synthesis: none;
-}
-
-/* Escala em múltiplos de 16px */
-h1 {
-  font-size: 48px !important;
-  line-height: 56px !important;
-}
-h2 {
-  font-size: 32px !important;
-  line-height: 40px !important;
-}
+/* Títulos e texto em Plex Sans; rótulos técnicos (fonte mono das páginas) em Plex Mono */
+body,
+h1,
+h2,
 h3,
 h4,
-h5,
-h6 {
-  font-size: 16px !important;
-  line-height: 24px !important;
-  text-transform: uppercase;
-}
 p,
 li,
-td,
-th,
-label,
 input,
 textarea,
 select,
-button,
-a,
-span,
-small,
-dd,
-dt,
-blockquote,
-figcaption {
-  font-size: 16px !important;
-  line-height: 24px;
+button {
+  font-family: var(--fb);
 }
-@media (min-width: 900px) {
-  h1 {
-    font-size: 64px !important;
-    line-height: 72px !important;
-  }
-}
-@media (max-width: 420px) {
-  h1 {
-    font-size: 32px !important;
-    line-height: 40px !important;
-  }
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 /* Superfícies escuras antigas → claras */

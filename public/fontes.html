@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Comparação de fontes — Girassol</title>
+    <style>
+      body {
+        margin: 0;
+        background: #1c1812;
+        color: #faf7f0;
+        font:
+          15px/1.4 system-ui,
+          sans-serif;
+      }
+      header {
+        padding: 12px 16px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      header b {
+        color: #f2b705;
+      }
+      .grade {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 0 8px 8px;
+        height: calc(100vh - 56px);
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .col h2 {
+        font-size: 15px;
+        margin: 0 0 6px;
+        color: #f2b705;
+      }
+      iframe {
+        flex: 1;
+        width: 100%;
+        border: 0;
+        background: #faf7f0;
+      }
+      @media (max-width: 900px) {
+        .grade {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+        iframe {
+          height: 80vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <b>Comparação de fontes</b
+      ><span
+        >Role cada coluna de forma independente. Nada aqui está publicado.</span
+      >
+    </header>
+    <div class="grade">
+      <div class="col">
+        <h2>Atual: IBM VGA em tudo</h2>
+        <iframe src="index.html" title="Versão atual, IBM VGA"></iframe>
+      </div>
+      <div class="col">
+        <h2>Recomendada: IBM Plex (VGA só nos detalhes)</h2>
+        <iframe src="fonte-plex.html" title="Versão IBM Plex"></iframe>
+      </div>
+      <div class="col">
+        <h2>Alternativa: Geist (VGA só nos detalhes)</h2>
+        <iframe src="fonte-geist.html" title="Versão Geist"></iframe>
+      </div>
+    </div>
+  </body>
+</html>

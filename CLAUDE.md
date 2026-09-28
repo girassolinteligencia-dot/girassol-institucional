@@ -16,7 +16,7 @@ O que faz: mapeia processos e desenvolve com IA ferramentas sob medida que perte
 Promessa: Sua ideia vira ferramenta — e a ferramenta é sua.
 Estética: híbrida — off-white #FAF7F0, tinta #1C1812, seções escuras #2B1D0E, acento girassol #F2B705 (âmbar #9A6400 sobre claro)
 Logos: girassol+cérebro SEMPRE com o nome "Girassol Inteligência"; ícone "gi" para favicon/ícones/avatar
-Tipografia: IBM VGA (bitmap, só múltiplos de 16px) em todo o site — crédito CC BY-SA no rodapé
+Tipografia: IBM Plex Sans (títulos/texto) + IBM Plex Mono (rótulos); IBM VGA só em detalhes (rótulo da abertura, cursor, girassol) — crédito CC BY-SA no rodapé
 Temas: site claro por padrão + seletor escuro; admin escuro por padrão
 Voz: consultoria formal, primeira pessoa do plural, técnica só como prova
 Protagonista: a equipe (fundador com discrição)

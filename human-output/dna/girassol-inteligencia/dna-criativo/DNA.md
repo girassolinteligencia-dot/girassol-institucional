@@ -119,12 +119,17 @@ Regra de contraste: amarelo `#F2B705` **nunca** como cor de texto sobre fundo cl
 
 ### Tipografia
 
-**Decisão de 28/09/2026: fonte única IBM VGA** (modo texto do IBM PC VGA, "The Ultimate Oldschool PC Font Pack", VileR / int10h.org, licença CC BY-SA 4.0 — crédito obrigatório no rodapé de todas as páginas).
+**Decisão de 28/09/2026 (revisada): família IBM Plex, com a IBM VGA como assinatura.** Do terminal da IBM ao presente — coerente com uma equipe que vem de décadas de TI.
 
-- Arquivo: `assets/fonts/WebPlus_IBM_VGA_9x16.woff` (variante WebPlus: tem ã, õ, ç; a Web437 não tem).
-- Bitmap 9x16: usar **apenas múltiplos de 16px** — 16 (texto, rótulos), 32 (H2), 48/64 (H1). Sem negrito/itálico.
-- Subtítulos (H3) em MAIÚSCULAS, como cabeçalhos de programas antigos. Botões com cantos retos e cursor de bloco piscando.
-- Camada compartilhada: `assets/css/girassol-vga.css`.
+| Uso | Fonte |
+|---|---|
+| Títulos (600) e texto (400) | **IBM Plex Sans** |
+| Rótulos, números, contadores, datas | **IBM Plex Mono** |
+| Detalhes de assinatura: rótulo da abertura que se decodifica, cursor de bloco nos botões, rótulos do girassol, seletor de tema | **IBM VGA** (bitmap 9x16, só em 16px; crédito CC BY-SA 4.0 no rodapé — VileR, int10h.org) |
+
+- Plex: licença aberta (OFL), Google Fonts, acentos completos, negrito e itálico reais.
+- Nunca usar a VGA em parágrafos ou textos longos (cansa a leitura).
+- Camadas: `public/index.html` (home), `public/assets/css/girassol-marca.css` (páginas internas), `public/admin.html` (painel).
 
 ### Temas
 
