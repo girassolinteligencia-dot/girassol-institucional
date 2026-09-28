@@ -1348,7 +1348,11 @@
           <li><a href="#casos">Casos</a></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
-        <button class="btn js-chat mag" type="button">
+        <button
+          class="btn js-chat mag"
+          data-assunto="diagnostico"
+          type="button"
+        >
           <span class="dot"></span>Iniciar diagnóstico
         </button>
       </div>
@@ -1372,7 +1376,11 @@
             precisa. Sem mais uma assinatura.
           </p>
           <div class="hero-actions fade d2">
-            <button class="btn js-chat mag" type="button">
+            <button
+              class="btn js-chat mag"
+              data-assunto="diagnostico"
+              type="button"
+            >
               <span class="dot"></span>Iniciar diagnóstico
             </button>
             <a class="btn-link" href="#metodo">Conheça o método</a>
@@ -1699,7 +1707,11 @@
               <div class="prova">
                 Demonstra: processamento local e soberania de dados.
               </div>
-              <a class="btn-link js-chat" href="#" role="button"
+              <a
+                class="btn-link js-chat"
+                data-assunto="alltoparquet"
+                href="#"
+                role="button"
                 >Conversar sobre esta solução</a
               >
             </article>
@@ -1721,7 +1733,11 @@
                 rel="noopener"
                 >Ver demonstração</a
               >
-              <a class="btn-link js-chat" href="#" role="button"
+              <a
+                class="btn-link js-chat"
+                data-assunto="plataforma-eleitoral"
+                href="#"
+                role="button"
                 >Conversar sobre esta solução</a
               >
             </article>
@@ -1736,7 +1752,11 @@
               <div class="prova">
                 Demonstra: profundidade técnica em engenharia de dados.
               </div>
-              <a class="btn-link js-chat" href="#" role="button"
+              <a
+                class="btn-link js-chat"
+                data-assunto="guia-parquet"
+                href="#"
+                role="button"
                 >Solicitar o guia</a
               >
             </article>
@@ -1769,7 +1789,11 @@
             Uma conversa inicial para entender sua operação e identificar onde
             uma ferramenta sob medida gera mais resultado.
           </p>
-          <button class="btn js-chat mag" type="button">
+          <button
+            class="btn js-chat mag"
+            data-assunto="diagnostico"
+            type="button"
+          >
             <span class="dot"></span>Iniciar diagnóstico
           </button>
         </div>
@@ -1826,8 +1850,9 @@
         document.querySelectorAll(".js-chat").forEach((el) =>
           el.addEventListener("click", (e) => {
             e.preventDefault();
-            if (window.girassolChat) window.girassolChat.open();
-            else if (window.openGirassolChat) window.openGirassolChat();
+            const assunto = el.dataset.assunto || "diagnostico";
+            if (window.girassolChat) window.girassolChat.open(assunto);
+            else if (window.openGirassolChat) window.openGirassolChat(assunto);
           }),
         );
 
