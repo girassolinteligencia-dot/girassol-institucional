@@ -1,0 +1,2 @@
+# Arquivos de public/ que NÃO são publicados (sintaxe .gitignore)
+.assetsignore

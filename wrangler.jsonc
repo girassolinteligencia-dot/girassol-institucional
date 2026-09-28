@@ -1,14 +1,32 @@
 {
   "name": "girassol-institucional",
+  "main": "src/index.js",
   "compatibility_date": "2026-08-20",
   "assets": {
-    "directory": ".",
-    "exclude": [
-      ".git/**",
-      ".wrangler/**",
-      "node_modules/**",
-      "*.log",
-      "*.bak"
-    ]
-  }
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Rotas atendidas pelo Worker; todo o resto é arquivo estático
+    "run_worker_first": [
+      "/api/*",
+      "/admin",
+      "/admin.html",
+      "/site-config.json",
+    ],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "girassol-site",
+      // Banco criado em 28/09/2026 (região ENAM)
+      "database_id": "e2e75ac1-fd81-4669-8b81-dc1f3b3dd01e",
+      "migrations_dir": "migrations",
+    },
+  ],
+  // Relatório mensal: dia 1 às 11h UTC (08h de Brasília)
+  "triggers": { "crons": ["0 11 1 * *"] },
+  "vars": {
+    // Cloudflare Access que protege o painel (/admin.html e /api/admin/*)
+    "ACCESS_TEAM_DOMAIN": "girassolteam.cloudflareaccess.com",
+    "ACCESS_AUD": "7b079362349595677ad4ccac3b800edb96b619c36a09f9b0b3ce2f1978aa176e",
+  },
 }

@@ -10,7 +10,35 @@
   const STORAGE_KEY = "girassol_web_session";
   const DEFAULT_API_BASE = "https://api.girassolinteligencia.com.br";
   const TURNSTILE_SITE_KEY = "0x4AAAAAAEw5N47esEJTOqpj";
-  const WHATSAPP_LINK = "https://wa.me/5567999818818?text=Ol%C3%A1%2C+estou+no+site+da+Girassol+e+gostaria+de+continuar+meu+atendimento.";
+  // Número e mensagem padrão; substituídos pelo que estiver no painel (site-config.json → general)
+  let WHATSAPP_NUMERO = "5567981151717";
+  let WHATSAPP_MENSAGEM =
+    "Olá, vim pelo site da Girassol Inteligência e gostaria de falar com a equipe.";
+  const linkWhatsapp = (texto) =>
+    "https://wa.me/" +
+    WHATSAPP_NUMERO +
+    "?text=" +
+    encodeURIComponent(texto || WHATSAPP_MENSAGEM);
+  const metrica = (tipo, extra) =>
+    window.dispatchEvent(
+      new CustomEvent("girassol:metrica", {
+        detail: Object.assign({ tipo: tipo }, extra || {}),
+      }),
+    );
+  // Sem sinal do agente (data.handoff), oferece a passagem após este número de respostas do visitante
+  const RESPOSTAS_PARA_PASSAGEM = 4;
+
+  // Saudação conforme o botão que abriu o chat (data-assunto no HTML)
+  const SAUDACOES = {
+    diagnostico:
+      "Olá. Sou o assistente da Girassol Inteligência. Farei algumas perguntas rápidas para entender sua necessidade e, em seguida, encaminho você à nossa equipe pelo WhatsApp. Qual processo da sua empresa mais consome tempo hoje?",
+    alltoparquet:
+      "Olá. Vamos falar sobre o AlltoParquet. Você quer conhecer a ferramenta ou adaptar uma solução semelhante para os dados da sua empresa?",
+    "plataforma-eleitoral":
+      "Olá. Vamos falar sobre a Plataforma Eleitoral Inteligente. Você quer conhecer a plataforma ou uma solução semelhante com outras bases públicas?",
+    "guia-parquet":
+      "Olá. Para enviarmos o Guia Apache Parquet, informe seu nome e o e-mail que deve recebê-lo.",
+  };
 
   class GirassolChatWidget {
     constructor() {
@@ -21,27 +49,46 @@
       this.messages = [];
       this.turnstileWidgetId = null;
       this.turnstileToken = null;
+      this.assunto = "diagnostico";
+      this.passagemOferecida = false;
       this.init();
     }
 
     async init() {
       this.restoreSession();
       this.createDOM();
+      this.carregarContato();
       this.attachEvents();
       this.initTurnstile();
 
       // Mensagem de boas-vindas inicial se não houver histórico
       if (this.messages.length === 0) {
-        this.addMessage(
-          "assistant",
-          "Olá! Seja bem-vindo à Girassol. Me conta: qual tarefa hoje toma tempo demais na sua empresa ou qual rotina você gostaria de organizar no computador?"
-        );
+        this.addMessage("assistant", SAUDACOES.diagnostico);
       }
+    }
+
+    // Usa o WhatsApp configurado no painel
+    carregarContato() {
+      fetch("/site-config.json")
+        .then((r) => r.json())
+        .then((cfg) => {
+          const g = (cfg && cfg.general) || {};
+          if (g.whatsappPhone)
+            WHATSAPP_NUMERO = String(g.whatsappPhone).replace(/\D/g, "");
+          if (g.whatsappMessage) WHATSAPP_MENSAGEM = g.whatsappMessage;
+          this.windowEl
+            .querySelectorAll(".chat-direct-link")
+            .forEach((a) => (a.href = linkWhatsapp()));
+        })
+        .catch(() => {});
     }
 
     initTurnstile() {
       const checkTurnstile = setInterval(() => {
-        if (window.turnstile && document.getElementById("girassolTurnstileContainer")) {
+        if (
+          window.turnstile &&
+          document.getElementById("girassolTurnstileContainer")
+        ) {
           clearInterval(checkTurnstile);
           try {
             this.turnstileWidgetId = window.turnstile.render(
@@ -53,14 +100,17 @@
                 },
                 "expired-callback": () => {
                   this.turnstileToken = null;
-                  if (this.turnstileWidgetId) window.turnstile.reset(this.turnstileWidgetId);
+                  if (this.turnstileWidgetId)
+                    window.turnstile.reset(this.turnstileWidgetId);
                 },
                 "error-callback": () => {
-                  console.warn("[Turnstile] Verificação local ignorada em modo de teste.");
+                  console.warn(
+                    "[Turnstile] Verificação local ignorada em modo de teste.",
+                  );
                 },
                 theme: "dark",
                 size: "invisible",
-              }
+              },
             );
           } catch (e) {
             console.warn("[Turnstile] Render error:", e);
@@ -91,7 +141,7 @@
           JSON.stringify({
             sessionId: this.sessionId,
             messages: this.messages,
-          })
+          }),
         );
       } catch (e) {
         console.warn("[GirassolChat] Falha ao salvar sessão:", e);
@@ -103,7 +153,10 @@
       const launcher = document.createElement("button");
       launcher.className = "girassol-chat-launcher";
       launcher.id = "girassolChatLauncher";
-      launcher.setAttribute("aria-label", "Conversar com o Assistente Girassol");
+      launcher.setAttribute(
+        "aria-label",
+        "Conversar com o Assistente Girassol",
+      );
       launcher.innerHTML = `
         <div class="launcher-icon-wrap">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -164,6 +217,7 @@
           <!-- Container invisível do Turnstile -->
           <div id="girassolTurnstileContainer" style="display:none;"></div>
 
+          <a class="chat-direct-link" href="${linkWhatsapp()}" target="_blank" rel="noopener noreferrer">Prefiro falar direto com a equipe no WhatsApp</a>
           <form class="chat-form" id="girassolChatForm">
             <input 
               type="text" 
@@ -187,7 +241,9 @@
       `;
       document.body.appendChild(chatWindow);
       this.windowEl = chatWindow;
-      this.messagesContainer = chatWindow.querySelector("#girassolChatMessages");
+      this.messagesContainer = chatWindow.querySelector(
+        "#girassolChatMessages",
+      );
       this.typingIndicator = chatWindow.querySelector("#girassolChatTyping");
       this.inputEl = chatWindow.querySelector("#girassolChatInput");
       this.formEl = chatWindow.querySelector("#girassolChatForm");
@@ -198,7 +254,9 @@
 
     attachEvents() {
       this.launcherEl.addEventListener("click", () => this.toggle());
-      this.windowEl.querySelector("#girassolChatMinimize").addEventListener("click", () => this.close());
+      this.windowEl
+        .querySelector("#girassolChatMinimize")
+        .addEventListener("click", () => this.close());
 
       this.formEl.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -219,8 +277,14 @@
       }
     }
 
-    open() {
+    open(assunto) {
+      // Mudou o assunto: registra a saudação específica no início desse tema
+      if (assunto && SAUDACOES[assunto] && assunto !== this.assunto) {
+        this.assunto = assunto;
+        this.addMessage("assistant", SAUDACOES[assunto]);
+      }
       this.isOpen = true;
+      metrica("chat_aberto", { assunto: this.assunto });
       this.windowEl.classList.add("active");
       this.launcherEl.style.opacity = "0.4";
       setTimeout(() => this.inputEl.focus(), 300);
@@ -242,9 +306,14 @@
     renderMessageDOM(msg) {
       const bubble = document.createElement("div");
       bubble.className = `chat-bubble ${msg.role}`;
-      
-      const timeStr = msg.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      
+
+      const timeStr =
+        msg.time ||
+        new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
       const textNode = document.createTextNode(msg.text);
       bubble.appendChild(textNode);
 
@@ -261,7 +330,10 @@
       const msg = {
         role,
         text,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       this.messages.push(msg);
       this.renderMessageDOM(msg);
@@ -304,6 +376,7 @@
 
       this.inputEl.value = "";
       this.addMessage("user", text);
+      metrica("chat_mensagem", { assunto: this.assunto });
 
       this.isLoading = true;
       this.setTyping(true);
@@ -315,6 +388,7 @@
           sessionId,
           text,
           turnstileToken: this.turnstileToken || undefined,
+          assunto: this.assunto,
         };
 
         const response = await fetch(`${this.apiBase}/web/chat`, {
@@ -337,10 +411,23 @@
         if (response.ok) {
           const data = await response.json();
           this.setTyping(false);
-          this.addMessage("assistant", data.reply || "Resposta recebida do núcleo.");
+          this.addMessage(
+            "assistant",
+            data.reply || "Resposta recebida do núcleo.",
+          );
           if (data.sessionId) {
             this.sessionId = data.sessionId;
             this.saveSession();
+          }
+          // Passagem para a equipe: sinal do agente ou número mínimo de respostas
+          const respostas = this.messages.filter(
+            (m) => m.role === "user",
+          ).length;
+          if (
+            data.handoff ||
+            (!this.passagemOferecida && respostas >= RESPOSTAS_PARA_PASSAGEM)
+          ) {
+            this.renderHandoff(data.summary);
           }
         } else {
           throw new Error(`HTTP ${response.status}`);
@@ -354,15 +441,76 @@
       }
     }
 
+    // Resumo para a equipe: o do agente, quando existir; senão, o que o visitante escreveu
+    montarResumo(resumoAgente) {
+      const origem = {
+        diagnostico: "diagnóstico",
+        alltoparquet: "AlltoParquet",
+        "plataforma-eleitoral": "Plataforma Eleitoral",
+        "guia-parquet": "Guia Apache Parquet",
+      }[this.assunto];
+      const corpo =
+        (resumoAgente && String(resumoAgente).trim()) ||
+        this.messages
+          .filter((m) => m.role === "user")
+          .map((m) => "- " + m.text)
+          .join("\n");
+      return (
+        "Olá, vim pelo site da Girassol (assunto: " +
+        origem +
+        ").\n" +
+        "Resumo do que conversei com o assistente:\n" +
+        corpo.slice(0, 1200)
+      );
+    }
+
+    renderHandoff(resumoAgente) {
+      this.passagemOferecida = true;
+      metrica("passagem_exibida", { assunto: this.assunto });
+      const bloco = document.createElement("div");
+      bloco.className = "chat-bubble assistant chat-handoff";
+      const aviso = document.createElement("span");
+      aviso.textContent =
+        "Obrigado. Com essas informações, nossa equipe pode continuar o atendimento pelo WhatsApp. Abaixo está o resumo que será enviado; revise ou edite antes de enviar.";
+      const campo = document.createElement("textarea");
+      campo.className = "chat-handoff-resumo";
+      campo.rows = 6;
+      campo.value = this.montarResumo(resumoAgente);
+      campo.setAttribute("aria-label", "Resumo que será enviado à equipe");
+      const botao = document.createElement("a");
+      botao.className = "chat-whatsapp-link";
+      botao.target = "_blank";
+      botao.rel = "noopener noreferrer";
+      botao.textContent = "Enviar resumo à equipe pelo WhatsApp";
+      const atualizar = () => {
+        botao.href = linkWhatsapp(campo.value);
+      };
+      campo.addEventListener("input", atualizar);
+      atualizar();
+      const nota = document.createElement("small");
+      nota.className = "chat-handoff-nota";
+      nota.textContent =
+        "O envio só acontece quando você tocar no botão. Tratamento conforme a nossa Política de Privacidade.";
+      botao.addEventListener("click", () =>
+        metrica("passagem_whatsapp", {
+          assunto: this.assunto,
+          resumo: campo.value,
+        }),
+      );
+      bloco.append(aviso, campo, botao, nota);
+      this.messagesContainer.appendChild(bloco);
+      this.scrollToBottom();
+    }
+
     renderFallbackMessage() {
       const bubble = document.createElement("div");
       bubble.className = "chat-bubble assistant";
       bubble.innerHTML = `
-        <span>Nosso Núcleo de IA está em processo de sincronização de rede. Se preferir atendimento imediato com o mesmo agente, você pode continuar diretamente pelo WhatsApp oficial:</span>
+        <span>Nosso Núcleo de IA está em processo de sincronização de rede. Se preferir atendimento imediato você pode falar diretamente com a nossa equipe pelo WhatsApp:</span>
         <div class="chat-whatsapp-banner">
-          <a href="${WHATSAPP_LINK}" target="_blank" rel="noopener noreferrer" class="chat-whatsapp-link">
+          <a href="${linkWhatsapp()}" target="_blank" rel="noopener noreferrer" class="chat-whatsapp-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-            Falar pelo WhatsApp Oficial
+            Falar com a equipe no WhatsApp
           </a>
         </div>
       `;
@@ -374,9 +522,9 @@
   // Inicializa quando a página estiver carregada e expõe globalmente
   function initWidget() {
     window.girassolChat = new GirassolChatWidget();
-    window.openGirassolChat = function() {
+    window.openGirassolChat = function (assunto) {
       if (window.girassolChat) {
-        window.girassolChat.open();
+        window.girassolChat.open(assunto);
       }
     };
   }
