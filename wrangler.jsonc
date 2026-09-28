@@ -11,6 +11,8 @@
       "/admin",
       "/admin.html",
       "/site-config.json",
+      "/casos/*",
+      "/sitemap.xml",
     ],
   },
   "d1_databases": [

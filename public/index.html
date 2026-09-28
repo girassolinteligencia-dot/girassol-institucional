@@ -1140,6 +1140,26 @@
         border-radius: 4px;
       }
 
+      /* Faixas de Soluções e Casos na home */
+      .ver-todos {
+        margin-top: 32px;
+      }
+      .casos-lista {
+        border-top: 0;
+        margin-top: 48px;
+      }
+      .caso-destaque {
+        text-decoration: none;
+        color: inherit;
+      }
+      .caso-destaque h3 {
+        font-size: 20px;
+        line-height: 1.3;
+      }
+      .caso-destaque:hover {
+        border-color: var(--ambar);
+      }
+
       /* Girassol = método */
       .flor-lead {
         color: #d9cfbe;
@@ -1262,8 +1282,8 @@
         <ul>
           <li><a href="#metodo">Método</a></li>
           <li><a href="#equipe">Equipe</a></li>
-          <li><a href="#solucoes">Soluções</a></li>
-          <li><a href="#casos">Casos</a></li>
+          <li><a href="/solucoes">Soluções</a></li>
+          <li><a href="/casos">Casos</a></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
         <button
@@ -1686,6 +1706,9 @@
               >
             </article>
           </div>
+          <p class="ver-todos rise">
+            <a class="btn-link" href="/solucoes">Ver todas as soluções</a>
+          </p>
         </div>
       </section>
 
@@ -1701,9 +1724,16 @@
               construída com quem opera e o resultado entregue.
             </p>
           </div>
-          <div class="casos-lista" id="casosLista" aria-live="polite">
+          <div
+            class="cards cards-3 casos-lista"
+            id="casosLista"
+            aria-live="polite"
+          >
             <p class="nota">Carregando casos…</p>
           </div>
+          <p class="ver-todos rise">
+            <a class="btn-link" href="/casos">Ver todos os casos</a>
+          </p>
         </div>
       </section>
 
@@ -1738,8 +1768,8 @@
           /><span>Girassol Inteligência</span></a
         >
         <nav>
-          <a href="#solucoes">Soluções</a>
-          <a href="#casos">Casos</a>
+          <a href="/solucoes">Soluções</a>
+          <a href="/casos">Casos</a>
           <a href="artigos.html">Artigos</a>
           <a href="privacidade.html">Privacidade</a>
           <a href="termos.html">Termos</a>
@@ -2348,7 +2378,9 @@
 
           // Soluções do painel; sem dados, os cartões fixos do HTML permanecem
           function renderSolucoes(lista) {
-            const ativas = (lista || []).filter((s) => s.ativo !== false);
+            const ativas = (lista || [])
+              .filter((s) => s.ativo !== false)
+              .slice(0, 3);
             if (!ativas.length) return;
             const alvo = document.querySelector("#solucoes .cards");
             alvo.innerHTML = ativas
@@ -2432,20 +2464,20 @@
                 lista.innerHTML = '<p class="nota">Em breve.</p>';
                 return;
               }
+              // Faixa da home: até 3 destaques; o caso completo fica em /casos/<id>
               lista.innerHTML = casos
+                .slice(0, 3)
                 .map(
                   (c) =>
-                    '<details class="caso" id="caso-' +
-                    esc(c.id) +
-                    '"><summary><small>' +
-                    esc(c.category || "") +
-                    "</small><div><h3>" +
+                    '<a class="card spot caso-destaque" href="/casos/' +
+                    encodeURIComponent(c.id) +
+                    '"><small>' +
+                    esc(c.category || "Caso") +
+                    "</small><h3>" +
                     esc(c.title) +
                     "</h3><p>" +
                     esc(c.summary || "") +
-                    '</p></div></summary><div class="caso-corpo">' +
-                    md(c.content || "") +
-                    "</div></details>",
+                    '</p><span class="btn-link">Ler o caso</span></a>',
                 )
                 .join("");
             })
