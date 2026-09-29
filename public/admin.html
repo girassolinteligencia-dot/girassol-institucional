@@ -1553,12 +1553,14 @@
           return partes
             .map((p) => {
               if (p === "miolo") return "Miolo (ponto de partida)";
+              if (p === "assinatura") return "Coluna: programa pago por mês";
+              if (p === "girassol") return "Coluna: Ferramenta Girassol";
               const m = p.match(/^(prova|item|etapa|passo|area)(\d+)$/);
               if (m)
                 return (
                   {
                     prova: "Prova",
-                    item: "Dor",
+                    item: chave.startsWith("dores.") ? "Dor" : "Item",
                     etapa: "Etapa",
                     passo: "Passo",
                     area: "Área",
