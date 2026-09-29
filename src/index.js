@@ -397,6 +397,7 @@ async function sitemap(env, url) {
   const hoje = new Date().toISOString().slice(0, 10);
   const fixas = [
     "/",
+    "/sobre",
     "/solucoes",
     "/casos",
     "/artigos",
