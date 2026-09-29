@@ -19,7 +19,9 @@ Logos: girassol+cérebro SEMPRE com o nome "Girassol Inteligência"; ícone "gi"
 Tipografia: IBM Plex Sans (títulos/texto) + IBM Plex Mono (rótulos); IBM VGA só em detalhes (rótulo da abertura, cursor, girassol) — crédito CC BY-SA no rodapé
 Temas: site claro por padrão + seletor escuro; admin escuro por padrão
 Voz: consultoria formal, primeira pessoa do plural, técnica só como prova
-Protagonista: a equipe (fundador com discrição)
+Protagonista: a equipe conduz, o cliente constrói junto (fundador com discrição)
+Equipe: núcleo fixo + rede de especialistas convidados por projeto (nunca "equipe fixa há anos")
+Valores no site: verdade ("de frente para a luz"), paciência para ouvir, melhoria contínua
 CTA único: chat com IA — "Iniciar diagnóstico"
 ```
 

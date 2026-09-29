@@ -471,7 +471,10 @@
         border: 1px dashed var(--linha);
       }
       /* No painel, o seletor de tema fica à direita para não cobrir o botão Sair */
-      .tema-toggle { left: auto !important; right: 16px; }
+      .tema-toggle {
+        left: auto !important;
+        right: 16px;
+      }
 
       /* Tipografia do DNA: títulos em Plex Sans 600; números e rótulos técnicos em Plex Mono */
       h1,
@@ -735,14 +738,19 @@
             formulário da página de Exclusão é fixo e não aparece aqui.
           </p>
           <div class="filtros" id="legalAbas">
-            <button data-legal="privacidade" aria-pressed="true">Privacidade</button>
+            <button data-legal="privacidade" aria-pressed="true">
+              Privacidade
+            </button>
             <button data-legal="termos">Termos de Uso</button>
             <button data-legal="exclusao-dados">Exclusão de Dados</button>
           </div>
           <div id="formLegal"></div>
           <details class="cartao" style="margin-top: 24px">
-            <summary><h3 style="display: inline">Como formatar o texto</h3></summary>
-            <pre style="white-space: pre-wrap; margin-top: 12px">## Título de seção
+            <summary>
+              <h3 style="display: inline">Como formatar o texto</h3>
+            </summary>
+            <pre style="white-space: pre-wrap; margin-top: 12px">
+## Título de seção
 Parágrafo comum. Deixe uma linha em branco entre parágrafos.
 **negrito**   *itálico*   `código`   [texto do link](https://exemplo.com)
 - item de lista
@@ -872,12 +880,96 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
         let publicada = null; // última versão publicada (texto JSON)
         let cfg = null; // versão em edição
 
-        function normalizar(c) {
+        // DNA 1.1 (29/09/2026): textos novos entram nas versões já publicadas,
+        // e textos substituídos só são trocados se ainda estiverem como no original.
+        const TEXTOS_NOVOS = {
+          "quem.titulo":
+            "Especialistas em pessoas, antes de especialistas em tecnologia.",
+          "quem.texto":
+            "Nascemos da experiência na gestão pública de tecnologia, onde tivemos muitas boas ideias que o tempo não permitiu construir. Hoje ouvimos pessoas e empresas de todas as áreas para transformar ideias em ferramentas que fazem diferença.",
+          "quem.valor1.titulo": "De frente para a luz",
+          "quem.valor1.texto":
+            "Trabalho honesto e transparente. Só construímos ferramentas que ajudam pessoas.",
+          "quem.valor2.titulo": "Paciência para ouvir",
+          "quem.valor2.texto":
+            "Você não precisa entender de tecnologia. Ouvimos com calma, e você participa de cada etapa: a ferramenta sai com a cara de quem vai usá-la.",
+          "quem.valor3.titulo": "Melhor a cada entrega",
+          "quem.valor3.texto":
+            "Cada projeto nos ensina algo que o próximo cliente recebe.",
+          "sobre.rotulo": "Sobre a Girassol",
+          "sobre.titulo": "Especialistas em pessoas, antes de especialistas em tecnologia.",
+          "sobre.texto": "A Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS. Ouvimos quem opera o negócio e, junto com essa pessoa, transformamos uma ideia ou um problema em uma ferramenta que passa a ser dela.",
+          "sobre.origem.rotulo": "Origem",
+          "sobre.origem.titulo": "De onde viemos",
+          "sobre.origem.texto": "Por anos, trabalhamos na gestão de tecnologia do setor público. Ali surgiram muitas ideias capazes de melhorar a vida das pessoas, mas nem sempre houve tempo para construí-las.",
+          "sobre.origem.texto2": "A Girassol nasceu, em 2025, para dar a essas ideias, e às de cada cliente, o tempo e a atenção que elas merecem. Ouvimos empresas e pessoas de todas as áreas, inclusive quem pensa em ferramentas que façam diferença na vida da população.",
+          "sobre.nome.rotulo": "O nome",
+          "sobre.nome.titulo": "Por que Girassol",
+          "sobre.nome.texto": "O nome veio de uma frase dita em família, inspirada na música “Girassol”, de Whindersson Nunes, na interpretação de Priscilla Alcantara: uma empresa que vive como o girassol, de costas para o escuro e de frente para a luz.",
+          "sobre.nome.texto2": "Levamos isso a sério. Significa trabalhar com honestidade, transparência e compromisso com a verdade, em cada conversa e em cada entrega.",
+          "sobre.inteligencia.rotulo": "O sobrenome",
+          "sobre.inteligencia.titulo": "O que “Inteligência” quer dizer",
+          "sobre.inteligencia.texto": "Não é só inteligência artificial. É a inteligência do negócio, dos dados e das pessoas: entender o que você precisa antes de escrever qualquer linha de código.",
+          "sobre.inteligencia.texto2": "Ela está na primeira conversa, na ideia que surge, na construção e na entrega. A inteligência artificial nos ajuda a construir mais rápido, sempre revisada por profissionais experientes.",
+          "sobre.como.rotulo": "Como trabalhamos",
+          "sobre.como.titulo": "Você constrói junto",
+          "sobre.como.texto": "Um núcleo fixo coordena cada projeto e convida especialistas com quem já construímos soluções importantes, da iniciativa privada e do poder público. Você participa de todas as etapas, e a ferramenta sai com a cara de quem vai usá-la.",
+          "sobre.compromissos.rotulo": "Compromissos",
+          "sobre.compromissos.titulo": "O que você pode esperar de nós",
+          "sobre.compromissos.item1.titulo": "Verdade.",
+          "sobre.compromissos.item1.texto": "Dizemos com clareza o que a ferramenta vai fazer e o que não vai, e o que a inteligência artificial faz e não faz.",
+          "sobre.compromissos.item2.titulo": "Paciência para ouvir.",
+          "sobre.compromissos.item2.texto": "Você não precisa entender de tecnologia. Explicamos sem jargão e no seu tempo.",
+          "sobre.compromissos.item3.titulo": "Melhor a cada entrega.",
+          "sobre.compromissos.item3.texto": "Cada projeto nos ensina algo que o próximo cliente recebe.",
+          "sobre.compromissos.item4.titulo": "Propriedade e cuidado com dados.",
+          "sobre.compromissos.item4.texto": "A ferramenta, o código e os dados ficam com a sua empresa, com segurança da informação e respeito à LGPD.",
+          "sobre.compromissos.item5.titulo": "Só o que ajuda pessoas.",
+          "sobre.compromissos.item5.texto": "Recusamos projetos cujo propósito seja prejudicar alguém.",
+          "sobre.onde.rotulo": "Onde atendemos",
+          "sobre.onde.titulo": "De Campo Grande para o Brasil",
+          "sobre.onde.texto": "Nossa sede é em Campo Grande/MS, onde atendemos também presencialmente. Pela internet, atendemos todo o Brasil: escritórios de advocacia, órgãos públicos, clínicas, comércio e qualquer operação que tenha uma boa ideia esperando para virar ferramenta.",
+          "sobre.chamada.titulo": "Tem uma ideia e não sabe por onde começar?",
+          "sobre.chamada.texto": "É exatamente aí que entramos. Comece por uma conversa."
+        };
+        const TEXTOS_SUBSTITUIDOS = {
+          "abertura.texto": [
+            "Entendemos como sua empresa trabalha e criamos, com inteligência artificial, a ferramenta que resolve o que hoje dá trabalho. Ela fica com você, sem mensalidade.",
+            "A Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS. Ouvimos como sua empresa trabalha e criamos, com você e com inteligência artificial, a ferramenta que resolve o que hoje dá trabalho. Ela fica com você, sem mensalidade.",
+          ],
+          "dores.item4.texto": [
+            "Melhorias simples, conhecidas pela equipe, que nunca encontraram quem as construísse.",
+            "Melhorias conhecidas pela equipe, ou uma boa ideia sua, que nunca encontraram quem as construísse.",
+          ],
+          "equipe.titulo": [
+            "Uma equipe que trabalha junto há anos, reunida para o seu projeto.",
+            "Uma rede de especialistas que já construiu junto, reunida para o seu projeto.",
+          ],
+          "equipe.texto": [
+            "Somos profissionais de gestão de projetos, análise de sistemas, engenharia de software, banco de dados e segurança da informação que trabalham juntos há anos. Para cada projeto, reunimos as especialidades que ele exige, nem mais, nem menos.",
+            "Um núcleo fixo coordena cada projeto e convida profissionais com quem já construímos soluções importantes: gestão de projetos, desenvolvimento de software, análise de dados, banco de dados, infraestrutura, segurança da informação e apoio jurídico. Para cada projeto, reunimos as especialidades que ele exige, nem mais, nem menos.",
+          ],
+          "equipe.texto2": [
+            "Nossa experiência vem da condução de áreas inteiras de tecnologia da informação. É ela que garante que a inteligência artificial seja usada com critério e que a ferramenta continue funcionando no dia a dia, depois da entrega.",
+            "Nossa experiência vem da iniciativa privada e do poder público, de grandes e pequenas empresas, e da condução de áreas inteiras de tecnologia da informação. É ela que garante que a inteligência artificial seja usada com critério e que a ferramenta continue funcionando no dia a dia, depois da entrega.",
+          ],
+        };
+        function normalizar(c, migrar = true) {
           c = c || {};
           c.general = c.general || {};
           c.solutions = c.solutions || [];
           c.cases = c.cases || [];
           c.articles = c.articles || [];
+          if (migrar && c.home) {
+            Object.entries(TEXTOS_NOVOS).forEach(([k, v]) => {
+              if (!(k in c.home)) c.home[k] = v;
+            });
+            Object.entries(TEXTOS_SUBSTITUIDOS).forEach(
+              ([k, [antigo, novo]]) => {
+                if (c.home[k] === antigo) c.home[k] = novo;
+              },
+            );
+          }
           return c;
         }
         function alterado() {
@@ -894,8 +986,12 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
 
         async function carregarConfig() {
           const r = await api("config");
+          // A comparação usa a versão publicada sem os textos do DNA 1.1,
+          // para que o botão Publicar acenda quando eles forem aplicados.
+          publicada = JSON.stringify(
+            normalizar(structuredClone(r.dados), false),
+          );
           cfg = normalizar(r.dados);
-          publicada = JSON.stringify(cfg);
           $("#estado").textContent = r.atualizadoEm
             ? "Publicado em " +
               dataBR(r.atualizadoEm) +
@@ -1562,6 +1658,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
         /* ---------------- Textos da home ---------------- */
         const SECOES_TEXTO = {
           abertura: "Abertura",
+          quem: "Quem somos",
           dores: "O ponto de partida",
           metodo: "Método (girassol)",
           propriedade: "Propriedade",
@@ -1571,6 +1668,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           final: "Chamada final",
           botoes: "Botões",
           pagina: "Páginas de Soluções, Casos e Artigos",
+          sobre: "Página Sobre",
         };
         const NOMES_CAMPO = {
           rotulo: "rótulo",
@@ -1590,6 +1688,12 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           verCaso: "Ver o caso completo",
           verCasos: "Ver todos os casos",
           verSolucoes: "Ver todas as soluções",
+          origem: "De onde viemos",
+          nome: "Por que Girassol",
+          inteligencia: "O que “Inteligência” quer dizer",
+          como: "Como trabalhamos",
+          compromissos: "Compromissos",
+          onde: "Onde atendemos",
         };
         function rotuloTexto(chave) {
           const partes = chave.split(".").slice(1);
@@ -1598,7 +1702,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
               if (p === "miolo") return "Miolo (ponto de partida)";
               if (p === "assinatura") return "Coluna: programa pago por mês";
               if (p === "girassol") return "Coluna: Ferramenta Girassol";
-              const m = p.match(/^(prova|item|etapa|passo|area)(\d+)$/);
+              const m = p.match(/^(prova|item|etapa|passo|area|valor)(\d+)$/);
               if (m)
                 return (
                   {
@@ -1607,6 +1711,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
                     etapa: "Etapa",
                     passo: "Passo",
                     area: "Área",
+                    valor: "Valor",
                   }[m[1]] +
                   " " +
                   m[2]
@@ -1648,13 +1753,19 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
         }
 
         /* ---------------- Páginas jurídicas ---------------- */
-        const NOMES_LEGAL = { privacidade: "Privacidade", termos: "Termos de Uso", "exclusao-dados": "Exclusão de Dados" };
+        const NOMES_LEGAL = {
+          privacidade: "Privacidade",
+          termos: "Termos de Uso",
+          "exclusao-dados": "Exclusão de Dados",
+        };
         let legalAtual = "privacidade";
         function renderLegal() {
           cfg.legal = cfg.legal || {};
           const p = (cfg.legal[legalAtual] = cfg.legal[legalAtual] || {});
           const ehExclusao = legalAtual === "exclusao-dados";
-          $$("#legalAbas [data-legal]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.legal === legalAtual));
+          $$("#legalAbas [data-legal]").forEach((b) =>
+            b.setAttribute("aria-pressed", b.dataset.legal === legalAtual),
+          );
           $("#formLegal").innerHTML =
             `<div class="duas"><label class="campo"><span>Rótulo (acima do título)</span><input type="text" data-l="rotulo" value="${esc(p.rotulo)}"></label>` +
             `<label class="campo"><span>Título</span><input type="text" data-l="titulo" value="${esc(p.titulo)}"></label></div>` +
@@ -1670,7 +1781,10 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
             inp.addEventListener("input", () => {
               p[inp.dataset.l] = inp.value;
               // Texto alterado: atualiza a data da página (só Privacidade e Termos exibem a data)
-              if (["antes", "depois", "titulo"].includes(inp.dataset.l) && !ehExclusao) {
+              if (
+                ["antes", "depois", "titulo"].includes(inp.dataset.l) &&
+                !ehExclusao
+              ) {
                 p.atualizado = new Date().toISOString().slice(0, 10);
                 const d = $('[data-l="atualizado"]');
                 if (d) d.value = p.atualizado;

@@ -1118,6 +1118,26 @@
         border-radius: 4px;
       }
 
+      /* Quem somos: três valores em lista, sem cartões */
+      .valores {
+        list-style: none;
+        margin-top: 32px;
+        display: grid;
+        gap: 24px;
+      }
+      .valores li {
+        border-left: 2px solid var(--girassol);
+        padding-left: 20px;
+      }
+      .equipe-texto .valores h3 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      .equipe-texto .valores p {
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+
       /* Equipe: texto corrido, sem cartões */
       .equipe {
         display: grid;
@@ -1288,6 +1308,7 @@
         </a>
         <ul>
           <li><a href="#metodo">Método</a></li>
+          <li><a href="/sobre">Sobre</a></li>
           <li><a href="#equipe">Equipe</a></li>
           <li><a href="/solucoes">Soluções</a></li>
           <li><a href="/casos">Casos</a></li>
@@ -1316,9 +1337,10 @@
             >
           </h1>
           <p class="lead fade d1" data-texto="abertura.texto">
-            Entendemos como sua empresa trabalha e criamos, com inteligência
-            artificial, a ferramenta que resolve o que hoje dá trabalho. Ela
-            fica com você, sem mensalidade.
+            A Girassol Inteligência é uma consultoria de tecnologia de Campo
+            Grande/MS. Ouvimos como sua empresa trabalha e criamos, com você e
+            com inteligência artificial, a ferramenta que resolve o que hoje dá
+            trabalho. Ela fica com você, sem mensalidade.
           </p>
           <div class="hero-actions fade d2">
             <a class="btn mag" href="#metodo"
@@ -1328,6 +1350,50 @@
           </div>
         </div>
         <div class="hint" aria-hidden="true"><i></i>Role</div>
+      </section>
+
+      <section class="quem" id="quem" aria-labelledby="quem-titulo">
+        <div class="wrap">
+          <div class="equipe rise">
+            <div>
+              <span class="eyebrow scramble">Quem somos</span>
+              <h2 id="quem-titulo" data-texto="quem.titulo">
+                Especialistas em pessoas, antes de especialistas em tecnologia.
+              </h2>
+            </div>
+            <div class="equipe-texto">
+              <p data-texto="quem.texto">
+                Nascemos da experiência na gestão pública de tecnologia, onde
+                tivemos muitas boas ideias que o tempo não permitiu construir.
+                Hoje ouvimos pessoas e empresas de todas as áreas para
+                transformar ideias em ferramentas que fazem diferença.
+              </p>
+              <ul class="valores stagger">
+                <li>
+                  <h3 data-texto="quem.valor1.titulo">De frente para a luz</h3>
+                  <p data-texto="quem.valor1.texto">
+                    Trabalho honesto e transparente. Só construímos ferramentas
+                    que ajudam pessoas.
+                  </p>
+                </li>
+                <li>
+                  <h3 data-texto="quem.valor2.titulo">Paciência para ouvir</h3>
+                  <p data-texto="quem.valor2.texto">
+                    Você não precisa entender de tecnologia. Ouvimos com calma,
+                    e você participa de cada etapa: a ferramenta sai com a cara
+                    de quem vai usá-la.
+                  </p>
+                </li>
+                <li>
+                  <h3 data-texto="quem.valor3.titulo">Melhor a cada entrega</h3>
+                  <p data-texto="quem.valor3.texto">
+                    Cada projeto nos ensina algo que o próximo cliente recebe.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="problema">
@@ -1385,8 +1451,8 @@
                   Ideias que ficaram no papel
                 </h3>
                 <p data-texto="dores.item4.texto">
-                  Melhorias simples, conhecidas pela equipe, que nunca
-                  encontraram quem as construísse.
+                  Melhorias conhecidas pela equipe, ou uma boa ideia sua, que
+                  nunca encontraram quem as construísse.
                 </p>
               </div>
             </li>
@@ -1548,22 +1614,25 @@
             <div>
               <span class="eyebrow scramble">Equipe</span>
               <h2 data-texto="equipe.titulo">
-                Uma equipe que trabalha junto há anos, reunida para o seu
-                projeto.
+                Uma rede de especialistas que já construiu junto, reunida para o
+                seu projeto.
               </h2>
             </div>
             <div class="equipe-texto">
               <p data-texto="equipe.texto">
-                Somos profissionais de gestão de projetos, análise de sistemas,
-                engenharia de software, banco de dados e segurança da informação
-                que trabalham juntos há anos. Para cada projeto, reunimos as
-                especialidades que ele exige, nem mais, nem menos.
+                Um núcleo fixo coordena cada projeto e convida profissionais com
+                quem já construímos soluções importantes: gestão de projetos,
+                desenvolvimento de software, análise de dados, banco de dados,
+                infraestrutura, segurança da informação e apoio jurídico. Para
+                cada projeto, reunimos as especialidades que ele exige, nem
+                mais, nem menos.
               </p>
               <p data-texto="equipe.texto2">
-                Nossa experiência vem da condução de áreas inteiras de
-                tecnologia da informação. É ela que garante que a inteligência
-                artificial seja usada com critério e que a ferramenta continue
-                funcionando no dia a dia, depois da entrega.
+                Nossa experiência vem da iniciativa privada e do poder público,
+                de grandes e pequenas empresas, e da condução de áreas inteiras
+                de tecnologia da informação. É ela que garante que a
+                inteligência artificial seja usada com critério e que a
+                ferramenta continue funcionando no dia a dia, depois da entrega.
               </p>
               <p class="equipe-coord" data-texto="equipe.coordenacao">
                 A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão
@@ -1639,6 +1708,7 @@
           /><span>Girassol Inteligência</span></a
         >
         <nav>
+          <a href="/sobre">Sobre</a>
           <a href="/solucoes">Soluções</a>
           <a href="/casos">Casos</a>
           <a href="artigos.html">Artigos</a>

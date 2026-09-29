@@ -1,19 +1,63 @@
 # DNA Criativo — Girassol Inteligência
 
 > Fonte da verdade da marca. Qualquer pessoa ou IA que criar, editar ou revisar uma peça da Girassol lê este arquivo antes.
-> Versão 1.0 · 28/09/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador)
+> Versão 1.1 · 29/09/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador) · 1.1: origem, nome, valores, rede de especialistas e cliente coautor (entrevista com o fundador)
 
 ---
 
 ## 1. Essência
 
-**Em uma frase:** a Girassol Inteligência é uma consultoria de tecnologia que mapeia os processos de empresas organizadas e desenvolve, com inteligência artificial, ferramentas sob medida que passam a pertencer ao cliente.
+**Em uma frase:** a Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS que ouve antes de construir: transforma a ideia ou o problema de quem opera o negócio em uma ferramenta feita junto com o cliente, e que passa a ser dele.
 
 **Promessa:** _Sua ideia vira ferramenta — e a ferramenta é sua._
 
 **Se a Girassol fechasse amanhã, o que deixaria de existir:** uma forma de contratar tecnologia em que o cliente participa da construção e sai proprietário da solução, em vez de assinar mais um software genérico.
 
-**Crença central:** tecnologia se constrói com quem opera o negócio. Não se vende tecnologia sem conversar.
+**Crença central:** tecnologia se constrói com quem opera o negócio. Não se vende tecnologia sem conversar. Somos **especialistas em pessoas** antes de especialistas em tecnologia: sem ouvir e entender quem vai usar, nenhuma ferramenta resolve.
+
+**Visão (5 anos):** que os clientes digam que tiveram uma ideia implementada, que ela mudou a vida deles ou da empresa, que foi uma parceria de sucesso, que indicam a Girassol — e que têm orgulho de ter participado da criação da ferramenta. O DNA de cada cliente fica embutido na ferramenta que ele ajudou a construir.
+
+---
+
+## 1.1 Origem e nome
+
+**Fatos:** empresa formalizada no início de 2025, CNPJ próprio, sede em Campo Grande/MS. Atende prioritariamente Campo Grande e, pela internet, todo o Brasil, em qualquer setor (jurídico, público, saúde, comércio e outros).
+
+**Origem:** a Girassol nasce da experiência na gestão de tecnologia do poder público. Nesse período surgiram muitas boas ideias que não houve tempo de implementar. A Girassol existe para isso: ouvir clientes e pessoas de todas as áreas e transformar ideias em ferramentas — inclusive aquelas que fazem diferença na vida da população.
+
+- Formulação correta: "não houve tempo de implementar". **Nunca** dizer que as ideias pararam por falta de vontade de gestores ou atribuir culpa a quem quer que seja.
+
+**Nome "Girassol":** veio de uma frase dita em família, inspirada na música "Girassol" (letra e melodia: Whindersson Nunes; interpretação e arranjos: Priscilla Alcantara — citar sempre com esse crédito): uma empresa que vive _de costas para o escuro e de frente para a luz_ — honesta, correta, voltada à verdade.
+
+Estrofe de inspiração (registro interno; **não publicar a estrofe no site** — direito autoral; no máximo uma linha literal, com crédito, na página Sobre):
+
+> Eu quero ser melhor do que eu nunca fui
+> Fazer o que eu posso pra me ajudar
+> Ser justo e paciente como era Jesus
+> Eu quero dar valor até ao calor do Sol
+> Que eu esteja preparado pra quem me conduz
+> Que eu seja todo dia como um girassol
+> De costas pro escuro e de frente pra luz
+
+**Nome "Inteligência":** não é só inteligência artificial. É a inteligência do negócio, dos dados e das pessoas, presente em todos os atos — na conversa com o cliente, na ideia que surge, na implementação da ferramenta.
+
+**Fé:** a fé do fundador é a raiz dos valores. Nos canais institucionais (site, assistente), ela aparece como valores e comportamento, sem referência religiosa explícita. A história completa (música, filha, fé) pode ser contada em apresentações, reuniões e redes sociais, a critério do fundador.
+
+### Valores ("De frente para a luz")
+
+| Verso                                   | Valor                                                                              | Uso               |
+| --------------------------------------- | ---------------------------------------------------------------------------------- | ----------------- |
+| De costas pro escuro, de frente pra luz | **Verdade** — honestidade, transparência, só projetos que ajudam pessoas           | Site e assistente |
+| Ser justo e paciente                    | **Paciência para ouvir** — justiça na proposta; acolher quem não domina tecnologia | Site e assistente |
+| Ser melhor do que eu nunca fui          | **Melhoria contínua** — cada entrega melhor que a anterior                         | Site e assistente |
+| Dar valor até ao calor do Sol           | **Gratidão** — valorizar cada cliente e cada oportunidade                          | Comportamento     |
+| Fazer o que eu posso                    | **Fazer a nossa parte** — empenho real, dentro do prometido                        | Comportamento     |
+| Preparado pra quem me conduz            | **Humildade e disponibilidade** — pronto para servir e ouvir                       | Comportamento     |
+| Todo dia como um girassol               | **Constância** — integridade no dia a dia, não só no discurso                      | Comportamento     |
+
+Regra: no site e no assistente, **só os três primeiros** são nomeados. Os demais aparecem no tom e na conduta, sem virar lista.
+
+**O que recusamos:** projetos cujo propósito seja prejudicar pessoas ou usar a tecnologia como força contra alguém. Comunicar sempre de forma positiva: "Só construímos ferramentas que ajudam pessoas."
 
 ---
 
@@ -30,6 +74,13 @@ Empresa pequena ou média, **já organizada**, mas presa em:
 
 **Arquétipo de referência:** escritório de advocacia com tudo em papel, sistemas desconectados e custos recorrentes de várias assinaturas.
 
+**Perfis complementares:**
+
+- **Quem tem a ideia, mas não o caminho:** pessoa ou empresa com uma boa ideia que não tem facilidade com tecnologia ou não consegue implementá-la. A Girassol é parceira dessa pessoa.
+- **Impacto público:** órgãos públicos e iniciativas voltadas à população — ferramentas que fazem diferença na vida das pessoas.
+
+Ao citar setores, usar exemplos concretos (escritórios de advocacia, órgãos públicos, clínicas, comércio) em vez de "atendemos qualquer setor".
+
 ### Método (como a Girassol trabalha)
 
 1. **Diagnóstico** — sentamos com quem opera e entendemos onde o trabalho trava.
@@ -42,20 +93,26 @@ Empresa pequena ou média, **já organizada**, mas presa em:
 
 ### Pilares
 
-| Pilar                 | O que significa                                         | Como provar                                                            |
-| --------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------- |
-| **Propriedade**       | A ferramenta é do cliente. Sem mais uma assinatura.     | Explicitar entrega de código/infra; comparar com modelo de assinatura. |
-| **Participação**      | Construído com quem opera.                              | Mostrar as etapas de validação com a equipe do cliente.                |
-| **Equipe experiente** | Time que trabalhou junto por anos, montado por projeto. | Áreas de competência, anos de experiência, cases.                      |
-| **Responsabilidade**  | IA com critério, segurança da informação e LGPD.        | Governança, testes, dados sob controle do cliente.                     |
+| Pilar                 | O que significa                                                    | Como provar                                                            |
+| --------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| **Propriedade**       | A ferramenta é do cliente. Sem mais uma assinatura.                | Explicitar entrega de código/infra; comparar com modelo de assinatura. |
+| **Participação**      | Construído com quem opera.                                         | Mostrar as etapas de validação com a equipe do cliente.                |
+| **Equipe experiente** | Rede de especialistas que já construiu junto, reunida por projeto. | Áreas de competência, experiência pública e privada, cases.            |
+| **Responsabilidade**  | IA com critério, segurança da informação e LGPD.                   | Governança, testes, dados sob controle do cliente.                     |
 
 ### Diferencial de credibilidade
 
-Experiência acumulada na condução de equipes de TI: service desk e help desk, infraestrutura, segurança da informação, desenvolvimento de software e gestão de projetos. Conhecimento das vantagens, riscos e cuidados no desenvolvimento com IA. Certificação em mapeamento de projetos e processos (BPM) e Design Thinking.
+**Maturidade.** Muitos anos em tecnologia, na iniciativa privada e no poder público, com grandes e pequenas empresas, grandes e pequenos problemas — e a tecnologia atravessa todas as áreas. Experiência acumulada na condução de equipes de TI: service desk e help desk, infraestrutura, segurança da informação, desenvolvimento de software e gestão de projetos. Conhecimento das vantagens, riscos e cuidados no desenvolvimento com IA. Certificação em mapeamento de projetos e processos (BPM) e Design Thinking.
 
-### A equipe (protagonista da marca)
+Resposta a "por que a Girassol e não uma software house?": **somos especialistas em pessoas** — profissionais experientes que sempre ouviram antes de construir, e o cliente participa de todas as etapas.
 
-Profissionais de projetos, analistas de sistemas, engenheiros de software, especialistas em banco de dados e em segurança da informação. **Um time que trabalhou junto durante anos e se reúne conforme o tipo de projeto.**
+### Protagonismo
+
+**A equipe conduz; o cliente constrói junto.** O cliente é coautor: está em todas as etapas, e a ferramenta sai com a cara de quem vai usá-la.
+
+### A equipe
+
+**Um núcleo fixo, que coordena, e uma rede de especialistas convidados por projeto** — profissionais com quem já se construíram soluções importantes: gestão de projetos, desenvolvimento de software, análise de dados, banco de dados, infraestrutura e servidores, segurança da informação e apoio jurídico (advogados). **Nunca** descrever como equipe fixa ou "que trabalha junto há anos" no presente; a formulação correta é "rede de especialistas que já construiu junto, reunida para o seu projeto".
 
 Metáfora oficial: **o girassol se constrói em torno do miolo** — o miolo é a necessidade do cliente; as pétalas são as etapas do método que a transformam em ferramenta. As especialidades da equipe aparecem na seção Equipe (quem faz), separadas do método (como é feito).
 
@@ -85,7 +142,7 @@ Ação principal única: **chat com IA no site** (widget conectado a `api.girass
 
 ### Vocabulário
 
-- **Usa:** diagnóstico, mapeamento, processo, operação, ferramenta, sob medida, propriedade, equipe, validação, homologação, segurança da informação, LGPD, governança, integração, entrega.
+- **Usa:** diagnóstico, mapeamento, processo, operação, ferramenta, sob medida, propriedade, equipe, validação, homologação, segurança da informação, LGPD, governança, integração, entrega, ouvir, parceria, construir junto, "especialistas em pessoas", "com a cara de quem usa", "de frente para a luz".
 - **Evita:** revolucionar, disruptivo, transformação digital (como slogan), solução completa, inovador, "o futuro é agora", robusto, alavancar.
 - **Nunca:** gíria ("fala comigo", "bora", "top"), diminutivos, emojis no site, "compre agora", superlativos sem prova, primeira pessoa do singular falando pela marca.
 
@@ -172,6 +229,14 @@ A marca tem **duas peças oficiais**, ilustradas (girassol com cérebro dourado 
 - Transparência sobre o que a IA faz e não faz.
 - Respeito a dados: LGPD mencionada como prática, não como selo decorativo.
 - Proposta enxuta: preferir "uma ou duas ferramentas" a pacotes.
+- Paciência com quem não domina tecnologia: explicar sem jargão, sem pressa, sem condescendência.
+- Só construir o que ajuda pessoas (ver Valores, seção 1.1).
+
+### Onde a identidade aparece
+
+- **Home:** nome e definição na abertura; bloco "Quem somos" logo após a abertura (origem curta + três valores), sem botão próprio.
+- **Página Sobre (`/sobre`):** origem, por que Girassol, o que é "Inteligência", compromissos, onde atendemos.
+- **Assistente do chat:** documento de identidade em `human-output/dna/girassol-inteligencia/assistente/IDENTIDADE.md`.
 
 ## 6. Anti-padrões
 
@@ -190,7 +255,7 @@ A marca tem **duas peças oficiais**, ilustradas (girassol com cérebro dourado 
 3. O técnico aparece como prova, não como título?
 4. Há um único CTA, levando ao chat ("Iniciar diagnóstico")?
 5. Paleta e tipografia seguem os tokens? Amarelo só como acento?
-6. A equipe — e não uma pessoa — é a protagonista?
+6. A equipe — e não uma pessoa — conduz, e o cliente aparece como quem constrói junto?
 
 ## 8. Pendências
 
