@@ -396,7 +396,8 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
@@ -408,145 +409,152 @@
         >
 
         <header class="legal-header">
-          <span class="legal-badge">Relações Contratuais Claras</span>
-          <h1 class="legal-title">Termos de Uso & Licenciamento</h1>
-          <div class="legal-meta">
+          <span class="legal-badge" id="legalRotulo"
+            >Relações Contratuais Claras</span
+          >
+          <h1 class="legal-title" id="legalTitulo">
+            Termos de Uso & Licenciamento
+          </h1>
+          <div class="legal-meta" id="legalMeta">
             Última atualização: Setembro de 2026 · Girassol Inteligência (Campo
             Grande/MS)
           </div>
         </header>
 
         <article class="legal-body">
-          <p>
-            Bem-vindo à <strong>Girassol Inteligência</strong>. Estes Termos de
-            Uso e Condições Gerais regem a navegação em nosso site institucional
-            (<code>girassolinteligencia.com.br</code>), a utilização de nossos
-            canais de atendimento interativos e o modelo de licenciamento de
-            nossas soluções e produtos de software.
-          </p>
+          <div id="legalAntes">
+            <p>
+              Bem-vindo à <strong>Girassol Inteligência</strong>. Estes Termos
+              de Uso e Condições Gerais regem a navegação em nosso site
+              institucional (<code>girassolinteligencia.com.br</code>), a
+              utilização de nossos canais de atendimento interativos e o modelo
+              de licenciamento de nossas soluções e produtos de software.
+            </p>
 
-          <div class="legal-card hud-box">
-            <span class="hud-corner tl"></span>
-            <span class="hud-corner tr"></span>
-            <span class="hud-corner bl"></span>
-            <span class="hud-corner br"></span>
-            <strong>Nossa Filosofia de Negócio: O Código é do Cliente.</strong
-            ><br />
-            Diferente do modelo de assinatura recorrente, nos projetos sob
-            medida desenvolvidos pela Girassol Inteligência o código-fonte, a
-            modelagem de processos BPMN e as bases de dados pertencem
-            integralmente à sua empresa. Você não fica refém de mensalidades
-            para ter acesso às suas próprias ferramentas.
-          </div>
+            <div class="legal-card hud-box">
+              <span class="hud-corner tl"></span>
+              <span class="hud-corner tr"></span>
+              <span class="hud-corner bl"></span>
+              <span class="hud-corner br"></span>
+              <strong>Nossa Filosofia de Negócio: O Código é do Cliente.</strong
+              ><br />
+              Diferente do modelo de assinatura recorrente, nos projetos sob
+              medida desenvolvidos pela Girassol Inteligência o código-fonte, a
+              modelagem de processos BPMN e as bases de dados pertencem
+              integralmente à sua empresa. Você não fica refém de mensalidades
+              para ter acesso às suas próprias ferramentas.
+            </div>
 
-          <h2>1. Escopo das Soluções e Serviços</h2>
-          <p>
-            A atuação técnica da Girassol Inteligência organiza-se em três
-            pilares principais:
-          </p>
-          <ul>
-            <li>
-              <strong>Desenvolvimento de Soluções Sob Medida:</strong> Softwares
-              e sistemas web modelados em conjunto com a sua equipe no fluxo
-              real do seu negócio, com interface desenhada para a rotina de quem
-              opera e entrega de código-fonte ao final do projeto.
-            </li>
-            <li>
-              <strong>Soluções Já Desenvolvidas:</strong>
-              Ferramentas construídas pela nossa equipe, que podem ser
-              licenciadas ou adaptadas à realidade de cada empresa, como o
-              <em>AlltoParquet</em> (conversor de grandes volumes de dados para
-              Apache Parquet, com licença perpétua e funcionamento 100%
-              offline).
-            </li>
-            <li>
-              <strong>Consultoria em Modelagem BPMN 2.0 e IA:</strong>
-              Mapeamento formal de processos, estruturação de fluxos
-              operacionais, eliminação de gargalos e governança para aplicação
-              segura de inteligência artificial corporativa.
-            </li>
-          </ul>
+            <h2>1. Escopo das Soluções e Serviços</h2>
+            <p>
+              A atuação técnica da Girassol Inteligência organiza-se em três
+              pilares principais:
+            </p>
+            <ul>
+              <li>
+                <strong>Desenvolvimento de Soluções Sob Medida:</strong>
+                Softwares e sistemas web modelados em conjunto com a sua equipe
+                no fluxo real do seu negócio, com interface desenhada para a
+                rotina de quem opera e entrega de código-fonte ao final do
+                projeto.
+              </li>
+              <li>
+                <strong>Soluções Já Desenvolvidas:</strong>
+                Ferramentas construídas pela nossa equipe, que podem ser
+                licenciadas ou adaptadas à realidade de cada empresa, como o
+                <em>AlltoParquet</em> (conversor de grandes volumes de dados
+                para Apache Parquet, com licença perpétua e funcionamento 100%
+                offline).
+              </li>
+              <li>
+                <strong>Consultoria em Modelagem BPMN 2.0 e IA:</strong>
+                Mapeamento formal de processos, estruturação de fluxos
+                operacionais, eliminação de gargalos e governança para aplicação
+                segura de inteligência artificial corporativa.
+              </li>
+            </ul>
 
-          <h2>2. Regra de Negócio: Integração Nativa</h2>
-          <p>
-            Na Girassol Inteligência, integrar programas para que conversem
-            entre si não é vendido como um aditivo surpresa:
-            <strong
-              >é uma característica fundamental da engenharia de qualquer
-              ferramenta que entregamos</strong
-            >. Todas as nossas aplicações são arquitetadas para comunicar-se
-            nativamente com os sistemas, bancos de dados, planilhas e rotinas já
-            existentes na sua empresa.
-          </p>
+            <h2>2. Regra de Negócio: Integração Nativa</h2>
+            <p>
+              Na Girassol Inteligência, integrar programas para que conversem
+              entre si não é vendido como um aditivo surpresa:
+              <strong
+                >é uma característica fundamental da engenharia de qualquer
+                ferramenta que entregamos</strong
+              >. Todas as nossas aplicações são arquitetadas para comunicar-se
+              nativamente com os sistemas, bancos de dados, planilhas e rotinas
+              já existentes na sua empresa.
+            </p>
 
-          <h2>3. Propriedade Intelectual e Licenciamento</h2>
-          <ul>
-            <li>
-              <strong>Softwares Sob Medida:</strong> Os direitos patrimoniais do
-              código específico gerado para a rotina exclusiva da contratante
-              são integralmente transferidos à empresa cliente após a quitação
-              do contrato de desenvolvimento.
-            </li>
-            <li>
-              <strong>Soluções Já Desenvolvidas (ex.: AlltoParquet):</strong> O
-              cliente adquire uma licença definitiva e intransferível de uso do
-              software para suas estações de trabalho, sem cobrança recorrente
-              de anuidade, mantendo-se os direitos morais de autor da Girassol
-              sobre os núcleos proprietários da aplicação.
-            </li>
-            <li>
-              <strong>Marca e Identidade Institucional:</strong> A logomarca
-              Girassol, os textos autorais, ilustrações técnicas e o design
-              deste site são de titularidade exclusiva da Girassol Inteligência
-              e protegidos pela legislação de direitos autorais e propriedade
-              industrial.
-            </li>
-          </ul>
+            <h2>3. Propriedade Intelectual e Licenciamento</h2>
+            <ul>
+              <li>
+                <strong>Softwares Sob Medida:</strong> Os direitos patrimoniais
+                do código específico gerado para a rotina exclusiva da
+                contratante são integralmente transferidos à empresa cliente
+                após a quitação do contrato de desenvolvimento.
+              </li>
+              <li>
+                <strong>Soluções Já Desenvolvidas (ex.: AlltoParquet):</strong>
+                O cliente adquire uma licença definitiva e intransferível de uso
+                do software para suas estações de trabalho, sem cobrança
+                recorrente de anuidade, mantendo-se os direitos morais de autor
+                da Girassol sobre os núcleos proprietários da aplicação.
+              </li>
+              <li>
+                <strong>Marca e Identidade Institucional:</strong> A logomarca
+                Girassol, os textos autorais, ilustrações técnicas e o design
+                deste site são de titularidade exclusiva da Girassol
+                Inteligência e protegidos pela legislação de direitos autorais e
+                propriedade industrial.
+              </li>
+            </ul>
 
-          <h2>4. Uso Responsável do Chat Assistente</h2>
-          <p>
-            O assistente de inteligência artificial disponibilizado no site
-            possui finalidade informativa, voltado à triagem inicial de
-            demandas, explicação da metodologia de trabalho e encaminhamento à
-            nossa equipe pelo WhatsApp, por meio de um resumo que o próprio
-            usuário revisa e decide enviar. As respostas do assistente não
-            constituem proposta comercial nem parecer técnico definitivo. O
-            usuário concorda em utilizar o canal com boa-fé, abstendo-se de
-            tentativas de injeção de prompt (prompt injection), envio de
-            conteúdos ilícitos ou abusos automatizados.
-          </p>
+            <h2>4. Uso Responsável do Chat Assistente</h2>
+            <p>
+              O assistente de inteligência artificial disponibilizado no site
+              possui finalidade informativa, voltado à triagem inicial de
+              demandas, explicação da metodologia de trabalho e encaminhamento à
+              nossa equipe pelo WhatsApp, por meio de um resumo que o próprio
+              usuário revisa e decide enviar. As respostas do assistente não
+              constituem proposta comercial nem parecer técnico definitivo. O
+              usuário concorda em utilizar o canal com boa-fé, abstendo-se de
+              tentativas de injeção de prompt (prompt injection), envio de
+              conteúdos ilícitos ou abusos automatizados.
+            </p>
 
-          <h2>5. Níveis de Serviço (SLA) e Suporte Técnico</h2>
-          <p>
-            Para ferramentas entregues e projetos em garantia, a Girassol mantém
-            canal de atendimento direto via WhatsApp e e-mail institucional com
-            resposta operacional célere (meta de diagnóstico em até 48 horas
-            úteis). Atualizações de manutenção corretiva e estabilidade são
-            fornecidas conforme as diretrizes acordadas no Termo de Entrega de
-            cada projeto.
-          </p>
+            <h2>5. Níveis de Serviço (SLA) e Suporte Técnico</h2>
+            <p>
+              Para ferramentas entregues e projetos em garantia, a Girassol
+              mantém canal de atendimento direto via WhatsApp e e-mail
+              institucional com resposta operacional célere (meta de diagnóstico
+              em até 48 horas úteis). Atualizações de manutenção corretiva e
+              estabilidade são fornecidas conforme as diretrizes acordadas no
+              Termo de Entrega de cada projeto.
+            </p>
 
-          <h2>6. Legislação Aplicável e Foro de Eleição</h2>
-          <p>
-            Estes Termos são redigidos e interpretados sob a égide das Leis da
-            República Federativa do Brasil. Fica eleito o
-            <strong
-              >Foro da Comarca de Campo Grande, Estado de Mato Grosso do
-              Sul</strong
-            >, com exclusão de qualquer outro por mais privilegiado que seja,
-            para dirimir eventuais controvérsias decorrentes da interpretação ou
-            execução deste instrumento.
-          </p>
+            <h2>6. Legislação Aplicável e Foro de Eleição</h2>
+            <p>
+              Estes Termos são redigidos e interpretados sob a égide das Leis da
+              República Federativa do Brasil. Fica eleito o
+              <strong
+                >Foro da Comarca de Campo Grande, Estado de Mato Grosso do
+                Sul</strong
+              >, com exclusão de qualquer outro por mais privilegiado que seja,
+              para dirimir eventuais controvérsias decorrentes da interpretação
+              ou execução deste instrumento.
+            </p>
 
-          <div class="legal-card hud-box">
-            <span class="hud-corner tl"></span>
-            <span class="hud-corner tr"></span>
-            <span class="hud-corner bl"></span>
-            <span class="hud-corner br"></span>
-            <strong>Dúvidas sobre os Termos ou Contratação:</strong><br />
-            Coordenação: Paulo Cardoso<br />
-            E-mail: <code>girassolinteligencia@gmail.com</code><br />
-            WhatsApp: <code>+55 (67) 98115-1717</code>
+            <div class="legal-card hud-box">
+              <span class="hud-corner tl"></span>
+              <span class="hud-corner tr"></span>
+              <span class="hud-corner bl"></span>
+              <span class="hud-corner br"></span>
+              <strong>Dúvidas sobre os Termos ou Contratação:</strong><br />
+              Coordenação: Paulo Cardoso<br />
+              E-mail: <code>girassolinteligencia@gmail.com</code><br />
+              WhatsApp: <code>+55 (67) 98115-1717</code>
+            </div>
           </div>
         </article>
       </div>
@@ -596,6 +604,7 @@
         new Date().getFullYear();
     </script>
     <script src="assets/js/chat-widget.js" defer></script>
+    <script src="assets/js/textos.js" defer></script>
     <script src="assets/js/metricas.js" defer></script>
   </body>
 </html>

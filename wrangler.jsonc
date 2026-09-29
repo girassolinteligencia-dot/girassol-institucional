@@ -13,6 +13,9 @@
       "/site-config.json",
       "/casos/*",
       "/sitemap.xml",
+      "/privacidade",
+      "/termos",
+      "/exclusao-dados",
     ],
   },
   "d1_databases": [

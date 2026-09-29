@@ -206,7 +206,8 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
@@ -215,9 +216,11 @@
       <div class="gi-wrap">
         <!-- Lista de casos (/casos) -->
         <section id="casoLista">
-          <span class="eyebrow">Casos</span>
-          <h1>Problemas reais, ferramentas entregues.</h1>
-          <p class="lead">
+          <span class="eyebrow" data-texto="pagina.casos.rotulo">Casos</span>
+          <h1 data-texto="pagina.casos.titulo">
+            Problemas reais, ferramentas entregues.
+          </h1>
+          <p class="lead" data-texto="pagina.casos.texto">
             Cada caso segue o mesmo percurso: o desafio da operação, a solução
             construída com quem opera e o resultado entregue.
           </p>
@@ -236,8 +239,10 @@
           <div class="caso-corpo" id="casoConteudo"></div>
           <aside class="chamada">
             <div>
-              <h2>Sua operação tem um desafio parecido?</h2>
-              <p>
+              <h2 data-texto="pagina.casos.chamada.titulo">
+                Sua operação tem um desafio parecido?
+              </h2>
+              <p data-texto="pagina.casos.chamada.texto">
                 Comece pelo diagnóstico: uma conversa para entender onde uma
                 ferramenta sob medida gera mais resultado.
               </p>
@@ -247,7 +252,8 @@
               data-assunto="diagnostico"
               type="button"
             >
-              <span class="gi-cursor"></span>Iniciar diagnóstico
+              <span class="gi-cursor"></span
+              ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span>
             </button>
           </aside>
           <section class="outros">
@@ -303,7 +309,12 @@
           esc(c.title) +
           "</h2><p>" +
           esc(c.summary || "") +
-          "</p><span>Ler o caso →</span></a>";
+          "</p><span>" +
+          esc(
+            (window.girassolTextos || {})["botoes.verCaso"] ||
+              "Ver o caso completo",
+          ) +
+          " →</span></a>";
 
         document.querySelectorAll(".js-chat").forEach((el) =>
           el.addEventListener("click", (e) => {
@@ -316,6 +327,7 @@
         fetch("/site-config.json")
           .then((r) => r.json())
           .then((cfg) => {
+            window.girassolTextos = cfg.home || {};
             const casos = (cfg.cases || []).filter(
               (c) => c.published !== false,
             );
@@ -337,6 +349,7 @@
       })();
     </script>
     <script src="/assets/js/chat-widget.js"></script>
+    <script src="/assets/js/textos.js" defer></script>
     <script src="/assets/js/metricas.js" defer></script>
   </body>
 </html>

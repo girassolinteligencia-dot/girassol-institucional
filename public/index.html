@@ -1322,7 +1322,8 @@
           </p>
           <div class="hero-actions fade d2">
             <a class="btn mag" href="#metodo"
-              ><span class="dot"></span>Conheça o método</a
+              ><span class="dot"></span
+              ><span data-texto="botoes.metodo">Conheça o método</span></a
             >
           </div>
         </div>
@@ -1596,8 +1597,12 @@
             <p class="nota">Carregando casos…</p>
           </div>
           <p class="ver-todos rise">
-            <a class="btn-link" href="/casos">Ver todos os casos</a>
-            <a class="btn-link" href="/solucoes">Ver todas as soluções</a>
+            <a class="btn-link" href="/casos" data-texto="botoes.verCasos"
+              >Ver todos os casos</a
+            >
+            <a class="btn-link" href="/solucoes" data-texto="botoes.verSolucoes"
+              >Ver todas as soluções</a
+            >
           </p>
         </div>
       </section>
@@ -1616,7 +1621,8 @@
             data-assunto="diagnostico"
             type="button"
           >
-            <span class="dot"></span>Iniciar diagnóstico
+            <span class="dot"></span
+            ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span>
           </button>
         </div>
       </section>
@@ -2338,7 +2344,12 @@
                     esc(c.title) +
                     "</h3><p>" +
                     esc(c.summary || "") +
-                    '</p><span class="btn-link">Ver o caso completo</span></a>',
+                    '</p><span class="btn-link">' +
+                    esc(
+                      (cfg.home && cfg.home["botoes.verCaso"]) ||
+                        "Ver o caso completo",
+                    ) +
+                    "</span></a>",
                 )
                 .join("");
             })
