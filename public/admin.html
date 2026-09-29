@@ -470,6 +470,9 @@
         color: var(--tinta-2);
         border: 1px dashed var(--linha);
       }
+      /* No painel, o seletor de tema fica à direita para não cobrir o botão Sair */
+      .tema-toggle { left: auto !important; right: 16px; }
+
       /* Tipografia do DNA: títulos em Plex Sans 600; números e rótulos técnicos em Plex Mono */
       h1,
       h2,
@@ -530,7 +533,8 @@
           <button role="tab" data-aba="solucoes">Soluções</button>
           <button role="tab" data-aba="casos">Casos</button>
           <button role="tab" data-aba="artigos">Artigos</button>
-          <button role="tab" data-aba="textos">Textos da home</button>
+          <button role="tab" data-aba="textos">Textos do site</button>
+          <button role="tab" data-aba="legal">Páginas jurídicas</button>
           <button role="tab" data-aba="geral">Geral e contatos</button>
           <button role="tab" data-aba="exclusoes">
             Exclusão de dados <span class="n" id="nExclusoes"></span>
@@ -713,11 +717,38 @@
         <!-- TEXTOS DA HOME -->
         <section class="painel" id="p-textos" role="tabpanel">
           <p class="intro">
-            Textos da página inicial. Deixe um campo vazio para manter o texto
+            Textos da página inicial, dos botões e das aberturas das páginas de
+            Soluções, Casos e Artigos. Deixe um campo vazio para manter o texto
             original do site. As alterações vão ao ar ao clicar em "Publicar no
-            site".
+            site". O botão "Iniciar diagnóstico" é a chamada principal da marca:
+            evite trocá-lo sem necessidade.
           </p>
           <div id="formTextos"></div>
+        </section>
+
+        <!-- PÁGINAS JURÍDICAS -->
+        <section class="painel" id="p-legal" role="tabpanel">
+          <p class="intro">
+            Textos de Privacidade, Termos de Uso e Exclusão de Dados. São
+            documentos jurídicos: revise com cuidado antes de publicar. A data
+            de "última atualização" muda sozinha quando o texto é alterado. O
+            formulário da página de Exclusão é fixo e não aparece aqui.
+          </p>
+          <div class="filtros" id="legalAbas">
+            <button data-legal="privacidade" aria-pressed="true">Privacidade</button>
+            <button data-legal="termos">Termos de Uso</button>
+            <button data-legal="exclusao-dados">Exclusão de Dados</button>
+          </div>
+          <div id="formLegal"></div>
+          <details class="cartao" style="margin-top: 24px">
+            <summary><h3 style="display: inline">Como formatar o texto</h3></summary>
+            <pre style="white-space: pre-wrap; margin-top: 12px">## Título de seção
+Parágrafo comum. Deixe uma linha em branco entre parágrafos.
+**negrito**   *itálico*   `código`   [texto do link](https://exemplo.com)
+- item de lista
+1. item de lista numerada
+> Caixa de destaque (cada linha começa com &gt;)</pre>
+          </details>
         </section>
 
         <!-- EXCLUSÃO DE DADOS -->
@@ -918,6 +949,7 @@
         function renderTudo() {
           renderGeral();
           renderTextos();
+          renderLegal();
           editores.forEach((e) => e.render());
           alterado();
         }
@@ -1537,6 +1569,8 @@
           solucoes: "Soluções",
           casos: "O que já entregamos (casos)",
           final: "Chamada final",
+          botoes: "Botões",
+          pagina: "Páginas de Soluções, Casos e Artigos",
         };
         const NOMES_CAMPO = {
           rotulo: "rótulo",
@@ -1547,6 +1581,15 @@
           texto2: "texto (2º parágrafo)",
           nota: "nota",
           coordenacao: "coordenação",
+          solucoes: "Soluções",
+          casos: "Casos",
+          artigos: "Artigos",
+          chamada: "chamada final",
+          diagnostico: "Iniciar diagnóstico (chamada principal)",
+          metodo: "Conheça o método",
+          verCaso: "Ver o caso completo",
+          verCasos: "Ver todos os casos",
+          verSolucoes: "Ver todas as soluções",
         };
         function rotuloTexto(chave) {
           const partes = chave.split(".").slice(1);
@@ -1603,6 +1646,45 @@
             }),
           );
         }
+
+        /* ---------------- Páginas jurídicas ---------------- */
+        const NOMES_LEGAL = { privacidade: "Privacidade", termos: "Termos de Uso", "exclusao-dados": "Exclusão de Dados" };
+        let legalAtual = "privacidade";
+        function renderLegal() {
+          cfg.legal = cfg.legal || {};
+          const p = (cfg.legal[legalAtual] = cfg.legal[legalAtual] || {});
+          const ehExclusao = legalAtual === "exclusao-dados";
+          $$("#legalAbas [data-legal]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.legal === legalAtual));
+          $("#formLegal").innerHTML =
+            `<div class="duas"><label class="campo"><span>Rótulo (acima do título)</span><input type="text" data-l="rotulo" value="${esc(p.rotulo)}"></label>` +
+            `<label class="campo"><span>Título</span><input type="text" data-l="titulo" value="${esc(p.titulo)}"></label></div>` +
+            (ehExclusao
+              ? `<label class="campo"><span>Subtítulo</span><input type="text" data-l="subtitulo" value="${esc(p.subtitulo)}"></label>`
+              : `<label class="campo"><span>Última atualização (muda sozinha ao editar o texto)</span><input type="date" data-l="atualizado" value="${esc(p.atualizado)}"></label>`) +
+            `<label class="campo"><span>${ehExclusao ? "Texto antes do formulário" : "Texto da página"}</span><textarea data-l="antes" rows="24">${esc(p.antes)}</textarea></label>` +
+            (ehExclusao
+              ? `<label class="campo"><span>Texto depois do formulário</span><textarea data-l="depois" rows="10">${esc(p.depois)}</textarea></label>`
+              : "") +
+            `<p class="muted"><a href="/${legalAtual}" target="_blank" rel="noopener">Ver a página publicada ↗</a></p>`;
+          $$("[data-l]", $("#formLegal")).forEach((inp) =>
+            inp.addEventListener("input", () => {
+              p[inp.dataset.l] = inp.value;
+              // Texto alterado: atualiza a data da página (só Privacidade e Termos exibem a data)
+              if (["antes", "depois", "titulo"].includes(inp.dataset.l) && !ehExclusao) {
+                p.atualizado = new Date().toISOString().slice(0, 10);
+                const d = $('[data-l="atualizado"]');
+                if (d) d.value = p.atualizado;
+              }
+              alterado();
+            }),
+          );
+        }
+        $$("#legalAbas [data-legal]").forEach((b) =>
+          b.addEventListener("click", () => {
+            legalAtual = b.dataset.legal;
+            renderLegal();
+          }),
+        );
 
         /* ---------------- Exclusão de dados ---------------- */
         const ROTULO_EXC = {

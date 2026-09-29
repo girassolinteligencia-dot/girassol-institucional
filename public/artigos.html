@@ -847,7 +847,8 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
@@ -860,13 +861,15 @@
             >← Voltar para a Página Inicial</a
           >
           <div class="eyebrow">
-            <span class="bracket-tag">Artigos</span>
+            <span class="bracket-tag" data-texto="pagina.artigos.rotulo"
+              >Artigos</span
+            >
           </div>
-          <h1>
-            Reflexões práticas sobre software,<br />processos e inteligência
+          <h1 data-texto="pagina.artigos.titulo">
+            Reflexões práticas sobre software, processos e inteligência
             artificial.
           </h1>
-          <p class="articles-hero-lead">
+          <p class="articles-hero-lead" data-texto="pagina.artigos.texto">
             Textos sobre tecnologia, processos e inteligência artificial
             aplicados à rotina real de empresas.
           </p>
@@ -1258,6 +1261,7 @@
 
     <!-- WIDGET FLUTUANTE DE IA (FALA COMIGO!) -->
     <script src="assets/js/chat-widget.js" defer></script>
+    <script src="assets/js/textos.js" defer></script>
     <script src="assets/js/metricas.js" defer></script>
   </body>
 </html>

@@ -401,7 +401,8 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
@@ -413,195 +414,205 @@
         >
 
         <header class="legal-header">
-          <span class="legal-badge">Conformidade LGPD & Soberania</span>
-          <h1 class="legal-title">Política de Privacidade</h1>
-          <div class="legal-meta">
+          <span class="legal-badge" id="legalRotulo"
+            >Conformidade LGPD & Soberania</span
+          >
+          <h1 class="legal-title" id="legalTitulo">Política de Privacidade</h1>
+          <div class="legal-meta" id="legalMeta">
             Última atualização: Setembro de 2026 · Girassol Inteligência (Campo
             Grande/MS)
           </div>
         </header>
 
         <article class="legal-body">
-          <p>
-            A <strong>Girassol Inteligência</strong> valoriza e prioriza a
-            privacidade, a transparência institucional e o controle absoluto dos
-            dados pessoais de seus clientes, usuários e parceiros. Esta Política
-            de Privacidade formaliza as diretrizes adotadas no tratamento de
-            informações coletadas através do nosso site institucional
-            (<code>girassolinteligencia.com.br</code>), canais de atendimento e
-            aplicações proprietárias, em estrita conformidade com a
-            <strong
-              >Lei Geral de Proteção de Dados (LGPD — Lei Federal nº
-              13.709/2018)</strong
-            >.
-          </p>
-
-          <div class="legal-card hud-box">
-            <span class="hud-corner tl"></span>
-            <span class="hud-corner tr"></span>
-            <span class="hud-corner bl"></span>
-            <span class="hud-corner br"></span>
-            <strong
-              >Princípio Fundamental da Girassol: Soberania e Não-Monetização de
-              Dados.</strong
-            ><br />
-            A Girassol Inteligência não vende, não aluga, não compartilha com
-            corretores de dados (data brokers) e não utiliza os dados
-            operacionais ou pessoais dos seus clientes para treinamento
-            indiscriminado de modelos de inteligência artificial públicos.
-            Nossos modelos operam em ambientes isolados com garantias estritas
-            de confidencialidade.
-          </div>
-
-          <h2>1. Informações que Coletamos</h2>
-          <p>
-            Coletamos exclusivamente os dados necessários para o atendimento
-            qualificado, prestação de consultoria técnica em engenharia de
-            processos e fornecimento de licenças de software:
-          </p>
-          <ul>
-            <li>
-              <strong>Dados Fornecidos Voluntariamente:</strong> Nome, endereço
-              de e-mail corporativo, telefone/WhatsApp, nome da empresa ou órgão
-              público e síntese das rotinas que necessitam de automação. Esses
-              dados são fornecidos quando você entra em contato pelo formulário,
-              pelo chat assistente ou solicita um blueprint técnico.
-            </li>
-            <li>
-              <strong>Dados de Conversação no Chat Web:</strong> Mensagens
-              enviadas ao assistente institucional para triagem e direcionamento
-              de projetos. Os diálogos são associados a um identificador de
-              sessão anônimo gerado localmente no seu navegador.
-            </li>
-            <li>
-              <strong>Dados Técnicos de Navegação:</strong> Registros essenciais
-              de cabeçalho de rede (endereço IP aproximado, tipo de navegador e
-              timestamps) processados de forma agregada pela rede de proteção
-              anti-DDoS e verificação anti-bot Cloudflare Turnstile,
-              exclusivamente para garantir a segurança da infraestrutura contra
-              ataques automatizados.
-            </li>
-            <li>
-              <strong>Métricas Anônimas de Uso:</strong> Contagens de visitas,
-              cliques em botões e início de conversas no chat, registradas sem
-              cookies, sem endereço IP e sem qualquer identificador do
-              visitante. Guardamos apenas o tipo do evento, a página, o domínio
-              de origem da visita e se o acesso foi por celular ou computador,
-              para melhorar o site.
-            </li>
-            <li>
-              <strong>Resumo do Diagnóstico:</strong> Quando você toca em
-              "Enviar resumo à equipe pelo WhatsApp", o texto do resumo (que
-              você pode revisar e editar antes) é registrado em nosso sistema de
-              atendimento para que a equipe dê continuidade ao seu pedido. Você
-              pode solicitar a exclusão a qualquer momento pela página de
-              Exclusão de Dados.
-            </li>
-          </ul>
-
-          <h2>2. Finalidade e Bases Legais do Tratamento</h2>
-          <p>
-            Todo tratamento de dados realizado pela Girassol apoia-se nas bases
-            legais previstas no Artigo 7º da LGPD:
-          </p>
-          <ul>
-            <li>
+          <div id="legalAntes">
+            <p>
+              A <strong>Girassol Inteligência</strong> valoriza e prioriza a
+              privacidade, a transparência institucional e o controle absoluto
+              dos dados pessoais de seus clientes, usuários e parceiros. Esta
+              Política de Privacidade formaliza as diretrizes adotadas no
+              tratamento de informações coletadas através do nosso site
+              institucional (<code>girassolinteligencia.com.br</code>), canais
+              de atendimento e aplicações proprietárias, em estrita conformidade
+              com a
               <strong
-                >Execução de Contrato ou Procedimentos Preliminares (Art. 7º,
-                V):</strong
-              >
-              Para elaborar propostas comerciais, mapear requisitos de software
-              em BPMN 2.0, entregar licenças de ferramentas (como o
-              <em>AlltoParquet</em>) e fornecer suporte técnico direto.
-            </li>
-            <li>
-              <strong>Legítimo Interesse do Controlador (Art. 7º, IX):</strong>
-              Para aprimorar a usabilidade das nossas ferramentas, manter a
-              integridade da plataforma e responder com celeridade às dúvidas
-              formuladas no chat.
-            </li>
-            <li>
-              <strong>Consentimento do Titular (Art. 7º, I):</strong> Quando
-              expressamente solicitado na submissão de formulários para
-              recebimento de informativos técnicos e guias de engenharia.
-            </li>
-          </ul>
+                >Lei Geral de Proteção de Dados (LGPD — Lei Federal nº
+                13.709/2018)</strong
+              >.
+            </p>
 
-          <h2>3. Inteligência Artificial com Governança</h2>
-          <p>
-            Diferente de soluções convencionais do mercado, a Girassol
-            Inteligência adota premissas rígidas de engenharia em seus projetos:
-          </p>
-          <ul>
-            <li>
-              <strong>Isolamento de Contexto:</strong> Dados confidenciais de
-              negócio, fluxogramas de processos e dados de faturamento nunca são
-              compartilhados entre clientes.
-            </li>
-            <li>
-              <strong>Opção On-Premise / Local:</strong> Para clientes dos
-              setores público, jurídico e do agronegócio com demandas críticas
-              de sigilo, desenvolvemos soluções capazes de operar 100%
-              desconectadas da internet (on-premise), mantendo o processamento
-              restrito ao maquinário local do contratante.
-            </li>
-            <li>
-              <strong>Supervisão Humana:</strong> Decisões críticas, judiciais e
-              organizacionais são sempre apoiadas e validadas por operadores
-              humanos, conforme nossa filosofia de construção a quatro mãos.
-            </li>
-          </ul>
+            <div class="legal-card hud-box">
+              <span class="hud-corner tl"></span>
+              <span class="hud-corner tr"></span>
+              <span class="hud-corner bl"></span>
+              <span class="hud-corner br"></span>
+              <strong
+                >Princípio Fundamental da Girassol: Soberania e Não-Monetização
+                de Dados.</strong
+              ><br />
+              A Girassol Inteligência não vende, não aluga, não compartilha com
+              corretores de dados (data brokers) e não utiliza os dados
+              operacionais ou pessoais dos seus clientes para treinamento
+              indiscriminado de modelos de inteligência artificial públicos.
+              Nossos modelos operam em ambientes isolados com garantias estritas
+              de confidencialidade.
+            </div>
 
-          <h2>4. Armazenamento e Retenção de Dados</h2>
-          <p>
-            Os dados pessoais são mantidos pelo tempo estritamente necessário
-            para atingir as finalidades descritas, cumprir obrigações fiscais e
-            legais ou resguardar o exercício regular de direitos em processos
-            administrativos ou judiciais. Dados temporários de sessão no site
-            podem ser eliminados pelo próprio usuário diretamente na limpeza de
-            cache do navegador.
-          </p>
+            <h2>1. Informações que Coletamos</h2>
+            <p>
+              Coletamos exclusivamente os dados necessários para o atendimento
+              qualificado, prestação de consultoria técnica em engenharia de
+              processos e fornecimento de licenças de software:
+            </p>
+            <ul>
+              <li>
+                <strong>Dados Fornecidos Voluntariamente:</strong> Nome,
+                endereço de e-mail corporativo, telefone/WhatsApp, nome da
+                empresa ou órgão público e síntese das rotinas que necessitam de
+                automação. Esses dados são fornecidos quando você entra em
+                contato pelo formulário, pelo chat assistente ou solicita um
+                blueprint técnico.
+              </li>
+              <li>
+                <strong>Dados de Conversação no Chat Web:</strong> Mensagens
+                enviadas ao assistente institucional para triagem e
+                direcionamento de projetos. Os diálogos são associados a um
+                identificador de sessão anônimo gerado localmente no seu
+                navegador.
+              </li>
+              <li>
+                <strong>Dados Técnicos de Navegação:</strong> Registros
+                essenciais de cabeçalho de rede (endereço IP aproximado, tipo de
+                navegador e timestamps) processados de forma agregada pela rede
+                de proteção anti-DDoS e verificação anti-bot Cloudflare
+                Turnstile, exclusivamente para garantir a segurança da
+                infraestrutura contra ataques automatizados.
+              </li>
+              <li>
+                <strong>Métricas Anônimas de Uso:</strong> Contagens de visitas,
+                cliques em botões e início de conversas no chat, registradas sem
+                cookies, sem endereço IP e sem qualquer identificador do
+                visitante. Guardamos apenas o tipo do evento, a página, o
+                domínio de origem da visita e se o acesso foi por celular ou
+                computador, para melhorar o site.
+              </li>
+              <li>
+                <strong>Resumo do Diagnóstico:</strong> Quando você toca em
+                "Enviar resumo à equipe pelo WhatsApp", o texto do resumo (que
+                você pode revisar e editar antes) é registrado em nosso sistema
+                de atendimento para que a equipe dê continuidade ao seu pedido.
+                Você pode solicitar a exclusão a qualquer momento pela página de
+                Exclusão de Dados.
+              </li>
+            </ul>
 
-          <h2>5. Seus Direitos como Titular de Dados</h2>
-          <p>
-            Em consonância com o Artigo 18 da LGPD, você possui a qualquer
-            momento o direito de:
-          </p>
-          <ul>
-            <li>Confirmar a existência de tratamento dos seus dados;</li>
-            <li>Acessar as informações que mantemos a seu respeito;</li>
-            <li>
-              Solicitar a correção de dados incompletos, inexatos ou
-              desatualizados;
-            </li>
-            <li>
-              Requerer a eliminação definitiva de dados desnecessários ou
-              tratados com base no seu consentimento (consulte nossa página
-              dedicada de
-              <a href="exclusao-dados.html" style="color: var(--petal)"
-                >Exclusão de Dados</a
-              >);
-            </li>
-            <li>
-              Revogar o consentimento previamente concedido para comunicações.
-            </li>
-          </ul>
+            <h2>2. Finalidade e Bases Legais do Tratamento</h2>
+            <p>
+              Todo tratamento de dados realizado pela Girassol apoia-se nas
+              bases legais previstas no Artigo 7º da LGPD:
+            </p>
+            <ul>
+              <li>
+                <strong
+                  >Execução de Contrato ou Procedimentos Preliminares (Art. 7º,
+                  V):</strong
+                >
+                Para elaborar propostas comerciais, mapear requisitos de
+                software em BPMN 2.0, entregar licenças de ferramentas (como o
+                <em>AlltoParquet</em>) e fornecer suporte técnico direto.
+              </li>
+              <li>
+                <strong
+                  >Legítimo Interesse do Controlador (Art. 7º, IX):</strong
+                >
+                Para aprimorar a usabilidade das nossas ferramentas, manter a
+                integridade da plataforma e responder com celeridade às dúvidas
+                formuladas no chat.
+              </li>
+              <li>
+                <strong>Consentimento do Titular (Art. 7º, I):</strong> Quando
+                expressamente solicitado na submissão de formulários para
+                recebimento de informativos técnicos e guias de engenharia.
+              </li>
+            </ul>
 
-          <h2>6. Encarregado de Dados (DPO) e Contato</h2>
-          <p>
-            Para exercer qualquer um dos seus direitos de titular ou esclarecer
-            dúvidas sobre esta Política, disponibilizamos canal direto com a
-            nossa coordenação técnica e de governança:
-          </p>
-          <div class="legal-card hud-box">
-            <span class="hud-corner tl"></span>
-            <span class="hud-corner tr"></span>
-            <span class="hud-corner bl"></span>
-            <span class="hud-corner br"></span>
-            <strong>Canal Oficial de Privacidade & LGPD:</strong><br />
-            E-mail: <code>girassolinteligencia@gmail.com</code><br />
-            WhatsApp: <code>+55 (67) 98115-1717</code><br />
-            Localização: Campo Grande, Mato Grosso do Sul — Brasil.
+            <h2>3. Inteligência Artificial com Governança</h2>
+            <p>
+              Diferente de soluções convencionais do mercado, a Girassol
+              Inteligência adota premissas rígidas de engenharia em seus
+              projetos:
+            </p>
+            <ul>
+              <li>
+                <strong>Isolamento de Contexto:</strong> Dados confidenciais de
+                negócio, fluxogramas de processos e dados de faturamento nunca
+                são compartilhados entre clientes.
+              </li>
+              <li>
+                <strong>Opção On-Premise / Local:</strong> Para clientes dos
+                setores público, jurídico e do agronegócio com demandas críticas
+                de sigilo, desenvolvemos soluções capazes de operar 100%
+                desconectadas da internet (on-premise), mantendo o processamento
+                restrito ao maquinário local do contratante.
+              </li>
+              <li>
+                <strong>Supervisão Humana:</strong> Decisões críticas, judiciais
+                e organizacionais são sempre apoiadas e validadas por operadores
+                humanos, conforme nossa filosofia de construção a quatro mãos.
+              </li>
+            </ul>
+
+            <h2>4. Armazenamento e Retenção de Dados</h2>
+            <p>
+              Os dados pessoais são mantidos pelo tempo estritamente necessário
+              para atingir as finalidades descritas, cumprir obrigações fiscais
+              e legais ou resguardar o exercício regular de direitos em
+              processos administrativos ou judiciais. Dados temporários de
+              sessão no site podem ser eliminados pelo próprio usuário
+              diretamente na limpeza de cache do navegador.
+            </p>
+
+            <h2>5. Seus Direitos como Titular de Dados</h2>
+            <p>
+              Em consonância com o Artigo 18 da LGPD, você possui a qualquer
+              momento o direito de:
+            </p>
+            <ul>
+              <li>Confirmar a existência de tratamento dos seus dados;</li>
+              <li>Acessar as informações que mantemos a seu respeito;</li>
+              <li>
+                Solicitar a correção de dados incompletos, inexatos ou
+                desatualizados;
+              </li>
+              <li>
+                Requerer a eliminação definitiva de dados desnecessários ou
+                tratados com base no seu consentimento (consulte nossa página
+                dedicada de
+                <a href="exclusao-dados.html" style="color: var(--petal)"
+                  >Exclusão de Dados</a
+                >);
+              </li>
+              <li>
+                Revogar o consentimento previamente concedido para comunicações.
+              </li>
+            </ul>
+
+            <h2>6. Encarregado de Dados (DPO) e Contato</h2>
+            <p>
+              Para exercer qualquer um dos seus direitos de titular ou
+              esclarecer dúvidas sobre esta Política, disponibilizamos canal
+              direto com a nossa coordenação técnica e de governança:
+            </p>
+            <div class="legal-card hud-box">
+              <span class="hud-corner tl"></span>
+              <span class="hud-corner tr"></span>
+              <span class="hud-corner bl"></span>
+              <span class="hud-corner br"></span>
+              <strong>Canal Oficial de Privacidade & LGPD:</strong><br />
+              E-mail: <code>girassolinteligencia@gmail.com</code><br />
+              WhatsApp: <code>+55 (67) 98115-1717</code><br />
+              Localização: Campo Grande, Mato Grosso do Sul — Brasil.
+            </div>
           </div>
         </article>
       </div>
@@ -651,6 +662,7 @@
         new Date().getFullYear();
     </script>
     <script src="assets/js/chat-widget.js" defer></script>
+    <script src="assets/js/textos.js" defer></script>
     <script src="assets/js/metricas.js" defer></script>
   </body>
 </html>

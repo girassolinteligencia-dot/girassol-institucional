@@ -9,6 +9,7 @@
  *   POST /api/lead             lead gerado quando o visitante envia o resumo à equipe
  *   POST /api/exclusao         pedido de exclusão de dados (LGPD, art. 18)
  *   GET  /casos/<id>           página de um caso, montada no servidor
+ *   GET  /privacidade, /termos, /exclusao-dados  páginas jurídicas com texto do painel
  *   GET  /sitemap.xml          sitemap com as páginas fixas e cada caso publicado
  *   Cron (dia 1, 08h de Brasília): relatório do mês anterior
  *   POST /api/login, /api/logout  login do painel (senha + código de duas etapas)
@@ -58,6 +59,9 @@ export default {
         return paginaCaso(request, env, url, caso[1]);
       }
       if (pathname === "/sitemap.xml") return sitemap(env, url);
+      const legal = pathname.slice(1);
+      if (PAGINAS_LEGAIS.has(legal) && request.method === "GET")
+        return paginaLegal(request, env, url, legal);
       if (pathname === "/api/login" && request.method === "POST")
         return login(request, env);
       if (pathname === "/api/logout" && request.method === "POST")
@@ -419,6 +423,116 @@ async function sitemap(env, url) {
       "Cache-Control": "public, max-age=3600",
     },
   });
+}
+
+/* ------------------------------------------------------------------ */
+/* Páginas jurídicas (Privacidade, Termos, Exclusão de Dados)          */
+/* O texto vem do painel em Markdown simples e é montado no servidor.  */
+/* O formulário da página de Exclusão fica fixo no HTML.               */
+/* ------------------------------------------------------------------ */
+
+const PAGINAS_LEGAIS = new Set(["privacidade", "termos", "exclusao-dados"]);
+
+// Negrito, itálico, código e links (só http(s), mailto, tel e caminhos do site)
+function inlineLegal(t) {
+  return escHtml(t)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*\s][^*]*?)\*/g, "$1<em>$2</em>")
+    .replace(
+      /\[([^\]]+)\]\(((?:https?:|mailto:|tel:)[^)\s]*|[\w\-./#]+)\)/g, // http(s), mailto, tel ou caminho do site; sem ":" (bloqueia javascript:)
+      '<a href="$2">$1</a>',
+    );
+}
+
+function markdownLegal(md) {
+  const blocos = String(md || "")
+    .replace(/\r/g, "")
+    .split(/\n{2,}/)
+    .map((b) => b.trim())
+    .filter(Boolean);
+  const html = [];
+  let lista = null; // { tag, itens }
+  const fechaLista = () => {
+    if (lista)
+      html.push(
+        `<${lista.tag}>${lista.itens.map((i) => `<li>${inlineLegal(i)}</li>`).join("")}</${lista.tag}>`,
+      );
+    lista = null;
+  };
+  for (const b of blocos) {
+    const linhas = b.split("\n");
+    const ehUl = linhas.every((l) => /^- /.test(l));
+    const ehOl = linhas.every((l) => /^\d+\. /.test(l));
+    if (ehUl || ehOl) {
+      const tag = ehUl ? "ul" : "ol";
+      if (lista && lista.tag !== tag) fechaLista();
+      if (!lista) lista = { tag, itens: [] };
+      linhas.forEach((l) => lista.itens.push(l.replace(/^(- |\d+\. )/, "")));
+      continue;
+    }
+    fechaLista();
+    if (b.startsWith("## ")) {
+      html.push(`<h2>${inlineLegal(b.slice(3))}</h2>`);
+    } else if (linhas.every((l) => l.startsWith(">"))) {
+      const dentro = linhas
+        .map((l) => inlineLegal(l.replace(/^>\s?/, "")))
+        .join("<br>");
+      html.push(
+        '<div class="legal-card hud-box"><span class="hud-corner tl"></span><span class="hud-corner tr"></span>' +
+          '<span class="hud-corner bl"></span><span class="hud-corner br"></span><p>' +
+          dentro +
+          "</p></div>",
+      );
+    } else {
+      html.push(`<p>${linhas.map(inlineLegal).join(" ")}</p>`);
+    }
+  }
+  fechaLista();
+  return html.join("\n");
+}
+
+async function paginaLegal(request, env, url, nome) {
+  const base = await env.ASSETS.fetch(request);
+  if (
+    !base.ok ||
+    !(base.headers.get("content-type") || "").includes("text/html")
+  )
+    return base;
+  const cfg = await configAtual(env, url);
+  const p = cfg.legal && cfg.legal[nome];
+  if (!p) return base; // sem texto no painel: usa o HTML do projeto
+  const data = p.atualizado
+    ? new Date(p.atualizado + "T12:00:00Z").toLocaleDateString("pt-BR", {
+        month: "long",
+        year: "numeric",
+      })
+    : "";
+  const meta =
+    p.subtitulo ||
+    (data
+      ? `Última atualização: ${data.charAt(0).toUpperCase() + data.slice(1)} · Girassol Inteligência (Campo Grande/MS)`
+      : "");
+  let r = new HTMLRewriter()
+    .on("#legalRotulo", { element: (el) => el.setInnerContent(p.rotulo || "") })
+    .on("#legalTitulo", { element: (el) => el.setInnerContent(p.titulo || "") })
+    .on("#legalMeta", { element: (el) => el.setInnerContent(meta) })
+    .on("#legalAntes", {
+      element: (el) =>
+        el.setInnerContent(markdownLegal(p.antes), { html: true }),
+    })
+    .on("#legalDepois", {
+      element: (el) =>
+        el.setInnerContent(markdownLegal(p.depois), { html: true }),
+    })
+    .on("title", {
+      element: (el) =>
+        el.setInnerContent(`${p.titulo} — Girassol Inteligência`),
+    })
+    .transform(base);
+  const h = new Headers(r.headers);
+  h.set("Cache-Control", "public, max-age=60");
+  return new Response(r.body, { status: 200, headers: h });
 }
 
 /* ------------------------------------------------------------------ */

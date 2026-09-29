@@ -458,7 +458,8 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
@@ -470,65 +471,71 @@
         >
 
         <header class="legal-header">
-          <span class="legal-badge">Autonomia do Titular · Art. 18 LGPD</span>
-          <h1 class="legal-title">Exclusão de Dados Pessoais</h1>
-          <div class="legal-meta">
+          <span class="legal-badge" id="legalRotulo"
+            >Autonomia do Titular · Art. 18 LGPD</span
+          >
+          <h1 class="legal-title" id="legalTitulo">
+            Exclusão de Dados Pessoais
+          </h1>
+          <div class="legal-meta" id="legalMeta">
             Procedimento Simplificado de Revogação de Consentimento & Eliminação
           </div>
         </header>
 
         <article class="legal-body">
-          <p>
-            Na <strong>Girassol Inteligência</strong>, você possui total
-            soberania sobre os seus dados. Se você já entrou em contato conosco,
-            solicitou demonstrações, realizou downloads de materiais técnicos ou
-            conversou com nossos canais de atendimento, tem o direito de
-            solicitar a
-            <strong>eliminação completa, definitiva e irrevogável</strong> dos
-            seus dados de contato dos nossos cadastros.
-          </p>
+          <div id="legalAntes">
+            <p>
+              Na <strong>Girassol Inteligência</strong>, você possui total
+              soberania sobre os seus dados. Se você já entrou em contato
+              conosco, solicitou demonstrações, realizou downloads de materiais
+              técnicos ou conversou com nossos canais de atendimento, tem o
+              direito de solicitar a
+              <strong>eliminação completa, definitiva e irrevogável</strong> dos
+              seus dados de contato dos nossos cadastros.
+            </p>
 
-          <h2>Como Funciona a Exclusão</h2>
-          <p>
-            Em atenção ao Artigo 18, inciso VI da Lei nº 13.709/2018 (LGPD), ao
-            recebermos a sua solicitação:
-          </p>
-          <ol>
-            <li>
-              Localizamos todos os registros associados ao seu e-mail ou número
-              de telefone nos nossos bancos de dados de leads e atendimentos;
-            </li>
-            <li>
-              Removemos de forma permanente o seu nome, contatos e histórico de
-              mensagens de triagem;
-            </li>
-            <li>
-              Eliminamos qualquer vínculo de marketing ou comunicações
-              institucionais futuras;
-            </li>
-            <li>
-              Enviamos a confirmação da eliminação para o e-mail informado no
-              prazo máximo legal de até 15 (quinze) dias.
-            </li>
-          </ol>
+            <h2>Como Funciona a Exclusão</h2>
+            <p>
+              Em atenção ao Artigo 18, inciso VI da Lei nº 13.709/2018 (LGPD),
+              ao recebermos a sua solicitação:
+            </p>
+            <ol>
+              <li>
+                Localizamos todos os registros associados ao seu e-mail ou
+                número de telefone nos nossos bancos de dados de leads e
+                atendimentos;
+              </li>
+              <li>
+                Removemos de forma permanente o seu nome, contatos e histórico
+                de mensagens de triagem;
+              </li>
+              <li>
+                Eliminamos qualquer vínculo de marketing ou comunicações
+                institucionais futuras;
+              </li>
+              <li>
+                Enviamos a confirmação da eliminação para o e-mail informado no
+                prazo máximo legal de até 15 (quinze) dias.
+              </li>
+            </ol>
 
-          <p>
-            <em
-              >Nota técnica: Registros estritamente fiscais ou contratuais
-              vinculados a licenças comerciais adquiridas com emissão de Nota
-              Fiscal serão mantidos unicamente pelo período exigido pelas leis
-              tributárias federais e código civil, sendo expurgados após o
-              término do prazo prescricional.</em
-            >
-          </p>
+            <p>
+              <em
+                >Nota técnica: Registros estritamente fiscais ou contratuais
+                vinculados a licenças comerciais adquiridas com emissão de Nota
+                Fiscal serão mantidos unicamente pelo período exigido pelas leis
+                tributárias federais e código civil, sendo expurgados após o
+                término do prazo prescricional.</em
+              >
+            </p>
 
-          <h2>Canal Direto de Solicitação</h2>
-          <p>
-            Para solicitar o expurgo imediato, preencha o formulário
-            simplificado abaixo ou, se preferir, envie uma mensagem direta ao
-            nosso encarregado de dados via e-mail ou WhatsApp:
-          </p>
-
+            <h2>Canal Direto de Solicitação</h2>
+            <p>
+              Para solicitar o expurgo imediato, preencha o formulário
+              simplificado abaixo ou, se preferir, envie uma mensagem direta ao
+              nosso encarregado de dados via e-mail ou WhatsApp:
+            </p>
+          </div>
           <div class="action-card hud-box">
             <span class="hud-corner tl"></span>
             <span class="hud-corner tr"></span>
@@ -581,25 +588,28 @@
               15 dias e enviará a confirmação para o e-mail informado.
             </div>
           </div>
-
-          <h2>Contatos Diretos com o Encarregado (DPO)</h2>
-          <p>
-            Caso deseje atendimento manual ou tenha qualquer dúvida sobre como
-            seus dados foram manuseados:
-          </p>
-          <ul>
-            <li>
-              <strong>E-mail Institucional:</strong>
-              <code>girassolinteligencia@gmail.com</code> (Assunto:
-              <em>LGPD — Solicitação de Exclusão</em>)
-            </li>
-            <li>
-              <strong>WhatsApp Direto:</strong> <code>+55 (67) 98115-1717</code>
-            </li>
-            <li>
-              <strong>Sede:</strong> Campo Grande, Mato Grosso do Sul — Brasil.
-            </li>
-          </ul>
+          <div id="legalDepois">
+            <h2>Contatos Diretos com o Encarregado (DPO)</h2>
+            <p>
+              Caso deseje atendimento manual ou tenha qualquer dúvida sobre como
+              seus dados foram manuseados:
+            </p>
+            <ul>
+              <li>
+                <strong>E-mail Institucional:</strong>
+                <code>girassolinteligencia@gmail.com</code> (Assunto:
+                <em>LGPD — Solicitação de Exclusão</em>)
+              </li>
+              <li>
+                <strong>WhatsApp Direto:</strong>
+                <code>+55 (67) 98115-1717</code>
+              </li>
+              <li>
+                <strong>Sede:</strong> Campo Grande, Mato Grosso do Sul —
+                Brasil.
+              </li>
+            </ul>
+          </div>
         </article>
       </div>
     </div>
@@ -683,6 +693,7 @@
       }
     </script>
     <script src="assets/js/chat-widget.js" defer></script>
+    <script src="assets/js/textos.js" defer></script>
     <script src="assets/js/metricas.js" defer></script>
   </body>
 </html>

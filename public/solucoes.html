@@ -190,24 +190,31 @@
           data-assunto="diagnostico"
           href="#"
           role="button"
-          ><span class="gi-cursor"></span>Iniciar diagnóstico</a
+          ><span class="gi-cursor"></span
+          ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span></a
         >
       </div>
     </header>
 
     <main class="pg">
       <div class="gi-wrap">
-        <span class="eyebrow">Soluções desenvolvidas</span>
-        <h1>O que a equipe já construiu.</h1>
-        <p class="lead">
+        <span class="eyebrow" data-texto="pagina.solucoes.rotulo"
+          >Soluções desenvolvidas</span
+        >
+        <h1 data-texto="pagina.solucoes.titulo">
+          O que a equipe já construiu.
+        </h1>
+        <p class="lead" data-texto="pagina.solucoes.texto">
           Soluções em operação que demonstram nossa capacidade técnica e podem
           ser adaptadas à realidade da sua empresa.
         </p>
         <div id="listaSolucoes"><p class="vazio">Carregando soluções…</p></div>
         <aside class="chamada">
           <div>
-            <h2>Precisa de algo diferente?</h2>
-            <p>
+            <h2 data-texto="pagina.solucoes.chamada.titulo">
+              Precisa de algo diferente?
+            </h2>
+            <p data-texto="pagina.solucoes.chamada.texto">
               A maior parte do nosso trabalho é sob medida. Conte o que trava a
               sua operação.
             </p>
@@ -217,7 +224,8 @@
             data-assunto="diagnostico"
             type="button"
           >
-            <span class="gi-cursor"></span>Iniciar diagnóstico
+            <span class="gi-cursor"></span
+            ><span data-texto="botoes.diagnostico">Iniciar diagnóstico</span>
           </button>
         </aside>
       </div>
@@ -322,6 +330,7 @@
       })();
     </script>
     <script src="/assets/js/chat-widget.js"></script>
+    <script src="/assets/js/textos.js" defer></script>
     <script src="/assets/js/metricas.js" defer></script>
   </body>
 </html>
