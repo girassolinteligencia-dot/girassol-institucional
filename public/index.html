@@ -393,25 +393,6 @@
       .hero.ready .fade.d3 {
         transition-delay: 0.7s;
       }
-      .proof {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        margin-top: 80px;
-        border-top: 1px solid var(--linha);
-        max-width: 900px;
-      }
-      .proof div {
-        padding: 24px 28px 0 0;
-      }
-      .proof strong {
-        display: block;
-        font: 600 18px/1.3 var(--serif);
-        margin-bottom: 6px;
-      }
-      .proof p {
-        font-size: 15px;
-        color: var(--tinta-2);
-      }
       .hint {
         position: absolute;
         right: 24px;
@@ -449,9 +430,6 @@
         }
       }
       @media (max-width: 900px) {
-        .proof {
-          grid-template-columns: 1fr;
-        }
         .hint {
           display: none;
         }
@@ -1343,32 +1321,6 @@
             <a class="btn mag" href="#metodo"
               ><span class="dot"></span>Conheça o método</a
             >
-          </div>
-          <div class="proof fade d3">
-            <div>
-              <strong data-texto="abertura.prova1.titulo"
-                >A ferramenta é sua</strong
-              >
-              <p data-texto="abertura.prova1.texto">
-                Código e dados permanecem com a sua empresa.
-              </p>
-            </div>
-            <div>
-              <strong data-texto="abertura.prova2.titulo"
-                >Construída com quem opera</strong
-              >
-              <p data-texto="abertura.prova2.texto">
-                Sua equipe valida cada etapa antes da entrega.
-              </p>
-            </div>
-            <div>
-              <strong data-texto="abertura.prova3.titulo"
-                >Segurança e LGPD</strong
-              >
-              <p data-texto="abertura.prova3.texto">
-                Homologação técnica e dados sob seu controle.
-              </p>
-            </div>
           </div>
         </div>
         <div class="hint" aria-hidden="true"><i></i>Role</div>
