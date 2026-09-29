@@ -1147,6 +1147,9 @@
       /* Faixas de Soluções e Casos na home */
       .ver-todos {
         margin-top: 32px;
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
       }
       .casos-lista {
         border-top: 0;
@@ -1549,110 +1552,28 @@
                 artificial seja usada com critério e que a ferramenta continue
                 funcionando no dia a dia, depois da entrega.
               </p>
-              <p class="equipe-coord" data-texto="equipe.coordenacao">A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão Pública e com ampla experiência na liderança de equipes de tecnologia da informação em todas as frentes da área. Possui certificações em tecnologia da informação, entre elas mapeamento de processos (BPM) e Design Thinking, e acompanha cada projeto de perto, com atenção aos cuidados que o uso de inteligência artificial exige.</p>
+              <p class="equipe-coord" data-texto="equipe.coordenacao">
+                A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão
+                Pública e com ampla experiência na liderança de equipes de
+                tecnologia da informação em todas as frentes da área. Possui
+                certificações em tecnologia da informação, entre elas mapeamento
+                de processos (BPM) e Design Thinking, e acompanha cada projeto
+                de perto, com atenção aos cuidados que o uso de inteligência
+                artificial exige.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="solucoes" id="solucoes">
-        <div class="wrap">
-          <div class="rise">
-            <span class="eyebrow scramble">Soluções desenvolvidas</span>
-            <h2 data-texto="solucoes.titulo">O que a equipe já construiu.</h2>
-            <p
-              data-texto="solucoes.texto"
-              class="lead"
-              style="margin-top: 16px"
-            >
-              Soluções em operação que demonstram nossa capacidade técnica — e
-              que podem ser adaptadas à sua realidade.
-            </p>
-          </div>
-          <div class="cards cards-3">
-            <article class="card spot tilt rise">
-              <small>Dados · Aplicativo desktop Windows</small>
-              <h3>AlltoParquet</h3>
-              <p>
-                Transforma planilhas e arquivos muito grandes em um formato até
-                10 vezes menor e mais rápido de consultar, direto no seu
-                computador e sem enviar nada para a internet. (Converte CSV,
-                Excel e JSON para Apache Parquet.)
-              </p>
-              <div class="prova">
-                Demonstra: seus dados nunca saem do seu computador.
-              </div>
-              <a
-                class="btn-link js-chat"
-                data-assunto="alltoparquet"
-                href="#"
-                role="button"
-                >Conversar sobre esta solução</a
-              >
-            </article>
-            <article class="card spot tilt rise">
-              <small>Dados públicos · Plataforma web</small>
-              <h3>Plataforma Eleitoral Inteligente</h3>
-              <p>
-                Consulta e análise dos dados eleitorais oficiais do TSE (2010 a
-                2024) para os 79 municípios de Mato Grosso do Sul, com acesso
-                seguro por link enviado ao e-mail.
-              </p>
-              <div class="prova">
-                Demonstra: transformar grandes bases públicas em consultas
-                simples.
-              </div>
-              <a
-                class="btn-link"
-                href="https://plataformaeleitoral.ia.br"
-                target="_blank"
-                rel="noopener"
-                >Ver demonstração</a
-              >
-              <a
-                class="btn-link js-chat"
-                data-assunto="plataforma-eleitoral"
-                href="#"
-                role="button"
-                >Conversar sobre esta solução</a
-              >
-            </article>
-            <article class="card spot tilt rise">
-              <small>Material técnico · Gratuito</small>
-              <h3>Guia Apache Parquet</h3>
-              <p>
-                Vinte capítulos sobre o formato colunar: anatomia dos arquivos,
-                compressão, particionamento e testes de desempenho com BigQuery,
-                AWS Athena e DuckDB.
-              </p>
-              <div class="prova">
-                Demonstra: profundidade técnica em engenharia de dados.
-              </div>
-              <a
-                class="btn-link js-chat"
-                data-assunto="guia-parquet"
-                href="#"
-                role="button"
-                >Solicitar o guia</a
-              >
-            </article>
-          </div>
-          <p class="ver-todos rise">
-            <a class="btn-link" href="/solucoes">Ver todas as soluções</a>
-          </p>
         </div>
       </section>
 
       <section class="casos" id="casos">
         <div class="wrap">
           <div class="rise">
-            <span class="eyebrow scramble">Casos</span>
-            <h2 data-texto="casos.titulo">
-              Problemas reais, ferramentas entregues.
-            </h2>
+            <span class="eyebrow scramble">Entregas</span>
+            <h2 data-texto="casos.titulo">O que já entregamos.</h2>
             <p data-texto="casos.texto" class="lead" style="margin-top: 16px">
-              Cada caso segue o mesmo percurso: o desafio da operação, a solução
-              construída com quem opera e o resultado entregue.
+              Projetos reais, do problema ao resultado. O detalhe de cada um
+              está nas páginas de casos e de soluções.
             </p>
           </div>
           <div
@@ -1664,6 +1585,7 @@
           </div>
           <p class="ver-todos rise">
             <a class="btn-link" href="/casos">Ver todos os casos</a>
+            <a class="btn-link" href="/solucoes">Ver todas as soluções</a>
           </p>
         </div>
       </section>
@@ -1867,12 +1789,7 @@
           const etapas = [...document.querySelectorAll(".etapa")],
             num = document.getElementById("contNum"),
             cbar = document.getElementById("contBar");
-          const GRUPOS = [
-              "DIAGNÓSTICO",
-              "PROPOSTA",
-              "CONSTRUÇÃO",
-              "TESTES",
-            ],
+          const GRUPOS = ["DIAGNÓSTICO", "PROPOSTA", "CONSTRUÇÃO", "TESTES"],
             POR = 8,
             NP = GRUPOS.length * POR;
           let W,
@@ -2314,6 +2231,7 @@
               .slice(0, 3);
             if (!ativas.length) return;
             const alvo = document.querySelector("#solucoes .cards");
+            if (!alvo) return;
             alvo.innerHTML = ativas
               .map(
                 (s) =>
@@ -2408,7 +2326,7 @@
                     esc(c.title) +
                     "</h3><p>" +
                     esc(c.summary || "") +
-                    '</p><span class="btn-link">Ler o caso</span></a>',
+                    '</p><span class="btn-link">Ver o caso completo</span></a>',
                 )
                 .join("");
             })
