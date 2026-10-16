@@ -1,7 +1,7 @@
 # DNA Criativo — Girassol Inteligência
 
 > Fonte da verdade da marca. Qualquer pessoa ou IA que criar, editar ou revisar uma peça da Girassol lê este arquivo antes.
-> Versão 1.2 · 15/10/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador) · 1.1: origem, nome, valores, rede de especialistas e cliente coautor (entrevista com o fundador) · 1.2: sem casos de uso; "O que construímos" e padrão de entrega
+> Versão 1.3 · 16/10/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador) · 1.1: origem, nome, valores, rede de especialistas e cliente coautor (entrevista com o fundador) · 1.2: sem casos de uso; "O que construímos" e padrão de entrega · 1.3: sem página de Soluções
 
 ---
 
@@ -121,7 +121,7 @@ Metáfora oficial: **o girassol se constrói em torno do miolo** — o miolo é 
 ### Oferta
 
 - **Principal:** desenvolvimento de ferramentas sob medida (diagnóstico → construção → entrega).
-- **Secundária:** "Soluções desenvolvidas" — produtos já construídos (inclusive a plataforma eleitoral) apresentados como **prova de capacidade adaptável**, não como vitrine de loja. Sem "compre agora"; chamada = "conversar sobre uma solução semelhante".
+- **Secundária:** nenhuma vitrine. Decisão de 16/10/2026: o site não publica produtos, "Soluções desenvolvidas" nem catálogo de projetos; a prova vem de "O que construímos" (tipos de ferramenta) e do padrão de entrega.
 
 ### O que construímos e padrão de entrega
 

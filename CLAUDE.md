@@ -28,5 +28,5 @@ CTA único: chat com IA — "Iniciar diagnóstico"
 ## Regras rápidas
 
 - Nunca: neon/brilho, gíria, emojis, "compre agora", jargão como título, fundador em destaque, múltiplos CTAs.
-- Produtos = "Soluções desenvolvidas" (prova de capacidade adaptável).
+- Sem página de produtos, casos de uso ou catálogo: o site mostra só o que a Girassol pode construir ("O que construímos") e o padrão de entrega.
 - Site em `public/` (só essa pasta é publicada). Worker em `src/index.js` (API de métricas, leads e painel) com banco D1 (`migrations/`). Painel em `public/admin.html`, com login próprio (senha + código de duas etapas, conferidos no Worker; configurar com `node scripts/configurar-acesso.mjs`).

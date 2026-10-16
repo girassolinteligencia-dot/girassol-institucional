@@ -312,7 +312,6 @@ async function sitemap(env, url) {
   const fixas = [
     "/",
     "/sobre",
-    "/solucoes",
     "/artigos",
     "/privacidade",
     "/termos",

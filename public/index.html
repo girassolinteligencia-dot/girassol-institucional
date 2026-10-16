@@ -897,10 +897,6 @@
         }
       }
 
-      /* Soluções */
-      .solucoes {
-        border-top: 1px solid var(--linha);
-      }
       .cards {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1263,7 +1259,7 @@
           <li><a href="#metodo">Método</a></li>
           <li><a href="/sobre">Sobre</a></li>
           <li><a href="#equipe">Equipe</a></li>
-          <li><a href="/solucoes">Soluções</a></li>
+          <li></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
       </div>
@@ -1463,9 +1459,6 @@
           </div>
           <p class="ver-todos rise">
             <span class="entregas-nota" data-texto="entregas.nota">Não encontrou o que precisa? A maior parte do nosso trabalho começa por uma ideia que ainda não existe.</span>
-            <a class="btn-link" href="/solucoes" data-texto="botoes.verSolucoes"
-              >Ver todas as soluções</a
-            >
           </p>
         </div>
       </section>
@@ -1769,7 +1762,6 @@
         >
         <nav>
           <a href="/sobre">Sobre</a>
-          <a href="/solucoes">Soluções</a>
           <a href="artigos.html">Artigos</a>
           <a href="privacidade.html">Privacidade</a>
           <a href="termos.html">Termos</a>
@@ -2328,7 +2320,7 @@
           requestAnimationFrame(draw);
         })();
 
-        // Textos, soluções e contatos: carregados do site-config.json (o mesmo arquivo que o painel edita)
+        // Textos e contatos: carregados do site-config.json (o mesmo arquivo que o painel edita)
         (function () {
           const esc = (t) =>
             String(t).replace(
@@ -2350,52 +2342,6 @@
               el.dataset.textoFinal = v;
               el.textContent = v;
             });
-          }
-
-          // Soluções do painel; sem dados, os cartões fixos do HTML permanecem
-          function renderSolucoes(lista) {
-            const ativas = (lista || [])
-              .filter((s) => s.ativo !== false)
-              .slice(0, 3);
-            if (!ativas.length) return;
-            const alvo = document.querySelector("#solucoes .cards");
-            if (!alvo) return;
-            alvo.innerHTML = ativas
-              .map(
-                (s) =>
-                  '<article class="card spot tilt rise in"><small>' +
-                  esc(s.categoria || "") +
-                  "</small><h3>" +
-                  esc(s.titulo) +
-                  "</h3><p>" +
-                  esc(s.descricao || "") +
-                  "</p>" +
-                  (s.demonstra
-                    ? '<div class="prova">Demonstra: ' +
-                      esc(s.demonstra) +
-                      "</div>"
-                    : "") +
-                  (s.demoUrl
-                    ? '<a class="btn-link" data-evento="demo" data-assunto="' +
-                      esc(s.assunto || s.id) +
-                      '" href="' +
-                      esc(s.demoUrl) +
-                      '" target="_blank" rel="noopener">Ver demonstração</a>'
-                    : "") +
-                  '<a class="btn-link js-chat" data-assunto="' +
-                  esc(s.assunto || s.id) +
-                  '" href="#" role="button">' +
-                  esc(s.chamada || "Conversar sobre esta solução") +
-                  "</a></article>",
-              )
-              .join("");
-            alvo.querySelectorAll(".js-chat").forEach((el) =>
-              el.addEventListener("click", (e) => {
-                e.preventDefault();
-                window.girassolChat &&
-                  window.girassolChat.open(el.dataset.assunto);
-              }),
-            );
           }
 
           // WhatsApp e redes do painel no rodapé
@@ -2432,7 +2378,6 @@
             .then((r) => r.json())
             .then((cfg) => {
               renderTextos(cfg.home);
-              renderSolucoes(cfg.solutions);
               renderContatos(cfg.general);
             })
             .catch(() => {});
