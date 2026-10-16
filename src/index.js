@@ -8,7 +8,7 @@
  *   POST /api/evento           métrica anônima (sem cookies, sem dado pessoal)
  *   POST /api/lead             lead gerado quando o visitante envia o resumo à equipe
  *   POST /api/exclusao         pedido de exclusão de dados (LGPD, art. 18)
- *   GET  /casos/<id>           página de um caso, montada no servidor
+ *   GET  /casos, /casos/<id>   redireciona para a seção "O que construímos" da home
  *   GET  /privacidade, /termos, /exclusao-dados  páginas jurídicas com texto do painel
  *   GET  /sitemap.xml          sitemap com as páginas fixas e cada caso publicado
  *   Cron (dia 1, 08h de Brasília): relatório do mês anterior
@@ -54,10 +54,9 @@ export default {
       if (pathname === "/api/exclusao" && request.method === "POST") {
         return registrarExclusao(request, env);
       }
-      const caso = pathname.match(/^\/casos\/([a-z0-9-]+)\/?$/);
-      if (caso && request.method === "GET") {
-        return paginaCaso(request, env, url, caso[1]);
-      }
+      // Casos saíram do site em 15/10/2026: endereços antigos levam a "O que construímos"
+      if (/^\/casos(\.html|\/.*)?$/.test(pathname))
+        return Response.redirect(new URL("/#entregas", url), 301);
       if (pathname === "/sitemap.xml") return sitemap(env, url);
       const legal = pathname.slice(1);
       if (PAGINAS_LEGAIS.has(legal) && request.method === "GET")
@@ -286,9 +285,7 @@ async function gerarRelatorio(env, mes) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Páginas de caso (/casos/<id>) e sitemap gerados no servidor         */
-/* WhatsApp, LinkedIn e buscadores não executam JavaScript: o título,  */
-/* a descrição e o texto do caso já saem prontos no HTML.              */
+/* Sitemap e configuração usada pelas páginas geradas no servidor      */
 /* ------------------------------------------------------------------ */
 
 const SITE = "https://girassolinteligencia.com.br";
@@ -309,89 +306,6 @@ const escHtml = (t) =>
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
   );
 
-// Mesmo Markdown simples da home: "### Título" e **destaque**
-function markdown(t) {
-  return escHtml(t)
-    .split(/\n{2,}/)
-    .map((bloco) =>
-      bloco
-        .split("\n")
-        .map((l) =>
-          l.startsWith("### ")
-            ? "<h2>" + l.slice(4) + "</h2>"
-            : l
-              ? "<p>" + l + "</p>"
-              : "",
-        )
-        .join(""),
-    )
-    .join("")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-}
-
-async function paginaCaso(request, env, url, id) {
-  const cfg = await configAtual(env, url);
-  const caso = (cfg.cases || []).find(
-    (c) => c.id === id && c.published !== false,
-  );
-  const base = await env.ASSETS.fetch(new Request(new URL("/casos", url)));
-  if (!caso) {
-    return new Response(await base.text(), {
-      status: 404,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
-  }
-  const titulo = `${caso.title} — Casos — Girassol Inteligência`;
-  const descricao = caso.summary || "";
-  const endereco = `${SITE}/casos/${caso.id}`;
-  const data = caso.date
-    ? new Date(caso.date + "T12:00:00Z").toLocaleDateString("pt-BR", {
-        month: "long",
-        year: "numeric",
-      })
-    : "";
-  const meta = (valor) => ({
-    element: (el) => el.setAttribute("content", valor),
-  });
-  const pagina = new HTMLRewriter()
-    .on("title", { element: (el) => el.setInnerContent(titulo) })
-    .on('meta[name="description"]', meta(descricao))
-    .on('meta[property="og:title"]', meta(caso.title))
-    .on('meta[property="og:description"]', meta(descricao))
-    .on('meta[property="og:url"]', meta(endereco))
-    .on('link[rel="canonical"]', {
-      element: (el) => el.setAttribute("href", endereco),
-    })
-    .on("#casoLista", { element: (el) => el.setAttribute("hidden", "") })
-    .on("#casoDetalhe", {
-      element: (el) => {
-        el.removeAttribute("hidden");
-        el.setAttribute("data-caso", caso.id);
-      },
-    })
-    .on("#casoCategoria", {
-      element: (el) => el.setInnerContent(caso.category || "Caso"),
-    })
-    .on("#casoTitulo", { element: (el) => el.setInnerContent(caso.title) })
-    .on("#casoMeta", {
-      element: (el) =>
-        el.setInnerContent(
-          [data, caso.readTime && caso.readTime + " de leitura"]
-            .filter(Boolean)
-            .join(" · "),
-        ),
-    })
-    .on("#casoResumo", { element: (el) => el.setInnerContent(descricao) })
-    .on("#casoConteudo", {
-      element: (el) =>
-        el.setInnerContent(markdown(caso.content || ""), { html: true }),
-    })
-    .transform(base);
-  const h = new Headers(pagina.headers);
-  h.set("Cache-Control", "public, max-age=60");
-  return new Response(pagina.body, { status: 200, headers: h });
-}
-
 async function sitemap(env, url) {
   const cfg = await configAtual(env, url);
   const hoje = new Date().toISOString().slice(0, 10);
@@ -399,16 +313,12 @@ async function sitemap(env, url) {
     "/",
     "/sobre",
     "/solucoes",
-    "/casos",
     "/artigos",
     "/privacidade",
     "/termos",
     "/exclusao-dados",
   ];
-  const casos = (cfg.cases || [])
-    .filter((c) => c.published !== false)
-    .map((c) => [`/casos/${c.id}`, c.date]);
-  const itens = fixas.map((p) => [p, hoje]).concat(casos);
+  const itens = fixas.map((p) => [p, hoje]);
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     itens
@@ -845,8 +755,7 @@ async function apiAdmin(request, env, url, usuario) {
     if (
       !c ||
       typeof c !== "object" ||
-      !Array.isArray(c.articles) ||
-      !Array.isArray(c.cases)
+      !Array.isArray(c.articles)
     ) {
       return json({ erro: "configuração inválida" }, 400);
     }

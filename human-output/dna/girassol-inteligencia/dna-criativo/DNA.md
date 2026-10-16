@@ -1,7 +1,7 @@
 # DNA Criativo — Girassol Inteligência
 
 > Fonte da verdade da marca. Qualquer pessoa ou IA que criar, editar ou revisar uma peça da Girassol lê este arquivo antes.
-> Versão 1.1 · 29/09/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador) · 1.1: origem, nome, valores, rede de especialistas e cliente coautor (entrevista com o fundador)
+> Versão 1.2 · 15/10/2026 · Modo: Audit-first (site existente + logo + briefing com o fundador) · 1.1: origem, nome, valores, rede de especialistas e cliente coautor (entrevista com o fundador) · 1.2: sem casos de uso; "O que construímos" e padrão de entrega
 
 ---
 
@@ -97,7 +97,7 @@ Ao citar setores, usar exemplos concretos (escritórios de advocacia, órgãos p
 | --------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | **Propriedade**       | A ferramenta é do cliente. Sem mais uma assinatura.                | Explicitar entrega de código/infra; comparar com modelo de assinatura. |
 | **Participação**      | Construído com quem opera.                                         | Mostrar as etapas de validação com a equipe do cliente.                |
-| **Equipe experiente** | Rede de especialistas que já construiu junto, reunida por projeto. | Áreas de competência, experiência pública e privada, cases.            |
+| **Equipe experiente** | Rede de especialistas que já construiu junto, reunida por projeto. | Áreas de competência, experiência pública e privada, tipos de ferramenta já construídos. |
 | **Responsabilidade**  | IA com critério, segurança da informação e LGPD.                   | Governança, testes, dados sob controle do cliente.                     |
 
 ### Diferencial de credibilidade
@@ -122,6 +122,14 @@ Metáfora oficial: **o girassol se constrói em torno do miolo** — o miolo é 
 
 - **Principal:** desenvolvimento de ferramentas sob medida (diagnóstico → construção → entrega).
 - **Secundária:** "Soluções desenvolvidas" — produtos já construídos (inclusive a plataforma eleitoral) apresentados como **prova de capacidade adaptável**, não como vitrine de loja. Sem "compre agora"; chamada = "conversar sobre uma solução semelhante".
+
+### O que construímos e padrão de entrega
+
+**Decisão de 15/10/2026: o site não publica casos de uso.** A prova vem do que a equipe sabe construir, descrito por tipo de ferramenta, sem nomes de clientes, projetos ou candidatos: painéis de análise de dados; dados oficiais acompanhados em tempo real; mapas e equipes de campo; assistentes com IA; sistemas para escritórios de advocacia; integração de terminais e sistemas; comunicação com o público; gestão central das ferramentas.
+
+**Padrão de entrega (compromisso da marca, vale para toda ferramenta):** código-fonte organizado, manual de uso, documentação técnica, processo mapeado, testes antes da entrega, segurança e LGPD desde o início, rotina de backup definida com o cliente, acompanhamento até a autonomia e IA com supervisão. Não falar em "treinamento": o cliente ganha autonomia porque participou da construção e recebe manuais e mapeamento. Prazos de suporte e garantia ficam no contrato de cada projeto.
+
+Números só com medição e condição do teste ("num arquivo de X, o resultado foi Y"); sem "até 50x" nem porcentagens soltas.
 
 ### Conversão
 
@@ -234,7 +242,7 @@ A marca tem **duas peças oficiais**, ilustradas (girassol com cérebro dourado 
 
 ### Onde a identidade aparece
 
-- **Home:** nome e definição na abertura; bloco "Quem somos" logo após a abertura (origem curta + três valores), sem botão próprio.
+- **Home:** nome e definição na abertura; bloco "Quem somos" logo após a abertura (origem curta + três valores), sem botão próprio; "O que construímos" depois das dores; "Padrão de entrega" depois do método.
 - **Página Sobre (`/sobre`):** origem, por que Girassol, o que é "Inteligência", compromissos, onde atendemos.
 - **Assistente do chat:** documento de identidade em `human-output/dna/girassol-inteligencia/assistente/IDENTIDADE.md`.
 

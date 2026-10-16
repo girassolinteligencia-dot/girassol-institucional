@@ -1164,27 +1164,61 @@
         }
       }
 
-      /* Faixas de Soluções e Casos na home */
+      /* O que construímos */
       .ver-todos {
         margin-top: 32px;
         display: flex;
-        gap: 32px;
+        gap: 16px 32px;
         flex-wrap: wrap;
+        align-items: baseline;
       }
-      .casos-lista {
-        border-top: 0;
-        margin-top: 48px;
+      .entregas {
+        background: var(--superficie);
       }
-      .caso-destaque {
-        text-decoration: none;
-        color: inherit;
+      .entregas-lista {
+        grid-template-columns: repeat(4, 1fr);
       }
-      .caso-destaque h3 {
+      .entregas-lista .card {
+        padding: 28px;
+      }
+      .entregas-lista .card small {
+        font-size: 13px;
+        color: var(--ambar);
+      }
+      .entregas-lista .card h3 {
         font-size: 20px;
         line-height: 1.3;
       }
-      .caso-destaque:hover {
-        border-color: var(--ambar);
+      .entregas-lista .card p {
+        font-size: 15px;
+      }
+      .entregas-nota {
+        color: var(--tinta-2);
+      }
+      @media (max-width: 1100px) {
+        .entregas-lista {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .entregas-lista {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Padrão de entrega */
+      .padrao {
+        border-top: 1px solid var(--linha);
+      }
+      .padrao-intro {
+        align-self: start;
+      }
+      .padrao-fecho {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--linha);
+        font-weight: 600;
+        color: var(--tinta);
       }
 
       /* Girassol = método */
@@ -1206,88 +1240,6 @@
         }
       }
 
-      /* Soluções em 3 colunas e casos (conteúdo trazido de produtos.html e casos.html) */
-      .cards-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .cards-3 .card {
-        gap: 16px;
-      }
-      @media (max-width: 1000px) {
-        .cards-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-      .casos {
-        background: var(--superficie);
-      }
-      .casos-lista {
-        margin-top: 48px;
-        border-top: 1px solid var(--linha);
-      }
-      .caso {
-        border-bottom: 1px solid var(--linha);
-      }
-      .caso summary {
-        list-style: none;
-        cursor: pointer;
-        display: grid;
-        grid-template-columns: 160px 1fr 32px;
-        gap: 24px;
-        padding: 32px 0;
-        align-items: start;
-      }
-      .caso summary::-webkit-details-marker {
-        display: none;
-      }
-      .caso summary small {
-        color: var(--ambar);
-        text-transform: uppercase;
-      }
-      .caso summary h3 {
-        font-size: 16px;
-        line-height: 24px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-      .caso summary p {
-        color: var(--tinta-2);
-      }
-      .caso summary::after {
-        content: "[+]";
-        color: var(--ambar);
-      }
-      .caso[open] summary::after {
-        content: "[-]";
-      }
-      .caso summary:hover h3 {
-        color: var(--ambar);
-      }
-      .caso-corpo {
-        padding: 0 56px 40px 184px;
-        color: var(--tinta-2);
-        max-width: 900px;
-      }
-      .caso-corpo h4 {
-        color: var(--tinta);
-        text-transform: uppercase;
-        margin: 24px 0 8px;
-        font-size: 16px;
-      }
-      .caso-corpo strong {
-        color: var(--tinta);
-      }
-      @media (max-width: 800px) {
-        .caso summary {
-          grid-template-columns: 1fr 32px;
-        }
-        .caso summary small {
-          grid-column: 1/-1;
-        }
-        .caso-corpo {
-          padding: 0 0 32px;
-        }
-      }
     </style>
     <link rel="stylesheet" href="assets/css/tema.css" />
     <script src="assets/js/tema.js"></script>
@@ -1307,11 +1259,11 @@
           <span>Girassol Inteligência</span>
         </a>
         <ul>
+          <li><a href="#entregas">O que construímos</a></li>
           <li><a href="#metodo">Método</a></li>
           <li><a href="/sobre">Sobre</a></li>
           <li><a href="#equipe">Equipe</a></li>
           <li><a href="/solucoes">Soluções</a></li>
-          <li><a href="/casos">Casos</a></li>
           <li><a href="artigos.html">Artigos</a></li>
         </ul>
       </div>
@@ -1337,10 +1289,9 @@
             >
           </h1>
           <p class="lead fade d1" data-texto="abertura.texto">
-            A Girassol Inteligência é uma consultoria de tecnologia de Campo
-            Grande/MS. Ouvimos como sua empresa trabalha e criamos, com você e
-            com inteligência artificial, a ferramenta que resolve o que hoje dá
-            trabalho. Ela fica com você, sem mensalidade.
+            Ouvimos como sua empresa trabalha e criamos, com você e com
+            inteligência artificial, a ferramenta que resolve o que hoje dá
+            trabalho. Ela fica com você, sem mensalidade de licença.
           </p>
           <div class="hero-actions fade d2">
             <a class="btn mag" href="#metodo"
@@ -1460,6 +1411,65 @@
         </div>
       </section>
 
+
+      <section class="entregas" id="entregas">
+        <div class="wrap">
+          <div class="rise">
+            <span class="eyebrow scramble">O que construímos</span>
+            <h2 data-texto="entregas.titulo">Ferramentas feitas para o jeito que sua empresa trabalha.</h2>
+            <p class="lead" style="margin-top: 16px" data-texto="entregas.texto">Alguns exemplos do que nossa equipe já construiu e pode adaptar à sua realidade.</p>
+          </div>
+          <div class="cards entregas-lista stagger">
+            <article class="card entrega">
+              <small data-texto="entregas.item1.rotulo">Dados</small>
+              <h3 data-texto="entregas.item1.titulo">Painéis de análise de dados</h3>
+              <p data-texto="entregas.item1.texto">Bases espalhadas em muitos arquivos e anos reunidas em painéis com filtros, mapas e comparativos, inclusive volumes que o Excel não aguenta, tratados no seu próprio computador.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item2.rotulo">Dados públicos</small>
+              <h3 data-texto="entregas.item2.titulo">Dados oficiais acompanhados em tempo real</h3>
+              <p data-texto="entregas.item2.texto">Coletamos automaticamente dados de fontes oficiais e os transformamos em consultas, comparativos e simulações. O que levava dias para reunir passa a ser acompanhado enquanto acontece.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item3.rotulo">Operação em campo</small>
+              <h3 data-texto="entregas.item3.titulo">Mapas e equipes de campo</h3>
+              <p data-texto="entregas.item3.texto">Roteiros, visitas e equipes de rua organizados num mapa. Quem coordena acompanha o que foi feito e onde, sem depender de relatórios em papel.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item4.rotulo">Inteligência artificial</small>
+              <h3 data-texto="entregas.item4.titulo">Assistentes com inteligência artificial</h3>
+              <p data-texto="entregas.item4.texto">Assistentes que atendem, consultam normas e documentos e preparam resumos para sua equipe. A IA faz a triagem e a análise inicial; as decisões ficam com pessoas.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item5.rotulo">Jurídico</small>
+              <h3 data-texto="entregas.item5.titulo">Sistemas para escritórios de advocacia</h3>
+              <p data-texto="entregas.item5.texto">Ferramentas desenhadas com quem trabalha no escritório, para reunir o que hoje está espalhado em papel, planilhas e várias assinaturas.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item6.rotulo">Integração</small>
+              <h3 data-texto="entregas.item6.titulo">Terminais e sistemas conectados</h3>
+              <p data-texto="entregas.item6.texto">Ligamos equipamentos e programas que hoje não conversam, para que a informação chegue sozinha aonde precisa, sem ser digitada de novo.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item7.rotulo">Comunicação</small>
+              <h3 data-texto="entregas.item7.titulo">Comunicação com o seu público</h3>
+              <p data-texto="entregas.item7.texto">Envio e organização de informativos e comunicados a partir de um só lugar, para que a mensagem certa chegue a quem precisa.</p>
+            </article>
+            <article class="card entrega">
+              <small data-texto="entregas.item8.rotulo">Gestão</small>
+              <h3 data-texto="entregas.item8.titulo">Gestão central das suas ferramentas</h3>
+              <p data-texto="entregas.item8.texto">Um painel com acesso protegido que reúne as aplicações da empresa: quem pode entrar, o que está no ar e como cada uma está funcionando.</p>
+            </article>
+          </div>
+          <p class="ver-todos rise">
+            <span class="entregas-nota" data-texto="entregas.nota">Não encontrou o que precisa? A maior parte do nosso trabalho começa por uma ideia que ainda não existe.</span>
+            <a class="btn-link" href="/solucoes" data-texto="botoes.verSolucoes"
+              >Ver todas as soluções</a
+            >
+          </p>
+        </div>
+      </section>
+
       <section class="flor" id="metodo" aria-labelledby="flor-titulo">
         <div class="flor-track" id="florTrack">
           <div class="flor-stage">
@@ -1520,7 +1530,7 @@
                   </h3>
                   <p data-texto="metodo.passo3.texto">
                     Usamos inteligência artificial para construir mais rápido,
-                    sempre revisada por engenheiros experientes. Sua equipe
+                    sempre revisada por profissionais experientes. Sua equipe
                     testa cada parte antes de seguirmos.
                   </p>
                 </div>
@@ -1538,8 +1548,8 @@
                   <small data-texto="metodo.passo5.rotulo">05 · Entrega</small>
                   <h3 data-texto="metodo.passo5.titulo">A ferramenta é sua</h3>
                   <p data-texto="metodo.passo5.texto">
-                    Você recebe a ferramenta, o código e o manual. Tudo fica com
-                    a sua empresa, sem mensalidade.
+                    Você recebe a ferramenta, o código e os manuais. Tudo fica
+                    com a sua empresa, sem mensalidade de licença.
                   </p>
                 </div>
               </div>
@@ -1553,6 +1563,82 @@
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="padrao" id="padrao">
+        <div class="wrap two">
+          <div class="rise padrao-intro">
+            <span class="eyebrow scramble">Padrão de entrega</span>
+            <h2 data-texto="padrao.titulo">Toda ferramenta sai pronta para ser sua.</h2>
+            <p class="lead" style="margin-top: 20px" data-texto="padrao.texto">Não importa o tamanho do projeto: cada entrega segue o mesmo padrão de qualidade, para que sua equipe use, mantenha e evolua o que recebeu.</p>
+            <p class="padrao-fecho" data-texto="padrao.fechamento">Você recebe a ferramenta, o código e os manuais, e o nosso acompanhamento até sua equipe caminhar sozinha. Tudo fica com a sua empresa.</p>
+          </div>
+          <ul class="dores stagger">
+            <li>
+              <b>01</b>
+              <div>
+                <h3 data-texto="padrao.item1.titulo">Código-fonte entregue e organizado</h3>
+                <p data-texto="padrao.item1.texto">O código fica com a sua empresa, escrito segundo as boas práticas de desenvolvimento e com histórico de cada alteração.</p>
+              </div>
+            </li>
+            <li>
+              <b>02</b>
+              <div>
+                <h3 data-texto="padrao.item2.titulo">Manual de uso</h3>
+                <p data-texto="padrao.item2.texto">Um guia em linguagem simples para quem vai usar a ferramenta no dia a dia, com o passo a passo das tarefas.</p>
+              </div>
+            </li>
+            <li>
+              <b>03</b>
+              <div>
+                <h3 data-texto="padrao.item3.titulo">Documentação técnica</h3>
+                <p data-texto="padrao.item3.texto">Como a ferramenta foi construída, onde roda e como instalar e atualizar, para que qualquer profissional consiga dar continuidade.</p>
+              </div>
+            </li>
+            <li>
+              <b>04</b>
+              <div>
+                <h3 data-texto="padrao.item4.titulo">Processo mapeado</h3>
+                <p data-texto="padrao.item4.texto">O desenho do processo que a ferramenta atende, validado com a sua equipe e pronto para orientar mudanças futuras.</p>
+              </div>
+            </li>
+            <li>
+              <b>05</b>
+              <div>
+                <h3 data-texto="padrao.item5.titulo">Testes antes da entrega</h3>
+                <p data-texto="padrao.item5.texto">Conferimos cálculos, telas, permissões e situações fora do comum antes de a ferramenta entrar na rotina.</p>
+              </div>
+            </li>
+            <li>
+              <b>06</b>
+              <div>
+                <h3 data-texto="padrao.item6.titulo">Segurança e LGPD</h3>
+                <p data-texto="padrao.item6.texto">Controle de acesso e proteção dos dados pessoais previstos desde o início, não acrescentados no fim.</p>
+              </div>
+            </li>
+            <li>
+              <b>07</b>
+              <div>
+                <h3 data-texto="padrao.item7.titulo">Cópia de segurança</h3>
+                <p data-texto="padrao.item7.texto">Uma rotina de backup definida com a sua equipe, para que nenhum dado dependa de sorte.</p>
+              </div>
+            </li>
+            <li>
+              <b>08</b>
+              <div>
+                <h3 data-texto="padrao.item8.titulo">Acompanhamento até a autonomia</h3>
+                <p data-texto="padrao.item8.texto">Nos primeiros passos, sua equipe conta com o nosso suporte. A autonomia costuma chegar logo: os manuais e o mapeamento explicam cada parte, a ferramenta é simples de usar e foi construída com a participação de quem vai usá-la.</p>
+              </div>
+            </li>
+            <li>
+              <b>09</b>
+              <div>
+                <h3 data-texto="padrao.item9.titulo">IA com supervisão</h3>
+                <p data-texto="padrao.item9.texto">Quando a ferramenta usa inteligência artificial, documentamos o que ela faz e o que não faz, e as decisões importantes ficam com pessoas.</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -1636,8 +1722,9 @@
               </p>
               <p class="equipe-coord" data-texto="equipe.coordenacao">
                 A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão
-                Pública e com ampla experiência na liderança de equipes de
-                tecnologia da informação em todas as frentes da área. Possui
+                Pública e com experiência na liderança de equipes de service
+                desk, infraestrutura, segurança da informação, desenvolvimento
+                de software e gestão de projetos. Possui
                 certificações em tecnologia da informação, entre elas mapeamento
                 de processos (BPM) e Design Thinking, e acompanha cada projeto
                 de perto, com atenção aos cuidados que o uso de inteligência
@@ -1648,33 +1735,6 @@
         </div>
       </section>
 
-      <section class="casos" id="casos">
-        <div class="wrap">
-          <div class="rise">
-            <span class="eyebrow scramble">Entregas</span>
-            <h2 data-texto="casos.titulo">O que já entregamos.</h2>
-            <p data-texto="casos.texto" class="lead" style="margin-top: 16px">
-              Projetos reais, do problema ao resultado. O detalhe de cada um
-              está nas páginas de casos e de soluções.
-            </p>
-          </div>
-          <div
-            class="cards cards-3 casos-lista"
-            id="casosLista"
-            aria-live="polite"
-          >
-            <p class="nota">Carregando casos…</p>
-          </div>
-          <p class="ver-todos rise">
-            <a class="btn-link" href="/casos" data-texto="botoes.verCasos"
-              >Ver todos os casos</a
-            >
-            <a class="btn-link" href="/solucoes" data-texto="botoes.verSolucoes"
-              >Ver todas as soluções</a
-            >
-          </p>
-        </div>
-      </section>
 
       <section class="final">
         <canvas id="finalField" aria-hidden="true"></canvas>
@@ -1710,7 +1770,6 @@
         <nav>
           <a href="/sobre">Sobre</a>
           <a href="/solucoes">Soluções</a>
-          <a href="/casos">Casos</a>
           <a href="artigos.html">Artigos</a>
           <a href="privacidade.html">Privacidade</a>
           <a href="termos.html">Termos</a>
@@ -2269,33 +2328,14 @@
           requestAnimationFrame(draw);
         })();
 
-        // Casos: carregados do site-config.json (o mesmo arquivo que o painel edita)
+        // Textos, soluções e contatos: carregados do site-config.json (o mesmo arquivo que o painel edita)
         (function () {
-          const lista = document.getElementById("casosLista");
           const esc = (t) =>
             String(t).replace(
               /[&<>"]/g,
               (c) =>
                 ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
             );
-          // Markdown simples dos casos: "### Título" vira subtítulo, **texto** vira destaque
-          const md = (t) =>
-            esc(t)
-              .split(/\n{2,}/)
-              .map((bloco) =>
-                bloco
-                  .split("\n")
-                  .map((l) =>
-                    l.startsWith("### ")
-                      ? "<h4>" + l.slice(4) + "</h4>"
-                      : l
-                        ? "<p>" + l + "</p>"
-                        : "",
-                  )
-                  .join(""),
-              )
-              .join("")
-              .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
           // Textos editáveis pelo painel (aba Textos da home); vazio mantém o texto do HTML
           function renderTextos(textos) {
             if (!textos) return;
@@ -2394,43 +2434,8 @@
               renderTextos(cfg.home);
               renderSolucoes(cfg.solutions);
               renderContatos(cfg.general);
-              const casos = (cfg.cases || []).filter(
-                (c) => c.published !== false,
-              );
-              if (!casos.length) {
-                lista.innerHTML = '<p class="nota">Em breve.</p>';
-                return;
-              }
-              // Faixa da home: até 3 destaques; o caso completo fica em /casos/<id>
-              lista.innerHTML = casos
-                .slice(0, 3)
-                .map(
-                  (c) =>
-                    '<a class="card spot caso-destaque" href="/casos/' +
-                    encodeURIComponent(c.id) +
-                    '"><small>' +
-                    esc(c.category || "Caso") +
-                    "</small><h3>" +
-                    esc(c.title) +
-                    "</h3><p>" +
-                    esc(c.summary || "") +
-                    '</p><span class="btn-link">' +
-                    esc(
-                      (cfg.home && cfg.home["botoes.verCaso"]) ||
-                        "Ver o caso completo",
-                    ) +
-                    "</span></a>",
-                )
-                .join("");
             })
-            .catch(() => {
-              lista.innerHTML =
-                '<p class="nota">Não foi possível carregar os casos agora. <a class="btn-link js-chat" href="#" role="button">Pergunte à nossa equipe</a>.</p>';
-              lista.querySelector(".js-chat").addEventListener("click", (e) => {
-                e.preventDefault();
-                window.girassolChat && window.girassolChat.open();
-              });
-            });
+            .catch(() => {});
         })();
       })();
     </script>

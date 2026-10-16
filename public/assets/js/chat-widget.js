@@ -224,7 +224,7 @@
               type="text" 
               class="chat-input" 
               id="girassolChatInput" 
-              placeholder="Escreva sua mensagem ou dúvida aqui..." 
+              placeholder="Conte, com suas palavras, o que hoje dá trabalho na sua empresa." 
               autocomplete="off" 
               maxlength="1000"
             />

@@ -11,6 +11,8 @@
       "/admin",
       "/admin.html",
       "/site-config.json",
+      "/casos",
+      "/casos.html",
       "/casos/*",
       "/sitemap.xml",
       "/privacidade",
