@@ -242,7 +242,7 @@ A marca tem **duas peças oficiais**, ilustradas (girassol com cérebro dourado 
 
 ### Onde a identidade aparece
 
-- **Home:** nome e definição na abertura; bloco "Quem somos" logo após a abertura (origem curta + três valores), sem botão próprio; "O que construímos" depois das dores; "Padrão de entrega" depois do método.
+- **Home (16/10/2026, versão curta, ~700 palavras visíveis):** abertura com campo de conversa que abre o chat; ponto de partida e Quem somos juntos (dores em etiquetas + origem em uma frase + três valores); o girassol que se monta (imutável); O que construímos (6 cartões "de → para", detalhe técnico ao clicar, faixa de termos técnicos); A ferramenta é sua (comparativo + entregáveis, lista completa ao clicar); Equipe em duas frases com link para Sobre; chamada final. A coordenação técnica fica só na página Sobre.
 - **Página Sobre (`/sobre`):** origem, por que Girassol, o que é "Inteligência", compromissos, onde atendemos.
 - **Assistente do chat:** documento de identidade em `human-output/dna/girassol-inteligencia/assistente/IDENTIDADE.md`.
 
