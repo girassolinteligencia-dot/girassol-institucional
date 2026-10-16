@@ -286,6 +286,14 @@
       this.scrollToBottom();
     }
 
+    // Abre o chat e envia uma frase já escrita (campo da abertura da home)
+    iniciarCom(texto) {
+      this.open("diagnostico");
+      if (!texto) return;
+      this.inputEl.value = texto;
+      this.handleSend();
+    }
+
     close() {
       this.isOpen = false;
       this.windowEl.classList.remove("active");
