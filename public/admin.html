@@ -534,7 +534,6 @@
             Leads <span class="n" id="nLeads"></span>
           </button>
           <button role="tab" data-aba="solucoes">Soluções</button>
-          <button role="tab" data-aba="casos">Casos</button>
           <button role="tab" data-aba="artigos">Artigos</button>
           <button role="tab" data-aba="textos">Textos do site</button>
           <button role="tab" data-aba="legal">Páginas jurídicas</button>
@@ -654,20 +653,10 @@
         <!-- SOLUÇÕES / CASOS / ARTIGOS (editores) -->
         <section class="painel" id="p-solucoes" role="tabpanel">
           <p class="intro">
-            Soluções da página /solucoes, na ordem desta lista (as 3 primeiras
-            também aparecem na página inicial). Sem preços: a chamada leva ao
-            chat com o assunto indicado.
+            Soluções da página /solucoes, na ordem desta lista. Sem preços: a
+            chamada leva ao chat com o assunto indicado.
           </p>
           <div class="editor" id="edSolucoes"></div>
-        </section>
-        <section class="painel" id="p-casos" role="tabpanel">
-          <p class="intro">
-            Cada caso publicado ganha página própria em /casos/identificador (e
-            os 3 primeiros aparecem em destaque na página inicial). Texto em
-            Markdown simples: "### Título" para subtítulos e **negrito**.
-            Estrutura recomendada: O Desafio, A Solução Girassol, O Resultado.
-          </p>
-          <div class="editor" id="edCasos"></div>
         </section>
         <section class="painel" id="p-artigos" role="tabpanel">
           <p class="intro">
@@ -721,7 +710,7 @@
         <section class="painel" id="p-textos" role="tabpanel">
           <p class="intro">
             Textos da página inicial, dos botões e das aberturas das páginas de
-            Soluções, Casos e Artigos. Deixe um campo vazio para manter o texto
+            Soluções e Artigos. Deixe um campo vazio para manter o texto
             original do site. As alterações vão ao ar ao clicar em "Publicar no
             site". O botão "Iniciar diagnóstico" é a chamada principal da marca:
             evite trocá-lo sem necessidade.
@@ -897,40 +886,56 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           "quem.valor3.texto":
             "Cada projeto nos ensina algo que o próximo cliente recebe.",
           "sobre.rotulo": "Sobre a Girassol",
-          "sobre.titulo": "Especialistas em pessoas, antes de especialistas em tecnologia.",
-          "sobre.texto": "A Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS. Ouvimos quem opera o negócio e, junto com essa pessoa, transformamos uma ideia ou um problema em uma ferramenta que passa a ser dela.",
+          "sobre.titulo":
+            "Especialistas em pessoas, antes de especialistas em tecnologia.",
+          "sobre.texto":
+            "A Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS. Ouvimos quem opera o negócio e, junto com essa pessoa, transformamos uma ideia ou um problema em uma ferramenta que passa a ser dela.",
           "sobre.origem.rotulo": "Origem",
           "sobre.origem.titulo": "De onde viemos",
-          "sobre.origem.texto": "Por anos, trabalhamos na gestão de tecnologia do setor público. Ali surgiram muitas ideias capazes de melhorar a vida das pessoas, mas nem sempre houve tempo para construí-las.",
-          "sobre.origem.texto2": "A Girassol nasceu, em 2025, para dar a essas ideias, e às de cada cliente, o tempo e a atenção que elas merecem. Ouvimos empresas e pessoas de todas as áreas, inclusive quem pensa em ferramentas que façam diferença na vida da população.",
+          "sobre.origem.texto":
+            "Por anos, trabalhamos na gestão de tecnologia do setor público. Ali surgiram muitas ideias capazes de melhorar a vida das pessoas, mas nem sempre houve tempo para construí-las.",
+          "sobre.origem.texto2":
+            "A Girassol nasceu, em 2025, para dar a essas ideias, e às de cada cliente, o tempo e a atenção que elas merecem. Ouvimos empresas e pessoas de todas as áreas, inclusive quem pensa em ferramentas que façam diferença na vida da população.",
           "sobre.nome.rotulo": "O nome",
           "sobre.nome.titulo": "Por que Girassol",
-          "sobre.nome.texto": "O nome veio de uma frase dita em família, inspirada na música “Girassol”, de Whindersson Nunes, na interpretação de Priscilla Alcantara: uma empresa que vive como o girassol, de costas para o escuro e de frente para a luz.",
-          "sobre.nome.texto2": "Levamos isso a sério. Significa trabalhar com honestidade, transparência e compromisso com a verdade, em cada conversa e em cada entrega.",
+          "sobre.nome.texto":
+            "O nome veio de uma frase dita em família, inspirada na música “Girassol”, de Whindersson Nunes, na interpretação de Priscilla Alcantara: uma empresa que vive como o girassol, de costas para o escuro e de frente para a luz.",
+          "sobre.nome.texto2":
+            "Levamos isso a sério. Significa trabalhar com honestidade, transparência e compromisso com a verdade, em cada conversa e em cada entrega.",
           "sobre.inteligencia.rotulo": "O sobrenome",
           "sobre.inteligencia.titulo": "O que “Inteligência” quer dizer",
-          "sobre.inteligencia.texto": "Não é só inteligência artificial. É a inteligência do negócio, dos dados e das pessoas: entender o que você precisa antes de escrever qualquer linha de código.",
-          "sobre.inteligencia.texto2": "Ela está na primeira conversa, na ideia que surge, na construção e na entrega. A inteligência artificial nos ajuda a construir mais rápido, sempre revisada por profissionais experientes.",
+          "sobre.inteligencia.texto":
+            "Não é só inteligência artificial. É a inteligência do negócio, dos dados e das pessoas: entender o que você precisa antes de escrever qualquer linha de código.",
+          "sobre.inteligencia.texto2":
+            "Ela está na primeira conversa, na ideia que surge, na construção e na entrega. A inteligência artificial nos ajuda a construir mais rápido, sempre revisada por profissionais experientes.",
           "sobre.como.rotulo": "Como trabalhamos",
           "sobre.como.titulo": "Você constrói junto",
-          "sobre.como.texto": "Um núcleo fixo coordena cada projeto e convida especialistas com quem já construímos soluções importantes, da iniciativa privada e do poder público. Você participa de todas as etapas, e a ferramenta sai com a cara de quem vai usá-la.",
+          "sobre.como.texto":
+            "Um núcleo fixo coordena cada projeto e convida especialistas com quem já construímos soluções importantes, da iniciativa privada e do poder público. Você participa de todas as etapas, e a ferramenta sai com a cara de quem vai usá-la.",
           "sobre.compromissos.rotulo": "Compromissos",
           "sobre.compromissos.titulo": "O que você pode esperar de nós",
           "sobre.compromissos.item1.titulo": "Verdade.",
-          "sobre.compromissos.item1.texto": "Dizemos com clareza o que a ferramenta vai fazer e o que não vai, e o que a inteligência artificial faz e não faz.",
+          "sobre.compromissos.item1.texto":
+            "Dizemos com clareza o que a ferramenta vai fazer e o que não vai, e o que a inteligência artificial faz e não faz.",
           "sobre.compromissos.item2.titulo": "Paciência para ouvir.",
-          "sobre.compromissos.item2.texto": "Você não precisa entender de tecnologia. Explicamos sem jargão e no seu tempo.",
+          "sobre.compromissos.item2.texto":
+            "Você não precisa entender de tecnologia. Explicamos sem jargão e no seu tempo.",
           "sobre.compromissos.item3.titulo": "Melhor a cada entrega.",
-          "sobre.compromissos.item3.texto": "Cada projeto nos ensina algo que o próximo cliente recebe.",
+          "sobre.compromissos.item3.texto":
+            "Cada projeto nos ensina algo que o próximo cliente recebe.",
           "sobre.compromissos.item4.titulo": "Propriedade e cuidado com dados.",
-          "sobre.compromissos.item4.texto": "A ferramenta, o código e os dados ficam com a sua empresa, com segurança da informação e respeito à LGPD.",
+          "sobre.compromissos.item4.texto":
+            "A ferramenta, o código e os dados ficam com a sua empresa, com segurança da informação e respeito à LGPD.",
           "sobre.compromissos.item5.titulo": "Só o que ajuda pessoas.",
-          "sobre.compromissos.item5.texto": "Recusamos projetos cujo propósito seja prejudicar alguém.",
+          "sobre.compromissos.item5.texto":
+            "Recusamos projetos cujo propósito seja prejudicar alguém.",
           "sobre.onde.rotulo": "Onde atendemos",
           "sobre.onde.titulo": "De Campo Grande para o Brasil",
-          "sobre.onde.texto": "Nossa sede é em Campo Grande/MS, onde atendemos também presencialmente. Pela internet, atendemos todo o Brasil: escritórios de advocacia, órgãos públicos, clínicas, comércio e qualquer operação que tenha uma boa ideia esperando para virar ferramenta.",
+          "sobre.onde.texto":
+            "Nossa sede é em Campo Grande/MS, onde atendemos também presencialmente. Pela internet, atendemos todo o Brasil: escritórios de advocacia, órgãos públicos, clínicas, comércio e qualquer operação que tenha uma boa ideia esperando para virar ferramenta.",
           "sobre.chamada.titulo": "Tem uma ideia e não sabe por onde começar?",
-          "sobre.chamada.texto": "É exatamente aí que entramos. Comece por uma conversa."
+          "sobre.chamada.texto":
+            "É exatamente aí que entramos. Comece por uma conversa.",
         };
         const TEXTOS_SUBSTITUIDOS = {
           "abertura.texto": [
@@ -954,11 +959,168 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
             "Nossa experiência vem da iniciativa privada e do poder público, de grandes e pequenas empresas, e da condução de áreas inteiras de tecnologia da informação. É ela que garante que a inteligência artificial seja usada com critério e que a ferramenta continue funcionando no dia a dia, depois da entrega.",
           ],
         };
+
+        // Foco no que a Girassol entrega (15/10/2026): sem casos, seções "O que
+        // construímos" e "Padrão de entrega", e textos jurídicos e artigos
+        // reescritos. Só troca o que ainda estiver como no original.
+        const MIGRACAO_2026_10 = {
+          novos: {
+          "entregas.titulo": "Ferramentas feitas para o jeito que sua empresa trabalha.",
+          "entregas.texto": "Alguns exemplos do que nossa equipe já construiu e pode adaptar à sua realidade.",
+          "entregas.item1.rotulo": "Dados",
+          "entregas.item1.titulo": "Painéis de análise de dados",
+          "entregas.item1.texto": "Bases espalhadas em muitos arquivos e anos reunidas em painéis com filtros, mapas e comparativos, inclusive volumes que o Excel não aguenta, tratados no seu próprio computador.",
+          "entregas.item2.rotulo": "Dados públicos",
+          "entregas.item2.titulo": "Dados oficiais acompanhados em tempo real",
+          "entregas.item2.texto": "Coletamos automaticamente dados de fontes oficiais e os transformamos em consultas, comparativos e simulações. O que levava dias para reunir passa a ser acompanhado enquanto acontece.",
+          "entregas.item3.rotulo": "Operação em campo",
+          "entregas.item3.titulo": "Mapas e equipes de campo",
+          "entregas.item3.texto": "Roteiros, visitas e equipes de rua organizados num mapa. Quem coordena acompanha o que foi feito e onde, sem depender de relatórios em papel.",
+          "entregas.item4.rotulo": "Inteligência artificial",
+          "entregas.item4.titulo": "Assistentes com inteligência artificial",
+          "entregas.item4.texto": "Assistentes que atendem, consultam normas e documentos e preparam resumos para sua equipe. A IA faz a triagem e a análise inicial; as decisões ficam com pessoas.",
+          "entregas.item5.rotulo": "Jurídico",
+          "entregas.item5.titulo": "Sistemas para escritórios de advocacia",
+          "entregas.item5.texto": "Ferramentas desenhadas com quem trabalha no escritório, para reunir o que hoje está espalhado em papel, planilhas e várias assinaturas.",
+          "entregas.item6.rotulo": "Integração",
+          "entregas.item6.titulo": "Terminais e sistemas conectados",
+          "entregas.item6.texto": "Ligamos equipamentos e programas que hoje não conversam, para que a informação chegue sozinha aonde precisa, sem ser digitada de novo.",
+          "entregas.item7.rotulo": "Comunicação",
+          "entregas.item7.titulo": "Comunicação com o seu público",
+          "entregas.item7.texto": "Envio e organização de informativos e comunicados a partir de um só lugar, para que a mensagem certa chegue a quem precisa.",
+          "entregas.item8.rotulo": "Gestão",
+          "entregas.item8.titulo": "Gestão central das suas ferramentas",
+          "entregas.item8.texto": "Um painel com acesso protegido que reúne as aplicações da empresa: quem pode entrar, o que está no ar e como cada uma está funcionando.",
+          "entregas.nota": "Não encontrou o que precisa? A maior parte do nosso trabalho começa por uma ideia que ainda não existe.",
+          "padrao.titulo": "Toda ferramenta sai pronta para ser sua.",
+          "padrao.texto": "Não importa o tamanho do projeto: cada entrega segue o mesmo padrão de qualidade, para que sua equipe use, mantenha e evolua o que recebeu.",
+          "padrao.item1.titulo": "Código-fonte entregue e organizado",
+          "padrao.item1.texto": "O código fica com a sua empresa, escrito segundo as boas práticas de desenvolvimento e com histórico de cada alteração.",
+          "padrao.item2.titulo": "Manual de uso",
+          "padrao.item2.texto": "Um guia em linguagem simples para quem vai usar a ferramenta no dia a dia, com o passo a passo das tarefas.",
+          "padrao.item3.titulo": "Documentação técnica",
+          "padrao.item3.texto": "Como a ferramenta foi construída, onde roda e como instalar e atualizar, para que qualquer profissional consiga dar continuidade.",
+          "padrao.item4.titulo": "Processo mapeado",
+          "padrao.item4.texto": "O desenho do processo que a ferramenta atende, validado com a sua equipe e pronto para orientar mudanças futuras.",
+          "padrao.item5.titulo": "Testes antes da entrega",
+          "padrao.item5.texto": "Conferimos cálculos, telas, permissões e situações fora do comum antes de a ferramenta entrar na rotina.",
+          "padrao.item6.titulo": "Segurança e LGPD",
+          "padrao.item6.texto": "Controle de acesso e proteção dos dados pessoais previstos desde o início, não acrescentados no fim.",
+          "padrao.item7.titulo": "Cópia de segurança",
+          "padrao.item7.texto": "Uma rotina de backup definida com a sua equipe, para que nenhum dado dependa de sorte.",
+          "padrao.item8.titulo": "Acompanhamento até a autonomia",
+          "padrao.item8.texto": "Nos primeiros passos, sua equipe conta com o nosso suporte. A autonomia costuma chegar logo: os manuais e o mapeamento explicam cada parte, a ferramenta é simples de usar e foi construída com a participação de quem vai usá-la.",
+          "padrao.item9.titulo": "IA com supervisão",
+          "padrao.item9.texto": "Quando a ferramenta usa inteligência artificial, documentamos o que ela faz e o que não faz, e as decisões importantes ficam com pessoas.",
+          "padrao.fechamento": "Você recebe a ferramenta, o código e os manuais, e o nosso acompanhamento até sua equipe caminhar sozinha. Tudo fica com a sua empresa."
+        },
+          substituidos: {
+          "abertura.texto": [
+            "A Girassol Inteligência é uma consultoria de tecnologia de Campo Grande/MS. Ouvimos como sua empresa trabalha e criamos, com você e com inteligência artificial, a ferramenta que resolve o que hoje dá trabalho. Ela fica com você, sem mensalidade.",
+            "Ouvimos como sua empresa trabalha e criamos, com você e com inteligência artificial, a ferramenta que resolve o que hoje dá trabalho. Ela fica com você, sem mensalidade de licença."
+          ],
+          "metodo.passo3.texto": [
+            "Usamos inteligência artificial para construir mais rápido, sempre revisada por engenheiros experientes. Sua equipe testa cada parte antes de seguirmos.",
+            "Usamos inteligência artificial para construir mais rápido, sempre revisada por profissionais experientes. Sua equipe testa cada parte antes de seguirmos."
+          ],
+          "metodo.passo5.texto": [
+            "Você recebe a ferramenta, o código e o manual. Tudo fica com a sua empresa, sem mensalidade.",
+            "Você recebe a ferramenta, o código e os manuais. Tudo fica com a sua empresa, sem mensalidade de licença."
+          ],
+          "equipe.coordenacao": [
+            "A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão Pública e com ampla experiência na liderança de equipes de tecnologia da informação em todas as frentes da área. Possui certificações em tecnologia da informação, entre elas mapeamento de processos (BPM) e Design Thinking, e acompanha cada projeto de perto, com atenção aos cuidados que o uso de inteligência artificial exige.",
+            "A coordenação técnica é de Paulo Cardoso, pós-graduado em Gestão Pública e com experiência na liderança de equipes de service desk, infraestrutura, segurança da informação, desenvolvimento de software e gestão de projetos. Possui certificações em tecnologia da informação, entre elas mapeamento de processos (BPM) e Design Thinking, e acompanha cada projeto de perto, com atenção aos cuidados que o uso de inteligência artificial exige."
+          ]
+        },
+          removidos: [
+          "casos.titulo",
+          "casos.texto",
+          "botoes.verCaso",
+          "botoes.verCasos",
+          "pagina.casos.chamada.texto",
+          "pagina.casos.chamada.titulo",
+          "pagina.casos.rotulo",
+          "pagina.casos.texto",
+          "pagina.casos.titulo"
+        ],
+          solucoes: {
+          "alltoparquet": {
+            "descricao": "Transforma planilhas e arquivos muito grandes em um formato bem menor e mais rápido de consultar, direto no seu computador e sem enviar nada para a internet. (Converte CSV, Excel e JSON para Apache Parquet.)"
+          }
+        },
+          artigos: {
+          "bpmn-ia-arquitetura": {
+            "title": "Por que desenhamos o processo antes de usar inteligência artificial",
+            "category": "Processos e IA",
+            "summary": "A inteligência artificial acelera a construção, mas não substitui o entendimento do negócio. Por isso, em todo projeto, o desenho do processo vem antes do código.",
+            "content": "### O atalho que sai caro\n\nCom a inteligência artificial, ficou fácil gerar telas e código em poucos minutos. Isso criou uma impressão perigosa: a de que entender o negócio deixou de ser necessário. Basta pedir \"um sistema de faturamento\" e pronto.\n\nNa prática, o que se obtém costuma ser um sistema rápido de construir e difícil de manter. Ele não prevê as situações fora do comum, ninguém consegue explicar por que funciona como funciona e, principalmente, não segue a rotina de quem trabalha no balcão, no escritório ou no campo.\n\n### Desenhar o processo primeiro\n\nAntes de escrever qualquer linha de código, sentamos com quem faz o trabalho e desenhamos, passo a passo, como ele acontece. Usamos para isso uma notação de mapeamento de processos reconhecida internacionalmente (BPMN). Esse desenho tem três efeitos práticos:\n\n1. **Acaba com a ambiguidade.** Cada decisão do processo ganha um critério claro. Por exemplo: pagamentos acima de determinado valor exigem a aprovação da diretoria.\n2. **Mostra onde estão os dados pessoais.** Fica evidente em que etapas há informações protegidas pela LGPD e que cuidados elas exigem.\n3. **Define como as partes conversam.** As informações que passam de uma etapa para outra ficam descritas antes de virarem sistema.\n\n### Onde a inteligência artificial ajuda de verdade\n\nCom o processo desenhado e validado por quem opera, a inteligência artificial não precisa adivinhar o que o negócio precisa. Ela passa a acelerar o trabalho da equipe:\n\n- escrevendo código organizado, que segue a estrutura definida;\n- criando testes para cada decisão do processo;\n- ajudando a otimizar consultas e cálculos sobre os dados;\n- montando telas que respeitam a ordem real do trabalho.\n\nTudo revisado por profissionais experientes antes de entrar na ferramenta.\n\n### Conclusão\n\nA inteligência artificial é uma excelente ajudante na construção, mas não decide o caminho. Quem decide é o entendimento do processo, construído junto com quem vive a rotina. Por isso, em todo projeto, o desenho do processo vem antes do código e é entregue ao cliente junto com a ferramenta."
+          },
+          "formato-parquet-analytics": {
+            "title": "Do CSV ao Parquet: dados grandes consultados com rapidez",
+            "category": "Dados",
+            "summary": "Como um formato aberto de arquivos permite consultar grandes volumes de dados em computadores comuns, sem depender de servidores caros.",
+            "content": "### Quando a planilha não abre mais\n\nO formato CSV, aquele arquivo de texto que quase todo sistema exporta, foi pensado para trocar dados com facilidade, não para consultá-los com rapidez. Enquanto o arquivo é pequeno, tudo bem. Quando passa de centenas de milhares de linhas, abrir, filtrar ou somar colunas começa a travar o computador.\n\n### O que muda com o formato Parquet\n\nO Apache Parquet é um formato aberto, criado para análise de grandes volumes de dados. Ele guarda as informações por coluna, e não por linha, e as comprime. Na prática, isso traz três vantagens:\n\n1. **Arquivos muito menores.** A compressão reduz bastante o espaço ocupado em disco. Quanto exatamente depende do tipo de dado.\n2. **Só se lê o que se precisa.** Se a consulta usa apenas as colunas de data e de valor, as outras colunas nem são abertas.\n3. **Partes inteiras são puladas.** O arquivo guarda um resumo de cada bloco de dados, como o menor e o maior valor. Assim, o programa sabe quais blocos não interessam à consulta e não perde tempo com eles.\n\n### Dados grandes, no próprio computador\n\nFoi dessa necessidade que nasceu uma das ferramentas que desenvolvemos: um programa que converte planilhas e arquivos grandes para Parquet no computador de quem usa, sem enviar nada para a internet. Analistas, advogados e gestores que lidam com dados sigilosos passam a trabalhar com volumes grandes em máquinas comuns, com os dados sempre sob o próprio controle."
+          }
+        },
+          legal: {
+          "privacidade": {
+            "rotulo": "Privacidade e LGPD",
+            "titulo": "Política de Privacidade",
+            "atualizado": "2026-10-15",
+            "antes": "A **Girassol Inteligência** é uma consultoria de tecnologia com sede em Campo Grande/MS. Esta política explica, em linguagem simples, quais dados pessoais tratamos quando você visita o site `girassolinteligencia.com.br` ou conversa com o nosso assistente, para que servem, com quem são compartilhados e como você pode pedir que sejam apagados. Ela segue a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).\n\n> **Nosso compromisso:** não vendemos nem alugamos dados pessoais, e não os usamos para nenhuma finalidade além das descritas aqui.\n\n## 1. Quais dados tratamos\n\n- **Métricas de uso do site.** Contamos visitas, cliques em botões e conversas iniciadas, sem cookies, sem endereço IP e sem nenhum identificador do visitante. Guardamos apenas o tipo do evento, a página, o site de onde veio a visita e se o acesso foi por celular ou computador.\n\n- **Conversa com o assistente.** As mensagens que você escreve no chat são enviadas ao nosso servidor de atendimento e processadas por um provedor de inteligência artificial para gerar as respostas. A conversa é ligada a um identificador de sessão gerado no seu navegador, não ao seu nome.\n\n- **Resumo do diagnóstico.** Ao final da conversa, o assistente prepara um resumo. Você pode revisá-lo e editá-lo antes de tocar em \"Enviar resumo à equipe pelo WhatsApp\". Quando você envia, o texto do resumo fica registrado em nosso sistema de atendimento para que a equipe dê continuidade ao seu pedido.\n\n- **Contato por WhatsApp ou e-mail.** Se você nos escrever, recebemos os dados que você mesmo informar, como nome, telefone, e-mail e empresa.\n\n- **Pedido de exclusão.** Se você usar o formulário da página de Exclusão de Dados, guardamos o nome, o e-mail e, se informado, o telefone, apenas para atender ao pedido.\n\n- **Proteção contra robôs.** O chat usa o Cloudflare Turnstile, que verifica se quem está do outro lado é uma pessoa. Para isso, a Cloudflare processa dados técnicos do navegador e da conexão.\n\n## 2. Para que usamos e com qual base legal\n\n- **Responder ao seu pedido e preparar uma proposta** (procedimentos preliminares a um contrato, art. 7º, V, da LGPD): conversa, resumo do diagnóstico e contatos.\n\n- **Melhorar o site e mantê-lo seguro** (legítimo interesse, art. 7º, IX): métricas sem identificação e verificação contra robôs.\n\n- **Atender aos seus direitos de titular** (cumprimento de obrigação legal, art. 7º, II): pedidos de exclusão e de informação.\n\n## 3. Com quem compartilhamos\n\nUsamos fornecedores que tratam dados em nosso nome, apenas para as finalidades acima:\n\n- **Cloudflare:** hospedagem do site, banco de dados das métricas, dos resumos e dos pedidos de exclusão, e verificação contra robôs.\n\n- **Servidor do assistente e provedor de inteligência artificial:** processam as mensagens do chat para gerar as respostas.\n\n- **WhatsApp (Meta):** quando você escolhe enviar o resumo ou falar conosco por lá.\n\nAlguns desses fornecedores podem processar dados fora do Brasil. Nesses casos, exigimos garantias compatíveis com a LGPD.\n\n## 4. Inteligência artificial com cuidado\n\n- As respostas do assistente são orientações iniciais. Propostas e decisões são sempre feitas por pessoas da nossa equipe.\n\n- Não usamos os dados dos nossos clientes para treinar modelos de inteligência artificial.\n\n- Nos projetos que desenvolvemos, os dados de cada cliente ficam separados dos de outros clientes, e podemos construir ferramentas que funcionam sem internet, no computador do próprio cliente.\n\n## 5. Por quanto tempo guardamos\n\nGuardamos os dados apenas pelo tempo necessário para as finalidades acima ou para cumprir obrigações legais. As métricas de uso não identificam ninguém. O identificador de sessão do chat fica no seu navegador e pode ser apagado a qualquer momento, limpando os dados do site.\n\n## 6. Seus direitos\n\nPela LGPD (art. 18), você pode, a qualquer momento:\n\n- confirmar se tratamos dados seus e acessá-los;\n\n- corrigir dados incompletos ou desatualizados;\n\n- pedir a exclusão dos seus dados (veja a página de [Exclusão de Dados](/exclusao-dados));\n\n- saber com quem compartilhamos seus dados;\n\n- revogar um consentimento que tenha dado.\n\n## 7. Encarregado de dados e contato\n\nO encarregado pelo tratamento de dados pessoais da Girassol Inteligência é **Paulo Cardoso**.\n\n> **Fale com o encarregado:**\n> E-mail: `girassolinteligencia@gmail.com`\n> WhatsApp: `+55 (67) 98115-1717`\n> Campo Grande, Mato Grosso do Sul — Brasil\n\nEsta política pode ser atualizada. A data da última atualização aparece no topo da página."
+          },
+          "termos": {
+            "rotulo": "Regras claras",
+            "titulo": "Termos de Uso",
+            "atualizado": "2026-10-15",
+            "antes": "Estes termos explicam as regras de uso do site `girassolinteligencia.com.br` e do nosso assistente, e como funcionam a propriedade e o licenciamento das ferramentas que desenvolvemos. Ao usar o site, você concorda com eles.\n\n> **Nosso princípio:** nos projetos sob medida, a ferramenta é sua. O código-fonte, o mapeamento do processo e os dados ficam com a sua empresa, sem mensalidade de licença.\n\n## 1. O que oferecemos\n\n- **Ferramentas sob medida:** sistemas, aplicativos e painéis construídos com a participação da sua equipe, a partir do diagnóstico do seu processo.\n\n- **Soluções desenvolvidas:** ferramentas que nossa equipe já construiu e que podem ser licenciadas ou adaptadas à sua empresa.\n\n- **Consultoria:** mapeamento de processos e orientação para o uso responsável de inteligência artificial.\n\nO escopo, o prazo e o valor de cada projeto são definidos em proposta e contrato próprios. Em caso de conflito, o contrato prevalece sobre estes termos.\n\n## 2. Padrão de entrega\n\nToda ferramenta sob medida é entregue com código-fonte organizado, manual de uso, documentação técnica e mapeamento do processo, depois de testada. Nos primeiros passos, sua equipe conta com o nosso acompanhamento até ganhar autonomia. Prazos de suporte e garantia constam do contrato de cada projeto.\n\n## 3. Propriedade e licenciamento\n\n- **Ferramentas sob medida:** após a quitação do contrato, os direitos patrimoniais sobre o código desenvolvido especificamente para a sua empresa são transferidos a ela. Componentes de uso geral, bibliotecas de terceiros e de código aberto seguem as próprias licenças.\n\n- **Soluções desenvolvidas:** a contratação dá direito a uma licença de uso, nas condições informadas na proposta. A titularidade do software continua com a Girassol Inteligência.\n\n- **Marca e conteúdo do site:** a marca Girassol Inteligência, os textos, as ilustrações e o design deste site pertencem à Girassol Inteligência e não podem ser reproduzidos sem autorização.\n\n## 4. Uso do assistente\n\nO assistente do site serve para tirar dúvidas, entender o seu pedido e encaminhá-lo à nossa equipe, por meio de um resumo que você mesmo revisa e decide enviar. As respostas dele são orientações iniciais e não constituem proposta comercial nem parecer técnico.\n\nAo usar o assistente, você se compromete a agir de boa-fé e a não tentar manipular seu funcionamento, enviar conteúdo ilícito ou fazer uso automatizado abusivo.\n\n## 5. Responsabilidade\n\nFazemos o possível para manter o site disponível e as informações corretas, mas não garantimos funcionamento ininterrupto. Os links para sites de terceiros são oferecidos por conveniência; não respondemos pelo conteúdo deles.\n\n## 6. Privacidade\n\nO tratamento de dados pessoais segue a nossa [Política de Privacidade](/privacidade).\n\n## 7. Lei aplicável e foro\n\nEstes termos seguem a legislação brasileira. Fica eleito o foro da Comarca de Campo Grande/MS, ressalvado o direito do consumidor de propor ação no foro do seu domicílio.\n\n> **Dúvidas sobre estes termos:**\n> E-mail: `girassolinteligencia@gmail.com`\n> WhatsApp: `+55 (67) 98115-1717`"
+          },
+          "exclusao-dados": {
+            "rotulo": "Seus direitos · LGPD",
+            "titulo": "Exclusão de dados pessoais",
+            "subtitulo": "Como pedir que seus dados sejam apagados",
+            "antes": "Se você já conversou com o nosso assistente, enviou um resumo de diagnóstico ou entrou em contato com a **Girassol Inteligência**, pode pedir que seus dados pessoais sejam apagados. É um direito garantido pela LGPD (art. 18, VI).\n\n## Como funciona\n\n1. Você envia o pedido pelo formulário abaixo, por e-mail ou por WhatsApp.\n\n2. Localizamos os registros ligados ao seu nome, e-mail ou telefone: resumos de diagnóstico, contatos e mensagens de atendimento.\n\n3. Apagamos esses dados e deixamos de enviar qualquer comunicação a você.\n\n4. Confirmamos a exclusão pelo e-mail informado em até 15 dias.\n\n*Dados que a lei nos obriga a guardar, como os de notas fiscais e contratos, são mantidos apenas pelo prazo legal e apagados depois.*\n\n## Faça o seu pedido\n\nPreencha o formulário abaixo ou, se preferir, fale diretamente com o encarregado de dados por e-mail ou WhatsApp:",
+            "depois": "## Contato direto com o encarregado de dados\n\nO encarregado pelo tratamento de dados pessoais é **Paulo Cardoso**.\n\n- **E-mail:** `girassolinteligencia@gmail.com` (assunto: *LGPD — Pedido de exclusão*)\n\n- **WhatsApp:** `+55 (67) 98115-1717`\n\n- **Sede:** Campo Grande, Mato Grosso do Sul — Brasil"
+          }
+        },
+          marcasLegal: {
+          "privacidade": "A **Girassol Inteligência** valoriza e prioriza a privacidad",
+          "termos": "Bem-vindo à **Girassol Inteligência**. Estes Termos de Uso e",
+          "exclusao-dados": "Na **Girassol Inteligência**, você possui total soberania so"
+        },
+        };
+        const ARTIGOS_ANTIGOS = {
+          "bpmn-ia-arquitetura": "Por que BPMN 2.0 e IA Generativa devem operar na mesma mesa de arquitetura",
+          "formato-parquet-analytics": "A transição do CSV para Apache Parquet: Eficiência analítica em escala real",
+        };
+        function migrar202610(c) {
+          const m = MIGRACAO_2026_10;
+          m.removidos.forEach((k) => delete c.home[k]);
+          Object.entries(m.novos).forEach(([k, v]) => {
+            if (!(k in c.home)) c.home[k] = v;
+          });
+          Object.entries(m.substituidos).forEach(([k, [antigo, novo]]) => {
+            if (c.home[k] === antigo) c.home[k] = novo;
+          });
+          (c.solutions || []).forEach((s) => {
+            if (s.id === "alltoparquet" && /até 10 vezes menor/.test(s.descricao || ""))
+              Object.assign(s, m.solucoes.alltoparquet);
+          });
+          (c.articles || []).forEach((a) => {
+            if (ARTIGOS_ANTIGOS[a.id] === a.title) Object.assign(a, m.artigos[a.id]);
+          });
+          c.legal = c.legal || {};
+          Object.entries(m.legal).forEach(([k, v]) => {
+            const atual = c.legal[k];
+            if (!atual || !atual.antes || atual.antes.startsWith(m.marcasLegal[k]))
+              c.legal[k] = { ...(atual || {}), ...v };
+          });
+        }
         function normalizar(c, migrar = true) {
           c = c || {};
           c.general = c.general || {};
           c.solutions = c.solutions || [];
-          c.cases = c.cases || [];
+          delete c.cases; // casos saíram do site em 15/10/2026
           c.articles = c.articles || [];
           if (migrar && c.home) {
             Object.entries(TEXTOS_NOVOS).forEach(([k, v]) => {
@@ -969,6 +1131,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
                 if (c.home[k] === antigo) c.home[k] = novo;
               },
             );
+            migrar202610(c);
           }
           return c;
         }
@@ -1027,7 +1190,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
             return "WhatsApp inválido: use DDI + DDD + número, só algarismos.";
           for (const [nome, lista, campo] of [
             ["Solução", cfg.solutions, "titulo"],
-            ["Caso", cfg.cases, "title"],
             ["Artigo", cfg.articles, "title"],
           ]) {
             const ids = new Set();
@@ -1503,43 +1665,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
             ],
           }),
           criarEditor({
-            alvo: "#edCasos",
-            chave: "cases",
-            campoTitulo: "title",
-            campoAtivo: "published",
-            novo: () => ({
-              id: "",
-              published: false,
-              title: "Novo caso",
-              category: "Institucional",
-              date: hoje(),
-              readTime: "3 min",
-              summary: "",
-              content:
-                "### O Desafio\n\n\n### A Solução Girassol\n\n\n### O Resultado\n",
-            }),
-            campos: [
-              { k: "published", rot: "Publicado", tipo: "check" },
-              { k: "title", rot: "Título" },
-              { k: "category", rot: "Categoria" },
-              { k: "date", rot: "Data", tipo: "date" },
-              { k: "readTime", rot: "Tempo de leitura" },
-              {
-                k: "summary",
-                rot: "Resumo (aparece fechado)",
-                tipo: "area",
-                linhas: 3,
-              },
-              {
-                k: "content",
-                rot: "Conteúdo (Markdown)",
-                tipo: "area",
-                linhas: 14,
-              },
-              { k: "id", rot: "Identificador" },
-            ],
-          }),
-          criarEditor({
             alvo: "#edArtigos",
             chave: "articles",
             campoTitulo: "title",
@@ -1644,7 +1769,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           if (!arq) return;
           try {
             const dados = normalizar(JSON.parse(await arq.text()));
-            if (!Array.isArray(dados.cases) || !Array.isArray(dados.articles))
+            if (!Array.isArray(dados.articles))
               throw new Error();
             cfg = dados;
             renderTudo();
@@ -1660,14 +1785,15 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           abertura: "Abertura",
           quem: "Quem somos",
           dores: "O ponto de partida",
+          entregas: "O que construímos",
           metodo: "Método (girassol)",
+          padrao: "Padrão de entrega",
           propriedade: "Propriedade",
           equipe: "Equipe",
           solucoes: "Soluções",
-          casos: "O que já entregamos (casos)",
           final: "Chamada final",
           botoes: "Botões",
-          pagina: "Páginas de Soluções, Casos e Artigos",
+          pagina: "Páginas de Soluções e Artigos",
           sobre: "Página Sobre",
         };
         const NOMES_CAMPO = {
@@ -1678,15 +1804,13 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           texto: "texto",
           texto2: "texto (2º parágrafo)",
           nota: "nota",
+          fechamento: "fechamento",
           coordenacao: "coordenação",
           solucoes: "Soluções",
-          casos: "Casos",
           artigos: "Artigos",
           chamada: "chamada final",
           diagnostico: "Iniciar diagnóstico (chamada principal)",
           metodo: "Conheça o método",
-          verCaso: "Ver o caso completo",
-          verCasos: "Ver todos os casos",
           verSolucoes: "Ver todas as soluções",
           origem: "De onde viemos",
           nome: "Por que Girassol",
