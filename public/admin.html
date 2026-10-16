@@ -533,7 +533,6 @@
           <button role="tab" data-aba="leads">
             Leads <span class="n" id="nLeads"></span>
           </button>
-          <button role="tab" data-aba="solucoes">Soluções</button>
           <button role="tab" data-aba="artigos">Artigos</button>
           <button role="tab" data-aba="textos">Textos do site</button>
           <button role="tab" data-aba="legal">Páginas jurídicas</button>
@@ -651,13 +650,6 @@
         </section>
 
         <!-- SOLUÇÕES / CASOS / ARTIGOS (editores) -->
-        <section class="painel" id="p-solucoes" role="tabpanel">
-          <p class="intro">
-            Soluções da página /solucoes, na ordem desta lista. Sem preços: a
-            chamada leva ao chat com o assunto indicado.
-          </p>
-          <div class="editor" id="edSolucoes"></div>
-        </section>
         <section class="painel" id="p-artigos" role="tabpanel">
           <p class="intro">
             Artigos da página Artigos. Texto em Markdown: ### subtítulos,
@@ -710,7 +702,7 @@
         <section class="painel" id="p-textos" role="tabpanel">
           <p class="intro">
             Textos da página inicial, dos botões e das aberturas das páginas de
-            Soluções e Artigos. Deixe um campo vazio para manter o texto
+            Artigos. Deixe um campo vazio para manter o texto
             original do site. As alterações vão ao ar ao clicar em "Publicar no
             site". O botão "Iniciar diagnóstico" é a chamada principal da marca:
             evite trocá-lo sem necessidade.
@@ -1093,6 +1085,18 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           "bpmn-ia-arquitetura": "Por que BPMN 2.0 e IA Generativa devem operar na mesma mesa de arquitetura",
           "formato-parquet-analytics": "A transição do CSV para Apache Parquet: Eficiência analítica em escala real",
         };
+        const TERMOS_ANTERIOR = "Estes termos explicam as regras de uso do site `girassolinteligencia.com.br` e do nosso assistente, e como funcionam a propriedade e o licenciamento das ferramentas que desenvolvemos. Ao usar o site, você concorda com eles.\n\n> **Nosso princípio:** nos projetos sob medida, a ferramenta é sua. O código-fonte, o mapeamento do processo e os dados ficam com a sua empresa, sem mensalidade de licença.\n\n## 1. O que oferecemos\n\n- **Ferramentas sob medida:** sistemas, aplicativos e painéis construídos com a participação da sua equipe, a partir do diagnóstico do seu processo.\n\n- **Soluções desenvolvidas:** ferramentas que nossa equipe já construiu e que podem ser licenciadas ou adaptadas à sua empresa.\n\n- **Consultoria:** mapeamento de processos e orientação para o uso responsável de inteligência artificial.\n\nO escopo, o prazo e o valor de cada projeto são definidos em proposta e contrato próprios. Em caso de conflito, o contrato prevalece sobre estes termos.\n\n## 2. Padrão de entrega\n\nToda ferramenta sob medida é entregue com código-fonte organizado, manual de uso, documentação técnica e mapeamento do processo, depois de testada. Nos primeiros passos, sua equipe conta com o nosso acompanhamento até ganhar autonomia. Prazos de suporte e garantia constam do contrato de cada projeto.\n\n## 3. Propriedade e licenciamento\n\n- **Ferramentas sob medida:** após a quitação do contrato, os direitos patrimoniais sobre o código desenvolvido especificamente para a sua empresa são transferidos a ela. Componentes de uso geral, bibliotecas de terceiros e de código aberto seguem as próprias licenças.\n\n- **Soluções desenvolvidas:** a contratação dá direito a uma licença de uso, nas condições informadas na proposta. A titularidade do software continua com a Girassol Inteligência.\n\n- **Marca e conteúdo do site:** a marca Girassol Inteligência, os textos, as ilustrações e o design deste site pertencem à Girassol Inteligência e não podem ser reproduzidos sem autorização.\n\n## 4. Uso do assistente\n\nO assistente do site serve para tirar dúvidas, entender o seu pedido e encaminhá-lo à nossa equipe, por meio de um resumo que você mesmo revisa e decide enviar. As respostas dele são orientações iniciais e não constituem proposta comercial nem parecer técnico.\n\nAo usar o assistente, você se compromete a agir de boa-fé e a não tentar manipular seu funcionamento, enviar conteúdo ilícito ou fazer uso automatizado abusivo.\n\n## 5. Responsabilidade\n\nFazemos o possível para manter o site disponível e as informações corretas, mas não garantimos funcionamento ininterrupto. Os links para sites de terceiros são oferecidos por conveniência; não respondemos pelo conteúdo deles.\n\n## 6. Privacidade\n\nO tratamento de dados pessoais segue a nossa [Política de Privacidade](/privacidade).\n\n## 7. Lei aplicável e foro\n\nEstes termos seguem a legislação brasileira. Fica eleito o foro da Comarca de Campo Grande/MS, ressalvado o direito do consumidor de propor ação no foro do seu domicílio.\n\n> **Dúvidas sobre estes termos:**\n> E-mail: `girassolinteligencia@gmail.com`\n> WhatsApp: `+55 (67) 98115-1717`";
+        function migrar202610b(c) {
+          delete c.solutions;
+          Object.keys(c.home || {})
+            .filter((k) => k.startsWith("pagina.solucoes.") || k === "botoes.verSolucoes")
+            .forEach((k) => delete c.home[k]);
+          const t = c.legal && c.legal.termos;
+          if (t && t.antes === TERMOS_ANTERIOR) {
+            t.antes = "Estes termos explicam as regras de uso do site `girassolinteligencia.com.br` e do nosso assistente, e como funcionam a propriedade e o licenciamento das ferramentas que desenvolvemos. Ao usar o site, você concorda com eles.\n\n> **Nosso princípio:** nos projetos sob medida, a ferramenta é sua. O código-fonte, o mapeamento do processo e os dados ficam com a sua empresa, sem mensalidade de licença.\n\n## 1. O que oferecemos\n\n- **Ferramentas sob medida:** sistemas, aplicativos e painéis construídos com a participação da sua equipe, a partir do diagnóstico do seu processo.\n\n- **Consultoria:** mapeamento de processos e orientação para o uso responsável de inteligência artificial.\n\nO escopo, o prazo e o valor de cada projeto são definidos em proposta e contrato próprios. Em caso de conflito, o contrato prevalece sobre estes termos.\n\n## 2. Padrão de entrega\n\nToda ferramenta sob medida é entregue com código-fonte organizado, manual de uso, documentação técnica e mapeamento do processo, depois de testada. Nos primeiros passos, sua equipe conta com o nosso acompanhamento até ganhar autonomia. Prazos de suporte e garantia constam do contrato de cada projeto.\n\n## 3. Propriedade e licenciamento\n\n- **Ferramentas sob medida:** após a quitação do contrato, os direitos patrimoniais sobre o código desenvolvido especificamente para a sua empresa são transferidos a ela. Componentes de uso geral, bibliotecas de terceiros e de código aberto seguem as próprias licenças.\n\n- **Marca e conteúdo do site:** a marca Girassol Inteligência, os textos, as ilustrações e o design deste site pertencem à Girassol Inteligência e não podem ser reproduzidos sem autorização.\n\n## 4. Uso do assistente\n\nO assistente do site serve para tirar dúvidas, entender o seu pedido e encaminhá-lo à nossa equipe, por meio de um resumo que você mesmo revisa e decide enviar. As respostas dele são orientações iniciais e não constituem proposta comercial nem parecer técnico.\n\nAo usar o assistente, você se compromete a agir de boa-fé e a não tentar manipular seu funcionamento, enviar conteúdo ilícito ou fazer uso automatizado abusivo.\n\n## 5. Responsabilidade\n\nFazemos o possível para manter o site disponível e as informações corretas, mas não garantimos funcionamento ininterrupto. Os links para sites de terceiros são oferecidos por conveniência; não respondemos pelo conteúdo deles.\n\n## 6. Privacidade\n\nO tratamento de dados pessoais segue a nossa [Política de Privacidade](/privacidade).\n\n## 7. Lei aplicável e foro\n\nEstes termos seguem a legislação brasileira. Fica eleito o foro da Comarca de Campo Grande/MS, ressalvado o direito do consumidor de propor ação no foro do seu domicílio.\n\n> **Dúvidas sobre estes termos:**\n> E-mail: `girassolinteligencia@gmail.com`\n> WhatsApp: `+55 (67) 98115-1717`";
+            t.atualizado = "2026-10-16";
+          }
+        }
         function migrar202610(c) {
           const m = MIGRACAO_2026_10;
           m.removidos.forEach((k) => delete c.home[k]);
@@ -1101,10 +1105,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           });
           Object.entries(m.substituidos).forEach(([k, [antigo, novo]]) => {
             if (c.home[k] === antigo) c.home[k] = novo;
-          });
-          (c.solutions || []).forEach((s) => {
-            if (s.id === "alltoparquet" && /até 10 vezes menor/.test(s.descricao || ""))
-              Object.assign(s, m.solucoes.alltoparquet);
           });
           (c.articles || []).forEach((a) => {
             if (ARTIGOS_ANTIGOS[a.id] === a.title) Object.assign(a, m.artigos[a.id]);
@@ -1119,7 +1119,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
         function normalizar(c, migrar = true) {
           c = c || {};
           c.general = c.general || {};
-          c.solutions = c.solutions || [];
+          delete c.solutions; // soluções saíram do site em 16/10/2026
           delete c.cases; // casos saíram do site em 15/10/2026
           c.articles = c.articles || [];
           if (migrar && c.home) {
@@ -1132,6 +1132,7 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
               },
             );
             migrar202610(c);
+            migrar202610b(c);
           }
           return c;
         }
@@ -1189,7 +1190,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           if (g.whatsappPhone && !/^\d{12,13}$/.test(g.whatsappPhone))
             return "WhatsApp inválido: use DDI + DDD + número, só algarismos.";
           for (const [nome, lista, campo] of [
-            ["Solução", cfg.solutions, "titulo"],
             ["Artigo", cfg.articles, "title"],
           ]) {
             const ids = new Set();
@@ -1623,48 +1623,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
         const hoje = () => new Date().toISOString().slice(0, 10);
         const editores = [
           criarEditor({
-            alvo: "#edSolucoes",
-            chave: "solutions",
-            campoTitulo: "titulo",
-            campoAtivo: "ativo",
-            novo: () => ({
-              id: "",
-              ativo: false,
-              titulo: "Nova solução",
-              categoria: "",
-              descricao: "",
-              demonstra: "",
-              demoUrl: "",
-              chamada: "Conversar sobre esta solução",
-              assunto: "diagnostico",
-            }),
-            campos: [
-              { k: "ativo", rot: "Exibir no site", tipo: "check" },
-              { k: "titulo", rot: "Título" },
-              {
-                k: "categoria",
-                rot: "Categoria (ex.: Dados · Aplicativo desktop)",
-              },
-              { k: "descricao", rot: "Descrição", tipo: "area" },
-              { k: "demonstra", rot: 'Complete "Demonstra: …"' },
-              {
-                k: "demoUrl",
-                rot: "Link de demonstração (opcional)",
-                tipo: "url",
-              },
-              { k: "chamada", rot: "Texto do botão" },
-              {
-                k: "assunto",
-                rot: "Assunto do chat (define a saudação)",
-                tipo: "assunto",
-              },
-              {
-                k: "id",
-                rot: "Identificador (gerado a partir do título se vazio)",
-              },
-            ],
-          }),
-          criarEditor({
             alvo: "#edArtigos",
             chave: "articles",
             campoTitulo: "title",
@@ -1790,7 +1748,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           padrao: "Padrão de entrega",
           propriedade: "Propriedade",
           equipe: "Equipe",
-          solucoes: "Soluções",
           final: "Chamada final",
           botoes: "Botões",
           pagina: "Páginas de Soluções e Artigos",
@@ -1811,7 +1768,6 @@ Parágrafo comum. Deixe uma linha em branco entre parágrafos.
           chamada: "chamada final",
           diagnostico: "Iniciar diagnóstico (chamada principal)",
           metodo: "Conheça o método",
-          verSolucoes: "Ver todas as soluções",
           origem: "De onde viemos",
           nome: "Por que Girassol",
           inteligencia: "O que “Inteligência” quer dizer",

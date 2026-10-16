@@ -32,12 +32,6 @@
   const SAUDACOES = {
     diagnostico:
       "Olá. Sou o assistente da Girassol Inteligência. Farei algumas perguntas rápidas para entender sua necessidade e, em seguida, encaminho você à nossa equipe pelo WhatsApp. Qual processo da sua empresa mais consome tempo hoje?",
-    alltoparquet:
-      "Olá. Vamos falar sobre o AlltoParquet. Você quer conhecer a ferramenta ou adaptar uma solução semelhante para os dados da sua empresa?",
-    "plataforma-eleitoral":
-      "Olá. Vamos falar sobre a Plataforma Eleitoral Inteligente. Você quer conhecer a plataforma ou uma solução semelhante com outras bases públicas?",
-    "guia-parquet":
-      "Olá. Para enviarmos o Guia Apache Parquet, informe seu nome e o e-mail que deve recebê-lo.",
   };
 
   class GirassolChatWidget {
@@ -446,9 +440,6 @@
     montarResumo(resumoAgente) {
       const origem = {
         diagnostico: "diagnóstico",
-        alltoparquet: "AlltoParquet",
-        "plataforma-eleitoral": "Plataforma Eleitoral",
-        "guia-parquet": "Guia Apache Parquet",
       }[this.assunto];
       const corpo =
         (resumoAgente && String(resumoAgente).trim()) ||
